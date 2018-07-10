@@ -1,0 +1,16 @@
+include templates/head
+include templates/nav
+include templates/footer
+include templates/flash-messages
+
+doctype html
+html
+  +head
+  body
+    +nav
+    +flash-messages
+    block body
+      .container
+        h1 Express MVC Boilerplate
+        p It's working!
+    +footer

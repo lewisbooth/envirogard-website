@@ -1,0 +1,16 @@
+mixin nav
+  nav.nav
+    .container
+      a(href="/")
+        img(src="/images/logos/main-logo.svg" alt="Main Logo").nav-logo
+      ul.nav-menu
+        +navLink("Home", "/")
+        +navLink("Create User", "/create-user")
+        if user
+          +navLink("Log Out", "/logout")
+        else
+          +navLink("Log In", "/login")
+
+mixin navLink(text, path)
+  li
+    a(href=path class=(currentPath === path ? "active" : ""))= text

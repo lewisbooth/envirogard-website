@@ -1,0 +1,90 @@
+// Critical CSS is inlined in the <head> tag for faster page renders
+// Try to keep the compiled CSS below 10kb for maximum performance
+
+@import 'variables'
+@import 'critical/reset'
+@import 'critical/fonts'
+@import 'critical/typography'
+@import 'critical/grid'
+@import 'critical/buttons'
+
+html
+  background-color lightGrey
+
+body
+  background-color white
+
+.nav
+  background-color offBlack
+  width 100%
+
+  .container
+    display flex
+    justify-content space-between
+    align-items center
+
+  &-logo
+    width 10rem
+
+  &-menu
+    display flex
+    
+    li
+
+      a
+        text-decoration none 
+        color white
+        padding 1rem 1.5rem
+        display inline-block
+        box-sizing border-box
+
+        &.active
+          background-color #333
+
+        &:hover
+          background-color mainBlue
+
+.flash-messages
+  display block
+
+  .flash
+    display block
+    background-color firebrick
+    color white
+
+    .container
+      text-align center
+      display flex
+      justify-content space-between
+
+    &__text
+      margin 0
+      flex-grow 1
+
+    &--success
+      background-color forestgreen
+
+      .flash__remove
+        background-color forestgreen
+
+        &:hover
+          background-color darkgreen
+
+    &__remove
+      padding 0 .75rem
+      margin 0
+      float right
+      font-size 2rem
+      background-color firebrick
+
+      &:hover
+        cursor pointer
+        background-color darkred
+
+form
+  display flex
+  flex-direction column
+  width 300px
+  background-color lightGrey
+  padding 2rem 2rem 0 2rem
+  margin-bottom 2rem
