@@ -1,0 +1,116 @@
+@media(max-width:mediaMobileWidth)
+
+  h4
+    font-size 2rem
+
+  .container
+    padding 0 (containerPadding / 2)
+
+  .nav
+
+    .container
+      padding-top 1.5rem
+      padding-bottom 1.5rem
+      padding-right 2rem
+
+    &__logo
+      width 20rem
+      height 3.6rem
+
+    &__search
+      display none
+
+
+    &__menu
+
+      &--useful-links
+        display none
+
+      &--contact a
+        margin-top -.5rem
+        
+        span
+          display none
+
+        img 
+          width 2.6rem
+          height 2.6rem
+
+    &__secondary
+
+      &--right
+        display none !important
+
+      &--left
+        width 100%
+
+        li
+          width 50%
+
+          a
+            width 100%
+            text-align center
+
+        &--industries a
+          box-shadow none !important
+
+        &--find-branch
+          display none !important
+
+  .home
+
+    &__slider
+
+      &--blue-strip
+        height 69.4%
+
+      &--carousel
+        padding-bottom 82.5%
+
+    &__promoted
+      margin-top 3rem
+      flex-direction column
+
+      &--left-column
+        margin-right 0
+        width 100%
+
+        .product-listings__cards
+          overflow-x scroll
+          flex-wrap nowrap
+          
+          &--entry
+            width calc(40% - .5rem)
+            margin-right .75rem
+
+            &:nth-child(2n)
+              margin-right .75rem
+
+        &--offers
+          flex-direction column
+
+          a
+            width 100%
+            margin-bottom 2rem
+
+      &--right-column
+        margin-left -(containerPadding / 2)
+        margin-right -(containerPadding / 2)
+        margin-top 2rem
+
+        h4
+          padding-left (containerPadding / 2)
+
+        &--industries--live-chat
+          max-height 30rem
+          overflow hidden
+
+          &--text
+            padding 5rem 4rem 1rem 4rem
+            width 100%
+
+  
+  .product-listings
+
+    &__cards--entry--image
+      height 11rem

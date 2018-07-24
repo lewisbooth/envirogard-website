@@ -1,6 +1,62 @@
 mixin footer
-  footer
+  .newsletter
     .container
-      p Boilerplate created by #[a(href="https://amp.studio" target="_blank") AMP Studio]
-      if user
-        p Logged in as #{user.email}
+      h4 Sign up to receive exclusive offers
+      form(name="newsletter" method="POST" action="/")
+        input(name="email" type="email" placeholder="Enter your email...")
+        button(type="submit")
+          img(src="/images/icons/search.svg" alt="Search")
+      
+  footer.footer
+    .container      
+      .footer__column
+        h5 Hire From Us
+        ul
+          li 
+            a(href="/") Open an Account
+          li 
+            a(href="/") Our Equipment
+          li 
+            a(href="/") Browse by Industry
+          li 
+            a(href="/") Trade Offers
+          li 
+            a(href="/") Find a Branch
+      .footer__column
+        h5 Sectors
+        ul
+          li
+            a(href="/") Waste Management
+          li
+            a(href="/") Contaminated Land
+          li
+            a(href="/") Pollution Control &amp; Prevention
+          li
+            a(href="/") Tank Purging &amp; Cleansing
+          li
+            a(href="/") Demolition &amp; Recycling
+          li
+            a(href="/") Asbestos Removal
+      .footer__column
+        h5 About Us
+        ul
+          li 
+            a(href="/") About Envirogard
+      .footer__column
+        h5 Customer Services
+        ul
+          li 
+            a(href="/") Find a Branch
+          li 
+            a(href="/") Opening Hours
+          li 
+            a(href="/") FAQ
+          li 
+            a(href="/") Contact Us
+
+    .footer__bottom-strip
+      .container
+        div
+          img(src="/images/logos/envirogard-wordmark-white.svg" alt="Envirogard Logo")
+          span &copy; Specialist Hires Ltd 2018
+        span Website by #[a(href="https://amp.studio" target="_blank") AMP Studio]

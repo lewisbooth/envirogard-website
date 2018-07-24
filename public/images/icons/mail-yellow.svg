@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="122px" height="95px" viewBox="0 0 122 95" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>Page 1</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Public-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Page-1" fill="#F8E71C">
+            <path d="M61.5273595,66.4602823 L46.3483304,52 L3,92.4054802 C4.57590497,94.0240797 6.67711159,95 9.03002525,95 L113.969975,95 C116.322888,95 118.424095,94.0240797 120,92.4054802 L76.6516696,52 L61.5273595,66.4602823 Z" id="Fill-1"></path>
+            <path d="M120,2.60008332 C118.456926,0.973547178 116.322888,0 113.969975,0 L9.03002525,0 C6.70994294,0 4.57590497,0.973547178 3,2.60008332 L61.5273595,57 L120,2.60008332 Z" id="Fill-3"></path>
+            <polygon id="Fill-5" points="0 8 0 86 42 47.4284424"></polygon>
+            <polygon id="Fill-7" points="80 47.4575812 122 86 122 8"></polygon>
+        </g>
+    </g>
+</svg>

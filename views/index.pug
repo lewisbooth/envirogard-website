@@ -1,1 +1,107 @@
 extends layout
+
+block body
+  .home__slider
+    .home__slider--blue-strip
+    .container
+      .home__slider--carousel
+        img.home__slider--carousel--image(src="/images/homepage/slider/slider-1-mobile.jpg" alt="Promotional Banner 1")
+        img.home__slider--carousel--image(src="/images/homepage/slider/slider-1.jpg" alt="Promotional Banner 2")
+
+  .container
+    .home__promoted
+      .home__promoted--left-column
+        .home__promoted--left-column--popular-products
+          h4 Popular Products
+          a(href="/products") View all products →
+          .product-listings__cards
+            //- +productListingCard
+            a.product-listings__cards--entry(href="/products/air-scrubbing-units/dust-control-dc-2000-aircube-air-scrubbing-unit")
+              .product-listings__cards--entry--image
+                img(src="/images/products/TEMP/temp-product.png")
+              .product-listings__cards--entry--title Dust Control DC 2000 Aircube Air Scrubbing Unit
+              .product-listings__cards--entry--button Hire Now &nbsp;→
+            a.product-listings__cards--entry(href="/products/air-scrubbing-units/dust-control-dc-2000-aircube-air-scrubbing-unit")
+              .product-listings__cards--entry--image
+                img(src="/images/products/TEMP/temp-product-1.jpg")
+              .product-listings__cards--entry--title Envirocabin Decontamination Unit
+              .product-listings__cards--entry--button Hire Now &nbsp;→
+            a.product-listings__cards--entry(href="/products/air-scrubbing-units/dust-control-dc-2000-aircube-air-scrubbing-unit")
+              .product-listings__cards--entry--image
+                img(src="/images/products/TEMP/temp-product-2.png")
+              .product-listings__cards--entry--title Dust Fighter DF Smart Misting Cannon
+              .product-listings__cards--entry--button Hire Now &nbsp;→
+            a.product-listings__cards--entry(href="/products/air-scrubbing-units/dust-control-dc-2000-aircube-air-scrubbing-unit")
+              .product-listings__cards--entry--image
+                img(src="/images/products/TEMP/temp-product-3.png")
+              .product-listings__cards--entry--title Numatic HZ/Q 250 H Type Vacuum
+              .product-listings__cards--entry--button Hire Now &nbsp;→
+        .home__promoted--left-column--offers
+          a(href="/products")
+            img(src="/images/homepage/offers/offer-1.png" alt="10% off your first order")
+          a(href="/products")
+            img(src="/images/homepage/offers/offer-2.png" alt="All new customers get 1 day free hire")
+
+      .home__promoted--right-column
+        h4 Products by Industry
+        .home__promoted--right-column--industries
+          ul
+            li 
+              a(href="/industries/pollution-control")
+                span Pollution Control
+            li
+              a(href="/industries/pollution-control") 
+                span Asbestos Removal
+            li
+              a(href="/industries/pollution-control")
+                span Demolition
+            li
+              a(href="/industries/pollution-control")
+                span Contaminated Land
+            li
+              a(href="/industries/pollution-control")
+                span Tank Purging
+          .home__promoted--right-column--industries--live-chat
+            img(src="/images/homepage/advisor.jpg")
+            .home__promoted--right-column--industries--live-chat--text
+              div
+                h4 NEED ADVICE?
+                h3 Speak to an advisor online
+              .button.live-chat__start-button
+                span Start Live Chat
+                img(src="/images/icons/chat.svg" alt="Live Chat Icon")
+                
+  .home__split-strip
+    .home__split-strip--environment-background
+    .container
+      .home__split-strip--popular-categories
+        .home__split-strip--popular-categories--title
+          h4 Popular Categories
+          a(href="/categories") View all categories →
+        ul.category-list
+          li 
+            a(href="/categories/decontamination-units")
+              span Decontamination Units
+          li
+            a(href="/categories/safety-showers") 
+              span Safety Showers
+          li
+            a(href="/categories/water-misting-cannons")
+              span Water Misting Cannons
+          li
+            a(href="/categories/dust-control-and-extraction")
+              span Dust Control &amp; Extraction
+          li
+            a(href="/categories/vacuum-cleaners")
+              span Vacuum Cleaners
+      .home__split-strip--environment
+        p For over 25 years we’ve helped contractors across the UK to protect the environment
+        a.button(href="/about") More about Envirogard &nbsp;→
+  
+  +branchFinder
+
+block extraFooterScripts
+  script(src="/js/flickity.js")
+  script
+    include ../public/js/home-slider.js
+    include ../public/js/branch-finder.js

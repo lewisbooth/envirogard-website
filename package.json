@@ -4,7 +4,7 @@
   "description": "A full-stack boilerplate for Express MVC apps",
   "main": "start.js",
   "scripts": {
-    "start": "nodemon ./start.js --ignore public/ --ignore views/scripts",
+    "start": "nodemon ./start.js --ignore public/ --ignore scripts/",
     "restore": "node mongodb/restore.js"
   },
   "repository": {
@@ -39,6 +39,7 @@
     "gulp": "^3.9.1",
     "gulp-babel": "^7.0.0",
     "gulp-minify": "^2.1.0",
+    "gulp-plumber": "^1.2.0",
     "gulp-postcss": "^7.0.0",
     "gulp-stylus": "^2.6.0",
     "ip": "^1.1.5",

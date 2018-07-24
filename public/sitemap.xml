@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://amp.studio/</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://amp.studio/create-user</loc>
-    <changefreq>weekly</changefreq>
-  </url>
-  <url>
-    <loc>https://amp.studio/login</loc>
+    <loc>https://envirogard.co.uk/</loc>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>

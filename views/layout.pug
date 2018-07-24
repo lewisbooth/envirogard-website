@@ -1,7 +1,10 @@
 include templates/head
 include templates/nav
 include templates/footer
-include templates/flash-messages
+include templates/flashMessages
+include mixins/productListingCard
+include mixins/branchFinder
+include mixins/branchFinderSVG
 
 doctype html
 html
@@ -11,6 +14,9 @@ html
     +flash-messages
     block body
       .container
-        h1 Express MVC Boilerplate
-        p It's working!
+        h1 New page
     +footer
+    block footerScripts
+      script
+        include ../public/js/nav.js
+    block extraFooterScripts

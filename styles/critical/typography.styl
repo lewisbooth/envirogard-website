@@ -1,7 +1,16 @@
 *
-  font-family open-sans-regular
+  font-family plexRegular
+
+::selection
+  background mainBlue
+  color white
   
+p, form, input, textarea, div
+  line-height 1.4
+  font-size 1.5rem
+
 h1, h2, h3, h4, h5, h6
+  font-family plexBold
   line-height 1.25
   margin 2rem 0
 
@@ -10,24 +19,32 @@ h1, h2, h3, h4, h5, h6
 
 h1
   font-size 4.8rem
+  font-family antiqueOlive
+  text-transform uppercase  
 
 h2
-  font-size 4.2rem
+  font-size 4rem
+  font-family antiqueOlive
 
 h3
-  font-size 3.6rem
+  font-size 3rem
 
 h4
-  font-size 2.8rem
+  font-size 2.4rem
 
 h5
-  font-size 2.4rem
+  font-size 2rem
 
 h6
   font-size 1.6rem
 
 a
   font-family inherit
+  color mainBlue
+
+  &:hover
+    text-decoration underline
+    color lightBlue
 
 p
   margin 0 0 2rem 0
@@ -37,3 +54,7 @@ p
 
 ul
   margin 0
+
+span 
+  font-family inherit
+  font-size inherit

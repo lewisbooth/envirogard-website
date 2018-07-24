@@ -1,0 +1,84 @@
+@media(max-width:mediaTabletWidth)
+
+  body
+
+    &.nav-scroll
+
+      .nav__secondary
+
+        &--logo
+          width 10rem
+          
+        > .container > ul > li
+
+          > span, > a
+            padding 0 1.5rem
+
+  .nav
+
+    .container
+      padding-top 1rem
+      padding-bottom 1rem
+
+    &__logo
+      width 24rem
+      height 6rem
+
+    &__search
+      width 28rem
+
+    &__menu--contact a 
+
+      img
+        width 2rem
+        height 2rem
+
+      span
+        font-size 1.6rem
+
+  .home
+
+    &__promoted
+
+      &--left-column
+        margin-right 2rem
+
+        .product-listings__cards--entry
+          width calc(50% - .5rem)
+          margin-right .75rem
+
+          &:nth-child(2n)
+            margin-right 0          
+
+        &--offers 
+          margin-top 1.5rem
+        
+          a
+            width calc(50% - .5rem)
+
+      &--right-column
+        min-width 26rem
+
+        &--industries--live-chat--text
+          padding-top 6rem
+
+          h4
+            font-size 2rem
+
+          h3
+            font-size 2.6rem
+          
+  .product-listings
+
+    &__cards
+      
+      &--entry 
+        width calc(33.333% - .75rem)
+        margin-right .75rem
+        margin-bottom .75rem
+
+      &:nth-child(4n)
+        margin-right .5rem
+
+      &:nth-child(3n)
+        margin-right 0

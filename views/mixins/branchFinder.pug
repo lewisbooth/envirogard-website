@@ -1,0 +1,140 @@
+//- Automatically load the script where needed
+mixin branchFinder
+  .branch-finder
+    .container
+      .branch-finder__info
+        h4 Find a Branch
+        .branch-finder__info--block
+          ol.branch-finder__info--block--titles
+            li(data-area="north-west").active #[span 1] North West
+            li(data-area="north-east") #[span 2] North East
+            li(data-area="midlands") #[span 3] Midlands
+            li(data-area="south-west") #[span 5] South West
+            li(data-area="south-east") #[span 4] South East
+          .branch-finder__info--block--info.active(data-area="north-west")     
+            img.branch-finder__info--block--info--logo(src="/images/logos/envirogard-wordmark-white.svg" alt="Envirogard Logo")
+            h5 Manchester Depot
+            .branch-finder__info--block--info--container
+              ul.branch-finder__info--block--info--container--address
+                li Oxford Street East
+                li Ashton Under Lyne
+                li Greater Manchester
+                li OL7 0NE
+              a.button(href="https://www.google.com/maps/place/Ashton-under-Lyne+OL7+0NE/@53.4762905,-2.1226783,13.5z/data=!4m5!3m4!1s0x487bb66028e96d55:0xe7099f00a380e927!8m2!3d53.4780029!4d-2.1066982" target="_blank") Directions
+              ul.branch-finder__info--block--info--container--opening-times
+                li
+                  span Mon-Fri
+                  span 8:30am – 8:00pm
+                li
+                  span Sat
+                  span 9:00am – 6:00pm
+              .branch-finder__info--block--info--container--contact
+                a(href="tel:01613208587")
+                  img(src="/images/icons/phone-yellow.svg")
+                  span 0161 320 8587
+                a(href="mailto:manchester@envirogard.co.uk")
+                  img(src="/images/icons/mail-yellow.svg")
+                  span manchesterdepot@envirogard.co.uk
+          .branch-finder__info--block--info(data-area="north-east" hidden)     
+            img.branch-finder__info--block--info--logo(src="/images/logos/envirogard-wordmark-white.svg" alt="Envirogard Logo")
+            h5 Barnsley Depot
+            .branch-finder__info--block--info--container
+              ul.branch-finder__info--block--info--container--address
+                li Chambers Road
+                li Platts Common Ind. Estate
+                li Hoyland
+                li Barnsley
+                li S74 9SE
+              a.button(href="https://www.google.com/maps/place/Envirogard+Specialist+Hires+Ltd/@53.504267,-1.474651,12z/data=!4m8!1m2!2m1!1senvirogard!3m4!1s0x0:0x1957859213dc1dd5!8m2!3d53.507729!4d-1.4441892" target="_blank") Directions
+              ul.branch-finder__info--block--info--container--opening-times
+                li 
+                  span Mon-Fri
+                  span 8:30am – 8:00pm
+                li 
+                  span Sat
+                  span 9:00am – 6:00pm
+              .branch-finder__info--block--info--container--contact
+                a(href="tel:01226740900")
+                  img(src="/images/icons/phone-yellow.svg")
+                  span 0122 674 0900
+                a(href="mailto:barnsleydepot@envirogard.co.uk")
+                  img(src="/images/icons/mail-yellow.svg")
+                  span barnsleydepot@envirogard.co.uk
+          .branch-finder__info--block--info(data-area="midlands" hidden)     
+            img.branch-finder__info--block--info--logo(src="/images/logos/envirogard-wordmark-white.svg" alt="Envirogard Logo")
+            h5 Tamworth Depot
+            .branch-finder__info--block--info--container
+              ul.branch-finder__info--block--info--container--address
+                li Unit 6 Swan Park
+                li Kettlebrook Road
+                li Tamworth
+                li Staffordshire
+                li B77 1AA
+              a.button(href="https://www.google.com/maps/place/Envirogard/@52.627345,-1.7032734,13.69z/data=!4m8!1m2!2m1!1senvirogard!3m4!1s0x0:0x95974b8a36eebf32!8m2!3d52.6272282!4d-1.6858864" target="_blank") Directions
+              ul.branch-finder__info--block--info--container--opening-times
+                li 
+                  span Mon-Fri
+                  span 8:30am – 8:00pm
+                li 
+                  span Sat
+                  span 9:00am – 6:00pm
+              .branch-finder__info--block--info--container--contact
+                a(href="tel:01827304955")
+                  img(src="/images/icons/phone-yellow.svg")
+                  span 01827 304955
+                a(href="mailto:tamworth@envirogard.co.uk")
+                  img(src="/images/icons/mail-yellow.svg")
+                  span tamworthdepot@envirogard.co.uk
+          .branch-finder__info--block--info(data-area="south-west" hidden)     
+            img.branch-finder__info--block--info--logo(src="/images/logos/envirogard-wordmark-white.svg" alt="Envirogard Logo")
+            h5 Bristol Depot
+            .branch-finder__info--block--info--container
+              ul.branch-finder__info--block--info--container--address
+                li Unit 24c
+                li Lower Field Farm
+                li Hinton Dyrham
+                li Nr. Bristol
+                li SN14 8HJ
+              a.button(href="https://www.google.com/maps/place/51%C2%B029'20.7%22N+2%C2%B024'38.0%22W/@51.4952989,-2.4509514,19063m/data=!3m1!1e3!4m5!3m4!1s0x0:0x0!8m2!3d51.4890691!4d-2.41056" target="_blank") Directions
+              ul.branch-finder__info--block--info--container--opening-times
+                li 
+                  span Mon-Fri
+                  span 8:30am – 8:00pm
+                li 
+                  span Sat
+                  span 9:00am – 6:00pm
+              .branch-finder__info--block--info--container--contact
+                a(href="tel:01179374551")
+                  img(src="/images/icons/phone-yellow.svg")
+                  span 0117 937 4551
+                a(href="mailto:bristoldepot@envirogard.co.uk")
+                  img(src="/images/icons/mail-yellow.svg")
+                  span bristoldepot@envirogard.co.uk
+          .branch-finder__info--block--info(data-area="south-east" hidden)
+            img.branch-finder__info--block--info--logo(src="/images/logos/envirogard-wordmark-white.svg" alt="Envirogard Logo")
+            h5 Ashford Depot
+            .branch-finder__info--block--info--container
+              ul.branch-finder__info--block--info--container--address
+                li Units 5 & 6 
+                li Wembdon Fm. Ind. Est.
+                li Bower Rd
+                li Ashford
+                li TN25 6SZ
+              a.button(href="https://www.google.com/maps/place/Envirogard+Specialist+Hires+Ltd/@51.1123214,0.9327298,13.19z/data=!4m8!1m2!2m1!1senvirogard!3m4!1s0x0:0xd5202315313f2ab4!8m2!3d51.1147306!4d0.9482574" target="_blank") Directions
+              ul.branch-finder__info--block--info--container--opening-times
+                li 
+                  span Mon-Fri
+                  span 8:30am – 8:00pm
+                li 
+                  span Sat
+                  span 9:00am – 6:00pm
+              .branch-finder__info--block--info--container--contact
+                a(href="tel:01303814930")
+                  img(src="/images/icons/phone-yellow.svg")
+                  span 01303 814930
+                a(href="mailto:ashforddepot@envirogard.co.uk")
+                  img(src="/images/icons/mail-yellow.svg")
+                  span ashforddepot@envirogard.co.uk
+
+      .branch-finder__map
+        +branchFinderSVG

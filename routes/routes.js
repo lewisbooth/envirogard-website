@@ -23,11 +23,13 @@ router.get("/", catchErrors(pageController.homepage))
 router.get("/login", pageController.login)
 router.post("/login", authController.login)
 router.get("/logout", authController.logout)
-router.get("/create-user", pageController.createUser)
-router.post("/create-user",
-  authController.validateRegister,
-  authController.createUser,
-  authController.login)
+
+// Create user (disabled)
+// router.get("/create-user", pageController.createUser)
+// router.post("/create-user",
+//   authController.validateRegister,
+//   authController.createUser,
+//   authController.login)
 
 // Admin
 router.all(/admin/, authController.isLoggedIn)

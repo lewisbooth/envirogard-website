@@ -2,13 +2,331 @@
 // Will be linked as an external stylesheet
 
 @import 'variables'
+  
+.flash-messages
+  display block
 
-footer
-  margin-top 3rem
-  padding 1rem
-  background-color lightGrey
+  .flash
+    display block
+    background-color firebrick
+    color white
+
+    .container
+      text-align center
+      display flex
+      justify-content space-between
+
+    &__text
+      margin 0
+      flex-grow 1
+
+    &--success
+      background-color forestgreen
+
+      .flash__remove
+        background-color forestgreen
+
+        &:hover
+          background-color darkgreen
+
+    &__remove
+      padding 0 .75rem
+      margin 0
+      float right
+      font-size 2rem
+      background-color firebrick
+
+      &:hover
+        cursor pointer
+        background-color darkred
+
+.home
+
+  &__split-strip
+    background-color mainYellow
+    margin-top 6rem
+    padding 3rem 0
+    position relative
+
+    .container
+      display flex
+      justify-content space-between
+      align-items center
+      position relative
+      z-index 1
+
+    &--popular-categories
+      width 42rem
+      padding-right containerPadding
+      max-width 50%
+
+      &--title
+        display flex
+        flex-wrap wrap
+        align-items center
+        justify-content space-between
+
+        a
+          margin-top .5rem
+
+    &--environment
+      max-width 45%
+      display flex
+      flex-direction column
+      justify-content center
+      align-items flex-start
+
+      p
+        color white
+        font-size 3.8rem
+        font-family plexLight
+
+    &--environment-background
+      position absolute
+      width 50%
+      height 100%
+      right 0
+      top 0
+      background-image url("/images/homepage/environment.jpg")
+      background-size cover
+      background-position 50%
+      z-index 0    
+
+.category-list
+
+  li
+    margin-bottom 1rem
+    font-size 1.8rem
+
+    a
+      background mainBlue
+      padding 2rem
+      color white
+      text-decoration none
+      display block
+
+      &:hover
+        background-color mainBlueHover
+
+      span::after
+        content "→"
+        width 3rem
+        height 3rem
+        font-family plexBold
+        background-color white
+        color mainBlue
+        border-radius 3rem
+        float right
+        display flex
+        align-items center
+        justify-content center
+        transform translateY(-.4rem)
+
+.branch-finder 
 
   .container
     display flex
     flex-wrap wrap
-    justify-content space-between
+
+  &__info
+    width 50%
+    display flex
+    flex-direction column
+    justify-content center
+    align-items flex-start
+    margin-top -5rem
+
+    &--block
+      background mainBlue
+      display flex
+      width 100%
+
+      &--titles
+        background offBlack !important
+        white-space nowrap
+
+        li
+          padding 2.5rem 5rem 2.5rem 3.5rem
+          color white
+          font-size 1.8rem
+          border-bottom 1px solid offBlackHover
+
+          span
+            color mainYellow
+
+            &::after
+              content "."
+
+          &:hover
+            background offBlackHover
+            cursor pointer
+          
+          &.active
+            background mainBlue
+
+      &--info
+        padding 3rem
+        flex-grow 1
+        color white
+        display none
+        background mainBlue
+
+        &.active
+          display block
+
+        &--logo
+          max-width 20rem
+
+        h5
+          margin 0 0 2.5rem 0
+
+        ul
+          flex-grow 1
+          margin-right 1rem
+
+        &--container
+          display flex
+          flex-wrap wrap
+          align-items flex-start
+          justify-content space-between
+
+          &--address, .button
+            margin-bottom 2rem
+
+          .button
+            margin-top 0
+            background mainYellow 
+            color offBlack
+            font-family plexBold
+
+            &:hover
+              background mainYellowHover
+
+          &--opening-times
+            margin-bottom 2rem
+            width 100%
+
+            li
+              display flex
+              width 100% 
+              justify-content space-between
+
+          &--contact
+
+            a
+              color mainYellow
+              text-decoration none
+              width 100%
+              display flex
+              align-items center
+              font-size 1.8rem
+
+              img
+                width 2rem
+                margin-right 1rem
+
+  &__map
+    width 50%
+    padding 6rem 0
+    margin 0 auto
+
+    svg
+      max-width 32rem
+      margin 0 auto
+
+      .landmass
+        fill offBlack
+
+      g.active .landmass
+        fill mainBlue !important
+        
+      #branch-finder > g:hover
+        cursor pointer
+
+        .landmass
+          fill offBlackHover
+
+.newsletter
+  background-color lightGrey
+  padding 4rem 0 6rem 0
+
+  .container
+    display flex
+    flex-direction column
+    align-items center
+    text-align center
+
+    h4 
+      font-size 2.6rem
+      color darkBlue
+      margin-bottom 1.5rem
+
+    form
+      width 45rem
+      display flex
+
+      input 
+        flex-grow 1
+        padding 1rem 1.5rem
+
+      button 
+        margin 0
+
+.footer
+  background-color mainBlue
+  color white
+  font-size 1.4rem
+
+  > .container
+    padding-top 4rem
+    padding-bottom 4rem
+    display flex
+    align-items flex-start
+    flex-wrap wrap
+
+  &__column
+    line-height 1.6
+    width 25%
+    padding-right 1rem
+
+  h5
+    margin 0 0 2rem 0
+  
+  ul li
+    padding .5rem 0
+
+  a
+    color white
+    text-decoration none
+
+    &:hover
+      text-decoration underline
+  
+  p
+    margin 0
+
+  &__bottom-strip
+    background-color offBlack
+
+    .container
+      display flex
+      flex-wrap wrap
+      justify-content space-between
+      padding-top 1rem
+      padding-bottom 1rem
+
+      div
+        display flex
+        flex-wrap wrap
+        align-items center
+
+      img
+        width 15rem
+        margin-right 2rem
+
+      a
+        font-family plexBold
+
+@import 'media-queries/large'
+@import 'media-queries/tablet'
+@import 'media-queries/mobile'

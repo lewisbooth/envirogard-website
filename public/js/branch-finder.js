@@ -1,0 +1,1 @@
+"use strict";var areas=document.querySelectorAll("[data-area]");areas.forEach(function(a){return a.addEventListener("click",function(){areas.forEach(function(e){return e.dataset.area===a.dataset.area?e.classList.add("active"):e.classList.remove("active")})})});

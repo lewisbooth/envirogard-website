@@ -1,0 +1,1 @@
+"use strict";var body=document.querySelector("body"),navHeight=document.querySelector(".nav").offsetHeight;document.addEventListener("scroll",function(e){body.className=e.pageY>navHeight?"nav-scroll":""});

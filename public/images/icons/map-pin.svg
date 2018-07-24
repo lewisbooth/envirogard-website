@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="17px" height="24px" viewBox="0 0 17 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51 (57462) - http://www.bohemiancoding.com/sketch -->
+    <title>placeholder</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Main-Navigation" transform="translate(-1347.000000, -52.000000)" fill="#234798">
+            <g id="Navigation">
+                <g id="Top-Menu">
+                    <g id="Contact" transform="translate(1347.000000, 24.000000)">
+                        <g id="Find-Us" transform="translate(0.000000, 28.000000)">
+                            <path d="M14.5124698,2.4616368 C12.9066668,0.875516494 10.7722455,-2.27373675e-13 8.50206788,-2.27373675e-13 C6.22911971,-2.27373675e-13 4.09525248,0.875516494 2.4888954,2.4616368 C-0.480565643,5.39993151 -0.850709323,10.925876 1.69042678,14.2750828 L8.50206788,24 L15.3004104,14.2882319 C17.8526287,10.925876 17.482485,5.39993151 14.5124698,2.4616368 Z M8.5796429,11.3965072 C6.86800544,11.3965072 5.47608789,10.020226 5.47608789,8.32781646 C5.47608789,6.63705057 6.86800544,5.26076932 8.5796429,5.26076932 C10.289618,5.26076932 11.6815356,6.63705057 11.6815356,8.32781646 C11.6815356,10.020226 10.289618,11.3965072 8.5796429,11.3965072 Z" id="placeholder"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

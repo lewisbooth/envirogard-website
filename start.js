@@ -14,7 +14,7 @@ process.env.PUBLIC_FOLDER = path.join(__dirname, "public")
 mongoose.connect(process.env.DATABASE, {
   autoReconnect: true,
   reconnectTries: 100,
-  reconnectInterval: 5000,
+  reconnectInterval: 500,
   useNewUrlParser: true
 }).then(() => {
   process.env.CONNECTED = "true"
@@ -32,6 +32,7 @@ require("./cron")
 
 // Load server scripts
 const app = require("./app")
+
 app.set("port", process.env.PORT || 8888)
 
 // Initiate the server

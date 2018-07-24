@@ -1,10 +1,13 @@
 mixin head
   head
-    title=`${title || "Express MVC Boilerplate"}`
-    meta(name="description" content=`${description || "Default Description"}`)
+    if path === "/"
+      title=`${title || "Envirogard – Setting Hire Standards"}`
+    else
+      title=`${title || "Setting Hire Standards"} | Envirogard`
+    meta(name="description" content=`${description || "Specialist Equipment Hire For Contractors"}`)
     meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
-    meta(name="theme-color" content="#111111")
+    meta(name="theme-color" content="#23479a")
     link(rel="icon" type="image/x-icon" href="favicon.ico")
     link(rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png")
     link(rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png")
@@ -15,7 +18,10 @@ mixin head
     meta(name="format-detection" content="telephone=no")
 
     //- Preload fonts & critical assets
-    link(rel='preload' href='/fonts/opensans-regular-webfont.woff2' as='font' type="font/woff2" crossorigin)
+    link(rel='preload' href='/fonts/AntiqueOlive-Compact.woff2' as='font' type="font/woff2" crossorigin)
+    link(rel='preload' href='/fonts/IBMPlexSans.woff2' as='font' type="font/woff2" crossorigin)
+    link(rel='preload' href='/fonts/IBMPlexSans-Bold.woff2' as='font' type="font/woff2" crossorigin)
+    link(rel='preload' href='/fonts/IBMPlexSans-Light.woff2' as='font' type="font/woff2" crossorigin)
 
     //- Inline critical CSS in production
     if production
@@ -29,4 +35,5 @@ mixin head
     //- External non-critical styles
     link(rel='stylesheet' href=hashes["main.css"] type="text/css")
 
+    block extraHeaderCSS
     block extraHeaderScripts

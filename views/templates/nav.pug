@@ -1,16 +1,167 @@
 mixin nav
-  nav.nav
-    .container
-      a(href="/")
-        img(src="/images/logos/main-logo.svg" alt="Main Logo").nav-logo
-      ul.nav-menu
-        +navLink("Home", "/")
-        +navLink("Create User", "/create-user")
-        if user
-          +navLink("Log Out", "/logout")
-        else
-          +navLink("Log In", "/login")
-
-mixin navLink(text, path)
-  li
-    a(href=path class=(currentPath === path ? "active" : ""))= text
+  nav
+    .nav
+      .container
+        a(href="/")
+          img.nav__logo(src="/images/logos/main-logo.svg" alt="Main Logo")
+        form.nav__search
+          input(type="text" name="globalSearch" placeholder="Search Envirogard...")
+          button(type="submit") 
+            img(src="/images/icons/search.svg" alt="Search")
+        .nav__menu
+          ul.nav__menu--useful-links
+            li
+              a(href="/about") About
+            li
+              a(href="/contact") Contact
+          ul.nav__menu--contact
+            li
+              a(href="/contact")
+                img(src="/images/icons/map-pin.svg" alt="Find Us")
+                span Find Us
+            li
+              a(href="/contact")
+                img(src="/images/icons/phone.svg" alt="Call Us")
+                span Call Us
+    .nav__secondary
+      .container
+        ul.nav__secondary--left
+          .nav__secondary--logo
+            img(src="/images/logos/envirogard-wordmark-white.svg")
+          li.nav__secondary--left--hire-equipment
+            a(href="/categories") Our Hire Equipment
+            .nav__dropdown
+              .container
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Decontamination Showers
+                  ul
+                    li 
+                      a(href="/") Emergency Drench Showers
+                    li 
+                      a(href="/") Modular Decontamination Showers
+                    li 
+                      a(href="/") Showers &amp; Toilets
+                    li 
+                      a(href="/") Trailer Decontamination Showers
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Ventilation &amp; Dust Control
+                  ul
+                    li 
+                      a(href="/") Water Misting Cannons
+                    li 
+                      a(href="/") Air Scrubbing Units
+                    li 
+                      a(href="/") Ventsafe Dust Extractors
+                    li 
+                      a(href="/") Fans &amp; Fume Extractors
+                    li 
+                      a(href="/") Air Ventilators
+                    li 
+                      a(href="/") Negative Pressure Units
+                    li 
+                      a(href="/") Fibre Suppressant Equipment
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Vacuum Cleaners
+                  ul
+                    li 
+                      a(href="/") Clean Room Vacuums
+                    li 
+                      a(href="/") HML HEPA Vacuums
+                    li 
+                      a(href="/") Type H Vacuums
+                    li 
+                      a(href="/") Wet Pick Up Vacuums
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Testing &amp; Monitoring
+                  ul
+                    li 
+                      a(href="/") Differential Pressure Monitor, Readout &amp; Alarm Systems
+                    li 
+                      a(href="/") Smoke Generators
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Temporary Site Services
+                  ul
+                    li 
+                      a(href="/") Water Bowsers
+                    li 
+                      a(href="/") Portable Generators
+                    li 
+                      a(href="/") Pumps &amp; Pressure Washers
+                    li 
+                      a(href="/") Site Electrics
+                    li 
+                      a(href="/") Bootwash
+          li.nav__secondary--left--industries
+            a(href="/industries") Browse by Industry
+            .nav__dropdown
+              .container
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Pollution Control
+                  ul
+                    li 
+                      a(href="/") Pumps &amp; Pressure Washers
+                    li 
+                      a(href="/") Bootwash
+                    li 
+                      a(href="/") HML HEPA Vacuums
+                    li 
+                      a(href="/") Wet Pick Up Vacuums
+                    li 
+                      a(href="/") Decontamination Showers
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Asbestos Removal
+                  ul
+                    li 
+                      a(href="/") Ventsafe Dust Extractors
+                    li 
+                      a(href="/") Fans &amp; Fume Extractors
+                    li 
+                      a(href="/") Fiber Suppressant Equipment
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Demolition
+                  ul
+                    li 
+                      a(href="/") Showers &amp; Toilets
+                    li 
+                      a(href="/") Site Electrics
+                    li 
+                      a(href="/") Ventsafe Dust Extractors
+                    li 
+                      a(href="/") Fans &amp; Fume Extractors
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Contaminated Land
+                  ul
+                    li 
+                      a(href="/") Pumps &amp; Pressure Washers
+                    li 
+                      a(href="/") Bootwash
+                    li 
+                      a(href="/") Wet Pick Up Vacuums
+                    li 
+                      a(href="/") Decontamination Showers
+                    li 
+                      a(href="/") Water Bowsers
+                .nav__dropdown--section
+                  h6 
+                    a(href="/") Tank Purging
+                  ul
+                    li 
+                      a(href="/") Pumps &amp; Pressure Washers
+          li.nav__secondary--left--find-branch
+            a(href="/contact") Find a Branch
+        ul.nav__secondary--right
+          li.live-chat__start-button
+            a(href="/contact")
+              img(src="/images/icons/chat.svg" alt="Live Chat Icon")
+              span Live Chat
+          li
+            a(href="/trade-account") Open an Account

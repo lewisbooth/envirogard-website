@@ -1,8 +1,6 @@
 const mongoose = require("mongoose")
 const User = mongoose.model("User")
 const passport = require('passport')
-const crypto = require('crypto')
-const { promisify } = require('es6-promisify')
 
 exports.login = passport.authenticate('local', {
   failureRedirect: '/login',

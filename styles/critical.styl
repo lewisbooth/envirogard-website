@@ -7,84 +7,414 @@
 @import 'critical/typography'
 @import 'critical/grid'
 @import 'critical/buttons'
+@import 'critical/forms'
+@import 'critical/flickity'
 
 html
-  background-color lightGrey
+  background-color offBlack
 
 body
   background-color white
 
+  &.nav-scroll
+    margin-top 4rem
+
+    .nav__secondary
+      position fixed
+      top 0
+
+      .container
+        padding-left containerPadding
+
+      &--logo
+        display flex
+        margin-right 1rem        
+
+nav
+  z-index 2
+
 .nav
-  background-color offBlack
+  background-color mainYellow
+  user-select none
   width 100%
 
   .container
     display flex
     justify-content space-between
     align-items center
+    padding-top 2rem
+    padding-bottom 2rem
 
-  &-logo
-    width 10rem
+  &__logo
+    width 33rem
+    height 6rem
 
-  &-menu
+  &__search
     display flex
+    flex-direction row
+    width 35rem
+
+    input
+      height 4rem
+      flex-grow 1
+      color mediumGrey
+
+    button
+      margin 0
+
+      img
+        width 1.8rem
+        height 1.9rem
     
-    li
+  &__menu
+    display flex
+    flex-direction column
+    align-items flex-end
 
+    &--useful-links
+      display flex
+      
+      li
+        height 1.2em
+        display flex
+        align-items center
+        border-right 1px solid black
+
+        a
+          text-decoration none 
+          color offBlack
+          display inline-block
+          box-sizing border-box
+          padding 0 1rem
+          font-size 1.5rem
+
+          &:hover
+            text-decoration underline
+
+        &:last-child
+          border none
+
+          a
+            padding-right 0
+
+    &--contact
+      display flex
+      flex-shrink 0
+      margin-top .5rem
+      
       a
-        text-decoration none 
-        color white
-        padding 1rem 1.5rem
-        display inline-block
-        box-sizing border-box
-
-        &.active
-          background-color #333
+        display flex
+        align-items center
+        text-decoration none
 
         &:hover
-          background-color mainBlue
+          text-decoration underline
 
-.flash-messages
-  display block
+        &:last-child
+          margin-left 2rem
 
-  .flash
-    display block
-    background-color firebrick
-    color white
+        img
+          width 2.4rem
+          height 2.4rem
 
-    .container
-      text-align center
+        span
+          font-family antiqueOlive
+          font-size 1.8rem
+          color mainBlue 
+          margin-left .75rem
+
+  &__secondary
+    width 100%
+    background-color mainBlue
+    position relative
+    user-select none
+    z-index 9
+
+    &--logo
+      display none
+
+    > .container
       display flex
       justify-content space-between
+      align-items center
+      padding 0
 
-    &__text
-      margin 0
+      > ul
+        display flex
+        
+        > li
+          font-size 1.5rem
+          display flex
+          align-items center
+          padding 1rem 0
+
+          &.live-chat__start-button a
+            display flex
+            height auto
+
+            img
+              width 2.6rem
+              height 1.9rem
+              margin-right 1rem
+
+          > span, > a
+            height 1.2em
+            padding 0 2rem
+            box-shadow 1px 0px 0px 0px rgba(255,255,255,0.25)
+            line-height 1.1
+            color white
+            text-decoration none
+
+          &:last-child span, &:last-child a
+            box-shadow none
+
+          &:hover
+            background-color mainBlueHover
+            box-shadow 1px 0px 0px 0px rgba(255,255,255,0.25),  -1px 0px 0px 0px rgba(255,255,255,0.25)
+
+            span, a
+              box-shadow none
+
+            .nav__dropdown
+              display block
+
+  &__dropdown
+    display none
+    position absolute
+    top 100%
+    left 0
+    width 100%
+    background-color lightGrey
+    border-bottom 1px solid mainBlue
+    padding 4rem 0 4.5rem 0
+
+    .container
+      display flex
+      flex-wrap wrap
+      align-items flex-start
+
+    &--section
+      width 20%
+      padding-right 1rem
+
+      h6
+        margin 0 0 1.25rem 0
+
+        a
+          color darkBlue
+          text-decoration none
+          padding 0
+
+          &:hover
+            text-decoration underline
+
+      ul
+
+        li
+          line-height 1.2
+          margin-bottom 1.4rem
+
+          &:last-child
+            margin-bottom 0
+
+          a
+            color offBlack
+            text-decoration none
+            padding 0
+            font-size 1.4rem
+            height auto
+
+            &:hover
+              text-decoration underline
+        
+          &:hover
+            background none
+
+.home
+
+  &__slider
+    position relative
+    z-index 0
+
+    &--blue-strip
+      background-color offBlack
+      width 100%
+      height 66.2%
+      position absolute
+      top 0
+      left 0
+      z-index -1
+
+    &--carousel
+      padding-bottom 41.3%
+
+      .flickity-prev-next-button
+        background rgba(255,255,255,0.25)
+
+      .flickity-viewport
+        position absolute
+        width 100%
+
+      &-cell
+        height 100%
+
+      .flickity-page-dots
+        bottom 0
+
+  &__promoted
+    display flex
+    margin-top 2rem
+
+    h4
+      margin 0 2rem 1.5rem 0
+
+    &--left-column
       flex-grow 1
+      margin-right 3rem
+      
+      &--popular-products
+        display flex
+        flex-wrap wrap
+        align-items flex-end
 
-    &--success
-      background-color forestgreen
+        > a
+          margin-bottom 1.6rem
+          
+      &--offers
+        margin-top 2.333rem
+        display flex
+        align-items flex-start
+        justify-content space-between
 
-      .flash__remove
-        background-color forestgreen
+        a
+          width calc(50% - 1.5rem)
 
-        &:hover
-          background-color darkgreen
+    &--right-column
+      min-width 30rem
 
-    &__remove
-      padding 0 .75rem
-      margin 0
-      float right
-      font-size 2rem
-      background-color firebrick
+      &--industries
+
+        ul
+          background-color mainYellow
+
+          li
+            font-family plexBold
+            font-size 1.6rem
+            padding 0 2rem
+
+            a
+              display block
+              padding 1.66rem 1.25rem
+              border-bottom 1px solid rgba(0,0,0,0.25)
+              text-decoration none 
+              color offBlack
+
+              span::after
+                content "→"
+                width 3rem
+                height 3rem
+                background-color white
+                border-radius 3rem
+                float right
+                display flex
+                align-items center
+                justify-content center
+                transform translateY(-.4rem)
+
+              img
+                width 3rem
+                height 3rem
+
+            &:last-child a
+              border none
+
+            &:hover
+              background-color mainYellowHover
+
+        &--live-chat
+          position relative
+
+          &--text
+            position absolute
+            top 0
+            left 50%
+            transform translateX(-50%)
+            height 100%
+            width 100%
+            padding 10rem 4rem 1.5rem 4rem
+            text-align center
+            display flex
+            flex-direction column
+            justify-content space-around
+            color white
+
+            h4
+              font-family antiqueOlive
+              font-size 2.2rem
+              margin 0 0 1rem 0
+
+            h3
+              margin 0 0 2rem 0
+              font-family plexLight
+
+
+.product-listings
+
+  &__cards
+    width 100%
+    display flex
+    flex-wrap wrap
+    align-items flex-start
+    
+    &--entry 
+      width calc(25% - .5rem)
+      min-width 16.5rem
+      margin-right .666rem
+      margin-bottom .666rem
+      background-color lightGrey
+      border 1px solid lightGreyBorder
+      color offBlack
+      text-align center
+      text-decoration none
+
+      &:nth-child(4n)
+        margin-right 0
+
+      &--image
+        height 15rem
+        overflow hidden
+        display flex
+        align-items center
+        justify-content center
+        background-color white
+
+        img
+          width auto
+          height auto
+          max-width 100%
+          max-height 100%
+
+      &--title
+        padding .75rem
+        display flex
+        align-items center
+        font-family plexBold
+
+      &--button
+        // Compensate for 1px border around whole card
+        margin -1px
+        padding .5rem
+        background-color mainBlue
+        color white
 
       &:hover
-        cursor pointer
-        background-color darkred
+        color mainBlue
+        text-decoration none
+        color offBlack
+        
+        .product-listings__cards--entry--button
+          background-color mainBlueHover
 
-form
-  display flex
-  flex-direction column
-  width 300px
-  background-color lightGrey
-  padding 2rem 2rem 0 2rem
-  margin-bottom 2rem
+@import 'media-queries/large-critical'
+@import 'media-queries/tablet-critical'
+@import 'media-queries/mobile-critical'
