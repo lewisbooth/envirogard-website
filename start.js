@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
 const path = require("path")
 const ip = require("ip")
+const { connectToMongo } = require("./helpers/connectToMongo")
 
 // Load environment variables
 require("dotenv").config({ path: "variables.env" })
@@ -10,19 +10,8 @@ require("dotenv").config({ path: "variables.env" })
 process.env.ROOT = __dirname
 process.env.PUBLIC_FOLDER = path.join(__dirname, "public")
 
-// Connect to MongoDB
-mongoose.connect(process.env.DATABASE, {
-  autoReconnect: true,
-  reconnectTries: 100,
-  reconnectInterval: 500,
-  useNewUrlParser: true
-}).then(() => {
-  process.env.CONNECTED = "true"
-  console.log("Connected to MongoDB")
-}, err => {
-  process.env.CONNECTED = "false"
-  console.error("🚫  Error connecting to MongoDB \n" + err.message)
-})
+// Initiate database connection
+connectToMongo()
 
 // Load MongoDB models
 require("./models/User")
