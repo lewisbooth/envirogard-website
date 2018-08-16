@@ -17,28 +17,31 @@ block body
           .home__promoted--left-column--popular-products--title
             h4 Equipment for Hire
             a(href="/products") View all products →
-          .product-listings__cards
-            //- +productListingCard
-            a.product-listings__cards--entry(href="/products/air-scrubbing-units/dust-control-dc-2000-aircube-air-scrubbing-unit")
-              .product-listings__cards--entry--image
-                img(src="/images/products/TEMP/temp-product.png")
-              .product-listings__cards--entry--title Dust Control DC 2000 Aircube Air Scrubbing Unit
-              .product-listings__cards--entry--button Hire Now &nbsp;→
-            a.product-listings__cards--entry(href="/products/air-scrubbing-units/dust-control-dc-2000-aircube-air-scrubbing-unit")
-              .product-listings__cards--entry--image
-                img(src="/images/products/TEMP/temp-product-1.jpg")
-              .product-listings__cards--entry--title Envirocabin Decontamination Unit
-              .product-listings__cards--entry--button Hire Now &nbsp;→
-            a.product-listings__cards--entry(href="/products/air-scrubbing-units/dust-control-dc-2000-aircube-air-scrubbing-unit")
-              .product-listings__cards--entry--image
-                img(src="/images/products/TEMP/temp-product-2.png")
-              .product-listings__cards--entry--title Dust Fighter DF Smart Misting Cannon
-              .product-listings__cards--entry--button Hire Now &nbsp;→
-            a.product-listings__cards--entry(href="/products/air-scrubbing-units/dust-control-dc-2000-aircube-air-scrubbing-unit")
-              .product-listings__cards--entry--image
-                img(src="/images/products/TEMP/temp-product-3.png")
-              .product-listings__cards--entry--title Numatic HZ/Q 250 H Type Vacuum
-              .product-listings__cards--entry--button Hire Now &nbsp;→
+          .category-listings
+            a.category-listings__entry(href=("/categories/showers-and-decontamination"))
+              img(src="/images/categories/showers-and-decontamination.jpg")
+              .category-listings__entry--label
+                h3 Showers &amp; Decontamination Hire
+            a.category-listings__entry(href=("/categories/showers-and-decontamination"))
+              img(src="/images/categories/showers-and-decontamination.jpg")
+              .category-listings__entry--label
+                h3 Showers &amp; Decontamination Hire
+            a.category-listings__entry(href=("/categories/showers-and-decontamination"))
+              img(src="/images/categories/showers-and-decontamination.jpg")
+              .category-listings__entry--label
+                h3 Showers &amp; Decontamination Hire
+            a.category-listings__entry(href=("/categories/showers-and-decontamination"))
+              img(src="/images/categories/showers-and-decontamination.jpg")
+              .category-listings__entry--label
+                h3 Showers &amp; Decontamination Hire
+            a.category-listings__entry(href=("/categories/showers-and-decontamination"))
+              img(src="/images/categories/showers-and-decontamination.jpg")
+              .category-listings__entry--label
+                h3 Showers &amp; Decontamination Hire
+            a.category-listings__entry(href=("/categories/showers-and-decontamination"))
+              img(src="/images/categories/showers-and-decontamination.jpg")
+              .category-listings__entry--label
+                h3 Showers &amp; Decontamination Hire
         .home__promoted--left-column--offers
           a(href="/products")
             img(src="/images/homepage/offers/offer-1.png" alt="10% off your first order")
@@ -104,7 +107,7 @@ block body
   +branchFinder
 
 block extraFooterScripts
-  script(src="/js/flickity.js" async defer onload="flickityInit()")
   script
     include ../public/js/flickity-init.js
     include ../public/js/branch-finder.js
+  script(src="/js/flickity.js" async defer onload="flickityInit()")
