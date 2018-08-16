@@ -13,6 +13,6 @@ exports.connectToMongo = (retry = false) => {
     process.env.CONNECTED = "false"
     if (!retry)
       console.error("🚫  Error connecting to MongoDB \n" + err.message)
-    setTimeout(() => connectToMongo(true), 5000)
+    setTimeout(() => exports.connectToMongo(true), 5000)
   })
 }

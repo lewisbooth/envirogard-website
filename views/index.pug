@@ -3,18 +3,20 @@ extends layout
 block body
   .home__slider
     .home__slider--blue-strip
-    .container
-      .home__slider--carousel
-        //- Responsive image URLs are controlled in critical.styl and mobile-critical.styl
-        .home__slider--carousel--image
-        .home__slider--carousel--image
+      .container
+        .home__slider--carousel
+          //- Control slider images in critical.styl
+          .home__slider--carousel--image
+          .home__slider--carousel--image
+          .home__slider--carousel--image
 
   .container
     .home__promoted
       .home__promoted--left-column
         .home__promoted--left-column--popular-products
-          h4 Popular Products
-          a(href="/products") View all products →
+          .home__promoted--left-column--popular-products--title
+            h4 Equipment for Hire
+            a(href="/products") View all products →
           .product-listings__cards
             //- +productListingCard
             a.product-listings__cards--entry(href="/products/air-scrubbing-units/dust-control-dc-2000-aircube-air-scrubbing-unit")
@@ -102,7 +104,7 @@ block body
   +branchFinder
 
 block extraFooterScripts
-  script(src="/js/flickity.js")
+  script(src="/js/flickity.js" async defer onload="flickityInit()")
   script
-    include ../public/js/home-slider.js
+    include ../public/js/flickity-init.js
     include ../public/js/branch-finder.js

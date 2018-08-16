@@ -233,51 +233,75 @@ nav
 .home
 
   &__slider
-    position relative
-    z-index 0
 
     &--blue-strip
       background-color offBlack
       width 100%
-      height 66.2%
-      position absolute
-      top 0
-      left 0
-      z-index -1
 
     &--carousel
-      padding-bottom 41.3%
+      padding-top 33.333%
+      position relative
+
+      .flickity
+
+        &-viewport
+          position absolute
+          top 0
+          left 0
+          width 100%
+
+        &-slider 
+          position absolute
+          top 0
+          left 0
+          
+        &-prev-next-button
+          display none
+
+        &-page-dots
+          bottom 10px
+
+          li
+            background-color white
 
       &--image
-        height 100%
         width 100%
-        background-image url("/images/homepage/slider/slider-1.jpg") 
-        background-repeat no-repeat
-        background-position 50%
+        height 100%
         background-size contain
+        background-repeat no-repeat
+        margin-right 50px
 
+        // Desktop images
         &:nth-child(1)
-          background-image url("/images/homepage/slider/slider-1.jpg") 
+          background-image url("/images/homepage/slider/slider-3.png")
+        &:nth-child(2)
+          background-image url("/images/homepage/slider/slider-1.jpg")
+        &:nth-child(3)
+          background-image url("/images/homepage/slider/slider-2.jpg")
 
-      .flickity-prev-next-button
-        background rgba(255,255,255,0.25)
+      // Mobile images
+      @media(max-width:mediaMobileWidth)
+        .home__slider--carousel--image
+          &:nth-child(1)
+            background-image url("/images/homepage/slider/slider-3-mobile.png")
+          &:nth-child(2)
+            background-image url("/images/homepage/slider/slider-1-mobile.jpg")
+          &:nth-child(3)
+            background-image url("/images/homepage/slider/slider-2-mobile.jpg")
 
-      .flickity-viewport
-        position absolute
-        width 100%
+        .flickity
 
-      &-cell
-        height 100%
+          &-viewport
+            padding-top 82.58%
 
-      .flickity-page-dots
-        bottom 0
-
+          &-prev-next-button
+            display block
+            background rgba(255,255,255,0.4)
+            
   &__promoted
     display flex
-    margin-top 2rem
+    margin-top 5rem
 
-    h4
-      margin 0 2rem 1.5rem 0
 
     &--left-column
       flex-grow 1
@@ -288,8 +312,16 @@ nav
         flex-wrap wrap
         align-items flex-end
 
-        > a
-          margin-bottom 1.6rem
+        &--title
+          display flex
+          flex-wrap wrap
+          justify-content space-between
+          align-items flex-end
+          margin-bottom 2rem
+          width 100%
+
+          h4
+            margin 0 2rem 0 0
           
       &--offers
         margin-top 2.333rem
