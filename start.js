@@ -1,14 +1,18 @@
 const path = require("path")
 const ip = require("ip")
 const { connectToMongo } = require("./helpers/connectToMongo")
+const { checkConfig } = require("./helpers/checkConfig")
 
-// Load environment variables
-require("dotenv").config({ path: "variables.env" })
 
 // Expose an absolute path to root & public directories 
 // Useful for scripts that are nested in folders
 process.env.ROOT = __dirname
 process.env.PUBLIC_FOLDER = path.join(__dirname, "public")
+
+checkConfig()
+
+// Load environment variables
+require("dotenv").config({ path: "variables.env" })
 
 // Initiate database connection
 connectToMongo()
