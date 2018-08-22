@@ -1,5 +1,11 @@
 mongodb/
 backups/
+public/cms
+
+# dotenv environment variables file
+.env
+variables.env
+variables.aws.json
 
 # Logs
 logs
@@ -57,7 +63,3 @@ typings/
 # Yarn Integrity file
 .yarn-integrity
 
-# dotenv environment variables file
-.env
-variables.env
-variables.aws.json

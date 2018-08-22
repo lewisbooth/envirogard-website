@@ -36,26 +36,14 @@
           width 2.6rem
           height 2.6rem
 
-    &__secondary
+    &__secondary      
 
       &--right
         display none !important
 
       &--left
         width 100%
-
-        li
-          width 50%
-
-          a
-            width 100%
-            text-align center
-
-        &--industries a
-          box-shadow none !important
-
-        &--find-branch
-          display none !important
+        overflow hidden
 
   .home
 
@@ -75,17 +63,6 @@
         margin-right 0
         width 100%
 
-        .product-listings__cards
-          overflow-x scroll
-          flex-wrap nowrap
-          
-          &--entry
-            width calc(40% - .5rem)
-            margin-right .75rem
-
-            &:nth-child(2n)
-              margin-right .75rem
-
         &--offers
           flex-direction column
 
@@ -102,15 +79,37 @@
           padding-left (containerPadding / 2)
 
         &--industries--live-chat
-          max-height 30rem
+          max-height 40rem
           overflow hidden
 
           &--text
-            padding 5rem 4rem 1rem 4rem
+            padding 0 4rem 4rem 4rem
             width 100%
+            max-height 20rem
+            top 100%
+            transform translateY(-100%) translateX(-50%)
 
   
-  .product-listings
+  .category-listings
 
-    &__cards--entry--image
-      height 11rem
+    &__entry
+      width calc(50% - .5rem)
+      margin-bottom 2rem
+      position relative
+      margin-right 1rem
+      text-decoration none
+      background-color mainBlueTransparent 
+
+      &:nth-child(3n)
+        margin-right 1rem
+
+      &:nth-child(2n)
+        margin-right 0
+
+      &--label
+        position relative
+        padding 1rem 1.25rem
+        background none
+        
+      &:hover .category-listings__entry--label
+        background none

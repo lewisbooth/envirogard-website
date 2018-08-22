@@ -25,11 +25,11 @@ router.post("/login", authController.login)
 router.get("/logout", authController.logout)
 
 // Create user (disabled)
-// router.get("/create-user", pageController.createUser)
-// router.post("/create-user",
-//   authController.validateRegister,
-//   authController.createUser,
-//   authController.login)
+router.get("/create-user", pageController.createUser)
+router.post("/create-user",
+  authController.validateRegister,
+  authController.createUser,
+  authController.login)
 
 // Admin
 router.all(/admin/, authController.isLoggedIn)
