@@ -1,16 +1,62 @@
-// This is all of the JS required for the Branch Finder widget
-
-// Whenever any DOM element with a [data-area] attribute is clicked, 
-// add an '.active' class to elements with a matching [data-area].
-
 const areas = document.querySelectorAll('[data-area]')
+const navBranchName = document.querySelector('.nav__menu--branch--name')
+const useLocationButtons = document.querySelectorAll('.branch-finder__info--title--use-location')
 
+// Import data file via Gulp (not valid JS)
+// The same file is imported into Node using module.exports on the server, 
+// so we create an exports object here to suppress errors
+let exports = {}
+@import './helpers/depotData.js'
+
+// Initialise location on page load
+initLocation()
+
+// Update the location preference when user clicks on
+// an element with the [data-area] attribute
 areas.forEach(e =>
   e.addEventListener('click', () => {
-    areas.forEach(f =>
-      f.dataset.area === e.dataset.area ?
-        f.classList.add('active') :
-        f.classList.remove('active')
-    )
+    updateLocation(e.dataset.area)
   })
 )
+
+// Reset the location to IP lookup when 'Use Location'
+// buttons are pressed
+useLocationButtons.forEach(e =>
+  e.addEventListener('click', () => {
+    initLocation(true)
+  })
+)
+
+// Initialise the location preference from cookie or IP
+function initLocation(forceLookup = false) {
+  // Try to fetch the location from cookies
+  const localDepot = Cookies.get('locationDepot')
+  console.log(localDepot)
+  if (localDepot && !forceLookup) {
+    updateLocation(localDepot)
+  } else {
+    // Otherwise, get location from IP address
+    // Returns "south-east" etc
+    fetch("/api/get-closest-depot")
+      .then(res => res.json())
+      .then(res => {
+        updateLocation(res)
+      })
+  }
+}
+
+// Change the cookie preference and change necessary page elements
+function updateLocation(newLocation) {
+  if (newLocation) {
+    Cookies.set('locationDepot', newLocation, { expires: 365 })
+  }
+  const localDepot = newLocation || Cookies.get('locationDepot')
+  // Render branch finder
+  areas.forEach(area =>
+    area.dataset.area === localDepot ?
+      area.classList.add('active') :
+      area.classList.remove('active')
+  )
+  // Change name of location in navbar
+  navBranchName.innerText = depotData[localDepot].name
+}

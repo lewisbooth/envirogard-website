@@ -14,92 +14,109 @@ mixin nav
               a(href="/about") About
             li
               a(href="/contact") Contact
-          ul.nav__menu--contact
-            li
-              a(href="/contact")
-                img(src="/images/icons/map-pin.svg" alt="Find Us")
-                span Find Us
-            li
-              a(href="/contact")
-                img(src="/images/icons/phone.svg" alt="Call Us")
-                span Call Us
+          a.nav__menu--search-mobile(href='/search')
+            img(src="/images/icons/search-blue.svg" alt="Search")
+          - const clientDepot = cookies ? cookies.locationDepot : "south-east"
+          - const depotInfo = depotData[clientDepot]
+          .nav__menu--contact
+            a.nav__menu--contact--phone(href="/contact")
+              img(src="/images/icons/phone.svg" alt="Call Us")
+              for depot, area in depotData
+                - const active = clientDepot === area ? 'active' : ''
+                span(data-area=area class=active)= depot.telephone
+          .nav__menu--branch
+            span.nav__menu--branch--name= depotInfo.name
+            span.nav__menu--branch--change (Change)
+              img(src="/images/icons/triangle-blue.svg" alt="Drop-down")
+              ul
+                for depot, area in depotData 
+                  - const active = clientDepot === area ? 'active' : ''
+                  li(data-area=area class=active)= depot.name
+
     .nav__secondary
       .container
-        ul.nav__secondary--left
-          li
-            a(href="/categories") Showers &amp; Decontamination
-            ul
-              li
-                a(href="/") Emergency Drench Showers
-              li
-                a(href="/") Modular Decontamination Showers
-              li
-                a(href="/") Showers &amp; Toilets
-              li
-                a(href="/") Trailer Decontamination Showers
-          li
-            a(href="/") Ventilation &amp; Dust Control
-            ul
-              li
-                a(href="/") Water Misting Cannons
-              li
-                a(href="/") Air Scrubbing Units
-              li
-                a(href="/") Ventsafe Dust Extractors
-              li
-                a(href="/") Fans &amp; Fume Extractors
-              li
-                a(href="/") Air Ventilators
-              li
-                a(href="/") Negative Pressure Units
-              li
-                a(href="/") Fibre Suppressant Equipment
-          li
-            a(href="/") Vacuum Cleaners
-            ul
-              li 
-                a(href="/") Clean Room Vacuums
-              li 
-                a(href="/") HML HEPA Vacuums
-              li 
-                a(href="/") Type H Vacuums
-              li 
-                a(href="/") Wet Pick Up Vacuums
-          li
-            a(href="/") Testing &amp; Monitoring
-            ul
-              li 
-                a(href="/") Differential Pressure Monitor, Readout &amp; Alarm Systems
-              li 
-                a(href="/") Smoke Generators
-          li
-            a(href="/") Temporary Site Services
-            ul
-              li 
-                a(href="/") Water Bowsers
-              li 
-                a(href="/") Portable Generators
-              li 
-                a(href="/") Pumps &amp; Pressure Washers
-              li 
-                a(href="/") Site Electrics
-              li 
-                a(href="/") Bootwash
-          li
-            a(href="/industries") Industries
-            ul
-              li 
-                a(href="/") Pollution Control
-              li 
-                a(href="/") Asbestos Removal
-              li 
-                a(href="/") Demolition
-              li 
-                a(href="/") Contaminated Land
-              li 
-                a(href="/") Tank Purging
-        ul.nav__secondary--right
-          li.live-chat__start-button
-            a(href="/contact")
-              img(src="/images/icons/chat.svg" alt="Live Chat Icon")
-              span Live Chat
+        div
+          span.nav__secondary--dropdown.hide__desktop Hire Equipment
+          ul.nav__secondary--products
+            li
+              a(href="/categories") Decontamination Units
+              ul
+                li
+                  a(href="/") Emergency Drench Showers
+                li
+                  a(href="/") Modular Decontamination Showers
+                li
+                  a(href="/") Showers &amp; Toilets
+                li
+                  a(href="/") Trailer Decontamination Showers
+            li
+              a(href="/") Ventilation &amp; Dust Control
+              ul
+                li
+                  a(href="/") Water Misting Cannons
+                li
+                  a(href="/") Air Scrubbing Units
+                li
+                  a(href="/") Ventsafe Dust Extractors
+                li
+                  a(href="/") Fans &amp; Fume Extractors
+                li
+                  a(href="/") Air Ventilators
+                li
+                  a(href="/") Negative Pressure Units
+                li
+                  a(href="/") Fibre Suppressant Equipment
+            li
+              a(href="/") Vacuum Cleaners
+              ul
+                li 
+                  a(href="/") Clean Room Vacuums
+                li 
+                  a(href="/") HML HEPA Vacuums
+                li 
+                  a(href="/") Type H Vacuums
+                li 
+                  a(href="/") Wet Pick Up Vacuums
+            li
+              a(href="/") Testing &amp; Monitoring
+              ul
+                li 
+                  a(href="/") Differential Pressure Monitors
+                li 
+                  a(href="/") Readout &amp; Alarm Systems
+                li 
+                  a(href="/") Smoke Generators
+            li
+              a(href="/") Temporary Site Services
+              ul
+                li 
+                  a(href="/") Water Bowsers
+                li 
+                  a(href="/") Portable Generators
+                li 
+                  a(href="/") Pumps &amp; Pressure Washers
+                li 
+                  a(href="/") Site Electrics
+                li 
+                  a(href="/") Bootwash
+          span.nav__secondary--dropdown.hide__desktop Browse by Industry
+          ul.nav__secondary--industries
+            li
+              a(href="/") Browse by Industry
+              ul
+                li 
+                  a(href="/") Pollution Control
+                li 
+                  a(href="/") Asbestos Removal
+                li 
+                  a(href="/") Demolition
+                li 
+                  a(href="/") Contaminated Land
+                li 
+                  a(href="/") Tank Purgin
+        div.hide__mobile
+          ul
+            li.live-chat__start-button
+              a(href="/contact")
+                img(src="/images/icons/chat.svg" alt="Live Chat Icon")
+                span Live Chat

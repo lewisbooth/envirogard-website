@@ -21,7 +21,7 @@ block body
             a.category-listings__entry(href=("/categories/showers-and-decontamination"))
               img(src="/images/cms/categories/TEMP/showers-and-decontamination.jpg")
               .category-listings__entry--label
-                h3 Showers &amp; Decontamination
+                h3 Decontamination Units
             a.category-listings__entry(href=("/categories/showers-and-decontamination"))
               img(src="/images/cms/categories/TEMP/dust-control.jpg")
               .category-listings__entry--label
@@ -82,9 +82,9 @@ block body
     .container
       .home__split-strip--popular-categories
         .home__split-strip--popular-categories--title
-          h4 Popular Categories
+          h4 Popular Products
           a(href="/categories") View all categories →
-        ul.category-list
+        ul.popular-products
           li 
             a(href="/categories/decontamination-units")
               span Decontamination Units
@@ -109,5 +109,4 @@ block body
 block extraFooterScripts
   script
     include ../public/js/flickity-init.js
-    include ../public/js/branch-finder.js
   script(src="/js/flickity.js" async defer onload="flickityInit()")

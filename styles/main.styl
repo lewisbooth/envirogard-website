@@ -92,10 +92,10 @@
       background-position 50%
       z-index 0    
 
-.category-list
+.popular-products
 
   li
-    margin-bottom 1rem
+    margin-bottom .5rem
     font-size 1.8rem
 
     a
@@ -135,6 +135,30 @@
     justify-content center
     align-items flex-start
     margin-top -5rem
+
+    &--title
+      width 100%
+      display flex
+      flex-wrap wrap
+      justify-content space-between
+      align-items flex-end
+      margin 2rem 0
+
+      h4
+        margin 0
+
+      &--use-location
+        color mainBlue
+        text-decoration underline
+        display flex
+
+        img
+          width 2rem
+          height 2rem
+          margin-left 1rem
+
+        &:hover
+          cursor pointer
 
     &--block
       background mainBlue
@@ -288,6 +312,35 @@
     line-height 1.6
     width 25%
     padding-right 1rem
+
+    &--branches
+      width 100%
+      position relative
+
+      img
+        max-height 24rem
+        width auto
+        margin 0 auto
+
+      &--text
+        position absolute
+        top 50%
+        left 50%
+        transform translateY(-50%) translateX(-50%)
+        margin 0 auto
+        font-size 1.8rem
+        text-align center
+
+        span
+          width 17rem 
+          display block
+          margin-bottom 1rem
+
+        a
+          color mainYellow !important
+          text-decoration underline !important
+          font-family plexBold
+
 
   h5
     margin 0 0 2rem 0

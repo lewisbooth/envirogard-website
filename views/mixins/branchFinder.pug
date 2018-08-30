@@ -3,7 +3,10 @@ mixin branchFinder
   .branch-finder
     .container
       .branch-finder__info
-        h4 Find a Branch
+        .branch-finder__info--title
+          h4 Find a Branch
+          span.branch-finder__info--title--use-location Use my location
+            img(src="/images/icons/gps-fixed-indicator.svg" alt="Location icon")
         .branch-finder__info--block
           ol.branch-finder__info--block--titles
             li(data-area="north-west").active #[span 1] North West

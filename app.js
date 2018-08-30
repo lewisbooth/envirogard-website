@@ -1,3 +1,6 @@
+// This file sets up the middleware for all Express network requests
+// Requests are handed off to the routing file after middleware
+
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
@@ -10,13 +13,13 @@ const compression = require("compression")
 const bodyParser = require("body-parser")
 const flash = require("connect-flash")
 const device = require("device")
-const path = require("path")
 
-// Helper functions & middleware
+// Helper functions & other middleware
 const { checkDB } = require("./helpers/checkDB")
 const { logging } = require("./helpers/logging")
 const { truncate } = require("./helpers/truncate")
 const { cacheBuster } = require("./helpers/cacheBuster")
+const { depotData } = require("./helpers/depotData")
 const errorHandlers = require("./helpers/errorHandlers")
 const routes = require("./routes/routes")
 const passport = require("passport")
@@ -33,7 +36,7 @@ app.use(compression())
 const maxAge = process.env.NODE_ENV === "production" ? 31536000 : 1
 
 // Serve static files
-// These should be served via reverse proxy in production (e.g. Nginx)
+// These should be served via Nginx/Apache reverse proxy in production
 app.use(express.static(process.env.PUBLIC_FOLDER, { maxAge }))
 
 // Add MDS hashes to automatically version CSS/JS
@@ -86,13 +89,17 @@ app.use(expressValidator())
 // Expose variables and functions to view templates
 app.use((req, res, next) => {
   // Parses the User Agent into desktop, phone, tablet, phone, bot or car
-  res.locals.device = device(req.headers['user-agent']).type
+  res.locals.device = device(req.headers["user-agent"]).type
   // Pass success/error messages into the template
   res.locals.flashes = req.flash()
   // Expose the current user data if logged in
   res.locals.user = req.user || null
   // Expose the URL path
   res.locals.currentPath = req.path
+  // Expose cookies
+  res.locals.cookies = req.cookies || {}
+  // Expose depot contact information
+  res.locals.depotData = depotData
   // Expose the requested query strings
   res.locals.query = req.query
   // Safely format descriptions
@@ -113,7 +120,7 @@ app.use(errorHandlers.notFound)
 app.use(errorHandlers.flashValidationErrors)
 
 // Error page with stacktrace during development
-if (app.get('env') === 'development')
+if (app.get("env") === "development")
   app.use(errorHandlers.developmentErrors)
 
 // Error page with no stacktrace in production

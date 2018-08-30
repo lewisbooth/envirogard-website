@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const pageController = require("../controllers/pageController")
+const apiController = require("../controllers/apiController")
 const authController = require("../controllers/authController")
 const { catchErrors } = require("../helpers/errorHandlers")
 
@@ -19,17 +20,23 @@ const upload = multer({
 // Public pages
 router.get("/", catchErrors(pageController.homepage))
 
+
+// API
+router.get("/api/get-closest-depot", apiController.getClosestDepot)
+
+
+
 // Authentication
 router.get("/login", pageController.login)
 router.post("/login", authController.login)
 router.get("/logout", authController.logout)
 
 // Create user (disabled)
-router.get("/create-user", pageController.createUser)
-router.post("/create-user",
-  authController.validateRegister,
-  authController.createUser,
-  authController.login)
+// router.get("/create-user", pageController.createUser)
+// router.post("/create-user",
+//   authController.validateRegister,
+//   authController.createUser,
+//   authController.login)
 
 // Admin
 router.all(/admin/, authController.isLoggedIn)

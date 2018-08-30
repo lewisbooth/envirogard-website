@@ -38,21 +38,23 @@ mixin footer
           li
             a(href="/") Asbestos Removal
       .footer__column
-        h5 About Us
+        h5 Customer Services
         ul
           li 
             a(href="/") About Envirogard
-      .footer__column
-        h5 Customer Services
         ul
           li 
             a(href="/") Find a Branch
           li 
-            a(href="/") Opening Hours
-          li 
             a(href="/") FAQ
           li 
             a(href="/") Contact Us
+      .footer__column
+        .footer__column--branches
+          img(src="images/branch-finder/branch-finder-map.png" alt="Map of the UK")
+          .footer__column--branches--text 
+            span We serve customers across the UK
+            a(href="/contact") Find a Branch 
 
     .footer__bottom-strip
       .container

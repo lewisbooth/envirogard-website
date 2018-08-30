@@ -20,9 +20,6 @@ connectToMongo()
 // Load MongoDB models
 require("./models/User")
 
-// Load cron jobs for sitemap, backup etc
-require("./cron")
-
 // Load server scripts
 const app = require("./app")
 
@@ -36,4 +33,7 @@ const server = app.listen(app.get("port"), () => {
   else
     console.log("🐌  Development Mode 🐌 ")
   console.log("Local address: " + ip.address())
-})
+}) 
+
+// Load cron jobs for sitemap, backup etc
+require("./cron")

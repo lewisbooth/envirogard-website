@@ -6,6 +6,7 @@ var autoprefixer = require("autoprefixer")
 var cssnano = require("cssnano")
 var babel = require("gulp-babel")
 var minify = require("gulp-minify")
+var jsImport = require("gulp-js-import")
 var browserSync = require("browser-sync").create()
 
 gulp.task("default", ["serve"])
@@ -28,6 +29,7 @@ gulp.task("scripts", () => {
   return gulp
     .src("scripts/**/*.js")
     .pipe(plumber())
+    .pipe(jsImport({hideConsole: true}))
     .pipe(babel({
       presets: ["env"]
     }))
