@@ -19,150 +19,12 @@
 
   .container
     padding 0 (containerPadding / 2)
-
-  nav
-    position fixed
-    top 0
-    z-index 999
-    width 100%
     
   .nav
-    z-index 9
-
-    .container
-      padding-top 1rem
-      padding-bottom 1rem
-      padding-right 2rem
 
     &__logo
       width 20rem
       height 3.6rem
-
-    &__search
-      display none
-
-    &__menu
-      flex-direction row
-
-      &--useful-links
-        display none
-
-      &--branch
-        display none
-
-      &--search-mobile
-        display block
-        margin-right 2rem
-
-        img 
-          width 2.6rem
-          height 2.6rem
-
-      &--contact
-        margin-top 0
-
-        &--phone
-          margin-left 0
-          min-width auto
-          
-          span.active
-            display none
-
-          img 
-            width 2.6rem !important
-            height 2.6rem !important
-
-    &__secondary
-      z-index -1
-
-      &--right
-        display none !important
-
-      .container
-        position relative
-        padding 0
-
-        ul
-          display none
-
-        > div 
-          width 100%
-        
-          > span 
-            display block
-            padding 1rem 0
-            width 50%
-            text-align center
-
-            &:first-child
-              border-right 1px solid lightBlue 
-
-      &--dropdown
-        background mainBlue
-
-        + ul 
-          display flex !important
-          flex-direction column
-          background mainBlueHover
-          position absolute
-          top 100%
-          width 100vw
-          transform translateY(-100%)
-          transition transform .35s ease-in-out
-          will-change transform
-          z-index -1
-
-          > li
-            border-bottom 1px solid lightBlue 
-            padding 0 !important
-
-            > a
-              display block
-              box-sizing content-box
-              padding 1.5rem !important
-              box-shadow none !important
-              width 100%
-
-            &:hover
-              cursor pointer
-              background mainBlueHover
-              
-              ul              
-                display none !important
-
-          &.nav__secondary--industries > li
-
-            a
-              display none
-
-            > ul
-              display block !important
-              background mainBlueHover !important
-              transform translateY(-100%)
-              transition transform .35s ease-in-out
-              will-change transform
-              z-index -1
-
-              > li
-                border-bottom 1px solid lightBlue 
-
-                > a
-                  color white !important
-                  padding 1.5rem !important
-                  display block !important
-
-        &.active
-          background mainBlueHover
-
-          + ul
-            transform translateY(0)
-          
-            &.nav__secondary--industries > li
-              border-bottom none !important 
-
-              > ul
-                transform translateY(0) !important
-                padding 0
 
   .home
 
@@ -244,6 +106,9 @@
       margin-bottom 0
       text-decoration none
       background-color mainBlue
+
+      &:nth-child(3n)
+        margin-right 0
 
       img 
         display none

@@ -16,7 +16,8 @@ mixin nav
               a(href="/contact") Contact
           a.nav__menu--search-mobile(href='/search')
             img(src="/images/icons/search-blue.svg" alt="Search")
-          - const clientDepot = cookies ? cookies.locationDepot : "south-east"
+          - const clientDepot = cookies.locationDepot ? cookies.locationDepot : "south-east"
+          - console.log(clientDepot)
           - const depotInfo = depotData[clientDepot]
           .nav__menu--contact
             a.nav__menu--contact--phone(href="/contact")
@@ -29,7 +30,7 @@ mixin nav
             span.nav__menu--branch--change (Change)
               img(src="/images/icons/triangle-blue.svg" alt="Drop-down")
               ul
-                for depot, area in depotData 
+                for depot, area in depotData
                   - const active = clientDepot === area ? 'active' : ''
                   li(data-area=area class=active)= depot.name
 
@@ -114,7 +115,7 @@ mixin nav
                   a(href="/") Contaminated Land
                 li 
                   a(href="/") Tank Purgin
-        div.hide__mobile
+        div.hide__tablet
           ul
             li.live-chat__start-button
               a(href="/contact")

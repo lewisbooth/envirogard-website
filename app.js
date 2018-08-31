@@ -97,7 +97,7 @@ app.use((req, res, next) => {
   // Expose the URL path
   res.locals.currentPath = req.path
   // Expose cookies
-  res.locals.cookies = req.cookies || {}
+  res.locals.cookies = req.cookies
   // Expose depot contact information
   res.locals.depotData = depotData
   // Expose the requested query strings

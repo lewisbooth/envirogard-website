@@ -23,8 +23,9 @@ exports.generate = () => {
   const age = currentTime - lastModified
 
   // Regenerate sitemap if it is out of date
+  // Wait a couple of seconds for server to connect to DB
   if (age > TIMEOUT)
-    sitemap.start()
+    setTimeout(() => sitemap.start(), 2000)
 
   // When the sitemap has finished, replace the local URL with the public one
   sitemap.on('done', () => {
