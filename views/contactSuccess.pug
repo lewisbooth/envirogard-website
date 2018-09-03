@@ -1,0 +1,14 @@
+extends layout
+
+block body
+  .page-header
+    .container
+      h1 Contact Us
+  .container
+    h3 Success!
+    p An Envirogard representative will get back to you as soon as possible.
+
+block extraFooterScripts
+  script(async src="https://unpkg.com/axios/dist/axios.min.js")
+  script
+    include ../public/js/contact-form.js

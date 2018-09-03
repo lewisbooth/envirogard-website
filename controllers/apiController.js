@@ -5,7 +5,6 @@ const { depotData } = require('../helpers/depotData')
 exports.getClosestDepot = async (req, res) => {
   // Use test IP if request comes from localhost
   const clientIP = req.ip.startsWith(":") ? "86.9.243.232" : req.ip
-  // In case there's an error, use the HQ location as the default
   const defaultLocation = "south-east"
   // Use IPStack.com to fetch the lat/long of the client IP
   fetch(`http://api.ipstack.com/${clientIP}?access_key=${process.env.IPSTACK_KEY}&fields=longitude,latitude`)
@@ -34,6 +33,7 @@ exports.getClosestDepot = async (req, res) => {
     })
 }
   
+// Calculate distance between two lat/long points on a sphere
 function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
   lat1 = Deg2Rad(lat1)
   lat2 = Deg2Rad(lat2)
@@ -46,7 +46,7 @@ function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
   return d
 }
 
-// Convert Degress to Radians
+// Convert Degrees to Radians
 function Deg2Rad(deg) {
   return deg * Math.PI / 180
 }

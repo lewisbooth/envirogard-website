@@ -4,4 +4,12 @@
     <loc>https://envirogard.co.uk/</loc>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://envirogard.co.uk/about</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/contact</loc>
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>

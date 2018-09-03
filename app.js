@@ -1,5 +1,6 @@
-// This file sets up the middleware for all Express network requests
-// Requests are handed off to the routing file after middleware
+// This file sets up the Express middleware
+// All network requests pass through the middleware top-to-bottom
+// Requests are then handed off to the rout ing file
 
 const express = require("express")
 const app = express()
@@ -42,6 +43,10 @@ app.use(express.static(process.env.PUBLIC_FOLDER, { maxAge }))
 // Add MDS hashes to automatically version CSS/JS
 app.use(cacheBuster)
 
+// Parse POST data into req.body
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+
 // Log dynamic requests
 app.use(logging)
 
@@ -72,10 +77,6 @@ app.use((req, res, next) => {
   next()
 })
 
-// Parse POST data into req.body
-app.use(bodyParser.json())
-app.use(bodyParser.urlencoded({ extended: true }))
-
 // Parse cookies into req.cookies
 app.use(cookieParser())
 
@@ -94,16 +95,13 @@ app.use((req, res, next) => {
   res.locals.flashes = req.flash()
   // Expose the current user data if logged in
   res.locals.user = req.user || null
-  // Expose the URL path
-  res.locals.currentPath = req.path
-  // Expose cookies
-  res.locals.cookies = req.cookies
-  // Expose depot contact information
-  res.locals.depotData = depotData
-  // Expose the requested query strings
-  res.locals.query = req.query
   // Safely format descriptions
   res.locals.truncate = truncate
+  // Expose other useful information
+  res.locals.currentPath = req.path
+  res.locals.cookies = req.cookies
+  res.locals.depotData = depotData
+  res.locals.query = req.query
   // Detect production mode
   if (process.env.NODE_ENV === "production")
     res.locals.production = true

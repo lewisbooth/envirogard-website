@@ -6,7 +6,7 @@ const useLocationButtons = document.querySelectorAll('.branch-finder__info--titl
 // The same file is imported into Node using module.exports on the server, 
 // so we create an exports object here to suppress errors
 let exports = {}
-@import './helpers/depotData.js'
+@import '../helpers/depotData.js'
 
 // Initialise location on page load
 initLocation()
@@ -31,7 +31,6 @@ useLocationButtons.forEach(e =>
 function initLocation(forceLookup = false) {
   // Try to fetch the location from cookies
   const localDepot = Cookies.get('locationDepot')
-  console.log(localDepot)
   if (localDepot && !forceLookup) {
     updateLocation(localDepot)
   } else {

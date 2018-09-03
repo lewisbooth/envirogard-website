@@ -1,0 +1,37 @@
+extends layout
+
+block body
+  .page-header
+    .container
+      h1 Contact Us
+  +branchFinder
+  .contact-forms
+    .container
+      .contact-forms__enquiry
+        h3 Enquiry Form
+        p If you’d prefer to contact us via enquiry form, please leave your details below and a member of our team will contact you as soon as possible. All fields are required.
+        form(name="contact")
+          .contact-forms__enquiry--input
+            label(for="name") Name
+            input(type="text" name="name" required)
+          .contact-forms__enquiry--input
+            label(for="company") Company
+            input(type="text" name="company" required)
+          .contact-forms__enquiry--input
+            label(for="email") Email
+            input(type="email" name="email" required)
+          .contact-forms__enquiry--input
+            label(for="phone") Phone Number
+            input(type="text" name="phone" required)
+          .contact-forms__enquiry--textarea          
+            label(for="message") Message
+            textarea(name="message" rows="10" required)
+          .contact-forms__enquiry--bot
+            input(type="text" name="bot")
+          .contact-forms__enquiry--errors
+          button(type="submit") Send Message
+
+block extraFooterScripts
+  script(async src="https://unpkg.com/axios/dist/axios.min.js")
+  script
+    include ../public/js/contact-form.js
