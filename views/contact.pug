@@ -4,6 +4,9 @@ block body
   .page-header
     .container
       h1 Contact Us
+  .grey-strip
+    .container
+      p.no-margin If you have a query, please read our #[a(href="/frequently-asked-questions") FAQ] page for answers to commonly asked questions.
   +branchFinder
   .contact-forms
     .container
@@ -30,6 +33,14 @@ block body
             input(type="text" name="bot")
           .contact-forms__enquiry--errors
           button(type="submit") Send Message
+      .contact-forms__other
+        h3 Live Chat
+        p You can speak with our advisors directly during business hours using our Live Chat.
+        .button.live-chat__start-button Start Live Chat
+        h3 Apply for a Trade Account
+        p If you’d like to hire from us, please apply for a Trade Account.
+        a.button(href="/trade-account") Apply Now →
+    
 
 block extraFooterScripts
   script(async src="https://unpkg.com/axios/dist/axios.min.js")

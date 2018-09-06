@@ -19,7 +19,6 @@ form.addEventListener('submit', e => {
 
 function renderErrors(errors) {
   errorContainer.innerHTML = 
-    `<span>Error submitting your form, please try again:</span>`
-  errorContainer.innerHTML += 
+    `<span>Error submitting your form, please try again:</span>` +
     errors.map(error => `<p>${error}</p>`).join('')
 }

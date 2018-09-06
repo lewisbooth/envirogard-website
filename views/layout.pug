@@ -17,8 +17,10 @@ html
         h1 New page
     +footer
     block footerScripts
+      script(async defer src="/js/tawkTo.js")
       script
         include ../public/js/nav.js
         include ../public/js/cookies.js
         include ../public/js/branch-finder.js
+        include ../public/js/tawkToInit.js
     block extraFooterScripts

@@ -14,8 +14,24 @@ exports.about = (req, res) => {
   res.render("about")
 }
 
+exports.tradeAccount = (req, res) => {
+  res.render("tradeAccount")
+}
+
+exports.tradeAccountTerms = (req, res) => {
+  res.render("tradeAccountTerms")
+}
+
+exports.faq = (req, res) => {
+  res.render("faq")
+}
+
 exports.contact = (req, res) => {
   res.render("contact")
+}
+
+exports.privacyPolicy = (req, res) => {
+  res.render("privacyPolicy")
 }
 
 exports.contactForm = async (req, res) => {
@@ -24,15 +40,17 @@ exports.contactForm = async (req, res) => {
   if (!validator.isEmpty(req.body.bot))
     return res.status(200).send()
   // Validate the fields
-  if (validator.isEmpty(req.body.name))
+  if (!req.body.name)
     errors.push("Please supply your name")
-  if (validator.isEmpty(req.body.company))
+  if (!req.body.company)
     errors.push("Please supply your company name")
-  if (!validator.isEmail(req.body.email))
+  if (!req.body.email)
+    errors.push("Please supply your email address")
+  if (req.body.email && !validator.isEmail(req.body.email))
     errors.push("Email address is invalid")
-  if (validator.isEmpty(req.body.phone))
+  if (!req.body.phone)
     errors.push("Please supply your phone number")
-  if (validator.isEmpty(req.body.message))
+  if (!req.body.message)
     errors.push("Please supply a message")
   // Handle errors
   if (errors.length) {

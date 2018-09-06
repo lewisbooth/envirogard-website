@@ -21,6 +21,11 @@ router.get("/about", pageController.about)
 router.get("/contact", pageController.contact)
 router.post("/contact", catchErrors(pageController.contactForm))
 router.get("/contact/success", pageController.contactSuccess)
+router.get("/trade-account", pageController.tradeAccount)
+router.get("/trade-account/terms-and-conditions", pageController.tradeAccountTerms)
+router.get("/frequently-asked-questions", pageController.faq)
+router.get("/privacy-policy", pageController.privacyPolicy)
+router.get("/privacy-policy", pageController.privacyPolicy)
 
 // API
 router.get("/api/get-closest-depot", apiController.getClosestDepot)

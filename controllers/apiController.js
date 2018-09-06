@@ -14,14 +14,14 @@ exports.getClosestDepot = async (req, res) => {
       let closestDepot = defaultLocation
       // Calculate distance of each depot from the client
       Object.keys(depotData).forEach(depot => {
-        const dif = PythagorasEquirectangular(
+        const distance = getDistance(
           client.latitude, 
           client.longitude, 
           depotData[depot].location.latitude, 
           depotData[depot].location.longitude
         )
-        if (dif < closestDistance) {
-          closestDistance = dif
+        if (distance < closestDistance) {
+          closestDistance = distance
           closestDepot = depot
         }
       })
@@ -34,7 +34,7 @@ exports.getClosestDepot = async (req, res) => {
 }
   
 // Calculate distance between two lat/long points on a sphere
-function PythagorasEquirectangular(lat1, lon1, lat2, lon2) {
+function getDistance(lat1, lon1, lat2, lon2) {
   lat1 = Deg2Rad(lat1)
   lat2 = Deg2Rad(lat2)
   lon1 = Deg2Rad(lon1)

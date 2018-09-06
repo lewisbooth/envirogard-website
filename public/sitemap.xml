@@ -12,4 +12,16 @@
     <loc>https://envirogard.co.uk/contact</loc>
     <changefreq>weekly</changefreq>
   </url>
+  <url>
+    <loc>https://envirogard.co.uk/trade-account</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/frequently-asked-questions</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/docs/envirogard-trade-account-form.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
 </urlset>

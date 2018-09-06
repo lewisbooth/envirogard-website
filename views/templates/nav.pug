@@ -16,7 +16,7 @@ mixin nav
               a(href="/contact") Contact
           a.nav__menu--search-mobile(href='/search')
             img(src="/images/icons/search-blue.svg" alt="Search")
-          - const clientDepot = cookies.locationDepot ? cookies.locationDepot : "south-east"
+          - const clientDepot = cookies && cookies.locationDepot ? cookies.locationDepot : "south-east"
           - const depotInfo = depotData[clientDepot]
           .nav__menu--contact
             a.nav__menu--contact--phone(href="/contact")
