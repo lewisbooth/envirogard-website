@@ -15,7 +15,7 @@ const upload = multer({
   }
 })
 
-// Public pages
+// Standard pages
 router.get("/", catchErrors(pageController.homepage))
 router.get("/about", pageController.about)
 router.get("/contact", pageController.contact)
@@ -40,10 +40,10 @@ router.all(/admin/, authController.isLoggedIn)
 router.get("/admin", pageController.login)
 
 // Create user (disabled)
-// router.get("/create-user", pageController.createUser)
-// router.post("/create-user",
-//   authController.validateRegister,
-//   authController.createUser,
-//   authController.login)
+router.get("/create-user", pageController.createUser)
+router.post("/create-user",
+  authController.validateRegister,
+  authController.createUser,
+  authController.login)
 
 module.exports = router

@@ -1,9 +1,9 @@
-const areas = document.querySelectorAll('[data-area]')
+const areaButtons = document.querySelectorAll('[data-area]')
 const navBranchName = document.querySelector('.nav__menu--branch--name')
 const useLocationButtons = document.querySelectorAll('.branch-finder__info--title--use-location')
 
 // Import data file via Gulp (not valid JS)
-// The same file is imported into Node using module.exports on the server, 
+// The same file is imported into the backend and uses exports object, 
 // so we create an exports object here to suppress errors
 let exports = {}
 @import '../helpers/depotData.js'
@@ -13,7 +13,7 @@ initLocation()
 
 // Update the location preference when user clicks on
 // an element with the [data-area] attribute
-areas.forEach(e =>
+areaButtons.forEach(e =>
   e.addEventListener('click', () => {
     updateLocation(e.dataset.area)
   })
@@ -31,6 +31,7 @@ useLocationButtons.forEach(e =>
 function initLocation(forceLookup = false) {
   // Try to fetch the location from cookies
   const localDepot = Cookies.get('locationDepot')
+  // Use the cookie if it's already set
   if (localDepot && !forceLookup) {
     updateLocation(localDepot)
   } else {
@@ -51,7 +52,7 @@ function updateLocation(newLocation) {
   }
   const localDepot = newLocation || Cookies.get('locationDepot')
   // Render branch finder
-  areas.forEach(area =>
+  areaButtons.forEach(area =>
     area.dataset.area === localDepot ?
       area.classList.add('active') :
       area.classList.remove('active')

@@ -1,0 +1,7 @@
+mixin adminBar
+  section.admin__bar
+    .container
+      img.admin__bar--logo(src="/images/logos/amp-cms-logo-white.svg" alt="AMP CMS Logo")
+      div.admin__bar--right
+        span Signed in as #[strong #{user.email}]
+        img(src="/images/icons/user.svg" alt="Default User Icon")

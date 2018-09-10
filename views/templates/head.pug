@@ -28,12 +28,17 @@ mixin head
       style
         include ../../public/css/critical.css
 
-    //- Use <link> during development to allow BrowserSync to inject changes
+    //- Use <link> for critical CSS during development 
+    //- to allow BrowserSync to inject changes
     else
       link(rel='stylesheet' href=hashes["critical.css"] type="text/css")
 
     //- External non-critical styles
     link(rel='stylesheet' href=hashes["main.css"] type="text/css")
+
+    //- Admin styles
+    if user
+      link(rel='stylesheet' href=hashes["admin.css"] type="text/css")
 
     block extraHeaderCSS
     block extraHeaderScripts

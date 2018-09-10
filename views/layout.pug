@@ -1,5 +1,6 @@
 include templates/head
 include templates/nav
+include templates/adminBar
 include templates/footer
 include templates/flashMessages
 include mixins/productListingCard
@@ -10,6 +11,8 @@ doctype html
 html
   +head
   body
+    if user
+      +adminBar
     +nav
     +flash-messages
     block body

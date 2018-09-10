@@ -1,6 +1,6 @@
 // This file sets up the Express middleware
 // All network requests pass through the middleware top-to-bottom
-// Requests are then handed off to the rout ing file
+// Requests are then handed off to the routing file
 
 const express = require("express")
 const app = express()
@@ -26,7 +26,7 @@ const routes = require("./routes/routes")
 const passport = require("passport")
 require("./helpers/passport")
 
-// Load Pug templating engine
+// Load Pug templating engine 
 app.set("views", "views")
 app.set("view engine", "pug")
 

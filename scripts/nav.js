@@ -1,9 +1,13 @@
 const body = document.querySelector('body')
+const nav = document.querySelector('nav')
+const adminBar = document.querySelector('.admin__bar')
 const mobileDropdownButtons = document.querySelectorAll('.nav__secondary--dropdown')
-const navHeight = document.querySelector('.nav').offsetHeight
+
+const navHeight = () => adminBar ? 
+    nav.offsetHeight + adminBar.offsetHeight : nav.offsetHeight
 
 document.addEventListener('scroll', e => {
-    body.className = e.pageY > navHeight ? "nav-scroll" : ""
+    body.className = e.pageY > navHeight() ? "nav-scroll" : ""
 })
 
 mobileDropdownButtons.forEach(button => {

@@ -15,6 +15,7 @@
       text-align center
       display flex
       justify-content space-between
+      align-items center
 
     &__text
       margin 0
@@ -30,11 +31,12 @@
           background-color darkgreen
 
     &__remove
-      padding 0 .75rem
+      padding .5rem .75rem
       margin 0
       float right
       font-size 2rem
       background-color firebrick
+      line-height 1
 
       &:hover
         cursor pointer
@@ -518,6 +520,22 @@
         font-size 1.3rem
         font-family plexBold
 
-@import 'media-queries/large'
-@import 'media-queries/tablet'
-@import 'media-queries/mobile'
+.login
+  margin 6rem auto
+  max-width 40rem
+  padding 2rem
+
+  img
+    margin-bottom 4rem
+    padding 0 2rem
+
+  form
+    display flex
+    flex-direction column
+
+    label
+      margin-top 1rem
+
+@import 'main/media-queries/large'
+@import 'main/media-queries/tablet'
+@import 'main/media-queries/mobile'
