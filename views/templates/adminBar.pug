@@ -4,4 +4,14 @@ mixin adminBar
       img.admin__bar--logo(src="/images/logos/amp-cms-logo-white.svg" alt="AMP CMS Logo")
       div.admin__bar--right
         span Signed in as #[strong #{user.email}]
-        img(src="/images/icons/user.svg" alt="Default User Icon")
+        img.admin__bar--right--user-icon(src="/images/icons/user.svg" alt="Default User Icon")
+        img.admin__bar--right--dropdown-icon(src="/images/icons/triangle-down.svg" alt="Dropdown Icon")
+        ul.admin__bar--right--dropdown
+          li
+            a(href="/dashboard")
+              img(src="/images/icons/settings.svg" alt="Settings Icon")
+              span Manage Content
+          li
+            a(href="/logout")
+              img(src="/images/icons/sign-out.svg" alt="Sign Out Icon")
+              span Sign out

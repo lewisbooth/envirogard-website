@@ -2,7 +2,7 @@ button, .button
   display inline-flex
   align-items center
   justify-content center
-  padding 1rem 1.5rem
+  padding 1.25rem 1.75rem
   margin 2rem 0
   border none
   background-color mainBlue
@@ -12,6 +12,11 @@ button, .button
   user-select none
   font-size 1.6rem
   white-space nowrap
+
+  &__arrow:after
+    content "→"
+    font-family plexBold 
+    margin-left .75rem
 
   &:hover
     background-color mainBlueHover

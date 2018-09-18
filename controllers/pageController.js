@@ -4,26 +4,43 @@ const validator = require('validator')
 const { contactForm } = require("../helpers/contactForm")
 
 // Titles and descriptions are written in the controllers
-// Titles are appended with "| AMP" in views/templates/head.pug
+// Titles are appended with "| Envirogard" in views/templates/head.pug
 
 exports.homepage = async (req, res) => {
   res.render("index")
 }
 
+exports.category = async (req, res) => {
+  res.render("category")
+}
+
 exports.about = (req, res) => {
-  res.render("about")
+  res.render("about", {
+    title: "About Us",
+    description:
+      "Established in 1989, Envirogard hires specialist equipment to contractors across mainland U.K. Equipment is supplied from our hire depots at Manchester, Barnsley, Tamworth, Bristol and Ashford (Kent)."
+  })
 }
 
 exports.tradeAccount = (req, res) => {
-  res.render("tradeAccount")
+  res.render("tradeAccount", {
+    title: "Trade Account Application",
+    description: "Apply for a Trade Account to hire equipment from Envirogard."
+  })
 }
 
 exports.tradeAccountTerms = (req, res) => {
-  res.render("tradeAccountTerms")
+  res.render("tradeAccountTerms", {
+    title: "Trade Account Terms and Conditions",
+    description: "Trade Account Terms and Conditions"
+  })
 }
 
 exports.faq = (req, res) => {
-  res.render("faq")
+  res.render("faq", {
+    title: "Frequently Asked Questions",
+    description: "Our FAQ page answers common questions about our service coverage & conditions, collection prodecures, care & use of hire goods, returns procedure and invoicing."
+  })
 }
 
 exports.contact = (req, res) => {
@@ -35,11 +52,11 @@ exports.privacyPolicy = (req, res) => {
 }
 
 exports.contactForm = async (req, res) => {
-  let errors = []
   // If a bot is detected, send a fake 200 OK response
   if (!validator.isEmpty(req.body.bot))
     return res.status(200).send()
   // Validate the fields
+  let errors = []
   if (!req.body.name)
     errors.push("Please supply your name")
   if (!req.body.company)
@@ -52,7 +69,7 @@ exports.contactForm = async (req, res) => {
     errors.push("Please supply your phone number")
   if (!req.body.message)
     errors.push("Please supply a message")
-  // Handle errors
+  // Handle validation errors
   if (errors.length) {
     console.log("Errors with contact form submission: \n" + errors)
     return res.status(400).json(errors)

@@ -230,13 +230,19 @@
               background mainYellowHover
 
           &--opening-times
-            margin-bottom 2rem
+            margin-bottom .75rem
             width 100%
 
             li
               display flex
+              flex-wrap wrap
               width 100% 
               justify-content space-between
+
+            &--by-arrangement
+              width 100%
+              text-align right
+              font-size 1.3rem
 
           &--contact
 
@@ -293,7 +299,7 @@
     h3
       color mainBlue
       font-size 2.4rem
-      margin 4rem 0 2rem 0
+      margin 6rem 0 2rem 0
 
     > ul
       list-style disc
@@ -431,6 +437,45 @@
 
       button 
         margin 0
+
+.category
+  
+  &__header
+    background offBlack 
+
+    .container
+      display flex
+      align-items center
+
+      h1
+        font-size 4rem
+        line-height 5rem
+        margin 0
+        padding 5rem 0
+        color white
+        
+      img
+        width 50%
+        min-width 50%
+
+  &__description
+    padding 5rem 0
+    max-width 62rem
+
+    &--read-more
+      color mainBlue
+      text-decoration underline
+      font-family plexBold
+      display inline-block
+
+      &::after
+        content "Read more"
+
+      &:hover
+        cursor pointer
+
+    &.expanded .category__description--read-more::after
+        content "Read less"
 
 .footer
   background-color mainBlue

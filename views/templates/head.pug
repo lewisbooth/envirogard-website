@@ -1,10 +1,10 @@
 mixin head
   head
     if path === "/"
-      title=`${title || "Envirogard – Setting Hire Standards"}`
+      title=`Envirogard | Setting Hire Standards`
     else
       title=`${title || "Setting Hire Standards"} | Envirogard`
-    meta(name="description" content=`${description || "Specialist Equipment Hire For Contractors"}`)
+    meta(name="description" content=`${description || "Specialist Equipment Hire For Contractors Across the UK. We Supply Decontamination Units, Showers & Toilets, Fibre Suppressant Equipment, Ventilation & Dust Extraction, HEPA Vacuum Cleaners, Portable Generators, Pressure Washers, Bootwash Stations and more."}`)
     meta(http-equiv="Content-Type" content="text/html; charset=utf-8")
     meta(name="viewport" content="width=device-width, initial-scale=1")
     meta(name="theme-color" content="#23479a")
@@ -28,8 +28,8 @@ mixin head
       style
         include ../../public/css/critical.css
 
-    //- Use <link> for critical CSS during development 
-    //- to allow BrowserSync to inject changes
+    //- External critical CSS during development 
+    //- Allows BrowserSync to inject changes
     else
       link(rel='stylesheet' href=hashes["critical.css"] type="text/css")
 

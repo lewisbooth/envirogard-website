@@ -1,0 +1,10 @@
+doctype html
+html
+  +head
+  body
+    if user
+      +adminBar
+    +flash-messages
+    block body
+      .container
+        h1 New page

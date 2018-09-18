@@ -19,8 +19,8 @@ areaButtons.forEach(e =>
   })
 )
 
-// Reset the location to IP lookup when 'Use Location'
-// buttons are pressed
+// Reset the location to IP lookup when
+// 'Use Location' buttons are pressed
 useLocationButtons.forEach(e =>
   e.addEventListener('click', () => {
     initLocation(true)
@@ -58,5 +58,7 @@ function updateLocation(newLocation) {
       area.classList.remove('active')
   )
   // Change name of location in navbar
-  navBranchName.innerText = depotData[localDepot].name
+  if (navBranchName) {
+    navBranchName.innerText = depotData[localDepot].name
+  }
 }

@@ -1,4 +1,6 @@
 mixin nav
+  - const clientDepot = cookies && cookies.locationDepot ? cookies.locationDepot : "south-east"
+  - const depotInfo = depotData[clientDepot]
   nav
     .nav
       .container
@@ -14,24 +16,27 @@ mixin nav
               a(href="/about") About
             li
               a(href="/contact") Contact
+            //- Changes depot drop-down menu
+            li.nav__menu--branch
+              span.nav__menu--branch--name= depotInfo.name
+              span.nav__menu--branch--change (Change)
+                img(src="/images/icons/triangle-blue.svg" alt="Drop-down")
+                ul
+                  for depot, area in depotData
+                    - const active = clientDepot === area ? 'active' : ''
+                    li(data-area=area class=active)= depot.name
           a.nav__menu--search-mobile(href='/search')
             img(src="/images/icons/search-blue.svg" alt="Search")
-          - const clientDepot = cookies && cookies.locationDepot ? cookies.locationDepot : "south-east"
-          - const depotInfo = depotData[clientDepot]
           .nav__menu--contact
-            a.nav__menu--contact--phone(href="/contact")
-              img(src="/images/icons/phone.svg" alt="Call Us")
+            a.nav__menu--contact--phone(href=`tel:${depotInfo.telephone}`)
+              img(src="/images/icons/phone.svg" alt="Call Us")  
               for depot, area in depotData
                 - const active = clientDepot === area ? 'active' : ''
                 span(data-area=area class=active)= depot.telephone
-          .nav__menu--branch
-            span.nav__menu--branch--name= depotInfo.name
-            span.nav__menu--branch--change (Change)
-              img(src="/images/icons/triangle-blue.svg" alt="Drop-down")
-              ul
-                for depot, area in depotData
-                  - const active = clientDepot === area ? 'active' : ''
-                  li(data-area=area class=active)= depot.name
+            a.nav__menu--contact--email(href=`tel:${depotInfo.email}`)
+              for depot, area in depotData
+                - const active = clientDepot === area ? 'active' : ''
+                span(data-area=area class=active)= depot.email
 
     .nav__secondary
       .container
@@ -113,7 +118,7 @@ mixin nav
                 li 
                   a(href="/") Contaminated Land
                 li 
-                  a(href="/") Tank Purgin
+                  a(href="/") Tank Purging
         div.hide__tablet
           ul
             li.live-chat__start-button

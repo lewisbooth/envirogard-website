@@ -3,9 +3,10 @@ const router = express.Router()
 const pageController = require("../controllers/pageController")
 const apiController = require("../controllers/apiController")
 const authController = require("../controllers/authController")
+const adminController = require("../controllers/adminController")
 const { catchErrors } = require("../helpers/errorHandlers")
 
-// Configure user upload handler
+// Configure file upload handler
 const multer = require("multer")
 const upload = multer({
   storage: multer.memoryStorage(),
@@ -17,6 +18,7 @@ const upload = multer({
 
 // Standard pages
 router.get("/", catchErrors(pageController.homepage))
+router.get("/categories/:slug", catchErrors(pageController.category))
 router.get("/about", pageController.about)
 router.get("/contact", pageController.contact)
 router.post("/contact", catchErrors(pageController.contactForm))
@@ -36,8 +38,8 @@ router.post("/login", authController.login)
 router.get("/logout", authController.logout)
 
 // Admin
-router.all(/admin/, authController.isLoggedIn)
-router.get("/admin", pageController.login)
+router.all(/dashboard/, authController.isLoggedIn)
+router.get("/dashboard", adminController.dashboard)
 
 // Create user (disabled)
 router.get("/create-user", pageController.createUser)

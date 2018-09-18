@@ -76,7 +76,7 @@ nav
     &--useful-links
       display flex
       
-      li
+      > li
         height 1.2em
         display flex
         align-items center
@@ -102,31 +102,37 @@ nav
     &--contact
       margin-top .25rem
       
-      &--phone
+      &--phone, &--email
         display flex
         align-items center
         justify-content right
         text-decoration none
         min-width 19rem
         margin-left 2rem
-
+        margin-top .25rem
 
         &:hover
           text-decoration underline
 
         img
-          width 2.4rem
-          height 2.4rem
+          width 2rem
+          height 2rem
 
         span
           display none
           font-family antiqueOlive
-          font-size 1.8rem
+          font-size 2.1rem
           color mainBlue 
           margin-left .75rem
+          line-height 1
           
           &.active
             display flex
+
+      &--email span 
+        font-size 1.4rem
+        font-family plexBold
+        margin-top .5rem
 
     &--branch
       font-size 1.4rem
@@ -143,7 +149,7 @@ nav
           margin-left .25rem
 
       &--name
-        margin-right .25rem
+        margin 0 .25rem 0 1rem
 
       &--change
         color mainBlue
@@ -166,7 +172,7 @@ nav
           right 0
 
           li
-            padding .5rem 1rem
+            padding .75rem 1.5rem
 
             &:hover
               background lightBlue
@@ -215,8 +221,9 @@ nav
               display none
               position absolute
               min-width 100%
-              top 101%
+              top 100%
               background-color lightGrey
+              box-shadow 0px 0px 15px 0px rgba(0,0,0,0.15)
               padding 1rem 0
 
               > li a

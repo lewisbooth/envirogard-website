@@ -23,6 +23,7 @@ const { cacheBuster } = require("./helpers/cacheBuster")
 const { depotData } = require("./helpers/depotData")
 const errorHandlers = require("./helpers/errorHandlers")
 const routes = require("./routes/routes")
+const redirects = require("./routes/redirects")
 const passport = require("passport")
 require("./helpers/passport")
 
@@ -111,7 +112,10 @@ app.use((req, res, next) => {
 // Pass the request to routing middleware
 app.use("/", routes)
 
-// 404 if no routes handle the request
+// Check for 301 redirects from the old site
+app.use("/", redirects)
+
+// Error 404 if no routes/redirects can handle the request
 app.use(errorHandlers.notFound)
 
 // Flash Mongoose errors
