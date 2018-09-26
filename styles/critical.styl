@@ -6,6 +6,7 @@
 @import 'critical/fonts'
 @import 'critical/typography'
 @import 'critical/grid'
+@import 'critical/utilities'
 @import 'critical/buttons'
 @import 'critical/forms'
 @import 'critical/flickity'
@@ -22,12 +23,6 @@ body
     .nav__secondary
       position fixed
       top 0
-
-.hide
-  display none
-
-  &__desktop
-    display none
 
 nav
   z-index 2
@@ -60,6 +55,7 @@ nav
 
     button
       margin 0
+      padding 1rem
 
       img
         width 1.8rem
@@ -236,7 +232,7 @@ nav
                   background-color mainBlue
                   color white
 
-            > a
+            > a, > span
               height 1.2em
               padding 0 1.25rem
               color white

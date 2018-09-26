@@ -1,4 +1,5 @@
 // Generates an XML sitemap by crawling the localhost site and replacing the URL
+
 const generateSitemap = require("sitemap-generator")
 const fs = require('fs')
 

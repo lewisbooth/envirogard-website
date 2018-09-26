@@ -1,4 +1,5 @@
 extends layout
+include mixins/categoryListing
 
 block body
   .category__header
@@ -8,4 +9,77 @@ block body
   .container
     .category__description
       p Should you need to put precautionary measures in place to protect staff or the general public from hazardous materials Envirogard can assist with an extensive fleet of decontamination units available for national hire.
+      p Extended description goes here
       .category__description--read-more
+  .container
+    .category
+      .category__filter
+        form.category__filter--subcategories
+          h4 Subcategories
+          a(href=`/category/${category}/emergency-drench-showers` class=(subcategory === "emergency-drench-showers" ? "active" : ""))
+            label Emergency Drench Showers
+              .checkbox
+          a(href=`/category/${category}/modular-decontamination-showers` class=(subcategory === "modular-decontamination-showers" ? "active" : ""))
+            label Modular Decontamination Showers
+              .checkbox
+          a(href=`/category/${category}/showers-and-toilets` class=(subcategory === "showers-and-toilets" ? "active" : ""))
+            label Showers & Toilets
+              .checkbox
+          a(href=`/category/${category}/trailer-decontamination-showers` class=(subcategory === "trailer-decontamination-showers" ? "active" : ""))
+            label Trailer Decontamination Showers
+              .checkbox
+        
+        form(name="search" method="GET").category__filter--search
+          h4 Category Search
+          .category__filter--search--input
+            input(name="search" type="text" placeholder="Find a product..." value=query.search)
+            button(type="submit")
+              img(src="/images/icons/search.svg" alt="Search")
+        
+        .category__filter--popular-categories
+          h3 Popular Categories
+          ul.popular-products
+            li 
+              a(href="/category/decontamination-units")
+                span Decontamination Units
+            li
+              a(href="/category/safety-showers") 
+                span Safety Showers
+            li
+              a(href="/category/water-misting-cannons")
+                span Water Misting Cannons
+            li
+              a(href="/category/dust-control-and-extraction")
+                span Dust Control &amp; Extraction
+            li
+              a(href="/category/vacuum-cleaners")
+                span Vacuum Cleaners
+
+      .category__results
+        .category__results--filters
+          form(name="sort" method="GET")
+            label Sort By
+            select(name="sort")
+              option(value="az" selected=(query.sort === "az")) Name A-Z
+              option(value="za" selected=(query.sort === "za")) Name Z-A
+          .pagination
+            label Page
+            - let n = 1
+            while n < pages.total
+              - query.page = n
+              -
+                const queryString = query ? "?" + Object.keys(query)
+                  .map(key => key + '=' + query[key])
+                  .join('&') : ""
+              - const active = n == pages.current
+              - const link = `/categories/${category}/${subcategory}${queryString}`
+              a(class=(active ? "active" : "") href=link).pagination__link= n++
+        .category__results--listings
+          +categoryListing
+          +categoryListing
+          +categoryListing
+          +categoryListing
+
+block extraFooterScripts
+  script
+    include ../public/js/category-page.js

@@ -11,7 +11,23 @@ exports.homepage = async (req, res) => {
 }
 
 exports.category = async (req, res) => {
-  res.render("category")
+  const page = req.query.page && typeof(req.query.page === "number") ? req.query.page : 1
+  res.render("category", {
+    category: req.params.category,
+    subcategory: req.params.subcategory || "",
+    pages: {
+      current: page,
+      total: 4
+    }
+  })
+}
+
+exports.industry = async (req, res) => {
+  res.render("industry", {
+    title: "Asbestos Removal",
+    description:
+      "Asbestos removal"
+  })
 }
 
 exports.about = (req, res) => {

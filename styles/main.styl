@@ -439,6 +439,10 @@
         margin 0
 
 .category
+  display flex
+  align-items flex-start
+  flex-wrap wrap
+  margin-bottom 5rem
   
   &__header
     background offBlack 
@@ -453,6 +457,7 @@
         margin 0
         padding 5rem 0
         color white
+        width 50%
         
       img
         width 50%
@@ -469,13 +474,219 @@
       display inline-block
 
       &::after
-        content "Read more"
+        content "Read more ↓"
 
       &:hover
         cursor pointer
 
-    &.expanded .category__description--read-more::after
-        content "Read less"
+    p
+      display none
+
+      &:first-child
+        display block
+
+    &.expanded 
+
+      p
+        display block
+      
+      .category__description--read-more::after
+        content "Read less ↑"
+
+  &__filter
+    width 29%
+    padding-right 4rem
+
+    form
+      padding 2rem
+      background lightGrey
+      user-select none
+      margin-bottom 3rem
+
+    h4
+      margin 0 0 2rem 0
+      font-size 1.8rem
+      color darkBlue
+      padding-bottom 1rem
+      border-bottom 2px solid lightGreyBorder
+
+    &--subcategories
+
+      label
+        display flex
+        align-items center
+        flex-direction row-reverse
+        justify-content right
+        font-size 1.4rem
+        margin-top 1rem
+
+        &:hover
+          cursor pointer
+
+      .checkbox
+        width 1.8rem 
+        height 1.8rem
+        background white
+        border 1px solid mediumGrey
+        margin-right 1.5rem
+
+      a
+        text-decoration none
+        color offBlack
+
+        &:hover .checkbox
+          background #aaa
+          outline 2px solid white
+          outline-offset -3px
+
+        &.active .checkbox
+          background mainBlue
+          outline 2px solid white
+          outline-offset -3px
+
+    &--search--input
+      display flex
+      align-items stretch
+      width 100%
+
+      input 
+        font-size 1.4rem
+        flex-grow 1
+
+      button 
+        margin 0
+        padding 1rem
+
+        img
+          width 1.6rem
+          height 1.6rem
+
+    &--popular-categories 
+
+      h3
+        font-size 2.4rem
+
+      .popular-products
+
+        li
+          background mainBlue
+          margin 0
+          padding 0 2rem
+
+          a
+            border-bottom 1px solid lightBlue
+            padding 1.75rem 1rem
+            font-size 1.6rem
+            background none
+
+          &:hover
+            background mainBlueHover
+
+  &__results
+    flex-grow 1
+    width 50%
+
+    &--filters
+      width 100%
+      display flex
+      align-items flex-end
+      justify-content space-between
+      margin-bottom 2rem
+
+      label
+        margin-right 1rem
+        font-family plexBold
+
+      select 
+        font-size 1.4rem
+        width 23rem
+
+    &--listing
+      padding 2rem 0
+      width 100%
+      display flex
+      border-bottom 1px solid lightGreyBorder
+      text-decoration none 
+      color offBlack
+
+      &:hover
+        text-decoration none 
+        color offBlack
+
+      &:last-child
+        border-bottom none
+
+      &--image
+        width 20rem
+        height 20rem
+        overflow hidden
+        flex-shrink 0
+        background-size cover
+        background-position center
+
+      &--text
+        flex-grow 1
+        padding 0 4rem
+        border-right 1px solid lightGreyBorder
+
+        h2
+          font-family plexBold
+          font-size 2rem
+          margin-top 0
+
+        ul
+
+          li
+            line-height 2
+            list-style square inside url("/images/icons/check-blue.png")
+
+            &::before
+              content " "
+
+      &--more-info
+        padding 0 0 0 4rem
+        flex-shrink 0
+
+        button
+          margin-top 0
+          font-family plexBold
+
+.industry
+
+  h4
+    color mainBlue
+
+  h5
+    margin-top 0
+    
+  .popular-products
+    list-style none !important
+    padding 0 !important
+    max-width 40rem
+
+    li
+      padding 0 !important
+      list-style none !important
+
+.pagination
+  display flex
+  align-items center
+
+  &__link
+    padding .5rem 1rem
+    color black
+    user-select none
+    text-decoration none
+
+    &:hover
+      color black
+      text-decoration none
+      background lightGreyBorder 
+      cursor pointer
+
+    &.active
+      color white
+      background mainBlue 
 
 .footer
   background-color mainBlue

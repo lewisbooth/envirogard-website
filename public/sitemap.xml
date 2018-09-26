@@ -13,27 +13,63 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/categories/showers-and-decontamination</loc>
+    <loc>https://envirogard.co.uk/category/decontamination-units</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/categories/decontamination-units</loc>
+    <loc>https://envirogard.co.uk/category/decontamination-units/subcategory</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/categories/safety-showers</loc>
+    <loc>https://envirogard.co.uk/industry/industry</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/categories/water-misting-cannons</loc>
+    <loc>https://envirogard.co.uk/category/showers-and-decontamination</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/categories/dust-control-and-extraction</loc>
+    <loc>https://envirogard.co.uk/industry/pollution-control</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/categories/vacuum-cleaners</loc>
+    <loc>https://envirogard.co.uk/category/safety-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/water-misting-cannons</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/dust-control-and-extraction</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/vacuum-cleaners</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industry/waste-mangement</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industry/contaminated-land</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industry/pollution-control-and-prevention</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industry/tank-purging-and-cleansing</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industry/demolition-and-recycling</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industry/asbestos-removal</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -49,11 +85,99 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/categories/temporary-site-services</loc>
+    <loc>https://envirogard.co.uk/category/decontamination-units/emergency-drench-showers</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/categories/ventilation-and-dust-control</loc>
+    <loc>https://envirogard.co.uk/category/decontamination-units/modular-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/decontamination-units/showers-and-toilets</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/decontamination-units/trailer-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/showers-and-decontamination/emergency-drench-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/showers-and-decontamination/modular-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/showers-and-decontamination/showers-and-toilets</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/showers-and-decontamination/trailer-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/safety-showers/emergency-drench-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/safety-showers/modular-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/safety-showers/showers-and-toilets</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/safety-showers/trailer-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/water-misting-cannons/emergency-drench-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/water-misting-cannons/modular-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/water-misting-cannons/showers-and-toilets</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/water-misting-cannons/trailer-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/dust-control-and-extraction/emergency-drench-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/dust-control-and-extraction/modular-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/dust-control-and-extraction/showers-and-toilets</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/dust-control-and-extraction/trailer-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/vacuum-cleaners/emergency-drench-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/vacuum-cleaners/modular-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/vacuum-cleaners/showers-and-toilets</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/vacuum-cleaners/trailer-decontamination-showers</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -61,11 +185,11 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/docs/envirogard-commercial-data-protection-policy.pdf</loc>
+    <loc>https://envirogard.co.uk/docs/envirogard-trade-account-form.pdf</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/docs/envirogard-trade-account-form.pdf</loc>
+    <loc>https://envirogard.co.uk/docs/envirogard-commercial-data-protection-policy.pdf</loc>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>
