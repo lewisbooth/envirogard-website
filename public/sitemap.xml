@@ -105,6 +105,10 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
+    <loc>https://envirogard.co.uk/product/envirogard-micro-decontamination-unit</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
     <loc>https://envirogard.co.uk/category/showers-and-decontamination/modular-decontamination-showers</loc>
     <changefreq>weekly</changefreq>
   </url>
@@ -190,6 +194,30 @@
   </url>
   <url>
     <loc>https://envirogard.co.uk/docs/envirogard-commercial-data-protection-policy.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/decontamination-showers/trailer-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/product/dust-control-dc-2000-aircube-air-scrubbing-unit</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/decontamination-showers/emergency-drench-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/decontamination-showers/modular-decontamination-showers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/category/decontamination-showers/showers-and-toilets</loc>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>

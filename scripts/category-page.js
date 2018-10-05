@@ -24,7 +24,7 @@ readMoreButton.addEventListener('click', () =>
 )
 
 
-// --------- Helper Functions ---------- //
+// ----- Helper Functions ----- //
 
 function submitInput() {  
   const newQuery = buildQueryString(urlParams)

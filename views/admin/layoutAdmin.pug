@@ -1,0 +1,19 @@
+include ../templates/head
+include ../templates/adminBar
+include ../templates/adminNav
+include ../templates/flashMessages
+include ../mixins/productListingAdmin
+
+doctype html
+html
+  +head
+  body.admin
+    if user
+      +adminBar
+    +adminNav
+    +flash-messages
+    .container
+      .admin__page
+        block body
+          h1 New page
+    block extraFooterScripts

@@ -1,0 +1,1 @@
+"use strict";function flickityInit(){new Flickity(".product__carousel--nav",{wrapAround:!1,asNavFor:".product__carousel--current",pageDots:!1,dragThreshhold:10,selectedAttraction:.1,friction:.5}),new Flickity(".product__carousel--current",{wrapAround:!0,pageDots:!1,dragThreshhold:10,selectedAttraction:.1,friction:.5})}

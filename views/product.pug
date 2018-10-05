@@ -1,0 +1,257 @@
+extends layout
+
+block body
+  .container
+    ul.breadcrumbs
+      li
+        a(href="/") Home
+      li
+        a(href="/category/decontamination-showers") Decontamination Showers
+      li
+        a(href="/category/decontamination-showers/trailer-decontamination-showers") Maxi Quad Decontamination Shower
+  .container.product
+    .product__left-column
+      .product__carousel
+        //- Large (currently selected) image
+        .product__carousel--current
+          .product__carousel--current--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+          .product__carousel--current--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+          .product__carousel--current--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+          .product__carousel--current--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+          .product__carousel--current--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+        //- Small navigation images
+        .product__carousel--nav
+          .product__carousel--nav--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+          .product__carousel--nav--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+          .product__carousel--nav--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+          .product__carousel--nav--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+          .product__carousel--nav--image
+            img(src="/images/cms/products/TEMP/carousel-1.jpg")
+
+      a.button.button__yellow.bold(href="#" target="_blank") 
+        span Download Data Sheet
+        img(src="/images/icons/download-blue.svg" alt="Download Icon")
+
+      .product__long-description
+        iframe(class="product__youtube-embed" width="560" height="315" src="https://www.youtube.com/embed/1La4QzGeaaQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen)
+        h2 About Maxi Quad Decontamination Showers        
+        p Envirogard's Maxi Quad decontamination showers are close to the maximum permitted length for road-tow trailers, but their relatively light weight and axle configuration makes them highly manoeuverable. 
+        p Extra head height, and a thoughful layout have maximized the available usable space. At the same time trailer weight has been kept within 1900kgs (1500kgs for the Maxi Quad XL version), so they can be towed by many light commercial vans.
+        p Lockers for personal belongings are provided at high level, with rails for hanging clothing below. 16 power points are available for charging respirator battery packs. 
+        p Thermostatic fan heaters maintain a comfortable temperature, while hot water for the showers is provided by a room-sealed balanced-flue LPG water heater; LPG is supplied from cylinders in an external locker.
+        p Electrical power connection is through a 16 amp 240v chassis inlet plug - we supply the matching trailing socket with the trailer. The requirement of the water heater is a clean supply of pressure between 1 bar and 6 bar; this can normally be achieved from a 15mm dia. hose connected to a mains tap.
+        p The shower area has 4 shower points, each one receiving thermostatically regulated warm water. Stainless steel sinks provided are large enough to allow for full forearm cleansing / cleaning of RPE/PPE as required. 
+        p High level shelving allows towels etc. to be kept away from overspray until required, and the rails under allow clothing, respirators, battery packs etc. to be hung out of harms way while showering off.
+
+    .product__right-column
+      .product__description
+        h1 Maxi Quad Decontamination Shower
+        p Envirogard's Maxi Quad decontamination showers are close to the maximum permitted length for road-tow trailers, but their relatively light weight and axle configuration makes them highly manoeuverable.
+        ul
+          li Large capacity (6.4m length)
+          li Lockers and seating
+          li 4 shower points and sinks
+          li Contains 16 power points
+      .product__block
+        h3.product__block--title Hire Product
+        .product__block--content
+          .product__block--content--branch-finder
+            .product__block--content--branch-finder--text
+              h4 Find Your Nearest Envirogard
+              p Please select your nearest Envirogard to make an enquiry.
+              select(name="branch")
+                option(value="north-west") Manchester
+                option(value="north-east") Barnsley
+                option(value="midlands") Tamworth
+                option(value="south-west") Bristol
+                option(value="south-east" selected) Ashford
+            .product__block--content--branch-finder--map
+              +branchFinderSVG
+          .product__block--content--entry(data-area="north-west")
+            .product__block--content--entry--area
+              .product__block--content--entry--area--title
+                img(src="/images/logos/envirogard-wordmark-blue.svg" alt="Envirogard Logo")
+                h5 Manchester
+              a.button.button__yellow(href="https://www.google.com/maps/place/Ashton-under-Lyne+OL7+0NE/@53.4762905,-2.1226783,13.5z/data=!4m5!3m4!1s0x487bb66028e96d55:0xe7099f00a380e927!8m2!3d53.4780029!4d-2.1066982" target="_blank") Get Directions
+            .product__block--content--entry--hire-options
+              h5 Hire Options
+              ul
+                li
+                  span 1
+                  div
+                    h6 Call Envirogard Manchester
+                    a(href="tel:01613208587") 
+                      img(src="/images/icons/phone.svg") 
+                      span 0161 320 8587
+                li
+                  span 2
+                  div
+                    h6 Email Envirogard Manchester
+                    a(href="mailto:manchester@envirogard.co.uk") 
+                      img(src="/images/icons/mail-blue.svg") 
+                      span manchester@envirogard.co.uk
+                li
+                  span 3
+                  div
+                    h6 Chat to Envirogard Manchester
+                    .button.button__yellow.live-chat__start-button 
+                      img(src="/images/icons/chat-black.svg")
+                      span Start Live Chat
+          .product__block--content--entry(data-area="north-east")
+            .product__block--content--entry--area
+              .product__block--content--entry--area--title
+                img(src="/images/logos/envirogard-wordmark-blue.svg" alt="Envirogard Logo")
+                h5 Barnsley
+              a.button.button__yellow(href="https://www.google.com/maps/place/Envirogard+Specialist+Hires+Ltd/@53.504267,-1.474651,12z/data=!4m8!1m2!2m1!1senvirogard!3m4!1s0x0:0x1957859213dc1dd5!8m2!3d53.507729!4d-1.4441892" target="_blank") Get Directions
+            .product__block--content--entry--hire-options
+              h5 Hire Options
+              ul
+                li
+                  span 1
+                  div
+                    h6 Call Envirogard Barnsley
+                    a(href="tel:01226740900") 
+                      img(src="/images/icons/phone.svg") 
+                      span 0122 674 0900
+                li
+                  span 2
+                  div
+                    h6 Email Envirogard Barnsley
+                    a(href="mailto:barnsley@envirogard.co.uk") 
+                      img(src="/images/icons/mail-blue.svg") 
+                      span barnsley@envirogard.co.uk
+                li
+                  span 3
+                  div
+                    h6 Chat to Envirogard Barnsley
+                    .button.button__yellow.live-chat__start-button Start Live Chat
+          .product__block--content--entry(data-area="midlands")
+            .product__block--content--entry--area
+              .product__block--content--entry--area--title
+                img(src="/images/logos/envirogard-wordmark-blue.svg" alt="Envirogard Logo")
+                h5 Tamworth
+              a.button.button__yellow(href="https://www.google.com/maps/place/Envirogard/@52.627345,-1.7032734,13.69z/data=!4m8!1m2!2m1!1senvirogard!3m4!1s0x0:0x95974b8a36eebf32!8m2!3d52.6272282!4d-1.6858864" target="_blank") Get Directions
+            .product__block--content--entry--hire-options
+              h5 Hire Options
+              ul
+                li
+                  span 1
+                  div
+                    h6 Call Envirogard Tamworth
+                    a(href="tel:01827304955") 
+                      img(src="/images/icons/phone.svg") 
+                      span 01827 304955
+                li
+                  span 2
+                  div
+                    h6 Email Envirogard Tamworth
+                    a(href="mailto:tamworth@envirogard.co.uk") 
+                      img(src="/images/icons/mail-blue.svg") 
+                      span tamworth@envirogard.co.uk
+                li
+                  span 3
+                  div
+                    h6 Chat to Envirogard Tamworth
+                    .button.button__yellow.live-chat__start-button Start Live Chat
+          .product__block--content--entry(data-area="south-west")
+            .product__block--content--entry--area
+              .product__block--content--entry--area--title
+                img(src="/images/logos/envirogard-wordmark-blue.svg" alt="Envirogard Logo")
+                h5 Bristol
+              a.button.button__yellow(href="https://www.google.com/maps/place/51%C2%B029'20.7%22N+2%C2%B024'38.0%22W/@51.4952989,-2.4509514,19063m/data=!3m1!1e3!4m5!3m4!1s0x0:0x0!8m2!3d51.4890691!4d-2.41056" target="_blank") Get Directions
+            .product__block--content--entry--hire-options
+              h5 Hire Options
+              ul
+                li
+                  span 1
+                  div
+                    h6 Call Envirogard Bristol
+                    a(href="tel:01179374551") 
+                      img(src="/images/icons/phone.svg") 
+                      span 0117 937 4551
+                li
+                  span 2
+                  div
+                    h6 Email Envirogard Bristol
+                    a(href="mailto:bristol@envirogard.co.uk") 
+                      img(src="/images/icons/mail-blue.svg") 
+                      span bristol@envirogard.co.uk
+                li
+                  span 3
+                  div
+                    h6 Chat to Envirogard Bristol
+                    .button.button__yellow.live-chat__start-button Start Live Chat
+          .product__block--content--entry(data-area="south-east")
+            .product__block--content--entry--area
+              .product__block--content--entry--area--title
+                img(src="/images/logos/envirogard-wordmark-blue.svg" alt="Envirogard Logo")
+                h5 Ashford
+              a.button.button__yellow(href="https://www.google.com/maps/place/Envirogard+Specialist+Hires+Ltd/@51.1123214,0.9327298,13.19z/data=!4m8!1m2!2m1!1senvirogard!3m4!1s0x0:0xd5202315313f2ab4!8m2!3d51.1147306!4d0.9482574" target="_blank") Get Directions
+            .product__block--content--entry--hire-options
+              h5 Hire Options
+              ul
+                li
+                  span 1
+                  div
+                    h6 Call Envirogard Ashford
+                    a(href="tel:01303814930") 
+                      img(src="/images/icons/phone.svg") 
+                      span 01303 814930
+                li
+                  span 2
+                  div
+                    h6 Email Envirogard Ashford
+                    a(href="mailto:ashford@envirogard.co.uk") 
+                      img(src="/images/icons/mail-blue.svg") 
+                      span ashford@envirogard.co.uk
+                li
+                  span 3
+                  div
+                    h6 Chat to Envirogard Ashford
+                    .button.button__yellow.live-chat__start-button Start Live Chat
+      .product__block
+        h3.product__block--title Product Specifications
+        .product__block--content
+          ul.product__block--content--specifications
+            li
+              span Unit Weight
+              span 1200kg
+            li
+              span Dimensions (W x L)
+              span 4m x 6.4m
+            li
+              span Number of Showers
+              span 4
+            li
+              span Number of Sinks
+              span 4
+            li
+              span Number of Lockers
+              span 6
+            li
+              span Power Inlet
+              span 16amp – 240v
+    .product-listings
+      h4 Related Products
+      +productListingCard
+      +productListingCard
+      +productListingCard
+      +productListingCard
+      +productListingCard
+
+
+block extraFooterScripts
+  script
+    include ../public/js/flickity-init-product.js
+  script
+    include ../public/js/flickity-as-nav-for.js
+  script(src=hashes["flickity.js"] async defer onload="flickityInit()")

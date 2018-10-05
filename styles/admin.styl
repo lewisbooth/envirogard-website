@@ -2,6 +2,7 @@
 @import 'variables-amp'
 
 .admin
+  background offBlack
 
   &__bar
     background ampCMSBlack
@@ -75,3 +76,329 @@
             max-width 2rem
             max-height 2rem
             margin-right 1rem
+
+  &__nav
+    background mainYellow
+
+    .container
+      display flex
+      align-items center
+      justify-content space-between
+    
+    &--logo img
+      width 21rem
+
+    &--links
+      display flex
+
+      li a
+        display block
+        text-decoration none 
+        padding 2rem 2rem
+        color offBlack
+
+        &:hover
+          background mainYellowHover
+
+        &.active
+          background offBlack
+          color white
+
+  &__page
+    background lightGrey
+    padding 2rem
+    margin-top 1rem
+    margin-bottom 6rem
+
+  &__filters
+    display flex
+    flex-wrap wrap
+    align-items flex-end
+    justify-content space-between
+
+    .button, button
+      padding .9rem 2rem
+      font-size 1.4rem
+
+    form
+      display flex
+      flex-wrap wrap
+      align-items flex-end
+
+      > div
+        display flex
+        flex-direction column
+        margin-right 2rem
+
+      label
+        font-size 1.4rem
+
+  &__pagination
+    width 100%
+    margin 2rem 0 0 0
+    display block
+    text-align center
+    position relative
+    
+    &--count
+      position absolute
+      top 0
+      left 0
+
+      > span 
+        margin 0
+        padding 0
+        font-size 1.4rem
+
+    > span
+      color mediumGrey
+
+    > a, > span
+      margin 0 .25rem
+      text-decoration none
+      padding .35rem .75rem
+      font-size 1.4rem
+
+      &.active
+        background mainBlue
+        color white
+
+    > a:hover
+      background lightGreyBorder
+      color mainBlue
+
+  &__listings
+    margin-top 2rem
+    display flex
+    flex-direction column
+
+    &--entry
+      background white
+      border 1px solid lightGreyBorder
+      display flex
+      color offBlack 
+      text-decoration none
+      margin-bottom .5rem
+
+      &:hover
+        text-decoration none
+        border-color mainBlue
+        background lightGrey
+
+        .admin__listings--entry--text--title
+          color mainBlue
+
+        .admin__listings--entry--text--subcategory
+          color mediumGrey
+
+        .button
+          background mainBlueHover
+
+      &--image
+        width 11rem
+        height 7rem
+        overflow hidden
+        position relative
+        flex-shrink 0
+
+        img 
+          position absolute
+          top 50%
+          transform translateY(-50%)
+
+      &--text
+        flex-grow 1
+        text-align left
+        padding 0 4rem
+        display flex
+        flex-direction column
+        justify-content center
+
+        &--title
+          font-family plexBold
+
+        &--subcategory
+          color mediumGrey
+          font-size 1.4rem
+
+      &--buttons
+        padding-right 2rem
+        display flex
+        flex-direction column
+        justify-content center
+
+        .button
+          padding .75rem 3rem
+          margin 0
+
+.edit-product
+  margin-top 2rem
+  
+  h1 
+    font-size 3.2rem
+    font-family plexBold
+    color mainBlue
+    text-transform none
+
+  button[type="submit"]
+    margin-bottom 0
+
+  label
+    display block
+    width 100%
+    font-family plexBold
+    margin-bottom .5rem
+
+  &__images
+    display inline-flex
+    flex-wrap wrap
+    align-items stretch
+    margin-top 1rem 
+    margin-bottom 2rem
+
+    &--entry
+      margin-right 1rem
+      position relative
+      min-width 10rem
+      background lightGreyBorder
+      border 1px solid lightGreyBorder
+
+      &:hover
+        cursor move
+        border-color mainBlue
+
+        img
+          opacity 0.7
+
+      input
+        display none
+
+      img
+        margin 0 auto
+        width auto
+        height 12.5rem
+
+      &--delete
+        position absolute
+        top 1rem
+        right 1rem
+        padding .5rem .6rem .6rem .6rem
+        line-height 0.6
+        background red
+        color white
+
+        &:hover
+          background firebrick
+          cursor pointer
+
+    &--new
+      width 20rem
+      height 12.5rem
+      position relative
+      background lightGrey 
+      border 3px dashed lightGreyBorder     
+
+      input
+        height 100%
+        width 100%
+        position absolute
+        top 0
+        left 0
+        opacity 0
+
+        &:hover
+          cursor pointer
+
+          ~ .edit-product__images--new--text
+            color mainBlue
+
+      &:hover
+        background lightGreyBorder
+        border-color mainBlue
+        cursor pointer
+
+      &--text
+        height 100%
+        display flex
+        flex-direction column
+        align-items center
+        justify-content center
+        color #aaa
+
+        &--plus
+          font-size 4rem
+          font-family plexBold 
+          line-height 0.8
+
+        span 
+          font-family plexBold
+
+.label-and-input
+  display flex
+  flex-wrap wrap
+  justify-content space-between
+  margin-bottom 1.75rem
+
+  .link
+    font-size 1.4rem
+    display inline-block
+
+  input, textarea, select, > div
+    width 100%
+
+  label
+    font-family plexBold
+    margin-bottom .5rem
+    display inline-block
+    width auto
+
+.file-uploaded
+  display flex
+  align-items center
+  font-size 1.4rem
+
+  img 
+    width 15px
+    height 15px
+
+  span 
+    margin 0 1rem
+
+.checkbox
+  display flex
+  align-items center
+  margin-top .75rem
+
+  input
+    width auto
+
+  label
+    font-family plexRegular
+    font-size 1.4rem
+    margin 0 0 0 1rem
+
+.multiple-input
+
+  > div
+    display flex
+    margin-bottom .75rem
+
+    input
+      margin-right 1rem
+
+  &__delete
+    padding .75rem 1.25rem
+
+    &:hover
+      cursor pointer
+      background lightGrey
+
+  &__add
+    color mainBlue 
+    text-decoration underline
+    font-size 1.4rem
+
+    &:hover
+      color mainBlueHover
+      cursor pointer
+

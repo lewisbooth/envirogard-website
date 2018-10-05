@@ -36,4 +36,6 @@ const server = app.listen(app.get("port"), () => {
 }) 
 
 // Load cron jobs for sitemap, backup etc
-require("./cron")
+if (process.env.NODE_ENV === "production") {
+  require("./cron")
+}

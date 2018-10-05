@@ -1,3 +1,4 @@
+// Initialises the homepage carousel
 function flickityInit() {
   var flkty = new Flickity( '.home__slider--carousel', {
     wrapAround: true,

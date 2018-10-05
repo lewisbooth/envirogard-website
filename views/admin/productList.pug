@@ -1,0 +1,64 @@
+extends layoutAdmin
+
+block body
+  .admin__filters
+    form(method="GET")
+      div
+        label(for="search") Search
+        input(name="search" type="text" placeholder="Search products...")
+      div
+        label(for="sort") Sort By
+        select(name="sort")
+          option(value="lastModified" selected=(query.sort === "lastModified")) Last Modified
+          option(value="az" selected=(query.sort === "az")) Name A-Z
+          option(value="za" selected=(query.sort === "za")) Name Z-A
+      div
+        label(for="subcategory") Subcategory
+        select(name="subcategory")
+          option(value="all" selected=(query.subcategory && query.subcategory === "all")) All
+          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
+          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
+          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
+          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
+          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
+      button.no-margin(type="submit") Apply Filter
+    a.button.button__green.no-margin(href="/dashboard/products/new") New Product
+  .admin__pagination
+    span << Prev
+    span.active(href="#") 1
+    a(href="#") 2
+    a(href="#") 3
+    a(href="#") 4
+    a(href="#") Next >>
+    .admin__pagination--count
+      span Found #[span.bold 87] results
+  .admin__listings
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+    +productListingAdmin
+  .admin__pagination
+    span << Prev
+    span.active(href="#") 1
+    a(href="#") 2
+    a(href="#") 3
+    a(href="#") 4
+    a(href="#") Next >>
+    .admin__pagination--count
+      span Found #[span.bold 87] results

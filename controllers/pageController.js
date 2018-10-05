@@ -13,12 +13,21 @@ exports.homepage = async (req, res) => {
 exports.category = async (req, res) => {
   const page = req.query.page && typeof(req.query.page === "number") ? req.query.page : 1
   res.render("category", {
+    title: "Decontamination Showers",
+    description: "Decontamination Showers",
     category: req.params.category,
     subcategory: req.params.subcategory || "",
     pages: {
       current: page,
       total: 4
     }
+  })
+}
+
+exports.product = async (req, res) => {
+  res.render("product", {
+    title: "Maxi Quad Decontamination Shower",
+    description: "Decontamination Showers"
   })
 }
 

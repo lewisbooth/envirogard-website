@@ -1,0 +1,101 @@
+extends layoutAdmin
+
+block body
+  .split-columns
+    div
+      a(href="/dashboard/products") << Back to Products
+    if product
+      div
+        a(href=product.url) << Back to Products
+
+  form.edit-product(method="POST")
+    if product && product.title
+      h1= product.title
+    label Images
+      span.label__subtitle Max size: 20MB. Drag and drop to re-arrange. The first image is used as a cover/meta image.
+    .edit-product__images
+      .edit-product__images--new
+        input(name="newImage" type="file" accept="image/*")
+        .edit-product__images--new--text
+          .edit-product__images--new--text--plus +
+          span New Image
+
+    .split-columns
+      div
+        .label-and-input
+          label(for="title") Title
+          input(name="title" type="text" value=(product ? product.title : '') required)
+        .label-and-input
+          label(for="subcategory") Subcategory
+          select(name="subcategory")
+            option(value="none") None
+            option(value="sub1") Sub 1
+            option(value="sub2") Sub 2
+            option(value="sub3") Sub 3
+            option(value="sub4") Sub 4
+            option(value="sub5") Sub 5
+            option(value="sub6") Sub 6
+            option(value="sub7") Sub 7
+            option(value="sub8") Sub 8
+        .label-and-input
+          label(for="shortDescription") Short Description
+          textarea(name="shortDescription" rows="3" value=(product ? product.shortDescription : '') required)
+        .label-and-input
+          label(for="metaTitle") Meta Title
+          span.link#copy-from-title Copy from Title
+          input(name="metaTitle" type="text" value=(product ? product.metaTitle : '') required)
+        .label-and-input
+          label(for="metaDescription") Meta Description
+          span.link#copy-from-short-description Copy from Short Description
+          textarea(name="metaDescription" rows="3" value=(product ? product.metaDescription : '') required)    
+        .label-and-input
+          label(for="features") Features
+          .multiple-input(data-multi="features")
+            if product && product.features.length > 0
+              for entry, i in product.features
+                div(data-key=i)
+                  input(type="text")
+                  .multiple-input__delete ×
+            div(data-key="1")
+              input(type="text")
+              .multiple-input__delete × 
+            .multiple-input__add Add feature
+        .label-and-input
+          label(for="specifications") Specifications
+          .multiple-input(data-multi="specifications")
+            if product && Object.keys(product.specifications).length > 0
+              for entry, i in product.specifications
+                div(data-key=i)
+                  input(type="text")
+                  input(type="text")
+                  .multiple-input__delete ×
+            div(data-key="1")
+              input(type="text" placeholder="Key (e.g Showers)")
+              input(type="text" placeholder="Value (e.g 4)")
+              .multiple-input__delete ×            
+            .multiple-input__add Add specification         
+        .label-and-input
+          label(for="youtubeID") Youtube Video ID
+          input(name="youtubeID" type="text" value=(product && product.youtubeID ? product.youtubeID : '') required)
+        .label-and-input
+          label(for="manualPDF") Upload Manual PDF
+          span.file-uploaded
+            img(src="/images/icons/check-green-circle.svg")
+            span File uploaded
+            a(href="#") Download
+          input(name="manualPDF" type="file")
+          .checkbox
+            input(name="deleteManualPDF" type="checkbox")
+            label(for="deleteManualPDF") Delete Manual PDF         
+      
+      div
+        .label-and-input
+          label(for="longDescription") Long Description
+          textarea(name="longDescription" rows="30" value=(product ? product.longDescription : '') required)
+          
+    hr
+    button.button__green(type="submit") Save Changes
+    
+block extraFooterScripts
+  script
+    include ../../public/js/admin/edit-product.js

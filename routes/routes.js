@@ -7,17 +7,18 @@ const adminController = require("../controllers/adminController")
 const { catchErrors } = require("../helpers/errorHandlers")
 
 // Configure file upload handler
-const multer = require("multer")
-const upload = multer({
-  storage: multer.memoryStorage(),
-  limits: {
-    fileSize: "20MB",
-    files: 1
-  }
-})
+// const multer = require("multer")
+// const upload = multer({
+//   storage: multer.memoryStorage(),
+//   limits: {
+//     fileSize: "20MB",
+//     files: 1
+//   }
+// })
 
 // Standard pages
 router.get("/", catchErrors(pageController.homepage))
+router.get("/product/:product", catchErrors(pageController.product))
 router.get("/category/:category/:subcategory?", catchErrors(pageController.category))
 router.get("/industry/:industry", catchErrors(pageController.industry))
 router.get("/about", pageController.about)
@@ -40,7 +41,10 @@ router.get("/logout", authController.logout)
 
 // Admin
 router.all(/dashboard/, authController.isLoggedIn)
-router.get("/dashboard", adminController.dashboard)
+router.get("/dashboard", (req, res) => 
+  res.redirect("/dashboard/products"))
+router.get("/dashboard/products", adminController.products)
+router.get("/dashboard/products/new", adminController.newProduct)
 
 // Create user (disabled)
 router.get("/create-user", pageController.createUser)

@@ -1,5 +1,5 @@
 // This file sets up the Express middleware
-// All network requests pass through the middleware top-to-bottom
+// All network requests pass through middleware top-to-bottom
 // Requests are then handed off to the routing file
 
 const express = require("express")
@@ -27,10 +27,6 @@ const redirects = require("./routes/redirects")
 const passport = require("passport")
 require("./helpers/passport")
 
-// Load Pug templating engine 
-app.set("views", "views")
-app.set("view engine", "pug")
-
 // Enable GZIP
 app.use(compression())
 
@@ -40,6 +36,10 @@ const maxAge = process.env.NODE_ENV === "production" ? 31536000 : 1
 // Serve static files
 // These should be served via Nginx/Apache reverse proxy in production
 app.use(express.static(process.env.PUBLIC_FOLDER, { maxAge }))
+
+// Load Pug templating engine 
+app.set("views", "views")
+app.set("view engine", "pug")
 
 // Add MDS hashes to automatically version CSS/JS
 app.use(cacheBuster)

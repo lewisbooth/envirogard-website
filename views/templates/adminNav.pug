@@ -1,0 +1,18 @@
+mixin adminNav
+  nav.admin__nav
+    .container
+      a.admin__nav--logo(href="/dashboard")
+        img(src="/images/logos/main-logo.svg" alt="Main Logo")
+      ul.admin__nav--links
+        li 
+          a(class=(currentPath.includes('/products') ? 'active' : '') href="/dashboard/products") Products
+        li 
+          a(href="/dashboard/categories") Categories
+        li 
+          a(href="/dashboard/subcategories") Subcategories
+        li 
+          a(href="/dashboard/industries") Industries
+        li 
+          a(href="/dashboard/customers") Customers
+        li 
+          a(href="/dashboard/settings") Settings

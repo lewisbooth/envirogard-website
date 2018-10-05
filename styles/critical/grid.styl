@@ -5,3 +5,16 @@
 
 .no-margin
   margin 0 !important
+
+// Two side-by-side columns
+.split-columns
+  display flex
+  align-items flex-start
+  justify-content space-between
+
+  > div
+    width 50%
+
+    // Gutter width
+    &:first-child
+      margin-right 4rem
