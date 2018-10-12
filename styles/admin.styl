@@ -231,6 +231,37 @@
           padding .75rem 3rem
           margin 0
 
+  &__upload-progress
+    background white
+    border 1px solid lightGreyBorder 
+    border-top none
+    padding 2rem
+    display none
+
+    &.active
+      display block
+
+    h5
+      margin-top 0
+          
+    progress
+      display block
+      width 100%
+
+  &__errors
+    background darkred
+    padding 2rem
+    color white
+    border 2px solid red
+    margin 2rem 0
+    display none
+
+    &.active
+      display block
+
+    h5, p
+      margin 0
+
 .edit-product
   margin-top 2rem
   
@@ -258,14 +289,22 @@
 
     &--entry
       margin-right 1rem
+      margin-bottom 1rem
       position relative
       min-width 10rem
       background lightGreyBorder
       border 1px solid lightGreyBorder
+      user-select none
 
       &:hover
         cursor move
         border-color mainBlue
+
+        img
+          opacity 0.7
+
+      &.dragover
+        background lightBlue
 
         img
           opacity 0.7
@@ -277,6 +316,7 @@
         margin 0 auto
         width auto
         height 12.5rem
+        pointer-events none
 
       &--delete
         position absolute
@@ -286,6 +326,7 @@
         line-height 0.6
         background red
         color white
+        pointer-events none
 
         &:hover
           background firebrick
@@ -297,6 +338,7 @@
       position relative
       background lightGrey 
       border 3px dashed lightGreyBorder     
+      user-select none
 
       input
         height 100%
@@ -388,10 +430,11 @@
 
   &__delete
     padding .75rem 1.25rem
+    user-select none
 
     &:hover
       cursor pointer
-      background lightGrey
+      background lightGreyBorder
 
   &__add
     color mainBlue 
@@ -401,4 +444,5 @@
     &:hover
       color mainBlueHover
       cursor pointer
+
 

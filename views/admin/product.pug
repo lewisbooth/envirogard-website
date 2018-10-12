@@ -8,12 +8,25 @@ block body
       div
         a(href=product.url) << Back to Products
 
-  form.edit-product(method="POST")
+  form.edit-product(name='product' onsubmit="submitForm(event)")
     if product && product.title
       h1= product.title
     label Images
-      span.label__subtitle Max size: 20MB. Drag and drop to re-arrange. The first image is used as a cover/meta image.
+      span.label__subtitle Drag and drop to re-arrange. The first image is used as a cover/meta image. (Max size: 20MB, Max images: 20)
     .edit-product__images
+      if product && product.images
+        for key in product.images
+          - const imageId = product.images[key]
+          div.edit-product__images--entry(
+            data-key=key
+            draggable="true" 
+            ondragstart="imageDragStart(event)" 
+            ondragenter="dragEnter(event)" 
+            ondragleave="dragLeave(event)" 
+            ondragover="dragOver(event)" 
+            ondrop="imageDrop(event)")
+            img(src=`/images/cms/products/${product._id}/${imageId}`)
+            div.edit-product__images--entry--delete ×
       .edit-product__images--new
         input(name="newImage" type="file" accept="image/*")
         .edit-product__images--new--text
@@ -46,56 +59,64 @@ block body
           input(name="metaTitle" type="text" value=(product ? product.metaTitle : '') required)
         .label-and-input
           label(for="metaDescription") Meta Description
-          span.link#copy-from-short-description Copy from Short Description
-          textarea(name="metaDescription" rows="3" value=(product ? product.metaDescription : '') required)    
+          span.link#copy-from-description Copy from Description
+          textarea(name="metaDescription" required rows="3" value=(product ? product.metaDescription : ''))
         .label-and-input
           label(for="features") Features
           .multiple-input(data-multi="features")
             if product && product.features.length > 0
               for entry, i in product.features
                 div(data-key=i)
-                  input(type="text")
+                  input(type="text" onchange="updateFeature(event)" value=product.features[i])
                   .multiple-input__delete ×
-            div(data-key="1")
-              input(type="text")
-              .multiple-input__delete × 
-            .multiple-input__add Add feature
+            div(data-key="0")
+              input(type="text" onchange="updateFeature(event)")
+              .multiple-input__delete(onclick="deleteFeature(event)") × 
+            .multiple-input__add(onclick="addFeature()") Add feature
         .label-and-input
           label(for="specifications") Specifications
           .multiple-input(data-multi="specifications")
             if product && Object.keys(product.specifications).length > 0
               for entry, i in product.specifications
                 div(data-key=i)
-                  input(type="text")
-                  input(type="text")
+                  input(type="text" onchange="updateSpecification(event)")
+                  input(type="text" onchange="updateSpecification(event)")
                   .multiple-input__delete ×
-            div(data-key="1")
-              input(type="text" placeholder="Key (e.g Showers)")
-              input(type="text" placeholder="Value (e.g 4)")
+            div(data-key="0")
+              input(type="text" data-type="key")
+              input(type="text" data-type="value")
               .multiple-input__delete ×            
-            .multiple-input__add Add specification         
+            .multiple-input__add(onclick="addSpecification()") Add specification         
         .label-and-input
           label(for="youtubeID") Youtube Video ID
-          input(name="youtubeID" type="text" value=(product && product.youtubeID ? product.youtubeID : '') required)
+            span.label__subtitle Enter the Video ID only (e.g. www.youtube.com/watch?v=#[span.underline.bold XuGW1x3T0Fc])
+          input(name="youtubeID" type="text" value=(product && product.youtubeID ? product.youtubeID : ''))
         .label-and-input
           label(for="manualPDF") Upload Manual PDF
-          span.file-uploaded
-            img(src="/images/icons/check-green-circle.svg")
-            span File uploaded
-            a(href="#") Download
-          input(name="manualPDF" type="file")
-          .checkbox
-            input(name="deleteManualPDF" type="checkbox")
-            label(for="deleteManualPDF") Delete Manual PDF         
+          if product && product.manualUploaded
+            span.file-uploaded
+              img(src="/images/icons/check-green-circle.svg")
+              span File uploaded
+              a(href="#") Download
+          input(name="manualPDF" type="file" accept=".pdf")
+          if product && product.manualUploaded
+            .checkbox
+              input(name="deleteManualPDF" type="checkbox")
+              label(for="deleteManualPDF") Delete Manual PDF
       
       div
         .label-and-input
           label(for="longDescription") Long Description
-          textarea(name="longDescription" rows="30" value=(product ? product.longDescription : '') required)
+          textarea(name="longDescription" rows="30" value=(product ? product.longDescription : ''))
           
     hr
+    .admin__upload-progress
+      h5 Uploading files...
+      progress(value="0" max="1")
+    .admin__errors
     button.button__green(type="submit") Save Changes
     
 block extraFooterScripts
   script
     include ../../public/js/admin/edit-product.js
+  script(src="https://unpkg.com/axios/dist/axios.min.js" async defer)
