@@ -1,19 +1,21 @@
 const fetch = require('node-fetch')
 const { depotData } = require('../helpers/depotData')
 
+const DEFAULT_LOCATION = "south-east"
+
 // Uses the client's IP to find their closest depot
 exports.getClosestDepot = async (req, res) => {
   // Use test IP if request comes from localhost
   const clientIP = req.ip.startsWith(":") ? "86.9.243.232" : req.ip
-  const defaultLocation = "south-east"
+  const API_ROUTE = `http://api.ipstack.com/${clientIP}?access_key=${process.env.IPSTACK_KEY}&fields=longitude,latitude`
   // Use IPStack.com to fetch the lat/long of the client IP
-  fetch(`http://api.ipstack.com/${clientIP}?access_key=${process.env.IPSTACK_KEY}&fields=longitude,latitude`)
+  fetch(API_ROUTE)
     .then(res => res.json())
     .then(client => {
       let closestDistance = 99999
-      let closestDepot = defaultLocation
+      let closestDepot = DEFAULT_LOCATION
       // Calculate distance of each depot from the client
-      Object.keys(depotData).forEach(depot => {
+      for (depot in depotData) {
         const distance = getDistance(
           client.latitude, 
           client.longitude, 
@@ -24,12 +26,12 @@ exports.getClosestDepot = async (req, res) => {
           closestDistance = distance
           closestDepot = depot
         }
-      })
+      }
       res.json(closestDepot)
     })
     .catch(err => {
       console.log(err)
-      res.json(defaultLocation)
+      res.json(DEFAULT_LOCATION)
     })
 }
   

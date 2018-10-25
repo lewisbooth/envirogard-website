@@ -9,8 +9,8 @@ const inputs = {
   metaTitle: form.querySelector('input[name="metaTitle"]'),
   metaDescription: form.querySelector('textarea[name="metaDescription"]'),
   youtubeID: form.querySelector('input[name="youtubeID"]'),
+  deleteManual: form.querySelector('input[name="deleteManual"]'),
 }
-
 let newImageInput = form.querySelector('input[name="newImage"]')
 const newImageText = form.querySelector('.edit-product__images--new--text')
 const imagesContainer = form.querySelector('.edit-product__images')
@@ -25,6 +25,7 @@ const addSpec = specsContainer.querySelector('.multiple-input__add')
 const manualPDF = form.querySelector('input[name="manualPDF"]')
 const uploadProgress = document.querySelector('.admin__upload-progress')
 const uploadProgressBar = uploadProgress.querySelector('progress')
+const deleteConfirmation = document.querySelector('#delete-product__lightbox')
 
 
 // -------- Triggers --------- //
@@ -48,9 +49,10 @@ function addNewImage(e) {
       // Calculate index (key) to uniquely identify the file 
       const key = imagesContainer.querySelectorAll('.edit-product__images--entry').length
       // Max 20 images
-      if (key > 20) return
+      if (key > 20) 
+        return
       // Create new preview block from template
-      const imagePreview = elementFromHTML(`
+      const imagePreview = renderTemplate(`
         <div 
           class="edit-product__images--entry" 
           data-key=${key}
@@ -61,7 +63,7 @@ function addNewImage(e) {
           ondragover="dragOver(event)" 
           ondrop="imageDrop(event)" >
           <img src="#"/>
-          <div class="edit-product__images--entry--delete">×</div> 
+          <div class="edit-product__images--entry--delete" onclick="deleteImage(event)">×</div> 
         </div>
       `)
       // Attach file input data to preview image src
@@ -79,6 +81,13 @@ function addNewImage(e) {
     }
     reader.readAsDataURL(input.files[0])
   }
+}
+
+function deleteImage(e) {
+  const key = e.target.parentElement.dataset.key
+  const imageBlock = imagesContainer.querySelector(`[data-key="${key}"]`)
+  if (imageBlock) 
+    imagesContainer.removeChild(imageBlock)
 }
 
 // Store the starting index of the dragged image
@@ -257,8 +266,8 @@ function renderSpecifications() {
   specifications = specifications.filter((entry, i) => 
     // Allow last entry to be empty
     !(i !== specifications.length - 1 
-      && entry[0] === ""
-      && entry[1] === "")
+      && entry[0] === ''
+      && entry[1] === '')
   )
   // Generate new HTML
   let html = ''
@@ -281,17 +290,14 @@ function submitForm(e) {
   let fileUpload = false
   // Append all basic text inputs
   for (let input in inputs) {
-    data.append(input, inputs[input].value)
+    if (inputs[input])
+      data.append(input, inputs[input].value)
   }
   // Remove empty space from specs & features
-  const filteredSpecs = specifications
-    .filter(entry => 
-      !(entry[0] === "" && entry[1] === "")
-    )
-  const filteredFeatures = features
-    .filter(entry => 
-      !(entry === "")
-    )
+  const filteredSpecs = specifications.filter(entry => 
+    !(entry[0] === "" && entry[1] === ""))
+  const filteredFeatures = features.filter(entry => 
+    !(entry === ""))
   // Append specs & features
   data.append("specifications", JSON.stringify(filteredSpecs))
   data.append("features", JSON.stringify(filteredFeatures))
@@ -313,10 +319,11 @@ function submitForm(e) {
       data.append(`image-${key}`, id)
     }
   })
-  // Handle upload progress bar
+  // Show upload progress bar if required
   if (fileUpload) {
     uploadProgress.classList.add('active')
   }
+  // Increment upload progress bar
   const onUploadProgress = p =>
     uploadProgressBar.value = p.loaded / p.total  
   // Send form data
@@ -324,17 +331,22 @@ function submitForm(e) {
     window.location.pathname, 
     data,
     { onUploadProgress }
-  )
-  .then(() => {
+  ).then(() =>
     window.location = "/dashboard/products"
-  })
-  .catch(err => {
+  ).catch(err => {
     const message = err.response.data || {
       title: "Error uploading product",
       text: "Please try again. If the problem persists, please contact AMP."
     }
     errors.flash(message.title, message.text)
   })
+}
+
+
+// -----  Delete Product ----- //
+
+function toggleDeleteConfirmation() {
+  deleteConfirmation.classList.toggle("active")
 }
 
 
@@ -356,7 +368,7 @@ function dragLeave(e) {
 }
 
 // Takes in a string of HTML and returns DOM element
-function elementFromHTML(html) {
+function renderTemplate(html) {
   const div = document.createElement('div')
   div.innerHTML = html.trim()
   return div.firstChild

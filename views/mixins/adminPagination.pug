@@ -1,0 +1,10 @@
+mixin adminPagination
+  if pageCount > 1
+      .admin__pagination
+        - let key = 1
+        while key <= pageCount
+          span(
+            data-key=key 
+            onclick="changePage(event)"
+            class=(key === page ? 'active' : ''))= key
+          - key++

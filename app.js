@@ -22,10 +22,12 @@ const { truncate } = require("./helpers/truncate")
 const { cacheBuster } = require("./helpers/cacheBuster")
 const { depotData } = require("./helpers/depotData")
 const errorHandlers = require("./helpers/errorHandlers")
-const routes = require("./routes/routes")
-const redirects = require("./routes/redirects")
 const passport = require("passport")
 require("./helpers/passport")
+
+// Routing files
+const routes = require("./routes/routes")
+const redirects = require("./routes/redirects")
 
 // Enable GZIP
 app.use(compression())
@@ -47,9 +49,6 @@ app.use(cacheBuster)
 // Parse POST data into req.body
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-
-// Log dynamic requests
-app.use(logging)
 
 // Throw error safely if DB is not connected
 app.use(checkDB)
@@ -80,6 +79,9 @@ app.use((req, res, next) => {
 
 // Parse cookies into req.cookies
 app.use(cookieParser())
+
+// Log dynamic requests
+app.use(logging)
 
 // Dynamic flash messages are passed to the view templates 
 // (e.g. "Successfully logged in" or "Incorrect login details")

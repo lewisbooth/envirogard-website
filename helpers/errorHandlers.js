@@ -12,12 +12,13 @@ const isStaticFile = path => path.match(/woff|woff2|js|css|jpg|png$/)
 
 // 404 Not Found Error Handler
 exports.notFound = (req, res, next) => {
-  if (req.accepts("html") && res.status(404) && !isStaticFile(req.path)) {
+  if (req.accepts("html") 
+      && res.status(404) 
+      && !isStaticFile(req.path)
+      && !req.headers['user-agent'].includes('SitemapGenerator')) {
     const err = new Error("Page Not Found")
     err.status = 404
-    // Avoid spamming 404 console errors when sitemap is generated
-    if (!req.headers['user-agent'].includes('Node/SitemapGenerator'))
-      console.error(`🚫  🔥  Error 404 ${req.method} ${req.path}`)
+    console.error(`🚫  🔥  Error 404 ${req.method} ${req.path}`)
     next(err)
   }
 }

@@ -79,23 +79,49 @@ productSchema.index({
 })
 
 productSchema
+  .virtual('pageURL')
+  .get(function () {
+    return `/products/${this.slug}`
+  })
+
+productSchema
   .virtual('manualURL')
   .get(function () {
     const url = `/cms/products/${this._id}/docs/manual.pdf`
     return this.manualPDF ? url : ''
   })
 
+productSchema
+  .virtual('mainImageThumbnailURL')
+  .get(function () {
+    if (this.images.length > 0) {
+      return `/cms/products/${this._id}/images/${this.images[0]}-thumb.jpg`
+    }
+    else {
+      return "/images/default/no-image.png"
+    }
+  })
+
+productSchema
+  .virtual('imageURLs')
+  .get(function () {
+    return this.images.map(image =>
+      `/cms/products/${this._id}/images/${image}.jpg`
+    )
+  })
+
 // Generate slug from product name
-// Runs each time the record is saved
+// Call manually with .save() when updating an existing record
+// because pre "save" functions do not run on "update" methods
 productSchema.pre("save", async function(next) {
-  if (!this.isModified("title")) {
-    return next()
-  }
   this.slug = slugify(`${this.title}`, { lower: true })
-  const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, "i")
-  // If slug already exists, add a unique number to the end
+  const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i')
   const productWithSlug = await this.constructor.find({ slug: slugRegEx })
+  // If slug already exists, add a unique number to the end
   if (productWithSlug.length) {
+    if (productWithSlug[0]._id.toString() === this._id.toString()) {
+      return next()
+    }
     this.slug = `${this.slug}-${productWithSlug.length + 1}`
   }
   next()

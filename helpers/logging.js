@@ -6,7 +6,7 @@ exports.logging = (req, res, next) => {
     return next()
   const timestamp = new Date().toString()
   var ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress
-  console.log(`${timestamp} ${req.method} ${req.path} ${ip} ${req.user ? req.user.username : ""}`)
+  console.log(`${timestamp} ${req.method} ${req.path} ${ip} ${req.user ? req.user.email : ""}`)
   if (req.method === "POST" && req.body)
     console.log(req.body)
   next()

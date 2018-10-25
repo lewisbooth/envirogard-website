@@ -1,9 +1,12 @@
-mixin productListingAdmin
-  a.admin__listings--entry(href="/dashboard/products/envirocabin-decontamination-unit")
+mixin productListingAdmin(product)
+  a.admin__listings--entry(href=`/dashboard/products/${product.slug}`)
     .admin__listings--entry--image
-      img(src="/images/cms/products/TEMP/carousel-1.jpg")
+      img(src=product.mainImageThumbnailURL)
     .admin__listings--entry--text
-      .admin__listings--entry--text--title Envirocabin Decontamination Unit
-      .admin__listings--entry--text--subcategory Decontamination Showers
+      .admin__listings--entry--text--title= product.title
+      if product.subcategory
+        .admin__listings--entry--text--subcategory= product.subcategory
+      else
+        .admin__listings--entry--text--subcategory.warning No Subcategory
     .admin__listings--entry--buttons
       .button Edit

@@ -130,6 +130,9 @@
         flex-direction column
         margin-right 2rem
 
+      select
+        min-width 15rem
+
       label
         font-size 1.4rem
 
@@ -159,18 +162,33 @@
       padding .35rem .75rem
       font-size 1.4rem
 
+      &:hover
+        background lightGreyBorder
+        color mainBlue
+        cursor pointer
+
       &.active
         background mainBlue
         color white
-
-    > a:hover
-      background lightGreyBorder
-      color mainBlue
 
   &__listings
     margin-top 2rem
     display flex
     flex-direction column
+
+    &--add
+      background #EEF8EB
+      border 2px dashed #6DAE26
+      text-align center
+      padding 2rem
+      color #6DAE26
+      text-decoration none
+      margin-bottom .5rem
+
+      &:hover
+        text-decoration none
+        color darkgreen
+        border-color darkgreen
 
     &--entry
       background white
@@ -183,13 +201,9 @@
       &:hover
         text-decoration none
         border-color mainBlue
-        background lightGrey
 
         .admin__listings--entry--text--title
           color mainBlue
-
-        .admin__listings--entry--text--subcategory
-          color mediumGrey
 
         .button
           background mainBlueHover
@@ -200,6 +214,7 @@
         overflow hidden
         position relative
         flex-shrink 0
+        background lightGrey
 
         img 
           position absolute
@@ -209,7 +224,7 @@
       &--text
         flex-grow 1
         text-align left
-        padding 0 4rem
+        padding 0 3rem
         display flex
         flex-direction column
         justify-content center
@@ -220,6 +235,9 @@
         &--subcategory
           color mediumGrey
           font-size 1.4rem
+
+          &.warning
+            color firebrick
 
       &--buttons
         padding-right 2rem
@@ -261,6 +279,15 @@
 
     h5, p
       margin 0
+
+  &__save-buttons
+    display flex
+    align-items center
+    justify-content space-between
+    border-top 2px solid lightGreyBorder
+
+    button, .button
+      margin 3rem 0 1rem 0 !important
 
 .edit-product
   margin-top 2rem
@@ -326,7 +353,7 @@
         line-height 0.6
         background red
         color white
-        pointer-events none
+        z-index 9
 
         &:hover
           background firebrick
@@ -445,4 +472,44 @@
       color mainBlueHover
       cursor pointer
 
+.lightbox
+  position fixed
+  top 0
+  left 0
+  width 100%
+  height 100%
+  background rgba(0,0,0,0.5)
+  z-index 999
+  display none
 
+  &.active
+    display block
+
+  &__window
+    position absolute
+    background white
+    color offBlack
+    padding 4rem
+    border-radius 1rem
+    top 50%
+    left 50%
+    transform translateX(-50%) translateY(-50%)
+
+    h4
+      margin-top 0
+      color mainBlue
+
+#delete-product__lightbox
+
+  p
+    padding 1rem
+    background lightGrey
+
+  span 
+    color mainBlue 
+    text-decoration underline
+    margin-left 2rem
+
+    &:hover
+      color lightBlue
+      cursor pointer

@@ -1,12 +1,21 @@
 extends layoutAdmin
 
 block body
-  .split-columns
+
+  if product
+    .lightbox#delete-product__lightbox
+      .lightbox__window
+        h4 Are you sure you want to delete this item?
+        p.bold= product.title
+        a.button.button__red.no-margin(href=`/dashboard/products/delete/${product._id}`) Delete
+        span(onclick="toggleDeleteConfirmation()") Cancel
+
+  .space-between
     div
       a(href="/dashboard/products") << Back to Products
     if product
       div
-        a(href=product.url) << Back to Products
+        a(href=product.pageURL target="_blank") View public page >>
 
   form.edit-product(name='product' onsubmit="submitForm(event)")
     if product && product.title
@@ -15,18 +24,19 @@ block body
       span.label__subtitle Drag and drop to re-arrange. The first image is used as a cover/meta image. (Max size: 20MB, Max images: 20)
     .edit-product__images
       if product && product.images
-        for key in product.images
-          - const imageId = product.images[key]
+        for id, index in product.images
           div.edit-product__images--entry(
-            data-key=key
+            data-key=index
+            data-id=id
             draggable="true" 
             ondragstart="imageDragStart(event)" 
             ondragenter="dragEnter(event)" 
             ondragleave="dragLeave(event)" 
             ondragover="dragOver(event)" 
             ondrop="imageDrop(event)")
-            img(src=`/images/cms/products/${product._id}/${imageId}`)
-            div.edit-product__images--entry--delete ×
+            img(src=product.imageURLs[index])
+            div.edit-product__images--entry--delete(
+              onclick=`deleteImage(event)`) ×
       .edit-product__images--new
         input(name="newImage" type="file" accept="image/*")
         .edit-product__images--new--text
@@ -52,19 +62,19 @@ block body
             option(value="sub8") Sub 8
         .label-and-input
           label(for="shortDescription") Short Description
-          textarea(name="shortDescription" rows="3" value=(product ? product.shortDescription : '') required)
+          textarea(name="shortDescription" rows="3" required)= product ? product.description.short : ''
         .label-and-input
           label(for="metaTitle") Meta Title
           span.link#copy-from-title Copy from Title
-          input(name="metaTitle" type="text" value=(product ? product.metaTitle : '') required)
+          input(name="metaTitle" type="text" value=(product ? product.meta.title : '') required)
         .label-and-input
           label(for="metaDescription") Meta Description
           span.link#copy-from-description Copy from Description
-          textarea(name="metaDescription" required rows="3" value=(product ? product.metaDescription : ''))
+          textarea(name="metaDescription" required rows="3")= product ? product.meta.description : ''
         .label-and-input
           label(for="features") Features
           .multiple-input(data-multi="features")
-            if product && product.features.length > 0
+            if product && product.features && product.features.length > 0
               for entry, i in product.features
                 div(data-key=i)
                   input(type="text" onchange="updateFeature(event)" value=product.features[i])
@@ -76,11 +86,19 @@ block body
         .label-and-input
           label(for="specifications") Specifications
           .multiple-input(data-multi="specifications")
-            if product && Object.keys(product.specifications).length > 0
+            if product && product.specifications && Object.keys(product.specifications).length > 0
               for entry, i in product.specifications
                 div(data-key=i)
-                  input(type="text" onchange="updateSpecification(event)")
-                  input(type="text" onchange="updateSpecification(event)")
+                  input(
+                    type="text" 
+                    data-type="key"
+                    value=entry[0] 
+                    onchange="updateSpecification(event)")
+                  input(
+                    type="text" 
+                    data-type="value"
+                    value=entry[1] 
+                    onchange="updateSpecification(event)")
                   .multiple-input__delete ×
             div(data-key="0")
               input(type="text" data-type="key")
@@ -93,28 +111,32 @@ block body
           input(name="youtubeID" type="text" value=(product && product.youtubeID ? product.youtubeID : ''))
         .label-and-input
           label(for="manualPDF") Upload Manual PDF
-          if product && product.manualUploaded
+          if product && product.manualPDF
             span.file-uploaded
               img(src="/images/icons/check-green-circle.svg")
               span File uploaded
-              a(href="#") Download
+              a(href=product.manualURL target="_blank") Download
           input(name="manualPDF" type="file" accept=".pdf")
-          if product && product.manualUploaded
+          if product && product.manualPDF
             .checkbox
-              input(name="deleteManualPDF" type="checkbox")
-              label(for="deleteManualPDF") Delete Manual PDF
+              input(name="deleteManual" type="checkbox")
+              label(for="deleteManual") Delete Manual PDF
       
       div
         .label-and-input
           label(for="longDescription") Long Description
-          textarea(name="longDescription" rows="30" value=(product ? product.longDescription : ''))
-          
-    hr
+          textarea(name="longDescription" rows="30")= product ? product.description.long : ''
+
     .admin__upload-progress
       h5 Uploading files...
       progress(value="0" max="1")
     .admin__errors
-    button.button__green(type="submit") Save Changes
+    .admin__save-buttons
+      if product
+        button.button__green(type="submit") Save Changes
+      else
+        button.button__green(type="submit") Add product
+      .button.button__red(onclick="toggleDeleteConfirmation()") Delete product
     
 block extraFooterScripts
   script

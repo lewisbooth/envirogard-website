@@ -1,6 +1,7 @@
-// Parses req.body into the Product schema 
+// Parses req.body into the Product schema
+// Strips any random fields and roughly enforces types
 exports.formatProduct = data => {
-  const product = {
+  return {
     title: String(data.title),
     // subcategory: String(data.subcategory),
     description: {
@@ -15,5 +16,4 @@ exports.formatProduct = data => {
     specifications: JSON.parse(data.specifications),
     youtubeID: String(data.youtubeID),
   }
-  return product
 }
