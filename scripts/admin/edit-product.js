@@ -25,7 +25,7 @@ const addSpec = specsContainer.querySelector('.multiple-input__add')
 const manualPDF = form.querySelector('input[name="manualPDF"]')
 const uploadProgress = document.querySelector('.admin__upload-progress')
 const uploadProgressBar = uploadProgress.querySelector('progress')
-const deleteConfirmation = document.querySelector('#delete-product__lightbox')
+const deleteConfirmation = document.querySelector('#delete-item__lightbox')
 
 
 // -------- Triggers --------- //
@@ -131,11 +131,13 @@ function updateImageKeys() {
 // ------ Meta Shortcuts ----- //
 
 function copyFromTitle() {
-  inputs.metaTitle.value = inputs.title.value
+  if (inputs.title.value)
+    inputs.metaTitle.value = inputs.title.value
 }
 
 function copyFromDescription() {
-  inputs.metaDescription.value = inputs.shortDescription.value  
+  if (inputs.shortDescription.value)
+    inputs.metaDescription.value = inputs.shortDescription.value  
 }
 
 
@@ -289,10 +291,9 @@ function submitForm(e) {
   const data = new FormData()
   let fileUpload = false
   // Append all basic text inputs
-  for (let input in inputs) {
+  for (let input in inputs) 
     if (inputs[input])
-      data.append(input, inputs[input].value)
-  }
+      data.append(input, inputs[input].value)  
   // Remove empty space from specs & features
   const filteredSpecs = specifications.filter(entry => 
     !(entry[0] === "" && entry[1] === ""))

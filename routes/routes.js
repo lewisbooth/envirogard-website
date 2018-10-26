@@ -8,7 +8,7 @@ const { catchErrors } = require('../helpers/errorHandlers')
 
 // Configure file upload handler
 const multer = require('multer')
-const uploadProduct = multer({
+const upload = multer({
   storage: multer.memoryStorage(),
   limits: {
     fileSize: '20MB',
@@ -29,6 +29,7 @@ router.get('/trade-account', pageController.tradeAccount)
 router.get('/trade-account/terms-and-conditions', pageController.tradeAccountTerms)
 router.get('/frequently-asked-questions', pageController.faq)
 router.get('/privacy-policy', pageController.privacyPolicy)
+
 // API
 router.get('/api/get-closest-depot', apiController.getClosestDepot)
 
@@ -41,28 +42,48 @@ router.get('/logout', authController.logout)
 router.all(/dashboard/, authController.isLoggedIn)
 router.get('/dashboard', (req, res) => 
   res.redirect('/dashboard/products'))
+
 router.get('/dashboard/products', adminController.products)
 router.get('/dashboard/products/new', adminController.newProduct)
 router.post('/dashboard/products/new', 
-  uploadProduct.any(),
+  upload.any(),
   catchErrors(adminController.newProductSave),
-  catchErrors(adminController.uploadProductManual),
-  catchErrors(adminController.uploadProductImagery),
+  catchErrors(adminController.uploadManual),
+  catchErrors(adminController.uploadImagery),
   (req, res) => res.status(200).send())
 router.get('/dashboard/products/delete/:id', adminController.deleteProduct)
 router.get('/dashboard/products/:slug', adminController.editProduct)
 router.post('/dashboard/products/:slug', 
-  uploadProduct.any(),
+  upload.any(),
   catchErrors(adminController.editProductSave),
-  catchErrors(adminController.uploadProductManual),
-  catchErrors(adminController.uploadProductImagery),
+  catchErrors(adminController.uploadManual),
+  catchErrors(adminController.uploadImagery),
+  (req, res) => res.status(200).send())
+  
+router.get('/dashboard/categories', adminController.categories)
+router.get('/dashboard/categories/new', adminController.newCategory)
+router.post('/dashboard/categories/new', 
+  upload.single("coverImage"),
+  catchErrors(adminController.newCategorySave),
+  catchErrors(adminController.uploadCategoryImage),
+  (req, res) => res.status(200).send())
+router.get('/dashboard/category/delete/:id', adminController.deleteCategory)
+router.get('/dashboard/categories/:slug', adminController.editCategory)
+router.post('/dashboard/categories/:slug', 
+  upload.single("coverImage"),
+  catchErrors(adminController.editCategorySave),
+  catchErrors(adminController.uploadCategoryImage),
   (req, res) => res.status(200).send())
 
-// Create user (disabled)
-// router.get('/create-user', pageController.createUser)
-// router.post('/create-user',
-//   authController.validateRegister,
-//   authController.createUser,
-//   authController.login)
+
+// Create a user with no authentication
+// Disable this in production for obvious reasons
+if (process.env.NODE_ENV === "development") {
+  router.get('/create-user', pageController.createUser)
+  router.post('/create-user',
+    authController.validateRegister,
+    authController.createUser,
+    authController.login)
+}
 
 module.exports = router

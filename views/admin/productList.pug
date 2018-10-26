@@ -1,6 +1,7 @@
 extends layoutAdmin
 
 block body
+  h1 Product Listings
   .admin__filters
     form(method="GET")
       div
@@ -9,10 +10,10 @@ block body
       div
         label(for="sortBy") Sort By
         select(name="sortBy")
-          option(value="newest" selected=(query.sort === "newest")) Newest
-          option(value="oldest" selected=(query.sort === "oldest")) Oldest
-          option(value="az" selected=(query.sort === "az")) Name A-Z
-          option(value="za" selected=(query.sort === "za")) Name Z-A
+          option(value="newest" selected=(query.sortBy === "newest")) Newest
+          option(value="oldest" selected=(query.sortBy === "oldest")) Oldest
+          option(value="az" selected=(query.sortBy === "az")) Name A-Z
+          option(value="za" selected=(query.sortBy === "za")) Name Z-A
       div
         label(for="subcategory") Subcategory
         select(name="subcategory")
@@ -23,7 +24,7 @@ block body
           option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
           option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
       button.no-margin(type="submit") Apply Filter
-    span Found #[span.bold= productCount] results
+    span Found #[span.bold= numberOfResults] results
   .admin__listings
     a.admin__listings--add(href="/dashboard/products/new")
       span Add a Product

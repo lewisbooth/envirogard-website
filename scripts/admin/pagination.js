@@ -1,6 +1,7 @@
 // Parse the query strings on page load
 const urlParams = getUrlParams(window.location.search)
 
+// Fired by pagination buttons with [data-key="num"]
 function changePage(e) {
   const newPage = e.target.dataset.key
   urlParams.page = newPage

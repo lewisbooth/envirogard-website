@@ -1,34 +1,25 @@
 extends layoutAdmin
 
 block body
+  h1 Category Listings
   .admin__filters
     form(method="GET")
       div
         label(for="search") Search
-        input(name="search" type="text" placeholder="Search products...")
+        input(name="search" type="text" placeholder="Search categories...")
       div
         label(for="sortBy") Sort By
         select(name="sortBy")
-          option(value="newest" selected=(query.sort === "newest")) Newest
-          option(value="oldest" selected=(query.sort === "oldest")) Oldest
-          option(value="az" selected=(query.sort === "az")) Name A-Z
-          option(value="za" selected=(query.sort === "za")) Name Z-A
-      div
-        label(for="subcategory") Subcategory
-        select(name="subcategory")
-          option(value="all" selected=(query.subcategory && query.subcategory === "all")) All
-          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
-          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
-          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
-          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
-          option(value="emergency-drench-showers" selected=(query.subcategory === "emergency-drench-showers")) Emergency Drench Showers
+          option(value="newest" selected=(query.sortBy === "newest")) Newest
+          option(value="oldest" selected=(query.sortBy === "oldest")) Oldest
+          option(value="az" selected=(query.sortBy === "az")) Name A-Z
+          option(value="za" selected=(query.sortBy === "za")) Name Z-A      
       button.no-margin(type="submit") Apply Filter
-    span Found #[span.bold= productCount] results
+    span Found #[span.bold= numberOfResults] results
   .admin__listings
-    a.admin__listings--add(href="/dashboard/products/new")
-      span Add a Product
-    if products
-      for product in products
-        +productListingAdmin(product)
-
+    a.admin__listings--add(href="/dashboard/categories/new")
+      span Add a Category
+    if categories
+      for category in categories
+        +categoryListingAdmin(category)
   +adminPagination

@@ -1,0 +1,72 @@
+extends layoutAdmin
+
+block body
+
+  if category
+    .lightbox#delete-item__lightbox
+      .lightbox__window
+        h4 Are you sure you want to delete this item?
+        p This action is not reversible.
+        p.bold= category.title
+        .lightbox__window--buttons
+          span(onclick='toggleDeleteConfirmation()') Cancel
+          a.button.button__red.no-margin(href=`/dashboard/categories/delete/${category._id}`) Delete
+
+  .space-between
+    div
+      a(href='/dashboard/categories') << Back to Categories
+    if category
+      div
+        a(href=category.pageURL target='_blank') View public page >>
+
+  form.admin__form.edit-category(name='category' onsubmit='submitForm(event)')
+    if category && category.title
+      h1= category.title
+    else
+      h1 New Category
+    .split-columns
+      div
+        .label-and-input
+          label(for='title') Title
+          input(name='title' type='text' value=(category ? category.title : '') required)
+        .label-and-input
+          label(for='shortDescription') Short Description
+          textarea(name='shortDescription' rows='3' required)= category ? category.description.short : ''
+        .label-and-input
+          label(for='longDescription') Expanded Description
+            span.label__subtitle Revealed when 'Read More' is clicked on category page
+          textarea(name='longDescription' rows='10')= category ? category.description.long : ''
+        .label-and-input
+          label(for='metaTitle') Meta Title
+          span.link#copy-from-title Copy from Title
+          input(name='metaTitle' type='text' value=(category ? category.meta.title : '') required)
+        .label-and-input
+          label(for='metaDescription') Meta Description
+          span.link#copy-from-description Copy from Description
+          textarea(name='metaDescription' required rows='3')= category ? category.meta.description : ''
+      div
+        .label-and-input
+          label Main image
+          input(name='coverImage' type='file' accept='image/*')
+
+        .image-preview(hidden=!(category && category.hasImage))
+          label Image preview
+            span.label__subtitle Cropped to 5:3 ratio to avoid large headings
+          .image-preview__cropped
+            img(src=(category && category.hasImage ? category.mainImageURL : ''))
+
+    .admin__upload-progress
+      h5 Uploading files...
+      progress(value='0' max='1')
+    .admin__errors
+    .admin__save-buttons
+      if category
+        button.button__green(type='submit') Save Changes
+        .button.button__red(onclick='toggleDeleteConfirmation()') Delete category
+      else
+        button.button__green(type='submit') Add category
+        
+block extraFooterScripts
+  script
+    include ../../public/js/admin/edit-category.js
+  script(src='https://unpkg.com/axios/dist/axios.min.js' async defer)

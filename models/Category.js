@@ -13,7 +13,7 @@ const options = {
   }
 }
 
-const productSchema = new Schema(
+const categorySchema = new Schema(
   {
     title: {
       type: String,
@@ -24,20 +24,11 @@ const productSchema = new Schema(
       type: String,
       trim: true
     },
-    images: [{
-      type: String,
-      trim: true
-    }],
-    subcategory: {
-      type: ObjectId,
-      ref: "Subcategory",
-      // required: "Please supply a subcategory"
-    },
+    hasImage: Boolean,    
     description: {
       short: {
         type: String,
-        trim: true,
-        required: "Please supply a short description"
+        trim: true
       },
       long: {
         type: String,
@@ -55,71 +46,46 @@ const productSchema = new Schema(
         trim: true,
         required: "Please supply a meta description"
       },
-    },
-    features: [{
-      type: String,
-      trim: true
-    }],
-    specifications: [[{
-      type: String,
-      trim: true
-    }]],
-    youtubeID: {
-      type: String,
-      trim: true
-    },
-    manualPDF: Boolean
+    }
   },
   options
 )
 
-productSchema.index({
-  slug: 1,
-  title: 1
-})
+categorySchema.index({ title: 1 })
+categorySchema.index({ slug: 1 })
 
-productSchema
+categorySchema
   .virtual('publicFolder')
   .get(function () {
-    return `${process.env.PUBLIC_FOLDER}/cms/products/${this._id}`
+    return `${process.env.PUBLIC_FOLDER}/cms/categories/${this._id}`
   })
 
-productSchema
+categorySchema
   .virtual('pageURL')
   .get(function () {
-    return `/products/${this.slug}`
+    return `/categories/${this.slug}`
   })
 
-productSchema
-  .virtual('manualURL')
+categorySchema
+  .virtual('mainImageURL')
   .get(function () {
-    const url = `/cms/products/${this._id}/docs/manual.pdf`
-    return this.manualPDF ? url : ''
+    return this.hasImage ? 
+      `/cms/categories/${this._id}/images/cover.jpg` :
+      '/images/default/no-image.png'    
   })
 
-productSchema
+categorySchema
   .virtual('mainImageThumbnailURL')
   .get(function () {
-    if (this.images.length > 0) {
-      return `/cms/products/${this._id}/images/${this.images[0]}-thumb.jpg`
-    }
-    else {
-      return "/images/default/no-image.png"
-    }
-  })
-
-productSchema
-  .virtual('imageURLs')
-  .get(function () {
-    return this.images.map(image =>
-      `/cms/products/${this._id}/images/${image}.jpg`
-    )
+    return this.hasImage ? 
+      `/cms/categories/${this._id}/images/cover-thumb.jpg` :
+      '/images/default/no-image.png'    
   })
 
 // Generate slug from product name
 // Call manually with .save() when updating an existing record
 // because pre "save" functions do not run on "update" methods
-productSchema.pre("save", async function(next) {
+categorySchema.pre("save", async function(next) {
   this.slug = slugify(`${this.title}`, { lower: true })
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i')
   const productWithSlug = await this.constructor.find({ slug: slugRegEx })
@@ -133,4 +99,4 @@ productSchema.pre("save", async function(next) {
   next()
 })
 
-module.exports = mongoose.model("Product", productSchema)
+module.exports = mongoose.model("Category", categorySchema)

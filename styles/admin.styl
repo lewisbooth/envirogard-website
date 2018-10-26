@@ -110,6 +110,12 @@
     margin-top 1rem
     margin-bottom 6rem
 
+    > h1
+      font-size 3rem
+      font-family plexBold 
+      text-transform none
+      margin-top 1rem
+
   &__filters
     display flex
     flex-wrap wrap
@@ -289,23 +295,25 @@
     button, .button
       margin 3rem 0 1rem 0 !important
 
+  &__form
+
+    h1 
+      font-size 3.2rem
+      font-family plexBold
+      color mainBlue
+      text-transform none
+
+    button[type="submit"]
+      margin-bottom 0
+
+    label
+      display block
+      width 100%
+      font-family plexBold
+      margin-bottom .5rem
+
 .edit-product
-  margin-top 2rem
-  
-  h1 
-    font-size 3.2rem
-    font-family plexBold
-    color mainBlue
-    text-transform none
-
-  button[type="submit"]
-    margin-bottom 0
-
-  label
-    display block
-    width 100%
-    font-family plexBold
-    margin-bottom .5rem
+  margin-top 2rem  
 
   &__images
     display inline-flex
@@ -498,18 +506,40 @@
     h4
       margin-top 0
       color mainBlue
+      margin-bottom 1.5rem
 
-#delete-product__lightbox
+    &--buttons
+      display flex
+      align-items center
+      justify-content right
 
-  p
+#delete-item__lightbox
+
+  p.bold
     padding 1rem
     background lightGrey
+    border 1px solid lightGreyBorder
 
   span 
     color mainBlue 
     text-decoration underline
-    margin-left 2rem
+    margin 0 3rem
 
     &:hover
       color lightBlue
       cursor pointer
+
+.image-preview
+  margin-bottom 3rem
+
+  &__cropped
+    padding-top 60%
+    overflow hidden
+    position relative
+
+    img
+      position absolute
+      top 50%
+      left 0
+      width 100%
+      transform translateY(-50%)

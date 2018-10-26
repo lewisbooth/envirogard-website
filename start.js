@@ -20,6 +20,7 @@ connectToMongo()
 // Load MongoDB models
 require("./models/User")
 require("./models/Product")
+require("./models/Category")
 
 // Load server scripts
 const app = require("./app")
