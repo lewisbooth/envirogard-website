@@ -21,6 +21,7 @@ connectToMongo()
 require("./models/User")
 require("./models/Product")
 require("./models/Category")
+require("./models/Subcategory")
 
 // Load server scripts
 const app = require("./app")

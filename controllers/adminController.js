@@ -6,36 +6,23 @@ const rimraf = require('rimraf')
 const mongoose = require("mongoose")
 const Product = mongoose.model("Product")
 const Category = mongoose.model("Category")
+const Subcategory = mongoose.model("Subcategory")
+const { calcPage } = require("../helpers/calcPage")
 const { blockThread } = require("../helpers/blockThread")
 const { formatProduct } = require("../helpers/formatProduct")
 const { formatCategory } = require("../helpers/formatCategory")
+const { parseSortParams } = require("../helpers/parseSortParams")
+const { parseFilterParams } = require("../helpers/parseFilterParams")
 
 const RESULTS_PER_PAGE = 20
 
 exports.products = async (req, res) => {
-  // Extract query params for easy use
-  const { search, subcategory, sortBy } = req.query
-  // Build filter params
-  let filter = {}
-  if (search)
-    filter.title = { $regex: search, $options: "i" }
-  if (subcategory && subcategory !== "all")
-    filter.subcategory = subcategory
-  let sort = { updatedAt: -1 }
-  if (sortBy === "oldest")
-    sort = { updatedAt: 1 }
-  if (sortBy === "az")
-    sort = { title: 1 }
-  if (sortBy === "za")
-    sort = { title: -1 }
-  // Calculate total number of items and pages
+  let filter = parseFilterParams(req.body)
+  let sort = parseSortParams(req.body)  
+  // Calculate pagination variables
   const numberOfResults = await Product.countDocuments(filter)
   const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE)
-  // Calculate page number
-  let page = Math.max(1, parseInt(req.query.page))
-  // Validate page number against max page value
-  if (page > numberOfPages)
-    page = numberOfPages
+  const page = calcPage(req.query.page, numberOfPages)  
   // Calculate number of items to skip based on page number
   const skip = (page - 1) * RESULTS_PER_PAGE
   const products = await Product
@@ -147,13 +134,14 @@ exports.uploadProductImagery = async (req, res, next) => {
   Object.keys(req.body).forEach(field => {
     if (field.startsWith('image')){
       const index = field.split('-')[1]
-      const id = req.body[field]
-      imageList[index] = id
+      const imageId = req.body[field]
+      imageList[index] = imageId
     }
   })
   // Extract new images from uploaded files
   const newImages = req.files.filter(file =>
-    file.fieldname.startsWith("image"))
+    file.fieldname.startsWith("image")
+  )
   if (!newImages) return next()
   // Initialise product image folder
   const folder = `${req.product.publicFolder}/images/`
@@ -229,32 +217,17 @@ exports.deleteProduct = async (req, res) => {
   )
 }
 
-exports.categories = async (req, res) => {
-  // Extract query params for easy use
-  const { search, sortBy } = req.query
-  // Build filter params
-  let filter = {}
-  if (search)
-    filter.title = { $regex: search, $options: "i" }
-  let sort = { updatedAt: -1 }
-  if (sortBy === "oldest")
-    sort = { updatedAt: 1 }
-  if (sortBy === "az")
-    sort = { title: 1 }
-  if (sortBy === "za")
-    sort = { title: -1 }
-  // Calculate total number of items and pages
+exports.categories = async (req, res) => {  
+  let filter = parseFilterParams(req.body)
+  let sort = parseSortParams(req.body)  
+  // Calculate pagination variables
   const numberOfResults = await Category.countDocuments()
   const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE)
-  // Calculate page number
-  let page = Math.max(1, parseInt(req.query.page))
-  // Validate page number against max page value
-  if (page > numberOfPages)
-    page = numberOfPages
+  const page = calcPage(req.query.page, numberOfPages)  
   // Calculate number of items to skip based on page number
   const skip = (page - 1) * RESULTS_PER_PAGE
   const categories = await Category
-    .find({})
+    .find(filter)
     .sort(sort)
     .skip(skip)
     .limit(RESULTS_PER_PAGE)
@@ -311,7 +284,7 @@ exports.editCategorySave = async (req, res, next) => {
         return res.status(400).send()
       // Manually call save() to trigger slug update
       doc.save()
-      // Attach the saved document to 'req', used by the file upload handlers
+      // Attach document to 'req' to be used by the file upload handlers
       req.category = doc
       req.flash("success", "Category has been updated")
       next()
@@ -343,7 +316,6 @@ exports.deleteCategory = async (req, res) => {
 exports.uploadCategoryImage = async (req, res, next) => {
   const newImage = req.file
   const folder = `${req.category.publicFolder}/images`
-  const oldFile = `${folder}/cover.jpg`
   // Initialise category image folder
   mkdirp.sync(folder)
   // Delete existing image if required
@@ -378,4 +350,27 @@ exports.uploadCategoryImage = async (req, res, next) => {
     { $set: { hasImage: true } }
   )
   next()
+}
+
+exports.subcategories = async (req, res) => {  
+  let filter = parseFilterParams(req.body)
+  let sort = parseSortParams(req.body)  
+  // Calculate total number of items and pages
+  const numberOfResults = await Subcategory.countDocuments()
+  const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE)
+  const page = calcPage(req.query.page, numberOfPages)  
+  // Calculate number of items to skip based on page number
+  const skip = (page - 1) * RESULTS_PER_PAGE
+  const subcategories = await Subcategory
+    .find(filter)
+    .sort(sort)
+    .skip(skip)
+    .limit(RESULTS_PER_PAGE)
+  res.render('admin/subcategoryList', {
+    title: "All Subcategories",
+    subcategories,
+    numberOfPages,
+    numberOfResults,
+    page,
+  })
 }

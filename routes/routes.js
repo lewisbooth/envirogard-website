@@ -67,7 +67,7 @@ router.post('/dashboard/categories/new',
   catchErrors(adminController.newCategorySave),
   catchErrors(adminController.uploadCategoryImage),
   (req, res) => res.status(200).send())
-router.get('/dashboard/category/delete/:id', adminController.deleteCategory)
+router.get('/dashboard/categories/delete/:id', adminController.deleteCategory)
 router.get('/dashboard/categories/:slug', adminController.editCategory)
 router.post('/dashboard/categories/:slug', 
   upload.single("coverImage"),
@@ -75,9 +75,10 @@ router.post('/dashboard/categories/:slug',
   catchErrors(adminController.uploadCategoryImage),
   (req, res) => res.status(200).send())
 
+router.get('/dashboard/subcategories', adminController.subcategories)
 
 // Create a user with no authentication
-// Disable this in production for obvious reasons
+// Disabled in production, obviously!
 if (process.env.NODE_ENV === "development") {
   router.get('/create-user', pageController.createUser)
   router.post('/create-user',

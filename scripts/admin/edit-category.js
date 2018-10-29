@@ -6,6 +6,7 @@ const copyFromTitleLink = form.querySelector('#copy-from-title')
 const copyFromDescriptionLink = form.querySelector('#copy-from-description')
 const uploadProgress = document.querySelector('.admin__upload-progress')
 const uploadProgressBar = uploadProgress.querySelector('progress')
+const deleteConfirmation = document.querySelector('#delete-item__lightbox')
 
 const inputs = {
   title: form.querySelector('input[name="title"]'),
@@ -87,4 +88,11 @@ function submitForm(e) {
     }
     errors.flash(message.title, message.text)
   })
+}
+
+
+// -----  Delete Product ----- //
+
+function toggleDeleteConfirmation() {
+  deleteConfirmation.classList.toggle("active")
 }

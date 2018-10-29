@@ -18,7 +18,7 @@ const categorySchema = new Schema(
     title: {
       type: String,
       trim: true,
-      required: "Please supply a product title"
+      required: "Please supply a category title"
     },
     slug: {
       type: String,
@@ -46,7 +46,8 @@ const categorySchema = new Schema(
         trim: true,
         required: "Please supply a meta description"
       },
-    }
+    },
+    subcategories: [ObjectId]
   },
   options
 )

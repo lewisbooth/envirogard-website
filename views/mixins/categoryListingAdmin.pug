@@ -4,7 +4,7 @@ mixin categoryListingAdmin(category)
       img(src=category.mainImageThumbnailURL)
     .admin__listings--entry--text
       .admin__listings--entry--text--title= category.title
-      if category.subcategories
+      if category.subcategories && category.subcategories.length
         - const count = category.subcategories.length
         .admin__listings--entry--text--subcategory= count + ' subcategories'
       else
