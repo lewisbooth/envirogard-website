@@ -1,4 +1,4 @@
-// Parses results page forms into sorting rules for Mongo queries
+// Parses req.body into sorting rules for Mongo queries
 exports.parseSortParams = body => {
   // Extract query params for easy use
   const { sortBy } = body

@@ -5,7 +5,7 @@ mixin productListingAdmin(product)
     .admin__listings--entry--text
       .admin__listings--entry--text--title= product.title
       if product.subcategory
-        .admin__listings--entry--text--subcategory= product.subcategory
+        .admin__listings--entry--text--subcategory= product.subcategory.title
       else
         .admin__listings--entry--text--subcategory.warning No Subcategory
     .admin__listings--entry--buttons

@@ -11,6 +11,7 @@ const { calcPage } = require("../helpers/calcPage")
 const { blockThread } = require("../helpers/blockThread")
 const { formatProduct } = require("../helpers/formatProduct")
 const { formatCategory } = require("../helpers/formatCategory")
+const { formatSubcategory } = require("../helpers/formatSubcategory")
 const { parseSortParams } = require("../helpers/parseSortParams")
 const { parseFilterParams } = require("../helpers/parseFilterParams")
 
@@ -30,6 +31,7 @@ exports.products = async (req, res) => {
     .sort(sort)
     .skip(skip)
     .limit(RESULTS_PER_PAGE)
+    .populate('subcategory')
   res.render('admin/productList', {
     title: "All Products",
     products,
@@ -77,9 +79,9 @@ exports.editProductSave = async (req, res, next) => {
   await Product.findOneAndUpdate(
     { slug: req.params.slug },
     { $set: product },
-    { new: true },
+    { returnNewDocument: true },
     (err, doc) => {
-      if (err)
+      if (err || !doc)
         return res.status(400).send()
       // Manually call save() to trigger slug update
       doc.save()
@@ -278,7 +280,7 @@ exports.editCategorySave = async (req, res, next) => {
   await Category.findOneAndUpdate(
     { slug: req.params.slug },
     { $set: category },
-    { new: true },
+    { returnNewDocument: true },
     (err, doc) => {
       if (err)
         return res.status(400).send()
@@ -366,6 +368,7 @@ exports.subcategories = async (req, res) => {
     .sort(sort)
     .skip(skip)
     .limit(RESULTS_PER_PAGE)
+    .populate('products')
   res.render('admin/subcategoryList', {
     title: "All Subcategories",
     subcategories,
@@ -373,4 +376,69 @@ exports.subcategories = async (req, res) => {
     numberOfResults,
     page,
   })
+}
+
+exports.newSubcategory = async (req, res) => {
+  res.render('admin/subcategory', {
+    title: "New Subcategory"
+  })
+}
+
+exports.newSubcategorySave = async (req, res, next) => {
+  const subcategory = formatSubcategory(req.body)
+  await new Subcategory(subcategory).save(
+    (err, data) => {
+      if (err) {
+        console.log(err)
+        return res.status(400).send()
+      }
+      req.flash("success", "New subcategory added")
+      res.status(200).send()
+    }
+  )
+}
+
+exports.editSubcategory = async (req, res) => {
+  const subcategory = await Subcategory
+    .findOne({ slug: req.params.slug })
+    .populate('products')
+    .populate('category')
+  if (!subcategory) {
+    req.flash("error", "Subcategory not found")
+    res.redirect("/dashboard/subcategories")
+    return
+  }
+  res.render('admin/subcategory', {
+    subcategory,
+    title: `Edit Subcategory - ${subcategory.title}`
+  })
+}
+
+exports.editSubcategorySave = async (req, res, next) => {
+  const subcategory = formatSubcategory(req.body)
+  await Subcategory.findOneAndUpdate(
+    { slug: req.params.slug },
+    { $set: subcategory },
+    { returnNewDocument: true },
+    async (err, doc) => {
+      if (err)
+        return res.status(400).send()
+      await Product.updateMany(
+        { subcategory: doc._id },        
+        { $set: { subcategory: null } }
+      )
+      if (subcategory.products) {
+        subcategory.products.forEach(async _id => {
+          await Product.updateMany(
+            { _id },        
+            { $set: { subcategory: doc._id } }
+          )
+        })
+      }
+      // Manually call save() to trigger slug update
+      doc.save()
+      req.flash("success", "Subcategory has been updated")
+      res.redirect("/dashboard/subcategories")
+    }
+  )
 }

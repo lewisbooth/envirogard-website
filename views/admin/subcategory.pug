@@ -1,0 +1,71 @@
+extends layoutAdmin
+
+block body
+
+  if subcategory
+    .lightbox#delete-item__lightbox
+      .lightbox__window
+        h4 Are you sure you want to delete this item?
+        p This action is not reversible.
+        p.bold= subcategory.title
+        .lightbox__window--buttons
+          span(onclick='toggleDeleteConfirmation()') Cancel
+          a.button.button__red.no-margin(href=`/dashboard/subsubcategories/delete/${subcategory._id}`) Delete
+
+  .space-between
+    div
+      a(href='/dashboard/subcategories') << Back to Subcategories
+    if subcategory
+      div
+        a(href=subcategory.pageURL target='_blank') View public page >>
+
+  form.admin__form.edit-subcategory(name='subcategory' onsubmit='submitForm(event)')
+    if subcategory && subcategory.title
+      h1= subcategory.title
+    else
+      h1 New Subcategory
+    .split-columns
+      div
+        .label-and-input
+          label(for='title') Title
+          input(name='title' type='text' value=(subcategory ? subcategory.title : '') required)
+      div
+        .label-and-input
+          label Category
+          select(name='category')
+            option(name='test' value='0') No category
+            for category in globalCategories
+              option(
+                name=category.title
+                value=category._id
+                selected=(subcategory && subcategory.category ? subcategory.category.id === category.id : false)          
+                )= category.title
+
+    .edit-subcategory__product-listings
+      label Add Products
+      input(name='productDropdown' type='text' placeholder="Start typing a product name...")
+      .edit-subcategory__product-listings--autocomplete
+        div
+          span Select product
+          ul 
+      .edit-subcategory__product-listings--container
+        if subcategory && subcategory.products
+          for product in subcategory.products
+            div(data-id=product.id)
+              span= product.title
+              div
+                a(href=product.editURL class="button" target="_blank") Edit Product
+                span(onclick="removeProduct(event)") Remove
+
+    .admin__errors
+    .admin__save-buttons
+      if subcategory
+        button.button__green(type='submit') Save Changes
+        .button.button__red(onclick='toggleDeleteConfirmation()') Delete subcategory
+      else
+        button.button__green(type='submit') Add subcategory
+        
+block extraFooterScripts
+  script
+    include ../../public/js/admin/edit-subcategory.js
+  script(src='https://unpkg.com/axios/dist/axios.min.js' async defer)

@@ -47,7 +47,7 @@ const categorySchema = new Schema(
         required: "Please supply a meta description"
       },
     },
-    subcategories: [ObjectId]
+    subcategories: [{type: ObjectId, ref: 'Subcategory'}]
   },
   options
 )

@@ -1,4 +1,4 @@
-// Parses results page forms into filters for Mongo queries
+// Parses req.body into filters for Mongo queries
 exports.parseFilterParams = body => {
   // Extract query params for easy use
   const { search, subcategory } = body

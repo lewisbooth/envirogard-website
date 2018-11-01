@@ -91,7 +91,7 @@ function submitForm(e) {
 }
 
 
-// -----  Delete Product ----- //
+// -----  Delete Category ----- //
 
 function toggleDeleteConfirmation() {
   deleteConfirmation.classList.toggle("active")

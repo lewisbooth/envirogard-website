@@ -1,0 +1,11 @@
+mixin subcategoryListingAdmin(subcategory)
+  a.admin__listings--entry(href=`/dashboard/subcategories/${subcategory.slug}`)
+    .admin__listings--entry--text
+      .admin__listings--entry--text--title= subcategory.title
+      if subcategory.products
+        - const count = subcategory.products.length
+        .admin__listings--entry--text--subcategory= count + ' products'
+      else
+        .admin__listings--entry--text--subcategory.warning No Products
+    .admin__listings--entry--buttons
+      .button Edit

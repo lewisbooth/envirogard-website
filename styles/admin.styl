@@ -230,7 +230,7 @@
       &--text
         flex-grow 1
         text-align left
-        padding 0 3rem
+        padding 1.4rem 3rem
         display flex
         flex-direction column
         justify-content center
@@ -409,6 +409,83 @@
 
         span 
           font-family plexBold
+
+.edit-subcategory
+
+  &__product-listings
+    width 100%
+    margin-bottom 3rem
+
+    input
+      width 100%
+
+      &:focus ~ .edit-subcategory__product-listings--autocomplete
+        display block
+
+    &--autocomplete
+      position relative
+      display none
+
+      div
+        border 1px solid mainBlue
+        width 100%
+        position absolute
+        top 100%
+        left 0
+        background white  
+
+      span 
+        text-transform uppercase
+        font-size 1.4rem
+        font-family plexBold
+        color mainBlue
+        padding .5rem 2rem
+        display block
+
+      ul
+
+        li
+          padding 1rem 2rem
+          border-top 1px solid lightGreyBorder
+          color #999
+
+          &[data-id]
+            color offBlack
+
+          &:hover, &.active
+            background mainBlue
+            color white
+            cursor pointer
+
+    &--container
+      width 100%
+      margin-top 1rem
+      background white
+
+      > div
+        border 1px solid lightGreyBorder
+        border-bottom none
+        padding 1rem 3rem
+        display flex
+        justify-content space-between
+        align-items center
+
+        &:last-child
+          border-bottom 1px solid lightGreyBorder
+
+        > div span
+          color mainBlue
+          text-decoration underline
+          margin-left 2.5rem
+          user-select none
+
+          &:hover
+            color mainBlueHover 
+            cursor pointer 
+
+        .button
+          margin 0
+          padding 1rem 3rem
 
 .label-and-input
   display flex

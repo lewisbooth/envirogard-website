@@ -20,6 +20,9 @@ const productSchema = new Schema(
       trim: true,
       required: "Please supply a product title"
     },
+    subcategory: {
+      type: ObjectId, ref: 'Subcategory'
+    },
     slug: {
       type: String,
       trim: true
@@ -28,11 +31,6 @@ const productSchema = new Schema(
       type: String,
       trim: true
     }],
-    subcategory: {
-      type: ObjectId,
-      ref: "Subcategory",
-      // required: "Please supply a subcategory"
-    },
     description: {
       short: {
         type: String,
@@ -88,6 +86,12 @@ productSchema
   .virtual('pageURL')
   .get(function () {
     return `/products/${this.slug}`
+  })
+
+productSchema
+  .virtual('editURL')
+  .get(function () {
+    return `/dashboard/products/${this.slug}`
   })
 
 productSchema

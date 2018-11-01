@@ -1,8 +1,6 @@
 const mongoose = require("mongoose")
 const slugify = require("slugify")
-const Category = mongoose.model("Category")
 const Schema = mongoose.Schema
-const ObjectId = Schema.ObjectId
 
 const options = {
   timestamps: true,
@@ -24,8 +22,7 @@ const subcategorySchema = new Schema(
     slug: {
       type: String,
       trim: true
-    },
-    products: [ObjectId]
+    }
   },
   options
 )
@@ -33,10 +30,25 @@ const subcategorySchema = new Schema(
 subcategorySchema.index({ title: 1 })
 subcategorySchema.index({ slug: 1 })
 
+// One-to-many relationship with Products
+// Products have a { subcategory: ObjectId } field
+subcategorySchema
+  .virtual('products', {
+    ref: 'Product',
+    localField: '_id',
+    foreignField: 'subcategory'
+  })
+
 subcategorySchema
   .virtual('pageURL')
   .get(function () {
     return `/categories/${this.slug}`
+  })
+
+subcategorySchema
+  .virtual('editURL')
+  .get(function () {
+    return `/dashboard/subcategories/${this.slug}`
   })
 
 // Generate slug from product name

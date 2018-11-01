@@ -48,6 +48,7 @@ exports.developmentErrors = (err, req, res, next) => {
       "<mark>$&</mark>"
     )
   }
+  console.log(err)
   res.status(err.status || 500)
   res.format({
     // Based on the `Accept` http header

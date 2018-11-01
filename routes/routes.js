@@ -31,7 +31,8 @@ router.get('/frequently-asked-questions', pageController.faq)
 router.get('/privacy-policy', pageController.privacyPolicy)
 
 // API
-router.get('/api/get-closest-depot', apiController.getClosestDepot)
+router.get('/api/get-closest-depot', catchErrors(apiController.getClosestDepot))
+router.post('/api/products/search', catchErrors(apiController.searchProducts))
 
 // Authentication
 router.get('/login', pageController.login)
@@ -48,16 +49,16 @@ router.get('/dashboard/products/new', adminController.newProduct)
 router.post('/dashboard/products/new', 
   upload.any(),
   catchErrors(adminController.newProductSave),
-  catchErrors(adminController.uploadManual),
-  catchErrors(adminController.uploadImagery),
+  catchErrors(adminController.uploadProductManual),
+  catchErrors(adminController.uploadProductImagery),
   (req, res) => res.status(200).send())
 router.get('/dashboard/products/delete/:id', adminController.deleteProduct)
-router.get('/dashboard/products/:slug', adminController.editProduct)
+router.get('/dashboard/products/:slug', catchErrors(adminController.editProduct))
 router.post('/dashboard/products/:slug', 
   upload.any(),
   catchErrors(adminController.editProductSave),
-  catchErrors(adminController.uploadManual),
-  catchErrors(adminController.uploadImagery),
+  catchErrors(adminController.uploadProductManual),
+  catchErrors(adminController.uploadProductImagery),
   (req, res) => res.status(200).send())
   
 router.get('/dashboard/categories', adminController.categories)
@@ -68,7 +69,7 @@ router.post('/dashboard/categories/new',
   catchErrors(adminController.uploadCategoryImage),
   (req, res) => res.status(200).send())
 router.get('/dashboard/categories/delete/:id', adminController.deleteCategory)
-router.get('/dashboard/categories/:slug', adminController.editCategory)
+router.get('/dashboard/categories/:slug', catchErrors(adminController.editCategory))
 router.post('/dashboard/categories/:slug', 
   upload.single("coverImage"),
   catchErrors(adminController.editCategorySave),
@@ -76,6 +77,10 @@ router.post('/dashboard/categories/:slug',
   (req, res) => res.status(200).send())
 
 router.get('/dashboard/subcategories', adminController.subcategories)
+router.get('/dashboard/subcategories/new', adminController.newSubcategory)
+router.post('/dashboard/subcategories/new', catchErrors(adminController.newSubcategorySave))
+router.get('/dashboard/subcategories/:slug',catchErrors(adminController.editSubcategory))
+router.post('/dashboard/subcategories/:slug',catchErrors(adminController.editSubcategorySave))
 
 // Create a user with no authentication
 // Disabled in production, obviously!

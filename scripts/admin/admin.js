@@ -5,7 +5,6 @@ class AdminErrors {
   }
   flash(title = "Error", text = "An error occured. Please try again.") {
     this.messages.push({ title, text })
-    console.log(this.messages)
     this.render()
   }
   clear() {

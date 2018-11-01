@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 exports.connectToMongo = (retry = false) => {
   mongoose.connect(process.env.DATABASE, {
     autoReconnect: true,
+    useCreateIndex: true,
     reconnectTries: 100,
     reconnectInterval: 500,
     useNewUrlParser: true

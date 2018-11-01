@@ -1,10 +1,10 @@
 // This file sets up the Express middleware
 // All network requests pass through middleware top-to-bottom
 // Requests are then handed off to the routing file
-
 const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
+const Category = mongoose.model("Category")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")(session)
 const { promisify } = require("es6-promisify")
@@ -91,7 +91,12 @@ app.use(flash())
 app.use(expressValidator())
 
 // Expose variables and functions to view templates
-app.use((req, res, next) => {
+app.use(async (req, res, next) => {
+  // Query category/subcategory structure for navigation
+  res.locals.globalCategories = await Category
+    .find({})
+    .sort({ title: 1 })
+    .populate('subcategories')
   // Parses the User Agent into desktop, phone, tablet, phone, bot or car
   res.locals.device = device(req.headers["user-agent"]).type
   // Pass success/error messages into the template
@@ -124,7 +129,7 @@ app.use(errorHandlers.notFound)
 app.use(errorHandlers.flashValidationErrors)
 
 // Error page with stacktrace during development
-if (app.get("env") === "development")
+if (process.env.NODE_ENV === "development")
   app.use(errorHandlers.developmentErrors)
 
 // Error page with no stacktrace in production
