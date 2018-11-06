@@ -1,5 +1,5 @@
 mixin productListingAdmin(product)
-  a.admin__listings--entry(href=`/dashboard/products/${product.slug}`)
+  a.admin__listings--entry(href=product.editURL)
     .admin__listings--entry--image
       img(src=product.mainImageThumbnailURL)
     .admin__listings--entry--text

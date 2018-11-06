@@ -1,26 +1,26 @@
-// Automatically generates cache-busting JS & CSS links using an MD5 hash
-// e.g. <link src="main.css?v=7815696ecbf1c96e6894b779456d330e">
+// Automatically generates cache-busting links using MD5 hashes
+// Hashes all CSS & JS files in the /public folder and returns usable links
+// e.g. main.css?v=7815696ecbf1c96e6894b779456d330e
 
-const { hashFile } = require("./hashFile")
 const fs = require("fs")
 const path = require("path")
+const { hashFile } = require("./hashFile")
 
-const ROOT = path.join(__dirname, "../public")
-const FOLDERS = ["css", "js"]
+const { PUBLIC_FOLDER } = process.env
+const STATIC_FOLDERS = ["css", "js"]
 const FILE_TYPES = /\.css|\.js/
-const DEBOUNCE = 200
-
-let debounce = false
 
 const hashes = {}
+
+let debounce = false
 
 function generateHashes() {
   if (debounce) return
   debounce = true
   let filesToHash = []
-  FOLDERS.forEach(folder => {
+  STATIC_FOLDERS.forEach(folder => {
     // Absolute path to folder
-    const folderPath = path.join(ROOT, folder)
+    const folderPath = path.join(PUBLIC_FOLDER, folder)
     // Build array of files in folder
     fs.readdirSync(folderPath)
       .filter(file => file.match(FILE_TYPES))
@@ -30,14 +30,15 @@ function generateHashes() {
   })
   filesToHash.forEach(file => {
     const [directory, filename] = file
-    const md5 = hashFile(path.join(ROOT, directory, filename))
+    const md5 = hashFile(path.join(PUBLIC_FOLDER, directory, filename))
     // Create a full URL with hash that will work in-browser
     const url = `/${directory}/${filename}?v=${md5}`
     hashes[filename] = url
   })
-  setTimeout(() => debounce = false, DEBOUNCE)
+  setTimeout(() => debounce = false, 200)
 }
 
+// Run once on server start, then watch folder for changes
 generateHashes()
 
 // Expose the hashes for use in view templates

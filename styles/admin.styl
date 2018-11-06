@@ -410,16 +410,16 @@
         span 
           font-family plexBold
 
-.edit-subcategory
+.edit-linked
 
-  &__product-listings
+  &__listings
     width 100%
     margin-bottom 3rem
 
     input
       width 100%
 
-      &:focus ~ .edit-subcategory__product-listings--autocomplete
+      &:focus ~ .edit-linked__listings--autocomplete
         display block
 
     &--autocomplete
@@ -622,3 +622,38 @@
       left 0
       width 100%
       transform translateY(-50%)
+
+#pell
+  border 1px solid lightGreyBorder
+
+.pell
+
+  &-actionbar
+    padding 1rem
+
+  &-button
+    color offBlack
+    margin 0
+
+  &-content
+    background white
+
+    h1
+      font-family plexBold
+      font-size 2.8rem
+
+    h2
+      font-family plexBold
+      font-size 2.2rem
+
+    ul
+      margin-left 4rem
+
+      li
+        list-style disc
+
+    ol
+      margin-left 4rem
+
+      li
+        list-style decimal

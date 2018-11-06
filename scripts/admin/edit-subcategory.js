@@ -2,9 +2,9 @@ const form = document.forms['subcategory']
 const titleInput = form.querySelector('input[name="title"]')
 const categoryInput = form.querySelector('select[name="category"]')
 const addProductInput = form.querySelector('[name="productDropdown"]')
-const autocompleteContainer = form.querySelector('.edit-subcategory__product-listings--autocomplete')
-const autocompleteResults = form.querySelector('.edit-subcategory__product-listings--autocomplete ul')
-const productContainer = form.querySelector('.edit-subcategory__product-listings--container')
+const autocompleteContainer = form.querySelector('.edit-linked__listings--autocomplete')
+const autocompleteResults = form.querySelector('.edit-linked__listings--autocomplete ul')
+const productContainer = form.querySelector('.edit-linked__listings--container')
 const deleteConfirmation = document.querySelector('#delete-item__lightbox')
 
 

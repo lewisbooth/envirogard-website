@@ -1,6 +1,7 @@
 const fetch = require('node-fetch')
 const mongoose = require("mongoose")
 const Product = mongoose.model("Product")
+const Subcategory = mongoose.model("Subcategory")
 const { depotData } = require('../helpers/depotData')
 const { parseSortParams } = require("../helpers/parseSortParams")
 const { parseFilterParams } = require("../helpers/parseFilterParams")
@@ -59,8 +60,9 @@ exports.getClosestDepot = async (req, res) => {
 
 // Takes search term from req.body and returns a list of matching products
 exports.searchProducts = async (req, res) => {
-  const sort = parseSortParams(req.body)
-  const filter = parseFilterParams(req.body)
+  const sort = parseSortParams(req)
+  const filter = parseFilterParams(req)
+  console.log(filter, sort)
   const products = await Product
     .find(filter)
     .limit(10)
@@ -74,6 +76,28 @@ exports.searchProducts = async (req, res) => {
       image: product.mainImageThumbnailURL,
       editURL: product.editURL,
       pageURL: product.pageURL,
+    }
+  })
+  res.json(results)
+}
+
+// Takes search term from req.body and returns a list of matching subcategories
+exports.searchSubcategories = async (req, res) => {
+  const sort = parseSortParams(req)
+  const filter = parseFilterParams(req)
+  const subcategories = await Subcategory
+    .find(filter)
+    .limit(10)
+    .sort(sort)
+  // Select only the useful fields
+  // Using .select('<fields>') on the query doesn't work with async/await?
+  const results = subcategories.map(subcategory => {
+    return {
+      id: subcategory._id,
+      title: subcategory.title,
+      image: subcategory.mainImageThumbnailURL,
+      editURL: subcategory.editURL,
+      pageURL: subcategory.pageURL,
     }
   })
   res.json(results)

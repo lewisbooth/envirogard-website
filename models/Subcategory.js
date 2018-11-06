@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const slugify = require("slugify")
 const Schema = mongoose.Schema
+const ObjectId = Schema.ObjectId
 
 const options = {
   timestamps: true,
@@ -22,7 +23,13 @@ const subcategorySchema = new Schema(
     slug: {
       type: String,
       trim: true
-    }
+    },
+    category: {
+      type: ObjectId, ref: 'Category'
+    },
+    industries: [{
+      type: ObjectId, ref: 'Industry'
+    }],
   },
   options
 )
@@ -42,7 +49,9 @@ subcategorySchema
 subcategorySchema
   .virtual('pageURL')
   .get(function () {
-    return `/categories/${this.slug}`
+    return this.category ? 
+      `/categories/${this.category.slug}/${this.slug}`
+      : null
   })
 
 subcategorySchema
@@ -50,6 +59,16 @@ subcategorySchema
   .get(function () {
     return `/dashboard/subcategories/${this.slug}`
   })
+
+// Always populate the category in order to generate the full page URL
+const autoPopulate = function(next) {
+  this.populate('category')
+  next()
+}
+  
+subcategorySchema.
+  pre('findOne', autoPopulate).
+  pre('find', autoPopulate)
 
 // Generate slug from product name
 // Call manually with .save() when updating an existing record

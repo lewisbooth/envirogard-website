@@ -1,0 +1,13 @@
+mixin industryListingAdmin(industry)
+  a.admin__listings--entry(href=industry.editURL)
+    .admin__listings--entry--image
+      img(src=industry.mainImageThumbnailURL)
+    .admin__listings--entry--text
+      .admin__listings--entry--text--title= industry.title     
+      if industry.subcategories && industry.subcategories.length > 0
+        - const count = industry.subcategories.length
+        .admin__listings--entry--text--subcategory= count + ' subcategories'
+      else
+        .admin__listings--entry--text--subcategory.warning No Subcategories 
+    .admin__listings--entry--buttons
+      .button Edit

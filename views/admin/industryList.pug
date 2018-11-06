@@ -1,7 +1,7 @@
 extends layoutAdmin
 
 block body
-  h1 Category Listings
+  h1 Industry Listings
   .admin__filters
     form(method="GET")
       div
@@ -9,7 +9,7 @@ block body
         input(
           name="search" 
           type="text" 
-          placeholder="Search categories..."
+          placeholder="Search industries..."
           value=query.search || null
         )
       div
@@ -22,9 +22,9 @@ block body
       button.no-margin(type="submit") Apply Filter
     span Found #[span.bold= numberOfResults] results
   .admin__listings
-    a.admin__listings--add(href="/dashboard/categories/new")
-      span Add a Category
-    if categories
-      for category in categories
-        +categoryListingAdmin(category)
+    a.admin__listings--add(href="/dashboard/industries/new")
+      span Add an Industry
+    if industries
+      for industry in industries
+        +industryListingAdmin(industry)
   +adminPagination

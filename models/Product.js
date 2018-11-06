@@ -21,7 +21,8 @@ const productSchema = new Schema(
       required: "Please supply a product title"
     },
     subcategory: {
-      type: ObjectId, ref: 'Subcategory'
+      type: ObjectId, ref: 'Subcategory',
+      default: null
     },
     slug: {
       type: String,

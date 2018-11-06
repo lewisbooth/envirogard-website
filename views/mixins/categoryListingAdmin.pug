@@ -1,10 +1,10 @@
 mixin categoryListingAdmin(category)
-  a.admin__listings--entry(href=`/dashboard/categories/${category.slug}`)
+  a.admin__listings--entry(href=category.editURL)
     .admin__listings--entry--image
       img(src=category.mainImageThumbnailURL)
     .admin__listings--entry--text
       .admin__listings--entry--text--title= category.title
-      if category.subcategories && category.subcategories.length
+      if category.subcategories && category.subcategories.length > 0
         - const count = category.subcategories.length
         .admin__listings--entry--text--subcategory= count + ' subcategories'
       else

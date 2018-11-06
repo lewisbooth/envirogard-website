@@ -3,7 +3,6 @@ const ip = require("ip")
 const { connectToMongo } = require("./helpers/connectToMongo")
 const { checkConfig } = require("./helpers/checkConfig")
 
-
 // Expose an absolute path to root & public directories 
 // Useful for scripts that are nested in folders
 process.env.ROOT = __dirname
@@ -22,6 +21,7 @@ require("./models/User")
 require("./models/Product")
 require("./models/Category")
 require("./models/Subcategory")
+require("./models/Industry")
 
 // Load server scripts
 const app = require("./app")

@@ -17,50 +17,22 @@ block body
           .home__promoted--left-column--popular-products--title
             h4 Equipment for Hire
           .category-listings
-            a.category-listings__entry(href=("/category/showers-and-decontamination"))
-              img(src="/images/cms/homepage/categories/TEMP/showers-and-decontamination.jpg")
-              .category-listings__entry--label
-                h3 Decontamination Units
-            a.category-listings__entry(href=("/category/showers-and-decontamination"))
-              img(src="/images/cms/homepage/categories/TEMP/dust-control.jpg")
-              .category-listings__entry--label
-                h3 Dust Control
-            a.category-listings__entry(href=("/category/showers-and-decontamination"))
-              img(src="/images/cms/homepage/categories/TEMP/vacuum-cleaners.jpg")
-              .category-listings__entry--label
-                h3 Vacuum Cleaners
-            a.category-listings__entry(href=("/category/showers-and-decontamination"))
-              img(src="/images/cms/homepage/categories/TEMP/air-ventilation.jpg")
-              .category-listings__entry--label
-                h3 Air Ventilation
-            a.category-listings__entry(href=("/category/showers-and-decontamination"))
-              img(src="/images/cms/homepage/categories/TEMP/site-services.jpg")
-              .category-listings__entry--label
-                h3 Site Services
-            a.category-listings__entry(href=("/category/showers-and-decontamination"))
-              img(src="/images/cms/homepage/categories/TEMP/testing-and-monitoring.jpg")
-              .category-listings__entry--label
-                h3 Testing &amp; Monitoring
+            for category in globalCategories
+              a.category-listings__entry(
+                href=category.pageURL
+                style=`background-image: url(${category.mainImageThumbnailURL});`
+              )
+                .category-listings__entry--label
+                  h3= category.title            
                 
       .home__promoted--right-column
         h4 Products by Industry
         .home__promoted--right-column--industries
           ul
-            li 
-              a(href="/industry/pollution-control")
-                span Pollution Control
-            li
-              a(href="/industry/pollution-control") 
-                span Asbestos Removal
-            li
-              a(href="/industry/pollution-control")
-                span Demolition
-            li
-              a(href="/industry/pollution-control")
-                span Contaminated Land
-            li
-              a(href="/industry/pollution-control")
-                span Tank Purging
+            for industry in globalIndustries
+              li
+                a(href=industry.pageURL)
+                  span= industry.title
           .home__promoted--right-column--industries--live-chat
             img(src="/images/homepage/advisor.jpg")
             .home__promoted--right-column--industries--live-chat--text

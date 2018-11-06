@@ -1,0 +1,95 @@
+extends layoutAdmin
+
+block body
+
+  if industry
+    .lightbox#delete-item__lightbox
+      .lightbox__window
+        h4 Are you sure you want to delete this item?
+        p This action is not reversible.
+        p.bold= industry.title
+        .lightbox__window--buttons
+          span(onclick='toggleDeleteConfirmation()') Cancel
+          a.button.button__red.no-margin(href=`/dashboard/industries/delete/${industry._id}`) Delete
+
+  .space-between
+    div
+      a(href='/dashboard/industries') << Back to Industries
+    if industry
+      div
+        a(href=industry.pageURL target='_blank') View public page >>
+
+  form.admin__form.edit-industry(name='industry' onsubmit='submitForm(event)')
+    if industry && industry.title
+      h1= industry.title
+    else
+      h1 New Industry
+    .split-columns
+      div
+        .label-and-input
+          label(for='title') Title
+          input(name='title' type='text' value=(industry ? industry.title : '') required)
+        .label-and-input
+          label(for='description') Description
+          //- Editor content is placed in a hidden textarea then extracted by JS
+          //- because reading textarea.value decodes HTML entities
+          //- i.e '&lt;div&gt;' becomes '<div>'
+          textarea#pell-data(hidden)= industry ? industry.description : ''
+          //- Decoded HTML is placed in the '#pell' editor element
+          #pell
+        .label-and-input
+          label(for='metaTitle') Meta Title
+          span.link#copy-from-title Copy from Title
+          input(name='metaTitle' type='text' value=(industry ? industry.meta.title : '') required)
+        .label-and-input
+          label(for='metaDescription') Meta Description
+          textarea(name='metaDescription' required rows='3')= industry ? industry.meta.description : ''
+      div
+        .label-and-input
+          label Main image
+          input(name='coverImage' type='file' accept='image/*')
+
+        .image-preview(hidden=!(industry && industry.hasImage))
+          label Image preview
+            span.label__subtitle Cropped to 5:3 ratio to avoid large headings
+          .image-preview__cropped
+            img(src=(industry && industry.hasImage ? industry.mainImageURL : ''))
+
+    .edit-linked__listings
+      label Manage Subcategories
+      input(name='subcategoryDropdown' 
+            type='text' 
+            autocomplete="off"
+            placeholder="Start typing a subcategory name...")
+      .edit-linked__listings--autocomplete
+        div
+          span Select subcategory
+          ul 
+      .edit-linked__listings--container
+        if industry && industry.subcategories
+          for subcategory in industry.subcategories
+            div(data-id=subcategory.id)
+              span= subcategory.title
+              div
+                a(href=subcategory.editURL class="button" target="_blank") Edit Subcategory
+                span(onclick="removeSubcategory(event)") Remove
+
+    .admin__upload-progress
+      h5 Uploading files...
+      progress(value='0' max='1')
+    .admin__errors
+    .admin__save-buttons
+      if industry
+        button.button__green(type='submit') Save Changes
+        .button.button__red(onclick='toggleDeleteConfirmation()') Delete industry
+      else
+        button.button__green(type='submit') Add industry
+        
+block extraHeaderScripts
+  link(rel="stylesheet" type="text/css" href="https://unpkg.com/pell/dist/pell.min.css")
+
+block extraFooterScripts
+  script(src='https://unpkg.com/axios/dist/axios.min.js' async defer)
+  script(src='https://unpkg.com/pell')
+  script
+    include ../../public/js/admin/edit-industry.js

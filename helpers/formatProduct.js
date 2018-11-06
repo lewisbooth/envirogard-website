@@ -3,7 +3,7 @@
 exports.formatProduct = data => {
   return {
     title: String(data.title),
-    // subcategory: String(data.subcategory),
+    subcategory: String(data.subcategory) || null,
     description: {
       short: String(data.shortDescription),
       long: String(data.longDescription),

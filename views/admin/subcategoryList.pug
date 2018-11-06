@@ -6,7 +6,12 @@ block body
     form(method="GET")
       div
         label(for="search") Search
-        input(name="search" type="text" placeholder="Search subcategories...")
+        input(
+          name="search" 
+          type="text" 
+          placeholder="Search subcategories..."
+          value=query.search || null
+        )
       div
         label(for="sortBy") Sort By
         select(name="sortBy")

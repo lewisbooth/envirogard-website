@@ -5,6 +5,7 @@ const express = require("express")
 const app = express()
 const mongoose = require("mongoose")
 const Category = mongoose.model("Category")
+const Industry = mongoose.model("Industry")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")(session)
 const { promisify } = require("es6-promisify")
@@ -39,11 +40,7 @@ const maxAge = process.env.NODE_ENV === "production" ? 31536000 : 1
 // These should be served via Nginx/Apache reverse proxy in production
 app.use(express.static(process.env.PUBLIC_FOLDER, { maxAge }))
 
-// Load Pug templating engine 
-app.set("views", "views")
-app.set("view engine", "pug")
-
-// Add MDS hashes to automatically version CSS/JS
+// Use MD5 hashes to automatically version CSS/JS
 app.use(cacheBuster)
 
 // Parse POST data into req.body
@@ -71,7 +68,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-// Promisify the PassportJS login API (non-blocking)
+// Promisify the PassportJS login API
 app.use((req, res, next) => {
   req.login = promisify(req.login, req)
   next()
@@ -80,14 +77,14 @@ app.use((req, res, next) => {
 // Parse cookies into req.cookies
 app.use(cookieParser())
 
-// Log dynamic requests
+// Log dynamic requests to console
 app.use(logging)
 
-// Dynamic flash messages are passed to the view templates 
+// Dynamic flash messages are passed from controllers to view templates 
 // (e.g. "Successfully logged in" or "Incorrect login details")
 app.use(flash())
 
-// Data validation library
+// Data validation library for user uploads
 app.use(expressValidator())
 
 // Expose variables and functions to view templates
@@ -97,6 +94,9 @@ app.use(async (req, res, next) => {
     .find({})
     .sort({ title: 1 })
     .populate('subcategories')
+  res.locals.globalIndustries = await Industry
+    .find({})
+    .sort({ title: 1 })
   // Parses the User Agent into desktop, phone, tablet, phone, bot or car
   res.locals.device = device(req.headers["user-agent"]).type
   // Pass success/error messages into the template
@@ -111,18 +111,21 @@ app.use(async (req, res, next) => {
   res.locals.depotData = depotData
   res.locals.query = req.query
   // Detect production mode
-  if (process.env.NODE_ENV === "production")
-    res.locals.production = true
+  res.locals.production = process.env.NODE_ENV === "production"
   next()
 })
+
+// Load Pug templating engine 
+app.set("views", "views")
+app.set("view engine", "pug")
 
 // Pass the request to routing middleware
 app.use("/", routes)
 
-// Check for 301 redirects from the old site
+// If the route is not handled, check 301 redirects from the old site
 app.use("/", redirects)
 
-// Error 404 if no routes/redirects can handle the request
+// Throw 404 error if no routes/redirects can handle the request
 app.use(errorHandlers.notFound)
 
 // Flash Mongoose errors

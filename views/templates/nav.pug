@@ -7,7 +7,7 @@ mixin nav
         a(href="/")
           img.nav__logo(src="/images/logos/main-logo.svg" alt="Main Logo")
         form.nav__search
-          input(type="text" name="globalSearch" placeholder="Search Envirogard...")
+          input(type="text" name="globalSearch" placeholder="Search Envirogard Products...")
           button(type="submit") 
             img(src="/images/icons/search.svg" alt="Search")
         .nav__menu
@@ -43,82 +43,23 @@ mixin nav
         div
           span.nav__secondary--dropdown.hide__desktop Hire Equipment
           ul.nav__secondary--products
-            li
-              a(href="/category/decontamination-units") Decontamination Units
-              ul
-                li
-                  a(href="/category/decontamination-units/subcategory") Emergency Drench Showers
-                li
-                  a(href="/category/decontamination-units/subcategory") Modular Decontamination Showers
-                li
-                  a(href="/category/decontamination-units/subcategory") Showers &amp; Toilets
-                li
-                  a(href="/category/decontamination-units/subcategory") Trailer Decontamination Showers
-            li
-              a(href="/category/decontamination-units") Ventilation &amp; Dust Control
-              ul
-                li
-                  a(href="/category/decontamination-units/subcategory") Water Misting Cannons
-                li
-                  a(href="/category/decontamination-units/subcategory") Air Scrubbing Units
-                li
-                  a(href="/category/decontamination-units/subcategory") Ventsafe Dust Extractors
-                li
-                  a(href="/category/decontamination-units/subcategory") Fans &amp; Fume Extractors
-                li
-                  a(href="/category/decontamination-units/subcategory") Air Ventilators
-                li
-                  a(href="/category/decontamination-units/subcategory") Negative Pressure Units
-                li
-                  a(href="/category/decontamination-units/subcategory") Fibre Suppressant Equipment
-            li
-              a(href="/category/decontamination-units") Vacuum Cleaners
-              ul
-                li 
-                  a(href="/category/decontamination-units/subcategory") Clean Room Vacuums
-                li 
-                  a(href="/category/decontamination-units/subcategory") HML HEPA Vacuums
-                li 
-                  a(href="/category/decontamination-units/subcategory") Type H Vacuums
-                li 
-                  a(href="/category/decontamination-units/subcategory") Wet Pick Up Vacuums
-            li
-              a(href="/category/decontamination-units") Testing &amp; Monitoring
-              ul
-                li 
-                  a(href="/category/decontamination-units/subcategory") Differential Pressure Monitors
-                li 
-                  a(href="/category/decontamination-units/subcategory") Readout &amp; Alarm Systems
-                li 
-                  a(href="/category/decontamination-units/subcategory") Smoke Generators
-            li
-              a(href="/category/decontamination-units") Temporary Site Services
-              ul
-                li 
-                  a(href="/category/decontamination-units/subcategory") Water Bowsers
-                li 
-                  a(href="/category/decontamination-units/subcategory") Portable Generators
-                li 
-                  a(href="/category/decontamination-units/subcategory") Pumps &amp; Pressure Washers
-                li 
-                  a(href="/category/decontamination-units/subcategory") Site Electrics
-                li 
-                  a(href="/category/decontamination-units/subcategory") Bootwash
+            for category in globalCategories
+              li
+                a(href=category.pageURL)= category.title
+                if category.subcategories
+                  ul
+                    for subcategory in category.subcategories
+                      li
+                        a(href=subcategory.pageURL)= subcategory.title
+                  
           span.nav__secondary--dropdown.hide__desktop Browse by Industry
           ul.nav__secondary--industries
             li
               span Browse by Industry
               ul
-                li 
-                  a(href="/industry/industry") Pollution Control
-                li 
-                  a(href="/industry/industry") Asbestos Removal
-                li 
-                  a(href="/industry/industry") Demolition
-                li 
-                  a(href="/industry/industry") Contaminated Land
-                li 
-                  a(href="/industry/industry") Tank Purging
+                for industry in globalIndustries
+                  li
+                    a(href=industry.pageURL)= industry.title
         div.hide__tablet
           ul
             li.live-chat__start-button

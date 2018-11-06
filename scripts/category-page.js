@@ -1,6 +1,6 @@
 const readMoreButton = document.querySelector('.category__description--read-more')
 const categoryDescription = document.querySelector('.category__description')
-const sortByInput = document.querySelector('select[name="sort"]')
+const sortByInput = document.querySelector('select[name="sortBy"]')
 const searchForm = document.querySelector('form[name="search"]')
 const searchInput = document.querySelector('input[name="search"]')
 
@@ -9,7 +9,7 @@ const urlParams = getUrlParams(window.location.search)
 
 // Building query strings manually prevents forms clearing each other
 sortByInput.addEventListener('change', () => {
-  urlParams.sort = sortByInput.value
+  urlParams.sortBy = sortByInput.value
   submitInput()
 })
 

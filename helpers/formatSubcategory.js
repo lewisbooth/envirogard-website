@@ -3,7 +3,7 @@
 exports.formatSubcategory = data => {
   return {
     title: String(data.title),
-    category: String(data.category),
+    category: String(data.category) || null,
     products: JSON.parse(data.products),
   }
 }

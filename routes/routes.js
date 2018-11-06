@@ -19,8 +19,8 @@ const upload = multer({
 // Standard pages
 router.get('/', catchErrors(pageController.homepage))
 router.get('/product/:product', catchErrors(pageController.product))
-router.get('/category/:category/:subcategory?', catchErrors(pageController.category))
-router.get('/industry/:industry', catchErrors(pageController.industry))
+router.get('/categories/:category/:subcategory?', catchErrors(pageController.category))
+router.get('/industries/:industry', catchErrors(pageController.industry))
 router.get('/about', pageController.about)
 router.get('/contact', pageController.contact)
 router.post('/contact', catchErrors(pageController.contactForm))
@@ -33,6 +33,7 @@ router.get('/privacy-policy', pageController.privacyPolicy)
 // API
 router.get('/api/get-closest-depot', catchErrors(apiController.getClosestDepot))
 router.post('/api/products/search', catchErrors(apiController.searchProducts))
+router.post('/api/subcategories/search', catchErrors(apiController.searchSubcategories))
 
 // Authentication
 router.get('/login', pageController.login)
@@ -42,9 +43,31 @@ router.get('/logout', authController.logout)
 // Admin
 router.all(/dashboard/, authController.isLoggedIn)
 router.get('/dashboard', (req, res) => 
-  res.redirect('/dashboard/products'))
+  res.redirect('/dashboard/categories'))
 
-router.get('/dashboard/products', adminController.products)
+router.get('/dashboard/categories', catchErrors(adminController.categories))
+router.get('/dashboard/categories/new', adminController.newCategory)
+router.post('/dashboard/categories/new', 
+  upload.single("coverImage"),
+  catchErrors(adminController.newCategorySave),
+  catchErrors(adminController.uploadCategoryImage),
+  (req, res) => res.status(200).send())
+router.get('/dashboard/categories/delete/:id', catchErrors(adminController.deleteCategory))
+router.get('/dashboard/categories/:slug', catchErrors(adminController.editCategory))
+router.post('/dashboard/categories/:slug', 
+  upload.single("coverImage"),
+  catchErrors(adminController.editCategorySave),
+  catchErrors(adminController.uploadCategoryImage),
+  (req, res) => res.status(200).send())
+
+router.get('/dashboard/subcategories', catchErrors(adminController.subcategories))
+router.get('/dashboard/subcategories/new', adminController.newSubcategory)
+router.post('/dashboard/subcategories/new', catchErrors(adminController.newSubcategorySave))
+router.get('/dashboard/subcategories/:slug',catchErrors(adminController.editSubcategory))
+router.post('/dashboard/subcategories/:slug',catchErrors(adminController.editSubcategorySave))
+router.get('/dashboard/subcategories/delete/:id', catchErrors(adminController.deleteSubcategory))
+
+router.get('/dashboard/products', catchErrors(adminController.products))
 router.get('/dashboard/products/new', adminController.newProduct)
 router.post('/dashboard/products/new', 
   upload.any(),
@@ -52,7 +75,7 @@ router.post('/dashboard/products/new',
   catchErrors(adminController.uploadProductManual),
   catchErrors(adminController.uploadProductImagery),
   (req, res) => res.status(200).send())
-router.get('/dashboard/products/delete/:id', adminController.deleteProduct)
+router.get('/dashboard/products/delete/:id', catchErrors(adminController.deleteProduct))
 router.get('/dashboard/products/:slug', catchErrors(adminController.editProduct))
 router.post('/dashboard/products/:slug', 
   upload.any(),
@@ -61,26 +84,20 @@ router.post('/dashboard/products/:slug',
   catchErrors(adminController.uploadProductImagery),
   (req, res) => res.status(200).send())
   
-router.get('/dashboard/categories', adminController.categories)
-router.get('/dashboard/categories/new', adminController.newCategory)
-router.post('/dashboard/categories/new', 
+router.get('/dashboard/industries', catchErrors(adminController.industries))
+router.get('/dashboard/industries/new', adminController.newIndustry)
+router.post('/dashboard/industries/new', 
   upload.single("coverImage"),
-  catchErrors(adminController.newCategorySave),
-  catchErrors(adminController.uploadCategoryImage),
+  catchErrors(adminController.newIndustrySave),
+  catchErrors(adminController.uploadIndustryImage),
   (req, res) => res.status(200).send())
-router.get('/dashboard/categories/delete/:id', adminController.deleteCategory)
-router.get('/dashboard/categories/:slug', catchErrors(adminController.editCategory))
-router.post('/dashboard/categories/:slug', 
+router.get('/dashboard/industries/delete/:id', catchErrors(adminController.deleteIndustry))
+router.get('/dashboard/industries/:slug', catchErrors(adminController.editIndustry))
+router.post('/dashboard/industries/:slug', 
   upload.single("coverImage"),
-  catchErrors(adminController.editCategorySave),
-  catchErrors(adminController.uploadCategoryImage),
+  catchErrors(adminController.editIndustrySave),
+  catchErrors(adminController.uploadIndustryImage),
   (req, res) => res.status(200).send())
-
-router.get('/dashboard/subcategories', adminController.subcategories)
-router.get('/dashboard/subcategories/new', adminController.newSubcategory)
-router.post('/dashboard/subcategories/new', catchErrors(adminController.newSubcategorySave))
-router.get('/dashboard/subcategories/:slug',catchErrors(adminController.editSubcategory))
-router.post('/dashboard/subcategories/:slug',catchErrors(adminController.editSubcategorySave))
 
 // Create a user with no authentication
 // Disabled in production, obviously!

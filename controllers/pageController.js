@@ -1,7 +1,15 @@
 const mongoose = require("mongoose")
 const User = mongoose.model("User")
-const validator = require('validator')
+const Product = mongoose.model("Product")
+const Industry = mongoose.model("Industry")
+const Category = mongoose.model("Category")
+const Subcategory = mongoose.model("Subcategory")
+const { calcPage } = require("../helpers/calcPage")
 const { contactForm } = require("../helpers/contactForm")
+const { parseSortParams } = require("../helpers/parseSortParams")
+const { parseFilterParams } = require("../helpers/parseFilterParams")
+const validator = require('validator')
+
 
 // Titles and descriptions are written in the controllers
 // Titles are appended with "| Envirogard" in views/templates/head.pug
@@ -11,16 +19,40 @@ exports.homepage = async (req, res) => {
 }
 
 exports.category = async (req, res) => {
-  const page = req.query.page && typeof(req.query.page === "number") ? req.query.page : 1
+  const filter = parseFilterParams(req)
+  const sort = parseSortParams(req, 'az')
+  
+  const category = await Category
+    .findOne({ slug: req.params.category })
+    .populate({
+      path: 'subcategories',
+      options: { 
+        filter: { slug: req.params.subcategory || null },
+        sort: { title: -1 } 
+      }
+    })
+    
+  if (!category) {
+    req.flash("error", "Category not found")
+    return res.redirect("/")
+  }
+
+  // Filter Products by selected subcategory
+  if (category.subcategories) {      
+    const subcategories = category.subcategories.map(doc => doc._id)
+    filter.subcategory = { $in: subcategories }
+  }
+  
+  // Run separate Product query for easier sorting of results
+  const products = await Product
+    .find(filter)
+    .sort(sort)
+
   res.render("category", {
-    title: "Decontamination Showers",
-    description: "Decontamination Showers",
-    category: req.params.category,
-    subcategory: req.params.subcategory || "",
-    pages: {
-      current: page,
-      total: 4
-    }
+    title: category.title,
+    description: category.meta.description,
+    category,
+    products
   })
 }
 

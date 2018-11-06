@@ -4,30 +4,27 @@ include mixins/categoryListing
 block body
   .category__header
     .container
-      h1 Decontamination Showers
-      img(src="/images/cms/categories/TEMP/decontamination-showers.jpg")
+      h1= category.title
+      img(src=category.mainImageURL)
   .container
     .category__description
-      p Should you need to put precautionary measures in place to protect staff or the general public from hazardous materials Envirogard can assist with an extensive fleet of decontamination units available for national hire.
-      p Extended description goes here
+      if category.description
+        p= category.description.short
+        p= category.description.long
       .category__description--read-more
   .container
     .category
       .category__filter
         form.category__filter--subcategories
-          h4 Subcategories
-          a(href=`/category/${category}/emergency-drench-showers` class=(subcategory === "emergency-drench-showers" ? "active" : ""))
-            label Emergency Drench Showers
-              .checkbox
-          a(href=`/category/${category}/modular-decontamination-showers` class=(subcategory === "modular-decontamination-showers" ? "active" : ""))
-            label Modular Decontamination Showers
-              .checkbox
-          a(href=`/category/${category}/showers-and-toilets` class=(subcategory === "showers-and-toilets" ? "active" : ""))
-            label Showers & Toilets
-              .checkbox
-          a(href=`/category/${category}/trailer-decontamination-showers` class=(subcategory === "trailer-decontamination-showers" ? "active" : ""))
-            label Trailer Decontamination Showers
-              .checkbox
+          if category.subcategories
+            h4 Subcategories
+            for subcategory in category.subcategories
+              - const currentSubcategory = subcategory.pageURL === currentPath
+              //- Deselect current subcategory when clicked
+              a(href=(currentSubcategory ? category.pageURL : subcategory.pageURL)
+                class=(currentSubcategory ? "active" : ""))
+                label= subcategory.title
+                  .checkbox
         
         form(name="search" method="GET").category__filter--search
           h4 Category Search
@@ -59,26 +56,25 @@ block body
         .category__results--filters
           form(name="sort" method="GET")
             label Sort By
-            select(name="sort")
-              option(value="az" selected=(query.sort === "az")) Name A-Z
-              option(value="za" selected=(query.sort === "za")) Name Z-A
-          .pagination
-            label Page
-            - let n = 1
-            while n < pages.total
-              - query.page = n
-              -
-                const queryString = query ? "?" + Object.keys(query)
-                  .map(key => key + '=' + query[key])
-                  .join('&') : ""
-              - const active = n == pages.current
-              - const link = `/categories/${category}/${subcategory}${queryString}`
-              a(class=(active ? "active" : "") href=link).pagination__link= n++
+            select(name="sortBy")
+              option(value="az" selected=(query.sortBy === "az")) Name A-Z
+              option(value="za" selected=(query.sortBy === "za")) Name Z-A
+          if pages
+            .pagination
+              label Page
+              - let n = 1
+              while n < pages.total
+                - query.page = n
+                -
+                  const queryString = query ? "?" + Object.keys(query)
+                    .map(key => key + '=' + query[key])
+                    .join('&') : ""
+                - const active = n == pages.current
+                - const link = `/categories/${category}/${subcategory}${queryString}`
+                a(class=(active ? "active" : "") href=link).pagination__link= n++
         .category__results--listings
-          +categoryListing
-          +categoryListing
-          +categoryListing
-          +categoryListing
+          for product in products
+            +categoryListing(product)
 
 block extraFooterScripts
   script

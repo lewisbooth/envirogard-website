@@ -10,14 +10,17 @@ block body
         p.bold= subcategory.title
         .lightbox__window--buttons
           span(onclick='toggleDeleteConfirmation()') Cancel
-          a.button.button__red.no-margin(href=`/dashboard/subsubcategories/delete/${subcategory._id}`) Delete
+          a.button.button__red.no-margin(href=`/dashboard/subcategories/delete/${subcategory._id}`) Delete
 
   .space-between
     div
       a(href='/dashboard/subcategories') << Back to Subcategories
     if subcategory
-      div
-        a(href=subcategory.pageURL target='_blank') View public page >>
+      if subcategory.pageURL
+        div
+          a(href=subcategory.pageURL target='_blank') View public page >>
+      else 
+        div Choose a Category to enable this Subcategory
 
   form.admin__form.edit-subcategory(name='subcategory' onsubmit='submitForm(event)')
     if subcategory && subcategory.title
@@ -33,7 +36,7 @@ block body
         .label-and-input
           label Category
           select(name='category')
-            option(name='test' value='0') No category
+            option(name='test' value='') No category
             for category in globalCategories
               option(
                 name=category.title
@@ -41,14 +44,17 @@ block body
                 selected=(subcategory && subcategory.category ? subcategory.category.id === category.id : false)          
                 )= category.title
 
-    .edit-subcategory__product-listings
-      label Add Products
-      input(name='productDropdown' type='text' placeholder="Start typing a product name...")
-      .edit-subcategory__product-listings--autocomplete
+    .edit-linked__listings
+      label Manage Products
+      input(name='productDropdown' 
+            type='text' 
+            autocomplete="off"
+            placeholder="Start typing a product name...")
+      .edit-linked__listings--autocomplete
         div
           span Select product
           ul 
-      .edit-subcategory__product-listings--container
+      .edit-linked__listings--container
         if subcategory && subcategory.products
           for product in subcategory.products
             div(data-id=product.id)

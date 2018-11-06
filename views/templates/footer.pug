@@ -12,31 +12,15 @@ mixin footer
       .footer__column
         h5 Hire From Us
         ul
-          li 
-            a(href="/") Decontamination Units
-          li 
-            a(href="/") Ventilation &amp; Dust Control
-          li 
-            a(href="/") Vacuum Cleaners
-          li 
-            a(href="/") Testing &amp; Monitoring
-          li 
-            a(href="/") Temporary Site Services
+          for category in globalCategories
+            li
+              a(href=category.pageURL)= category.title         
       .footer__column
         h5 Industries
         ul
-          li
-            a(href="/industry/waste-mangement") Waste Management
-          li
-            a(href="/industry/contaminated-land") Contaminated Land
-          li
-            a(href="/industry/pollution-control-and-prevention") Pollution Control &amp; Prevention
-          li
-            a(href="/industry/tank-purging-and-cleansing") Tank Purging &amp; Cleansing
-          li
-            a(href="/industry/demolition-and-recycling") Demolition &amp; Recycling
-          li
-            a(href="/industry/asbestos-removal") Asbestos Removal
+          for industry in globalIndustries
+            li
+              a(href=industry.pageURL)= industry.title
       .footer__column
         h5 Customer Services
         ul

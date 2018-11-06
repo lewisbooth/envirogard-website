@@ -5,20 +5,20 @@ mixin adminNav
         img(src="/images/logos/main-logo.svg" alt="Main Logo")
       ul.admin__nav--links
         li 
-          a(class=(currentPath.includes('/products') ? 'active' : '') 
-            href="/dashboard/products") Products
-        li 
           a(class=(currentPath.includes('/categories') ? 'active' : '')
           href="/dashboard/categories") Categories
         li 
           a(class=(currentPath.includes('/subcategories') ? 'active' : '')
           href="/dashboard/subcategories") Subcategories
         li 
+          a(class=(currentPath.includes('/products') ? 'active' : '') 
+            href="/dashboard/products") Products
+        li 
           a(class=(currentPath.includes('/industries') ? 'active' : '')
           href="/dashboard/industries") Industries
-        li 
-          a(class=(currentPath.includes('/customers') ? 'active' : '')
-          href="/dashboard/customers") Customers
-        li 
-          a(class=(currentPath.includes('/settings') ? 'active' : '')
-          href="/dashboard/settings") Settings
+        //- li 
+        //-   a(class=(currentPath.includes('/customers') ? 'active' : '')
+        //-   href="/dashboard/customers") Customers
+        //- li 
+        //-   a(class=(currentPath.includes('/settings') ? 'active' : '')
+        //-   href="/dashboard/settings") Settings

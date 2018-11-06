@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 const slugify = require("slugify")
 const Schema = mongoose.Schema
+const ObjectId = Schema.ObjectId
 
 const options = {
   timestamps: true,
@@ -12,12 +13,12 @@ const options = {
   }
 }
 
-const categorySchema = new Schema(
+const industrySchema = new Schema(
   {
     title: {
       type: String,
       trim: true,
-      required: "Please supply a category title"
+      required: "Please supply an industry title"
     },
     slug: {
       type: String,
@@ -25,14 +26,9 @@ const categorySchema = new Schema(
     },
     hasImage: Boolean,    
     description: {
-      short: {
-        type: String,
-        trim: true
-      },
-      long: {
-        type: String,
-        trim: true
-      },
+      type: String,
+      trim: true,
+      required: "Please supply a description"
     },
     meta: {
       title: {
@@ -50,56 +46,64 @@ const categorySchema = new Schema(
   options
 )
 
-categorySchema.index({ title: 1 })
-categorySchema.index({ slug: 1 })
+industrySchema.index({ title: 1 })
+industrySchema.index({ slug: 1 })
 
-// One-to-many relationship with Subcategory
-// Subcategories have a { category: ObjectId } field
-categorySchema
+// One-to-many relationship with Subcategory & Cateory
+// Subcategories/Categories have a { industry: [ObjectId] } field
+
+industrySchema
   .virtual('subcategories', {
     ref: 'Subcategory',
     localField: '_id',
-    foreignField: 'category'
+    foreignField: 'industries'
   })
 
-categorySchema
-  .virtual('publicFolder')
-  .get(function () {
-    return `${process.env.PUBLIC_FOLDER}/cms/categories/${this._id}`
+industrySchema
+  .virtual('categories', {
+    ref: 'Category',
+    localField: '_id',
+    foreignField: 'industries'
   })
 
-categorySchema
+industrySchema
   .virtual('pageURL')
   .get(function () {
-    return `/categories/${this.slug}`
+    return `/industries/${this.slug}`
   })
 
-categorySchema
+industrySchema
   .virtual('editURL')
   .get(function () {
-    return `/dashboard/categories/${this.slug}`
+    return `/dashboard/industries/${this.slug}`
   })
 
-categorySchema
+industrySchema
+  .virtual('publicFolder')
+  .get(function () {
+    return `${process.env.PUBLIC_FOLDER}/cms/industries/${this._id}`
+  })
+
+industrySchema
   .virtual('mainImageURL')
   .get(function () {
     return this.hasImage ? 
-      `/cms/categories/${this._id}/images/cover.jpg` :
+      `/cms/industries/${this._id}/images/cover.jpg` :
       '/images/default/no-image.png'    
   })
 
-categorySchema
+industrySchema
   .virtual('mainImageThumbnailURL')
   .get(function () {
     return this.hasImage ? 
-      `/cms/categories/${this._id}/images/cover-thumb.jpg` :
+      `/cms/industries/${this._id}/images/cover-thumb.jpg` :
       '/images/default/no-image.png'    
   })
 
 // Generate slug from product name
 // Call manually with .save() when updating an existing record
 // because pre "save" functions do not run on "update" methods
-categorySchema.pre("save", async function(next) {
+industrySchema.pre("save", async function(next) {
   this.slug = slugify(`${this.title}`, { lower: true })
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i')
   const productWithSlug = await this.constructor.find({ slug: slugRegEx })
@@ -113,4 +117,4 @@ categorySchema.pre("save", async function(next) {
   next()
 })
 
-module.exports = mongoose.model("Category", categorySchema)
+module.exports = mongoose.model("Industry", industrySchema)
