@@ -18,7 +18,7 @@ const upload = multer({
 
 // Standard pages
 router.get('/', catchErrors(pageController.homepage))
-router.get('/product/:product', catchErrors(pageController.product))
+router.get('/products/:slug', catchErrors(pageController.product))
 router.get('/categories/:category/:subcategory?', catchErrors(pageController.category))
 router.get('/industries/:industry', catchErrors(pageController.industry))
 router.get('/about', pageController.about)
@@ -42,19 +42,19 @@ router.get('/logout', authController.logout)
 
 // Admin
 router.all(/dashboard/, authController.isLoggedIn)
-router.get('/dashboard', (req, res) => 
+router.get('/dashboard', (req, res) =>
   res.redirect('/dashboard/categories'))
 
 router.get('/dashboard/categories', catchErrors(adminController.categories))
 router.get('/dashboard/categories/new', adminController.newCategory)
-router.post('/dashboard/categories/new', 
+router.post('/dashboard/categories/new',
   upload.single("coverImage"),
   catchErrors(adminController.newCategorySave),
   catchErrors(adminController.uploadCategoryImage),
   (req, res) => res.status(200).send())
 router.get('/dashboard/categories/delete/:id', catchErrors(adminController.deleteCategory))
 router.get('/dashboard/categories/:slug', catchErrors(adminController.editCategory))
-router.post('/dashboard/categories/:slug', 
+router.post('/dashboard/categories/:slug',
   upload.single("coverImage"),
   catchErrors(adminController.editCategorySave),
   catchErrors(adminController.uploadCategoryImage),
@@ -63,13 +63,13 @@ router.post('/dashboard/categories/:slug',
 router.get('/dashboard/subcategories', catchErrors(adminController.subcategories))
 router.get('/dashboard/subcategories/new', adminController.newSubcategory)
 router.post('/dashboard/subcategories/new', catchErrors(adminController.newSubcategorySave))
-router.get('/dashboard/subcategories/:slug',catchErrors(adminController.editSubcategory))
-router.post('/dashboard/subcategories/:slug',catchErrors(adminController.editSubcategorySave))
+router.get('/dashboard/subcategories/:slug', catchErrors(adminController.editSubcategory))
+router.post('/dashboard/subcategories/:slug', catchErrors(adminController.editSubcategorySave))
 router.get('/dashboard/subcategories/delete/:id', catchErrors(adminController.deleteSubcategory))
 
 router.get('/dashboard/products', catchErrors(adminController.products))
 router.get('/dashboard/products/new', adminController.newProduct)
-router.post('/dashboard/products/new', 
+router.post('/dashboard/products/new',
   upload.any(),
   catchErrors(adminController.newProductSave),
   catchErrors(adminController.uploadProductManual),
@@ -77,23 +77,23 @@ router.post('/dashboard/products/new',
   (req, res) => res.status(200).send())
 router.get('/dashboard/products/delete/:id', catchErrors(adminController.deleteProduct))
 router.get('/dashboard/products/:slug', catchErrors(adminController.editProduct))
-router.post('/dashboard/products/:slug', 
+router.post('/dashboard/products/:slug',
   upload.any(),
   catchErrors(adminController.editProductSave),
   catchErrors(adminController.uploadProductManual),
   catchErrors(adminController.uploadProductImagery),
   (req, res) => res.status(200).send())
-  
+
 router.get('/dashboard/industries', catchErrors(adminController.industries))
 router.get('/dashboard/industries/new', adminController.newIndustry)
-router.post('/dashboard/industries/new', 
+router.post('/dashboard/industries/new',
   upload.single("coverImage"),
   catchErrors(adminController.newIndustrySave),
   catchErrors(adminController.uploadIndustryImage),
   (req, res) => res.status(200).send())
 router.get('/dashboard/industries/delete/:id', catchErrors(adminController.deleteIndustry))
 router.get('/dashboard/industries/:slug', catchErrors(adminController.editIndustry))
-router.post('/dashboard/industries/:slug', 
+router.post('/dashboard/industries/:slug',
   upload.single("coverImage"),
   catchErrors(adminController.editIndustrySave),
   catchErrors(adminController.uploadIndustryImage),

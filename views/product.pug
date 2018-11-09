@@ -2,65 +2,57 @@ extends layout
 
 block body
   .container
+    //- Breadcrumbs
     ul.breadcrumbs
       li
         a(href="/") Home
-      li
-        a(href="/category/decontamination-showers") Decontamination Showers
-      li
-        a(href="/category/decontamination-showers/trailer-decontamination-showers") Maxi Quad Decontamination Shower
+      if (product.subcategory)
+        if (product.subcategory.category)
+          li
+            a(href=product.subcategory.category.pageURL)= product.subcategory.category.title
+        li
+          a(href=product.subcategory.pageURL)= product.subcategory.title
+      li= product.title
   .container.product
     .product__left-column
-      .product__carousel
-        //- Large (currently selected) image
-        .product__carousel--current
-          .product__carousel--current--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-          .product__carousel--current--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-          .product__carousel--current--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-          .product__carousel--current--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-          .product__carousel--current--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-        //- Small navigation images
-        .product__carousel--nav
-          .product__carousel--nav--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-          .product__carousel--nav--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-          .product__carousel--nav--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-          .product__carousel--nav--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-          .product__carousel--nav--image
-            img(src="/images/cms/products/TEMP/carousel-1.jpg")
-
-      a.button.button__yellow.bold(href="#" target="_blank") 
-        span Download Data Sheet
-        img(src="/images/icons/download-blue.svg" alt="Download Icon")
+      if product.images
+        if product.images.length > 0
+          .product__carousel
+            //- Large (currently selected) image
+            .product__carousel--current
+              for image in product.images
+                .product__carousel--current--image
+                  img(src=`/cms/products/${product._id}/images/${image}.jpg`)
+            //- Small navigation images
+            .product__carousel--nav
+              for image in product.images
+                .product__carousel--nav--image
+                  img(src=`/cms/products/${product._id}/images/${image}-thumb.jpg`)     
+        else
+          img(src='/images/default/no-image-large.png')
 
       .product__long-description
-        iframe(class="product__youtube-embed" width="560" height="315" src="https://www.youtube.com/embed/1La4QzGeaaQ" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen)
-        h2 About Maxi Quad Decontamination Showers        
-        p Envirogard's Maxi Quad decontamination showers are close to the maximum permitted length for road-tow trailers, but their relatively light weight and axle configuration makes them highly manoeuverable. 
-        p Extra head height, and a thoughful layout have maximized the available usable space. At the same time trailer weight has been kept within 1900kgs (1500kgs for the Maxi Quad XL version), so they can be towed by many light commercial vans.
-        p Lockers for personal belongings are provided at high level, with rails for hanging clothing below. 16 power points are available for charging respirator battery packs. 
-        p Thermostatic fan heaters maintain a comfortable temperature, while hot water for the showers is provided by a room-sealed balanced-flue LPG water heater; LPG is supplied from cylinders in an external locker.
-        p Electrical power connection is through a 16 amp 240v chassis inlet plug - we supply the matching trailing socket with the trailer. The requirement of the water heater is a clean supply of pressure between 1 bar and 6 bar; this can normally be achieved from a 15mm dia. hose connected to a mains tap.
-        p The shower area has 4 shower points, each one receiving thermostatically regulated warm water. Stainless steel sinks provided are large enough to allow for full forearm cleansing / cleaning of RPE/PPE as required. 
-        p High level shelving allows towels etc. to be kept away from overspray until required, and the rails under allow clothing, respirators, battery packs etc. to be hung out of harms way while showering off.
+        //- Youtube embed
+        if product.youtubeID
+          iframe(class="product__youtube-embed" width="560" height="315" src=`https://www.youtube.com/embed/${product.youtubeID}` frameborder="0" allow="autoplay; encrypted-media" allowfullscreen)
+        if product.description.long
+          h2= `About ${product.title}`
+          .pell-client !{product.description.long}
+
+      //- Download manual
+      if product.manualPDF
+        a.button.button__yellow.bold(href=product.manualURL target="_blank") 
+          span Download Manual
+          img(src="/images/icons/download-blue.svg" alt="Download Icon")
 
     .product__right-column
       .product__description
-        h1 Maxi Quad Decontamination Shower
-        p Envirogard's Maxi Quad decontamination showers are close to the maximum permitted length for road-tow trailers, but their relatively light weight and axle configuration makes them highly manoeuverable.
-        ul
-          li Large capacity (6.4m length)
-          li Lockers and seating
-          li 4 shower points and sinks
-          li Contains 16 power points
+        h1= product.title
+        p= product.description.short
+        if product.features && product.features.length > 0
+          ul
+            for feature in product.features
+              li= feature
       .product__block
         h3.product__block--title Hire Product
         .product__block--content
@@ -218,36 +210,28 @@ block body
                   div
                     h6 Chat to Envirogard Ashford
                     .button.button__yellow.live-chat__start-button Start Live Chat
-      .product__block
-        h3.product__block--title Product Specifications
-        .product__block--content
-          ul.product__block--content--specifications
-            li
-              span Unit Weight
-              span 1200kg
-            li
-              span Dimensions (W x L)
-              span 4m x 6.4m
-            li
-              span Number of Showers
-              span 4
-            li
-              span Number of Sinks
-              span 4
-            li
-              span Number of Lockers
-              span 6
-            li
-              span Power Inlet
-              span 16amp – 240v
-    .product-listings
-      h4 Related Products
-      +productListingCard
-      +productListingCard
-      +productListingCard
-      +productListingCard
-      +productListingCard
+      if product.specifications && product.specifications.length > 0
+        .product__block
+          h3.product__block--title Product Specifications
+          .product__block--content
+            ul.product__block--content--specifications
+              for specification in product.specifications
+                li
+                  span= specification[0]
+                  span= specification[1]
 
+    //- Related Products
+    if product.subcategory && product.subcategory.products
+      -
+        const relatedProducts = product.subcategory.products
+          .filter(relatedProduct => {
+            relatedProduct._id.toString() !== product._id.toString()
+          })
+      if relatedProducts.length > 0
+        .product-listings
+          h4 Related Products
+          for relatedProduct in relatedProducts
+            +productListingCard(relatedProduct)
 
 block extraFooterScripts
   script

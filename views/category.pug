@@ -5,18 +5,22 @@ block body
   .category__header
     .container
       h1= category.title
-      img(src=category.mainImageURL)
+      if category.hasImage
+        .category__header--image(
+          style=`background-image: url('${category.mainImageURL}');`
+        )
   .container
     .category__description
       if category.description
         p= category.description.short
-        p= category.description.long
-      .category__description--read-more
+        if category.description.long
+          p= category.description.long
+          .category__description--read-more 
   .container
     .category
       .category__filter
-        form.category__filter--subcategories
-          if category.subcategories
+        if category.subcategories
+          form.category__filter--subcategories
             h4 Subcategories
             for subcategory in category.subcategories
               - const currentSubcategory = subcategory.pageURL === currentPath
@@ -73,8 +77,12 @@ block body
                 - const link = `/categories/${category}/${subcategory}${queryString}`
                 a(class=(active ? "active" : "") href=link).pagination__link= n++
         .category__results--listings
-          for product in products
-            +categoryListing(product)
+          if products && products.length > 0
+            for product in products
+              +categoryListing(product)
+          else
+            - const extraText = query.search ? ` with name '${query.search}'` : ''
+            h5= "No products found" + extraText
 
 block extraFooterScripts
   script

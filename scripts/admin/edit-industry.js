@@ -34,21 +34,32 @@ imageInput.addEventListener('change', previewImage)
 
 const editor = pell.init({
   element: editorElement,
-  actions: ['bold', 'italic', 'heading1', 'heading2', 'paragraph', 'link', 'olist', 'ulist'],
-  onChange: html => {}
+  actions: ['bold', 'italic', 'heading2', 'paragraph', 'link', 'olist', 'ulist'],
+  onChange: html => { }
 })
 
 // Copy the decoded HTML from hidden textarea to Pell editor
 editor.content.innerHTML = descriptionContent
+
+editor.addEventListener("paste", function (event) {
+  // cancel paste
+  event.preventDefault()
+
+  // get text representation of clipboard
+  var text = (event.originalEvent || event).clipboardData.getData('text/plain')
+
+  // insert text manually
+  document.execCommand("insertHTML", false, text)
+})
 
 
 // ------ Image Preview ------ //
 
 function previewImage(e) {
   const input = e.target
-  if (input.files && input.files[0]) {    
-    var reader = new FileReader()    
-    reader.onload = e => {     
+  if (input.files && input.files[0]) {
+    var reader = new FileReader()
+    reader.onload = e => {
       imagePreview.setAttribute('src', e.target.result)
       imagePreviewContainer.removeAttribute('hidden')
     }
@@ -87,13 +98,13 @@ function renderDropdown(subcategoryData, placeholder) {
     let alreadyAddedToList = false
     subcategories.forEach(subcategory => {
       if (subcategory.id === entry.id)
-        alreadyAddedToList = true      
+        alreadyAddedToList = true
     })
     return !alreadyAddedToList
   })
   // Generate list HTML
   if (filteredSubcategories.length > 0) {
-    autocompleteResults.innerHTML = filteredSubcategories.map(subcategory => 
+    autocompleteResults.innerHTML = filteredSubcategories.map(subcategory =>
       `<li data-id="${subcategory.id}" 
         data-edit="${subcategory.editURL}" 
         onmousedown="addSubcategory(event)">
@@ -118,17 +129,17 @@ function updateSubcategoriesFromDOM() {
   const subcategoryElements = subcategoryContainer.querySelectorAll('div[data-id]') || []
   subcategories = []
   subcategoryElements.forEach(e => {
-      const { id } = e.dataset
-      const editURL = e.querySelector('.button').getAttribute('href')
-      const title = e.querySelector('span').innerText    
-      subcategories.push({ id, editURL, title })
-    })
+    const { id } = e.dataset
+    const editURL = e.querySelector('.button').getAttribute('href')
+    const title = e.querySelector('span').innerText
+    subcategories.push({ id, editURL, title })
+  })
 }
 
 function addSubcategory(e) {
   subcategories.push({
-    id: e.target.dataset.id, 
-    title: e.target.innerText, 
+    id: e.target.dataset.id,
+    title: e.target.innerText,
     editURL: e.target.dataset.edit
   })
   sortSubcategoryList()
@@ -143,12 +154,12 @@ function removeSubcategory(e) {
     if (subcategory.id === id)
       index = i
   })
-  subcategories.splice(index,1)
+  subcategories.splice(index, 1)
   renderSubcategoryList()
 }
 
 function sortSubcategoryList() {
-  subcategories = subcategories.sort((a, b) => 
+  subcategories = subcategories.sort((a, b) =>
     a.title > b.title
   )
 }
@@ -173,9 +184,9 @@ function submitForm(e) {
   errors.clear()
   const data = new FormData()
   // Append all basic text inputs
-  for (let input in inputs) 
+  for (let input in inputs)
     if (inputs[input])
-      data.append(input, inputs[input].value)  
+      data.append(input, inputs[input].value)
   // Append Pell editor
   data.append("description", editor.content.innerHTML)
   data.append("subcategories", JSON.stringify(subcategories.map(subcategory => subcategory.id)))
@@ -186,10 +197,10 @@ function submitForm(e) {
   }
   // Increment upload progress bar
   const onUploadProgress = p =>
-    uploadProgressBar.value = p.loaded / p.total  
+    uploadProgressBar.value = p.loaded / p.total
   // Send form data
   axios.post(
-    window.location.pathname, 
+    window.location.pathname,
     data,
     { onUploadProgress }
   ).then(() =>

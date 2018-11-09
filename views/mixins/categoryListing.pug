@@ -2,9 +2,9 @@ mixin categoryListing(product)
   a.category__results--listing(href=product.pageURL)
     .category__results--listing--image(style=`background-image: url('${product.mainImageThumbnailURL}');`)
     .category__results--listing--text
-      h2= product.title
+      h2= truncate(product.title, 75)
       ul
         for feature in product.features
-          li= feature
+          li= truncate(feature, 48)
     .category__results--listing--more-info
       button.button__yellow.button__arrow More Info

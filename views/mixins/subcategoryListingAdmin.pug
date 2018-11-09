@@ -3,7 +3,7 @@ mixin subcategoryListingAdmin(subcategory)
     .admin__listings--entry--text
       .admin__listings--entry--text--title= subcategory.title
       if subcategory.category
-        if subcategory.products
+        if subcategory.products && subcategory.products.length > 0
           - const count = subcategory.products.length
           .admin__listings--entry--text--subcategory= count + ' products'
         else

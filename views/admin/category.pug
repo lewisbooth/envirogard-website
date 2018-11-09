@@ -51,7 +51,7 @@ block body
 
         .image-preview(hidden=!(category && category.hasImage))
           label Image preview
-            span.label__subtitle Cropped to 5:3 ratio to avoid large headings
+            span.label__subtitle Cropped to 5:3 ratio on category page to avoid large headings
           .image-preview__cropped
             img(src=(category && category.hasImage ? category.mainImageURL : ''))
 

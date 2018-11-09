@@ -5,12 +5,11 @@ const inputs = {
   title: form.querySelector('input[name="title"]'),
   subcategory: form.querySelector('select[name="subcategory"]'),
   shortDescription: form.querySelector('textarea[name="shortDescription"]'),
-  longDescription: form.querySelector('textarea[name="longDescription"]'),
   metaTitle: form.querySelector('input[name="metaTitle"]'),
   metaDescription: form.querySelector('textarea[name="metaDescription"]'),
   youtubeID: form.querySelector('input[name="youtubeID"]'),
-  deleteManual: form.querySelector('input[name="deleteManual"]'),
 }
+const deleteManual = form.querySelector('input[name="deleteManual"]')
 let newImageInput = form.querySelector('input[name="newImage"]')
 const newImageText = form.querySelector('.edit-product__images--new--text')
 const imagesContainer = form.querySelector('.edit-product__images')
@@ -26,7 +25,8 @@ const manualPDF = form.querySelector('input[name="manualPDF"]')
 const uploadProgress = document.querySelector('.admin__upload-progress')
 const uploadProgressBar = uploadProgress.querySelector('progress')
 const deleteConfirmation = document.querySelector('#delete-item__lightbox')
-
+const editorElement = document.getElementById('pell')
+const descriptionContent = document.getElementById('pell-data').value
 
 // -------- Triggers --------- //
 
@@ -34,6 +34,29 @@ newImageInput.addEventListener('change', addNewImage)
 copyFromTitleLink.addEventListener('click', copyFromTitle)
 copyFromDescriptionLink.addEventListener('click', copyFromDescription)
 
+
+// ------- Text Editor -------- //
+
+const editor = pell.init({
+  defaultParagraphSeparator: 'p',
+  element: editorElement,
+  actions: ['bold', 'italic', 'heading2', 'paragraph', 'link', 'olist', 'ulist'],
+  onChange: html => { }
+})
+
+// Copy the decoded HTML from hidden textarea to Pell editor
+editor.content.innerHTML = descriptionContent
+
+editor.addEventListener("paste", function (event) {
+  // cancel paste
+  event.preventDefault()
+
+  // get text representation of clipboard
+  var text = (event.originalEvent || event).clipboardData.getData('text/plain')
+
+  // insert text manually
+  document.execCommand("insertHTML", false, text)
+})
 
 // --------- Images ---------- //
 
@@ -43,13 +66,13 @@ const newImageBlockTemplate = newImageBlock.innerHTML
 // File input containing image data is moved inside the preview block
 function addNewImage(e) {
   const input = e.target
-  if (input.files && input.files[0]) {    
-    var reader = new FileReader()    
-    reader.onload = e => {     
+  if (input.files && input.files[0]) {
+    var reader = new FileReader()
+    reader.onload = e => {
       // Calculate index (key) to uniquely identify the file 
       const key = imagesContainer.querySelectorAll('.edit-product__images--entry').length
       // Max 20 images
-      if (key > 20) 
+      if (key > 20)
         return
       // Create new preview block from template
       const imagePreview = renderTemplate(`
@@ -86,16 +109,16 @@ function addNewImage(e) {
 function deleteImage(e) {
   const key = e.target.parentElement.dataset.key
   const imageBlock = imagesContainer.querySelector(`[data-key="${key}"]`)
-  if (imageBlock) 
+  if (imageBlock)
     imagesContainer.removeChild(imageBlock)
 }
 
 // Store the starting index of the dragged image
 function imageDragStart(e) {
   // If a child element (e.g. <img>) is dragged, check the parent div for key
-  const startIndex = 
-    e.target.dataset.key ? 
-      e.target.dataset.key : 
+  const startIndex =
+    e.target.dataset.key ?
+      e.target.dataset.key :
       e.target.parentNode.dataset.key
   e.dataTransfer.setData("startIndex", startIndex)
 }
@@ -104,11 +127,11 @@ function imageDragStart(e) {
 function imageDrop(e) {
   e.preventDefault()
   e.target.classList.remove('dragover')
-  const startIndex = e.dataTransfer.getData("startIndex")  
+  const startIndex = e.dataTransfer.getData("startIndex")
   // If dropped onto a child element, check the parent div for key
-  const endIndex = 
-    e.target.dataset.key ? 
-      e.target.dataset.key : 
+  const endIndex =
+    e.target.dataset.key ?
+      e.target.dataset.key :
       e.target.parentNode.dataset.key
   // Abandon ship if there's an error getting the indexes
   if (!startIndex || !endIndex) return
@@ -122,7 +145,7 @@ function imageDrop(e) {
 // Loop through image previews and assign a key based on position
 function updateImageKeys() {
   const previews = imagesContainer.querySelectorAll('.edit-product__images--entry')
-  previews.forEach((image, i) => 
+  previews.forEach((image, i) =>
     image.dataset.key = i
   )
 }
@@ -137,7 +160,7 @@ function copyFromTitle() {
 
 function copyFromDescription() {
   if (inputs.shortDescription.value)
-    inputs.metaDescription.value = inputs.shortDescription.value  
+    inputs.metaDescription.value = inputs.shortDescription.value
 }
 
 
@@ -164,7 +187,7 @@ function updateFeature(e) {
 function addFeature() {
   // Return if last feature is empty
   if (features[features.length - 1] === "")
-    return  
+    return
   features.push('')
   renderFeatures()
 }
@@ -174,7 +197,7 @@ function deleteFeature(e) {
   // If there's only 1 feature, clear it
   if (features.length === 1) {
     features = [""]
-  // Otherwise, delete the feature
+    // Otherwise, delete the feature
   } else {
     features.splice(key, 1)
   }
@@ -192,13 +215,13 @@ const featureTemplate = (feature, key) => `
 // Takes the features object and renders template for each entry
 function renderFeatures() {
   // Filter empty entries
-  features = features.filter((entry, i) => 
+  features = features.filter((entry, i) =>
     // Allow last entry to be empty
     !(i !== features.length - 1 && entry === "")
   )
   // Generate new HTML
   let html = ''
-  features.forEach((feature, i) => 
+  features.forEach((feature, i) =>
     html += featureTemplate(features[i], i)
   )
   html += '<div class="multiple-input__add" onclick="addFeature()">Add Feature</div>'
@@ -237,8 +260,8 @@ function addSpecification() {
   // Return if last specification is empty
   const lastSpec = specifications[specifications.length - 1]
   if (lastSpec[0] === "" && lastSpec[1] === "")
-    return  
-  specifications.push(["",""])
+    return
+  specifications.push(["", ""])
   renderSpecifications()
 }
 
@@ -247,7 +270,7 @@ function deleteSpecification(e) {
   // If there's only 1 specification, clear it
   if (specifications.length === 1) {
     specifications = [["", ""]]
-  // Otherwise, delete the specification
+    // Otherwise, delete the specification
   } else {
     specifications.splice(key, 1)
   }
@@ -265,9 +288,9 @@ const specificationTemplate = (spec, key) => `
 // Takes the features object and renders template for each entry
 function renderSpecifications() {
   // Filter empty entries
-  specifications = specifications.filter((entry, i) => 
+  specifications = specifications.filter((entry, i) =>
     // Allow last entry to be empty
-    !(i !== specifications.length - 1 
+    !(i !== specifications.length - 1
       && entry[0] === ''
       && entry[1] === '')
   )
@@ -291,13 +314,17 @@ function submitForm(e) {
   const data = new FormData()
   let fileUpload = false
   // Append all basic text inputs
-  for (let input in inputs) 
+  for (let input in inputs)
     if (inputs[input])
-      data.append(input, inputs[input].value)  
+      data.append(input, inputs[input].value)
+
+  if (deleteManual && deleteManual.checked)
+    data.append('deleteManual', true)
+
   // Remove empty space from specs & features
-  const filteredSpecs = specifications.filter(entry => 
+  const filteredSpecs = specifications.filter(entry =>
     !(entry[0] === "" && entry[1] === ""))
-  const filteredFeatures = features.filter(entry => 
+  const filteredFeatures = features.filter(entry =>
     !(entry === ""))
   // Append specs & features
   data.append("specifications", JSON.stringify(filteredSpecs))
@@ -307,6 +334,11 @@ function submitForm(e) {
     data.append("manualPDF", manualPDF.files[0], "manual.pdf")
     fileUpload = true
   }
+  // Append Pell editor
+  if (editor.content.innerText)
+    data.append("longDescription", editor.content.innerHTML)
+  else
+    data.append("longDescription", '')
   // Append image inputs
   const imageBlocks = imagesContainer.querySelectorAll('.edit-product__images--entry')
   imageBlocks.forEach((block, key) => {
@@ -314,7 +346,7 @@ function submitForm(e) {
     const id = block.dataset.id
     // Use file data if present, otherwise it's existing image ID
     if (input && input.files && input.files[0]) {
-      data.append(`image-${key}`, input.files[0])      
+      data.append(`image-${key}`, input.files[0])
       fileUpload = true
     } else if (id) {
       data.append(`image-${key}`, id)
@@ -326,10 +358,10 @@ function submitForm(e) {
   }
   // Increment upload progress bar
   const onUploadProgress = p =>
-    uploadProgressBar.value = p.loaded / p.total  
+    uploadProgressBar.value = p.loaded / p.total
   // Send form data
   axios.post(
-    window.location.pathname, 
+    window.location.pathname,
     data,
     { onUploadProgress }
   ).then(() =>

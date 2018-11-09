@@ -525,7 +525,7 @@
   margin-top .75rem
 
   input
-    width auto
+    width auto !important
 
   label
     font-family plexRegular
@@ -638,22 +638,24 @@
   &-content
     background white
 
-    h1
-      font-family plexBold
-      font-size 2.8rem
+    p, div, ul, ol
+      font-size 1.4rem
 
     h2
       font-family plexBold
       font-size 2.2rem
+      color mainBlue
 
     ul
       margin-left 4rem
 
       li
         list-style disc
+        margin-bottom 1rem
 
     ol
       margin-left 4rem
 
       li
         list-style decimal
+        margin-bottom 1rem

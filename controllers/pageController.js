@@ -10,7 +10,6 @@ const { parseSortParams } = require("../helpers/parseSortParams")
 const { parseFilterParams } = require("../helpers/parseFilterParams")
 const validator = require('validator')
 
-
 // Titles and descriptions are written in the controllers
 // Titles are appended with "| Envirogard" in views/templates/head.pug
 
@@ -21,29 +20,37 @@ exports.homepage = async (req, res) => {
 exports.category = async (req, res) => {
   const filter = parseFilterParams(req)
   const sort = parseSortParams(req, 'az')
-  
+
   const category = await Category
     .findOne({ slug: req.params.category })
     .populate({
       path: 'subcategories',
-      options: { 
+      options: {
         filter: { slug: req.params.subcategory || null },
-        sort: { title: -1 } 
+        sort: { title: -1 }
       }
     })
-    
+
   if (!category) {
     req.flash("error", "Category not found")
     return res.redirect("/")
   }
 
-  // Filter Products by selected subcategory
-  if (category.subcategories) {      
-    const subcategories = category.subcategories.map(doc => doc._id)
-    filter.subcategory = { $in: subcategories }
-  }
-  
+  // Filter Products by selected subcategories
+  const selectedSubcategories = category.subcategories.map(doc => {
+    if (req.params.subcategory) {
+      if (req.params.subcategory === doc.slug) {
+        return doc._id
+      }
+    } else {
+      return doc._id
+    }
+  })
+
+  filter.subcategory = { $in: selectedSubcategories }
+
   // Run separate Product query for easier sorting of results
+  // Otherwise we could populate nested Products from the Category query
   const products = await Product
     .find(filter)
     .sort(sort)
@@ -57,17 +64,44 @@ exports.category = async (req, res) => {
 }
 
 exports.product = async (req, res) => {
+  const filter = parseFilterParams(req)
+  const product = await Product
+    .findOne(filter)
+    .populate({
+      path: 'subcategory',
+      options: {
+        populate: 'category products'
+      }
+    })
+
+  if (!product) {
+    req.flash("error", "Product not found")
+    return res.redirect("/")
+  }
+
   res.render("product", {
-    title: "Maxi Quad Decontamination Shower",
-    description: "Decontamination Showers"
+    title: product.title,
+    description: product.meta.description,
+    product
   })
 }
 
 exports.industry = async (req, res) => {
+  const industry = await Industry
+    .findOne({ slug: req.params.industry })
+    .populate({
+      path: 'subcategories'
+    })
+
+  if (!industry) {
+    req.flash("error", "Industry not found")
+    return res.redirect("/")
+  }
+
   res.render("industry", {
-    title: "Asbestos Removal",
-    description:
-      "Asbestos removal"
+    title: industry.title,
+    description: industry.meta.description,
+    industry
   })
 }
 
@@ -159,19 +193,5 @@ exports.createUser = (req, res) => {
     title: "Create User",
     description:
       "Create a user with no validation"
-  })
-}
-
-// Reference controller for creating queries
-exports.sampleQuery = async (req, res) => {
-  const users = await User
-    .find({})
-    .limit(3)
-    .sort({ updatedAt: -1 })
-  res.render("queryResults", {
-    users,
-    title: "Last 3 users",
-    description:
-      "A list of the 3 most recently updated users"
   })
 }

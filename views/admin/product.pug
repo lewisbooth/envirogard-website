@@ -60,7 +60,7 @@ block body
               for subcategory in category.subcategories
                 option(
                   value=subcategory._id
-                  selected=(product.subcategory == subcategory._id.toString())
+                  selected=(product ? product.subcategory == subcategory._id.toString() : false)
                 )=subcategory.title
         .label-and-input
           label(for='shortDescription') Short Description
@@ -127,8 +127,12 @@ block body
       div
         .label-and-input
           label(for='longDescription') Long Description
-          textarea(name='longDescription' rows='30')= product ? product.description.long : ''
-
+          //- Editor content is placed in a hidden textarea then extracted by JS
+          //- because reading textarea.value decodes HTML entities
+          //- i.e '&lt;div&gt;' becomes '<div>'
+          textarea#pell-data(hidden)= product ? product.description.long : ''
+          //- Decoded HTML is placed in the '#pell' editor element
+          #pell
     .admin__upload-progress
       h5 Uploading files...
       progress(value='0' max='1')
@@ -140,7 +144,11 @@ block body
       else
         button.button__green(type='submit') Add product
     
+block extraHeaderScripts
+  link(rel="stylesheet" type="text/css" href="https://unpkg.com/pell/dist/pell.min.css")
+
 block extraFooterScripts
+  script(src='https://unpkg.com/pell')
   script
     include ../../public/js/admin/edit-product.js
   script(src='https://unpkg.com/axios/dist/axios.min.js' async defer)

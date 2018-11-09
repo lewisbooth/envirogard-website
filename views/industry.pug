@@ -3,28 +3,19 @@ extends layout
 block body
   .category__header
     .container
-      h1 Asbestos Removal
-      img(src="/images/cms/industries/TEMP/asbestos-removal.jpg")
+      h1= industry.title
+      if industry.hasImage
+        .category__header--image(
+          style=`background-image: url('${industry.mainImageURL}');`
+        )
   .container.industry
     .page-columns
+      .page-columns__column !{industry.description}
       .page-columns__column
-        p Asbestos was initially used extensively during the 1930s as a construction material. Unfortunately, the shocking health risks were not identified early enough. We now know that the fibres from this material lead to fatal respiratory diseases and lung cancer.
-        h4 How Widespread is Asbestos?
-        p It wasn’t until 1999 that the substance was confirmed as dangerous and outlawed in the UK. So if your home was built between 1930-1999 it is likely you have asbestos materials within your home. Here are the most common places it may have been used:
-        ul
-          li Roofing
-          li Insulation (Boards, cavity wall, attic)
-          li Walls (cement)
-          li Flooring
-          li Gutters and Pipes
-        p But there’s no need to panic yet! The material is not harmful as long as it’s in good condition. The potential danger only occurs when it has been broken, damaged or allowed to deteriorate. This is what triggers harmful airborne fibres to be released into the environment.
-        p The key to staying safe is correct identification, care and attention.
-      .page-columns__column
-        h5 Hire Asbestos Removal equipment
-        ul.popular-products
-          li 
-            a(href="/category/decontamination-units")
-              span Vacuum Cleaners
-          li
-            a(href="/category/safety-showers") 
-              span Dust Control & Extraction
+        if industry.subcategories && industry.subcategories.length > 0
+          h5= `Hire ${industry.title} equipment`
+          ul.popular-products
+            for subcategory in industry.subcategories
+              li 
+                a(href=subcategory.pageURL target='_blank')
+                  span= subcategory.title

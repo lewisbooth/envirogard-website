@@ -21,11 +21,11 @@ const RESULTS_PER_PAGE = 20
 
 exports.products = async (req, res) => {
   let filter = parseFilterParams(req)
-  let sort = parseSortParams(req)  
+  let sort = parseSortParams(req)
   // Calculate pagination variables
   const numberOfResults = await Product.countDocuments(filter)
-  const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE)
-  const page = calcPage(req.query.page, numberOfPages)  
+  const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE) || 1
+  const page = calcPage(req.query.page, numberOfPages)
   // Calculate number of items to skip based on page number
   const skip = (page - 1) * RESULTS_PER_PAGE
   const products = await Product
@@ -53,8 +53,8 @@ exports.newProductSave = async (req, res, next) => {
   const product = formatProduct(req.body)
   await new Product(product).save(
     (err, data) => {
-      if (err) 
-        return res.status(400).send()      
+      if (err)
+        return res.status(400).send()
       // Attach document to 'req' to be used by the file upload handlers
       req.product = data
       req.flash("success", "New product added")
@@ -76,7 +76,7 @@ exports.editProduct = async (req, res) => {
   })
 }
 
-exports.editProductSave = async (req, res, next) => {  
+exports.editProductSave = async (req, res, next) => {
   const product = formatProduct(req.body)
   await Product.findOneAndUpdate(
     { slug: req.params.slug },
@@ -92,14 +92,14 @@ exports.editProductSave = async (req, res, next) => {
       req.flash("success", "Product has been updated")
       next()
     }
-  )  
+  )
 }
 
 // Handles uploading and deleting manual PDF
 exports.uploadProductManual = async (req, res, next) => {
   // Extract PDF buffer from uploaded files
   const newPDF = req.files.filter(file =>
-    file.fieldname === "manualPDF" && 
+    file.fieldname === "manualPDF" &&
     file.mimetype === "application/pdf"
   )[0]
   const folder = `${req.product.publicFolder}/docs`
@@ -110,18 +110,18 @@ exports.uploadProductManual = async (req, res, next) => {
     if (fs.existsSync(filepath))
       fs.unlinkSync(filepath)
     await Product.findOneAndUpdate(
-      {_id: req.product._id}, 
+      { _id: req.product._id },
       { $set: { manualPDF: false } }
     )
   }
   if (!newPDF) return next()
   // Save buffer to file
   write(filepath, newPDF.buffer, { encoding: 'ascii' }, async err => {
-    if (err) { 
-      console.log(err) 
+    if (err) {
+      console.log(err)
     } else {
       await Product.findOneAndUpdate(
-        {_id: req.product._id}, 
+        { _id: req.product._id },
         { $set: { manualPDF: true } }
       )
     }
@@ -136,7 +136,7 @@ exports.uploadProductImagery = async (req, res, next) => {
   // Build array of image IDs from any existing imagery
   let imageList = []
   Object.keys(req.body).forEach(field => {
-    if (field.startsWith('image')){
+    if (field.startsWith('image')) {
       const index = field.split('-')[1]
       const imageId = req.body[field]
       imageList[index] = imageId
@@ -180,12 +180,12 @@ exports.uploadProductImagery = async (req, res, next) => {
   // Save image references to database
   // Looks like [ '1540285585887', '1540285585891', '1540285585893' ]
   await Product.findOneAndUpdate(
-    {_id: req.product._id}, 
+    { _id: req.product._id },
     { $set: { images: imageList } }
   )
   // Delete unnecessary files
   fs.readdir(folder, (err, files) => {
-    if (err)  {
+    if (err) {
       return console.log(err)
     }
     files.forEach(filename => {
@@ -195,7 +195,7 @@ exports.uploadProductImagery = async (req, res, next) => {
       const fileExists = fs.existsSync(path)
       // Delete the file if it's not in the new array
       if (fileExists && imageList.indexOf(id) === -1) {
-        fs.unlinkSync(folder + filename) 
+        fs.unlinkSync(folder + filename)
       }
     })
   })
@@ -203,7 +203,7 @@ exports.uploadProductImagery = async (req, res, next) => {
 }
 
 exports.deleteProduct = async (req, res) => {
-  await Product.findByIdAndRemove(req.params.id, 
+  await Product.findByIdAndRemove(req.params.id,
     (err, doc) => {
       if (err) {
         console.log(err)
@@ -221,13 +221,13 @@ exports.deleteProduct = async (req, res) => {
   )
 }
 
-exports.categories = async (req, res) => {  
+exports.categories = async (req, res) => {
   let filter = parseFilterParams(req)
-  let sort = parseSortParams(req)  
+  let sort = parseSortParams(req)
   // Calculate pagination variables
   const numberOfResults = await Category.countDocuments()
-  const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE)
-  const page = calcPage(req.query.page, numberOfPages)  
+  const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE) || 1
+  const page = calcPage(req.query.page, numberOfPages)
   // Calculate number of items to skip based on page number
   const skip = (page - 1) * RESULTS_PER_PAGE
   const categories = await Category
@@ -255,8 +255,8 @@ exports.newCategorySave = async (req, res, next) => {
   const category = formatCategory(req.body)
   await new Category(category).save(
     (err, data) => {
-      if (err) 
-        return res.status(400).send()      
+      if (err)
+        return res.status(400).send()
       // Attach document to 'req' to be used by the file upload handlers
       req.category = data
       req.flash("success", "New category added")
@@ -278,7 +278,7 @@ exports.editCategory = async (req, res) => {
   })
 }
 
-exports.editCategorySave = async (req, res, next) => {  
+exports.editCategorySave = async (req, res, next) => {
   const category = formatCategory(req.body)
   await Category.findOneAndUpdate(
     { slug: req.params.slug },
@@ -288,17 +288,17 @@ exports.editCategorySave = async (req, res, next) => {
       if (err)
         return res.status(400).send()
       // Manually call save() to trigger slug update
-      doc.save()      
+      doc.save()
       // Attach document to 'req' to be used by the file upload handlers
       req.category = doc
       req.flash("success", "Category has been updated")
       next()
     }
-  )  
+  )
 }
 
 exports.deleteCategory = async (req, res) => {
-  await Category.findByIdAndRemove(req.params.id, 
+  await Category.findByIdAndRemove(req.params.id,
     (err, doc) => {
       if (err) {
         console.log(err)
@@ -325,10 +325,10 @@ exports.uploadCategoryImage = async (req, res, next) => {
   mkdirp.sync(folder)
   // Delete existing image if required
   if ((newImage || req.body.deleteImage) && fs.existsSync(`${folder}/cover.jpg`)) {
-    fs.unlinkSync(`${folder}/cover.jpg`) 
-    fs.unlinkSync(`${folder}/cover-thumb.jpg`) 
+    fs.unlinkSync(`${folder}/cover.jpg`)
+    fs.unlinkSync(`${folder}/cover-thumb.jpg`)
     await Category.findOneAndUpdate(
-      {_id: req.category._id}, 
+      { _id: req.category._id },
       { $set: { hasImage: false } }
     )
   }
@@ -351,19 +351,19 @@ exports.uploadCategoryImage = async (req, res, next) => {
     .toFile(`${folder}/cover-thumb.jpg`)
   // Set flag in database
   await Category.findOneAndUpdate(
-    {_id: req.category._id}, 
+    { _id: req.category._id },
     { $set: { hasImage: true } }
   )
   next()
 }
 
-exports.subcategories = async (req, res) => {  
-  let filter = parseFilterParams(req)
-  let sort = parseSortParams(req)  
+exports.subcategories = async (req, res) => {
+  const filter = parseFilterParams(req)
+  const sort = parseSortParams(req)
   // Calculate total number of items and pages
   const numberOfResults = await Subcategory.countDocuments()
-  const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE)
-  const page = calcPage(req.query.page, numberOfPages)  
+  const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE) || 1
+  const page = calcPage(req.query.page, numberOfPages)
   // Calculate number of items to skip based on page number
   const skip = (page - 1) * RESULTS_PER_PAGE
   const subcategories = await Subcategory
@@ -397,7 +397,7 @@ exports.newSubcategorySave = async (req, res, next) => {
       }
       for (let product in subcategory.products) {
         await Product.updateOne(
-          { _id: product },        
+          { _id: product },
           { $set: { subcategory: doc._id } }
         )
       }
@@ -434,14 +434,14 @@ exports.editSubcategorySave = async (req, res, next) => {
         return res.status(400).send()
       // Remove all Product references to this Subcategory
       await Product.updateMany(
-        { subcategory: doc._id },        
+        { subcategory: doc._id },
         { $set: { subcategory: null } }
       )
       // Rebuild Product references
       if (subcategory.products) {
         subcategory.products.forEach(async _id => {
           await Product.updateMany(
-            { _id },        
+            { _id },
             { $set: { subcategory: doc._id } }
           )
         })
@@ -455,7 +455,7 @@ exports.editSubcategorySave = async (req, res, next) => {
 }
 
 exports.deleteSubcategory = async (req, res) => {
-  await Subcategory.findByIdAndRemove(req.params.id, 
+  await Subcategory.findByIdAndRemove(req.params.id,
     async (err, doc) => {
       if (err) {
         console.log(err)
@@ -465,7 +465,7 @@ exports.deleteSubcategory = async (req, res) => {
       }
       // Remove all Product references to this Subcategory
       await Product.updateMany(
-        { subcategory: doc._id },        
+        { subcategory: doc._id },
         { $set: { subcategory: null } }
       )
       req.flash("success", "Subcategory deleted")
@@ -476,11 +476,11 @@ exports.deleteSubcategory = async (req, res) => {
 
 exports.industries = async (req, res) => {
   let filter = parseFilterParams(req)
-  let sort = parseSortParams(req)  
+  let sort = parseSortParams(req)
   // Calculate pagination variables
   const numberOfResults = await Industry.countDocuments(filter)
-  const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE)
-  const page = calcPage(req.query.page, numberOfPages)  
+  const numberOfPages = Math.ceil(numberOfResults / RESULTS_PER_PAGE) || 1
+  const page = calcPage(req.query.page, numberOfPages)
   // Calculate number of items to skip based on page number
   const skip = (page - 1) * RESULTS_PER_PAGE
   const industries = await Industry
@@ -508,16 +508,16 @@ exports.newIndustrySave = async (req, res, next) => {
   const industry = formatIndustry(req.body)
   await new Industry(industry).save(
     (err, data) => {
-      if (err) 
-        return res.status(400).send()             
+      if (err)
+        return res.status(400).send()
       if (industry.subcategories) {
         industry.subcategories.forEach(async _id => {
           await Subcategory.updateMany(
-            { _id },        
+            { _id },
             { $push: { industries: doc._id } }
           )
         })
-      } 
+      }
       // Attach document to 'req' to be used by the file upload handlers
       req.industry = data
       req.flash("success", "New industry added")
@@ -527,7 +527,7 @@ exports.newIndustrySave = async (req, res, next) => {
 }
 
 exports.deleteIndustry = async (req, res) => {
-  await Industry.findByIdAndRemove(req.params.id, 
+  await Industry.findByIdAndRemove(req.params.id,
     (err, doc) => {
       if (err) {
         console.log(err)
@@ -560,7 +560,7 @@ exports.editIndustry = async (req, res) => {
   })
 }
 
-exports.editIndustrySave = async (req, res, next) => {  
+exports.editIndustrySave = async (req, res, next) => {
   const industry = formatIndustry(req.body)
   await Industry.findOneAndUpdate(
     { slug: req.params.slug },
@@ -571,14 +571,14 @@ exports.editIndustrySave = async (req, res, next) => {
         return res.status(400).send()
       // Remove all Subcategory references to this Industry
       await Subcategory.updateMany(
-        { industries: doc._id },        
+        { industries: doc._id },
         { $pull: { industries: doc._id } }
       )
       // Rebuild Subcategory references
       if (industry.subcategories) {
         industry.subcategories.forEach(async _id => {
           await Subcategory.updateMany(
-            { _id },        
+            { _id },
             { $push: { industries: doc._id } }
           )
         })
@@ -590,7 +590,7 @@ exports.editIndustrySave = async (req, res, next) => {
       req.flash("success", "Industry has been updated")
       next()
     }
-  )  
+  )
 }
 
 // Handles uploading new images and rearranging/deleting existing images.
@@ -602,10 +602,10 @@ exports.uploadIndustryImage = async (req, res, next) => {
   mkdirp.sync(folder)
   // Delete existing image if required
   if ((newImage || req.body.deleteImage) && fs.existsSync(`${folder}/cover.jpg`)) {
-    fs.unlinkSync(`${folder}/cover.jpg`) 
-    fs.unlinkSync(`${folder}/cover-thumb.jpg`) 
+    fs.unlinkSync(`${folder}/cover.jpg`)
+    fs.unlinkSync(`${folder}/cover-thumb.jpg`)
     await Industry.findOneAndUpdate(
-      {_id: req.industry._id}, 
+      { _id: req.industry._id },
       { $set: { hasImage: false } }
     )
   }
@@ -628,7 +628,7 @@ exports.uploadIndustryImage = async (req, res, next) => {
     .toFile(`${folder}/cover-thumb.jpg`)
   // Set flag in database
   await Industry.findOneAndUpdate(
-    {_id: req.industry._id}, 
+    { _id: req.industry._id },
     { $set: { hasImage: true } }
   )
   next()

@@ -22,9 +22,9 @@ exports.getClosestDepot = async (req, res) => {
       // Calculate distance of each depot from the client
       for (depot in depotData) {
         const distance = getDistance(
-          client.latitude, 
-          client.longitude, 
-          depotData[depot].location.latitude, 
+          client.latitude,
+          client.longitude,
+          depotData[depot].location.latitude,
           depotData[depot].location.longitude
         )
         if (distance < closestDistance) {
@@ -39,30 +39,29 @@ exports.getClosestDepot = async (req, res) => {
       res.json(DEFAULT_LOCATION)
     })
 
-    // Calculate distance between two lat/long points on a sphere
-    function getDistance(lat1, lon1, lat2, lon2) {
-      lat1 = Deg2Rad(lat1)
-      lat2 = Deg2Rad(lat2)
-      lon1 = Deg2Rad(lon1)
-      lon2 = Deg2Rad(lon2)
-      var R = 6371 // km
-      var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2)
-      var y = (lat2 - lat1)
-      var d = Math.sqrt(x * x + y * y) * R
-      return d
-    }
-    
-    // Convert Degrees to Radians
-    function Deg2Rad(deg) {
-      return deg * Math.PI / 180
-    }
+  // Calculate distance between two lat/long points on a sphere
+  function getDistance(lat1, lon1, lat2, lon2) {
+    lat1 = Deg2Rad(lat1)
+    lat2 = Deg2Rad(lat2)
+    lon1 = Deg2Rad(lon1)
+    lon2 = Deg2Rad(lon2)
+    var R = 6371 // km
+    var x = (lon2 - lon1) * Math.cos((lat1 + lat2) / 2)
+    var y = (lat2 - lat1)
+    var d = Math.sqrt(x * x + y * y) * R
+    return d
+  }
+
+  // Convert Degrees to Radians
+  function Deg2Rad(deg) {
+    return deg * Math.PI / 180
+  }
 }
 
 // Takes search term from req.body and returns a list of matching products
 exports.searchProducts = async (req, res) => {
   const sort = parseSortParams(req)
   const filter = parseFilterParams(req)
-  console.log(filter, sort)
   const products = await Product
     .find(filter)
     .limit(10)

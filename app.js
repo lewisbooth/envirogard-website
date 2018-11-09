@@ -47,6 +47,9 @@ app.use(cacheBuster)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// Log dynamic requests to console
+app.use(logging)
+
 // Throw error safely if DB is not connected
 app.use(checkDB)
 
@@ -77,8 +80,6 @@ app.use((req, res, next) => {
 // Parse cookies into req.cookies
 app.use(cookieParser())
 
-// Log dynamic requests to console
-app.use(logging)
 
 // Dynamic flash messages are passed from controllers to view templates 
 // (e.g. "Successfully logged in" or "Incorrect login details")

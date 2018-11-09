@@ -1,6 +1,6 @@
-mixin productListingCard
-  a.product-listings__cards--entry(href="/product/dust-control-dc-2000-aircube-air-scrubbing-unit")
+mixin productListingCard(product)
+  a.product-listings__cards--entry(href=product.pageURL)
     .product-listings__cards--entry--image
-      img(src="/images/cms/products/TEMP/carousel-1.jpg")
-    .product-listings__cards--entry--title Maxi Quad Decontamination Shower
+      img(src=product.mainImageThumbnailURL)
+    .product-listings__cards--entry--title= product.title
     .product-listings__cards--entry--button Hire Now &nbsp;→

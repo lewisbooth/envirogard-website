@@ -1,9 +1,9 @@
 mixin adminPagination
   //- Check the required variables exist
-  if page && pageCount && pageCount > 1
+  if page && numberOfPages && numberOfPages > 1
     .admin__pagination
       - let key = 1
-      while key <= pageCount
+      while key <= numberOfPages
         span(
           data-key=key 
           onclick="changePage(event)"
