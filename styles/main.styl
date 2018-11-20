@@ -134,10 +134,16 @@
       &:hover
         background-color mainBlueHover
 
+      span
+        display flex
+        align-items center
+        justify-content space-between
+
       span::after
         content "→"
         width 3rem
         height 3rem
+        min-width 3rem
         font-family plexBold
         background-color white
         color mainBlue
@@ -314,11 +320,11 @@
   &__column
 
     &:nth-child(1)
-      max-width 50%
-      padding-right 8rem
+      width 50%
 
     &:nth-child(2)
-      max-width 32rem
+      width 32rem
+      margin 0 auto
 
     h3
       color mainBlue
@@ -473,7 +479,7 @@
   margin-bottom 6rem
 
   &__right-column, &__left-column
-    width calc(50% - 2rem)
+    width calc(50% - 3rem)
     margin-bottom 4rem
 
   &__description
@@ -590,8 +596,8 @@
 
               > div
                 background lightGrey
-                flex-grow 1
                 padding 1.25rem 2rem
+                flex-grow 1
 
                 h6
                   margin 0 0 .25rem 0
@@ -600,7 +606,7 @@
                   display flex
                   text-decoration none 
                   font-family plexBold
-                  font-size 2.2rem
+                  font-size 1.8rem
 
                   img
                     width 2.5rem
@@ -649,13 +655,14 @@
           transform translateY(-50%) translateX(-50%)
 
     &--nav
-      height 8rem
+      height auto
       padding 0 8rem
       margin-top 2rem
       margin-bottom 5rem
 
       .flickity-prev-next-button
         padding 0
+        margin 0
         width 3rem
         height 3rem
       
@@ -697,6 +704,7 @@
   width 100%
   display flex
   flex-wrap wrap
+  align-items flex-start
 
   h4
     width 100%
@@ -863,10 +871,12 @@
       display flex
       align-items stretch
       width 100%
+      max-width 100%
 
       input 
         font-size 1.4rem
         flex-grow 1
+        min-width 1px
 
       button 
         margin 0
@@ -959,10 +969,13 @@
           margin-top 0
 
         ul
+          padding-left 2.25rem
 
           li
-            line-height 2
+            line-height 1.2
+            margin-bottom 1rem
             list-style square inside url("/images/icons/check-blue.png")
+            list-style-position outside
 
             &::before
               content " "

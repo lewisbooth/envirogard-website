@@ -17,12 +17,16 @@ html
 body
   background-color white
 
-  &.nav-scroll
-    margin-top 4rem
+@media(min-width:mediaLargeWidth)
+  
+  body  
 
-    .nav__secondary
-      position fixed
-      top 0
+    &.nav-scroll
+      margin-top 4rem
+
+      .nav__secondary
+        position fixed
+        top 0
 
 nav
   z-index 2
@@ -36,8 +40,8 @@ nav
     display flex
     justify-content space-between
     align-items center
-    padding-top 2rem
-    padding-bottom 2rem
+    padding-top 1.5rem
+    padding-bottom 1.5rem
 
   &__logo
     width 33rem
@@ -69,6 +73,9 @@ nav
     align-items flex-end
 
     &--search-mobile
+      display none
+
+    &--contact-mobile
       display none
 
     &--useful-links
@@ -194,7 +201,7 @@ nav
       display flex
       justify-content space-between
       align-items center
-      padding 0 .5rem
+      padding 0 1rem
       color white
       white-space nowrap
       

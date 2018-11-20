@@ -3,9 +3,9 @@
   body
     margin-top 10rem
 
-    &.nav-scroll .nav__secondary
-      position relative
-
+    &.logged-in
+      margin-top 13.5rem
+    
     &.nav-scroll
 
       .nav__secondary
@@ -38,43 +38,34 @@
       padding-bottom 1rem
       padding-right 2rem
 
-    &__logo
-      width 28rem
-      height 4.5rem
-
     &__search
-      display none
+      padding 0 2rem
+
+    &__logo
+      width 22rem
+      height 4rem
 
     &__menu
-      flex-direction row
-
-      &--useful-links
-        display none
-
-      &--branch
-        display none
-
-      &--search-mobile
-        display block
-        margin-right 2rem
-
-        img 
-          width 2.6rem
-          height 2.6rem
 
       &--contact
         margin-top 0
+        display flex
 
         &--phone
+          flex-shrink 0 
           margin-left 0
           min-width auto
+          margin-top .5rem
           
-          span.active
-            display none
-
           img 
-            width 2.6rem !important
-            height 2.6rem !important
+            width 2rem !important
+            height 2rem !important
+
+          span 
+            font-size 2rem
+
+        &--email
+          display none
 
     &__secondary
       z-index -1
@@ -136,7 +127,7 @@
 
           &.nav__secondary--industries > li
 
-            a
+            a, span
               display none
 
             > ul
@@ -171,6 +162,10 @@
   .home
 
     &__promoted
+      margin 3rem 0
+
+      h4
+        font-size 2rem
 
       &--left-column
         margin-right 2rem
@@ -189,7 +184,8 @@
             width calc(50% - .5rem)
 
       &--right-column
-        min-width 26rem
+        min-width 28rem 
+        width 28rem
 
         &--industries--live-chat--text
           padding-top 6rem
@@ -200,12 +196,12 @@
           h3
             font-size 2.6rem
           
-
   .category-listings
 
     &__entry
       width calc(50% - 1rem)
       margin-right 2rem
+      padding-top 35%
 
       &:nth-child(3n)
         margin-right 2rem

@@ -224,13 +224,13 @@ block body
     if product.subcategory && product.subcategory.products
       -
         const relatedProducts = product.subcategory.products
-          .filter(relatedProduct => {
+          .filter(relatedProduct => 
             relatedProduct._id.toString() !== product._id.toString()
-          })
+          )
       if relatedProducts.length > 0
         .product-listings
           h4 Related Products
-          for relatedProduct in relatedProducts
+          for relatedProduct in relatedProducts.slice(0, 5)
             +productListingCard(relatedProduct)
 
 block extraFooterScripts

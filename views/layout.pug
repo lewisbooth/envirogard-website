@@ -10,9 +10,7 @@ include mixins/branchFinderSVG
 doctype html
 html
   +head
-  body
-    if user
-      +adminBar
+  body(class=(user ? 'logged-in' : ''))
     +nav
     +flash-messages
     block body
@@ -20,7 +18,7 @@ html
         h1 New page
     +footer
     block footerScripts
-      script(async defer src="/js/tawkTo.js")
+      script(async defer src=hashes["/js/tawkTo.js"])
       script
         include ../public/js/nav.js
         include ../public/js/cookies.js

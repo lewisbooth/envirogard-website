@@ -299,7 +299,7 @@ function renderSpecifications() {
   specifications.forEach((spec, i) => {
     html += specificationTemplate(spec, i)
   })
-  html += '<div class="multiple-input__add" onclick="addSpecification()">Add Feature</div>'
+  html += '<div class="multiple-input__add" onclick="addSpecification()">Add Specification</div>'
   specsContainer.innerHTML = html
 }
 
@@ -335,7 +335,7 @@ function submitForm(e) {
     fileUpload = true
   }
   // Append Pell editor
-  if (editor.content.innerText)
+  if (editor.content.innerText.length > 1)
     data.append("longDescription", editor.content.innerHTML)
   else
     data.append("longDescription", '')

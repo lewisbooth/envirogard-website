@@ -4,22 +4,24 @@ const adminBar = document.querySelector('.admin__bar')
 const mobileDropdownButtons = document.querySelectorAll('.nav__secondary--dropdown')
 
 // Recalculates every time in case window has resized
-const navHeight = () => 
-    adminBar ? 
-        nav.offsetHeight + adminBar.offsetHeight : 
+const navHeight = () =>
+    adminBar ?
+        nav.offsetHeight + adminBar.offsetHeight :
         nav.offsetHeight
 
 // Add .nav-scroll class when scrolling to stick nav to the top of the viewport
-document.addEventListener('scroll', e => 
-    body.className = e.pageY > navHeight() ? "nav-scroll" : ""
+document.addEventListener('scroll', e =>
+    e.pageY > navHeight() ?
+        body.classList.add("nav-scroll") :
+        body.classList.remove("nav-scroll")
 )
 
-mobileDropdownButtons.forEach(button => 
+mobileDropdownButtons.forEach(button =>
     button.addEventListener('click', () => {
         const buttonWasActive = button.classList.contains('active')
-        mobileDropdownButtons.forEach(button => 
+        mobileDropdownButtons.forEach(button =>
             button.classList.remove('active')
-        )        
+        )
         if (!buttonWasActive) {
             button.classList.add('active')
         }

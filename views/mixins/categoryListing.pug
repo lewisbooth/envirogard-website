@@ -4,7 +4,8 @@ mixin categoryListing(product)
     .category__results--listing--text
       h2= truncate(product.title, 75)
       ul
-        for feature in product.features
-          li= truncate(feature, 48)
+        for feature, i in product.features
+          if i < 4
+            li= truncate(feature, 48)
     .category__results--listing--more-info
       button.button__yellow.button__arrow More Info

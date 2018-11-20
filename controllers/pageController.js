@@ -1,10 +1,7 @@
 const mongoose = require("mongoose")
-const User = mongoose.model("User")
 const Product = mongoose.model("Product")
 const Industry = mongoose.model("Industry")
 const Category = mongoose.model("Category")
-const Subcategory = mongoose.model("Subcategory")
-const { calcPage } = require("../helpers/calcPage")
 const { contactForm } = require("../helpers/contactForm")
 const { parseSortParams } = require("../helpers/parseSortParams")
 const { parseFilterParams } = require("../helpers/parseFilterParams")
@@ -14,13 +11,12 @@ const validator = require('validator')
 // Titles are appended with "| Envirogard" in views/templates/head.pug
 
 exports.homepage = async (req, res) => {
+  // Categories & Subcategories are already queried on every request
+  // and passed to res.locals.globalCategories
   res.render("index")
 }
 
 exports.category = async (req, res) => {
-  const filter = parseFilterParams(req)
-  const sort = parseSortParams(req, 'az')
-
   const category = await Category
     .findOne({ slug: req.params.category })
     .populate({
@@ -36,10 +32,18 @@ exports.category = async (req, res) => {
     return res.redirect("/")
   }
 
-  // Filter Products by selected subcategories
+  // If a subcategory is selected, use its title instead of the category title
+  let subcategoryTitle = ''
+
+  // Build the Product query
+  const filter = parseFilterParams(req)
+  const sort = parseSortParams(req, 'az')
+
+  // Returns an array of requested subcategory IDs
   const selectedSubcategories = category.subcategories.map(doc => {
     if (req.params.subcategory) {
       if (req.params.subcategory === doc.slug) {
+        subcategoryTitle = doc.title
         return doc._id
       }
     } else {
@@ -47,16 +51,17 @@ exports.category = async (req, res) => {
     }
   })
 
+  // Filter Products by selected subcategories
   filter.subcategory = { $in: selectedSubcategories }
 
-  // Run separate Product query for easier sorting of results
+  // Run separate Product query for easier filtering/sorting of results
   // Otherwise we could populate nested Products from the Category query
   const products = await Product
     .find(filter)
     .sort(sort)
 
   res.render("category", {
-    title: category.title,
+    title: subcategoryTitle || category.title,
     description: category.meta.description,
     category,
     products
@@ -135,7 +140,10 @@ exports.faq = (req, res) => {
 }
 
 exports.contact = (req, res) => {
-  res.render("contact")
+  res.render("contact", {
+    title: "Contact Us",
+    description: "Find your closest branch in the UK to hire specialist protective equipment."
+  })
 }
 
 exports.privacyPolicy = (req, res) => {

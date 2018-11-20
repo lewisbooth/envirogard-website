@@ -390,17 +390,17 @@ exports.newSubcategory = async (req, res) => {
 exports.newSubcategorySave = async (req, res, next) => {
   const subcategory = formatSubcategory(req.body)
   await new Subcategory(subcategory).save(
-    async (err, data) => {
+    async (err, doc) => {
       if (err) {
         console.log(err)
         return res.status(400).send()
       }
-      for (let product in subcategory.products) {
+      subcategory.products.forEach(async product => {
         await Product.updateOne(
           { _id: product },
           { $set: { subcategory: doc._id } }
         )
-      }
+      })
       req.flash("success", "New subcategory added")
       res.status(200).send()
     }

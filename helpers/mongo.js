@@ -74,7 +74,7 @@ exports.backup = () => {
       console.log("Successfully backed up database to mongodb/backup")
       // Tarball the database dump
       tar.c({ file: `mongodb/${timestamp}.tgz` },
-        ["./mongodb/backup"]
+        ["./mongodb/backup", "./public/cms"]
       ).then(_ => {
         // Upload the tarball to S3
         S3.upload(

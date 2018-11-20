@@ -2,6 +2,8 @@ mixin nav
   - const clientDepot = cookies && cookies.locationDepot ? cookies.locationDepot : "south-east"
   - const depotInfo = depotData[clientDepot]
   nav
+    if user
+      +adminBar
     .nav
       .container
         a(href="/")
@@ -27,6 +29,8 @@ mixin nav
                     li(data-area=area class=active)= depot.name
           a.nav__menu--search-mobile(href='/search')
             img(src="/images/icons/search-blue.svg" alt="Search")
+          a.nav__menu--contact-mobile(href='/contact')
+            img(src="/images/icons/phone.svg" alt="Contact Us")
           .nav__menu--contact
             a.nav__menu--contact--phone(href=`tel:${depotInfo.telephone}`)
               img(src="/images/icons/phone.svg" alt="Call Us")  

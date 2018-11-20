@@ -5,6 +5,7 @@
     &__split-strip
 
       &--environment
+        max-width 45%
 
         p
           font-size 3rem
@@ -24,3 +25,63 @@
       
         &--info
           padding 3rem 2rem
+          
+  .category
+
+    &__header
+
+      .container h1
+        word-wrap break-word
+        font-size 3.2rem
+        line-height 1.2
+    
+    &__description
+      width 100%
+      max-width 100%
+
+    &__filter
+      width 35%
+
+    &__results
+
+      &--listing
+
+        &--image
+          width 15rem
+          height 15rem
+
+        &--text
+          border-right none
+          padding-right 1rem
+
+          h2
+            font-size 1.8rem
+
+        &--more-info
+          display none
+
+  .product
+
+    &__block--content--entry--hire-options
+
+      & ul li 
+
+        > span 
+          padding 1.5rem
+        
+        > div 
+          padding 1.5rem 1.25rem
+        
+          a img 
+            display none
+
+  .about
+    
+    &__column
+
+      &:nth-child(1)
+        max-width 50%
+        padding-right 0
+
+      &:nth-child(2)
+        max-width 32rem

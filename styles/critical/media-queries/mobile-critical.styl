@@ -3,8 +3,8 @@
   body
     margin-top 8.7rem
 
-    &.nav-scroll .nav__secondary
-      position relative
+    &.logged-in
+      margin-top 14rem
 
   .hide
 
@@ -25,6 +25,30 @@
     &__logo
       width 20rem
       height 3.6rem
+      
+    &__search
+      display none
+
+    &__menu
+      flex-direction row
+
+      &--useful-links
+        display none
+
+      &--contact
+        display none
+      
+      &--contact-mobile
+        display block
+      
+      &--search-mobile
+        display block
+        margin-right 2rem
+
+        img 
+          width 2.6rem
+          height 2.6rem
+
 
   .home
 
@@ -44,17 +68,11 @@
         margin-right 0
         width 100%
 
-        &--offers
-          flex-direction column
-
-          a
-            width 100%
-            margin-bottom 2rem
-
       &--right-column
-        margin-left -(containerPadding / 2)
-        margin-right -(containerPadding / 2)
+        margin-left 0
+        margin-right 0
         margin-top 2rem
+        width 100%
 
         h4
           padding-left (containerPadding / 2)
@@ -76,7 +94,7 @@
               display none
 
             &--text
-              background lightGrey
+              // background lightGrey
               color black
               position relative
               padding 8rem containerPadding
@@ -103,27 +121,23 @@
       margin-bottom 2rem
       position relative
       margin-right 0
-      margin-bottom 0
+      margin-bottom .5rem
       text-decoration none
-      background-color mainBlue
+      background none !important
+      padding-top 0
 
       &:nth-child(3n)
         margin-right 0
 
-      img 
-        display none
-
       &--label
         position relative
         padding 2rem 1.75rem
-        background none
+        background mainBlue
 
         h3
           font-weight 500
           font-size 1.6rem
         
-      &:hover .category-listings__entry--label
-        background none
 
   .split-columns
     flex-wrap wrap
