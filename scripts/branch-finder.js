@@ -28,7 +28,7 @@ areaButtons.forEach(e =>
 // To do this, we load the file into an <object> element and parse the XML.
 mapSvgData.addEventListener("load", () => {
   // Extract parsed DOM node from <object>
-  const data = mapSvgData.contentDocument.documentnode
+  const data = mapSvgData.contentDocument.documentElement
   // Replace <object> with parsed element
   mapSvgContainer.innerHTML = ''
   mapSvgContainer.appendChild(data)
