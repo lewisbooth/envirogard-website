@@ -3,6 +3,10 @@ mixin adminNav
     .container
       a.admin__nav--logo(href="/dashboard")
         img(src="/images/logos/main-logo.svg" alt="Main Logo")
+      .admin__nav--dropdown(onclick="toggleAdminNav(event)")
+        .admin__nav--dropdown--bar
+        .admin__nav--dropdown--bar
+        .admin__nav--dropdown--bar
       ul.admin__nav--links
         li 
           a(class=(currentPath.includes('/categories') ? 'active' : '')

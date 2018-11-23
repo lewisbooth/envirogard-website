@@ -94,8 +94,8 @@ exports.cleanBucket = (Bucket, limit) => {
       console.log(err.message)
       return
     }
-    // If there are more files than the given limit, delete them
-    if (!data.KeyCount > limit)
+    // If the limit isn't reached, return
+    if (data.KeyCount < limit)
       return
     // Find the oldest items
     const outdatedItems = data.Contents

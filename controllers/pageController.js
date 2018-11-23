@@ -16,6 +16,38 @@ exports.homepage = async (req, res) => {
   res.render("index")
 }
 
+exports.product = async (req, res) => {
+  const filter = parseFilterParams(req)
+  const product = await Product
+    .findOne(filter)
+    .populate({
+      path: 'subcategory',
+      options: {
+        populate: 'category products'
+      }
+    })
+
+  if (!product) {
+    req.flash("error", "Product not found")
+    return res.redirect("/")
+  }
+
+  res.render("product", {
+    title: product.title,
+    description: product.meta.description,
+    product
+  })
+}
+
+exports.search = async (req, res) => {
+  const filter = parseFilterParams(req)
+  const products = await Product.find(filter)
+  res.render("search", {
+    title: 'Search Products',
+    products
+  })
+}
+
 exports.category = async (req, res) => {
   const category = await Category
     .findOne({ slug: req.params.category })
@@ -65,29 +97,6 @@ exports.category = async (req, res) => {
     description: category.meta.description,
     category,
     products
-  })
-}
-
-exports.product = async (req, res) => {
-  const filter = parseFilterParams(req)
-  const product = await Product
-    .findOne(filter)
-    .populate({
-      path: 'subcategory',
-      options: {
-        populate: 'category products'
-      }
-    })
-
-  if (!product) {
-    req.flash("error", "Product not found")
-    return res.redirect("/")
-  }
-
-  res.render("product", {
-    title: product.title,
-    description: product.meta.description,
-    product
   })
 }
 

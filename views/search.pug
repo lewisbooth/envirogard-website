@@ -1,0 +1,27 @@
+extends layout
+
+block body
+  .page-header
+    .container
+      h1 Search Products
+  .container.search
+    .page-columns
+      form.search__global
+        label Search Envirogard Products...
+        input(
+          type="text" 
+          name="globalSearch" 
+          value=(query.globalSearch || '')
+          placeholder="Search Envirogard Products..."
+        )
+        button(type="submit") 
+          img(src="/images/icons/search.svg" alt="Search")
+          
+      if products.length > 0 && query.globalSearch
+        h5 Found #{products.length} products 
+          if query.globalSearch
+            span for '#{query.globalSearch}'
+        for product in products
+          +categoryListing(product)
+      else if query.search
+        h5 No products found

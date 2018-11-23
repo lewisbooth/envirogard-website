@@ -1,1 +1,1 @@
-"use strict";var liveChatStartButtons=document.querySelectorAll(".live-chat__start-button");liveChatStartButtons.forEach(function(t){return t.addEventListener("click",function(){return Tawk_API.maximize()})});
+"use strict";var liveChatStartButtons=document.querySelectorAll(".live-chat__start-button");for(i=0;i<liveChatStartButtons.length;i++)liveChatStartButtons[i].addEventListener("click",function(){return Tawk_API.maximize()});

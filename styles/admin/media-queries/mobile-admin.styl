@@ -1,0 +1,97 @@
+@media(max-width:mediaMobileWidth)
+
+  .admin
+
+    &__nav
+      position relative
+      z-index 0
+
+      .container
+        background mainYellow
+      
+      &--dropdown
+        display flex
+        flex-direction column
+        justify-content space-around
+        height 4rem
+        padding .75rem 1.25rem
+        border 1px solid mainBlue
+        border-radius 5px
+        margin 1.25rem 0
+
+        &:hover
+          background mainYellowHover 
+          cursor pointer
+
+        &--bar
+          width 3.5rem
+          height 1px
+          background mainBlue
+
+        &.active
+
+          + .admin__nav--links
+            transform translateY(0)
+
+      &--links
+        position absolute
+        flex-direction column
+        top 100%
+        left 0
+        z-index -1
+        width 100vw
+        background mainYellow
+        transform translateY(-100%)
+        transition transform .35s
+
+        li 
+          background mainYellowHover
+         
+
+    &__page
+      margin-top 0 
+      margin-left - (containerPadding / 2)
+      margin-right - (containerPadding / 2)
+
+    h1
+      font-size 2.6rem
+      margin 1rem 0
+
+    &__bar
+      position relative
+      z-index 2
+
+      .container
+        justify-content right
+
+      &--logo
+        display none
+
+    &__listings
+
+      &--entry
+        flex-direction column
+
+        &--image
+          display none
+
+        &--buttons
+          padding-right 0
+
+    &__filters
+
+      label 
+        margin-top 1rem
+
+      > span 
+        margin-top 1rem
+
+  .edit-linked__listings--container
+
+    > div
+      padding 1rem 1.5rem
+      flex-direction column
+
+      span 
+        width 100%
+        margin-bottom 1rem

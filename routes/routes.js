@@ -18,6 +18,7 @@ const upload = multer({
 
 // Standard pages
 router.get('/', catchErrors(pageController.homepage))
+router.get('/search', catchErrors(pageController.search))
 router.get('/products/:slug', catchErrors(pageController.product))
 router.get('/categories/:category/:subcategory?', catchErrors(pageController.category))
 router.get('/industries/:industry', catchErrors(pageController.industry))

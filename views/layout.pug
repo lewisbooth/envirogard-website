@@ -6,6 +6,7 @@ include templates/flashMessages
 include mixins/productListingCard
 include mixins/branchFinder
 include mixins/branchFinderSVG
+include mixins/categoryListing
 
 doctype html
 html
@@ -18,7 +19,7 @@ html
         h1 New page
     +footer
     block footerScripts
-      script(async defer src=hashes["/js/tawkTo.js"])
+      script(async defer src=hashes["tawkTo.js"])
       script
         include ../public/js/nav.js
         include ../public/js/cookies.js

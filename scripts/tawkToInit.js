@@ -1,5 +1,6 @@
 const liveChatStartButtons = document.querySelectorAll('.live-chat__start-button')
-
-liveChatStartButtons.forEach(button => 
-  button.addEventListener('click', () => Tawk_API.maximize())
-)
+for (i = 0; i < liveChatStartButtons.length; i++) {
+  liveChatStartButtons[i].addEventListener('click', () =>
+    Tawk_API.maximize()
+  )
+}

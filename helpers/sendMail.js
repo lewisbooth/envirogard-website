@@ -1,4 +1,5 @@
 const aws = require("aws-sdk")
+aws.config.loadFromPath(process.env.ROOT + '/variables.aws.json')
 
 exports.send = (mailData, callback) => {
   let errors = []

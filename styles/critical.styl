@@ -110,7 +110,7 @@ nav
       &--phone, &--email
         display flex
         align-items center
-        justify-content right
+        justify-content flex-end
         text-decoration none
         min-width 19rem
         margin-left 2rem
@@ -227,6 +227,7 @@ nav
               position absolute
               min-width 100%
               top 100%
+              left 0
               background-color lightGrey
               box-shadow 0px 0px 15px 0px rgba(0,0,0,0.15)
               padding 1rem 0
@@ -319,21 +320,21 @@ nav
 
         // Desktop images
         &:nth-child(1)
-          background-image url("/images/cms/homepage/slider/slider-3.png")
-        &:nth-child(2)
           background-image url("/images/cms/homepage/slider/slider-1.jpg")
-        &:nth-child(3)
+        &:nth-child(2)
           background-image url("/images/cms/homepage/slider/slider-2.jpg")
+        &:nth-child(3)
+          background-image url("/images/cms/homepage/slider/slider-3.png")
 
       // Mobile images
       @media(max-width:mediaMobileWidth)
         .home__slider--carousel--image
           &:nth-child(1)
-            background-image url("/images/cms/homepage/slider/slider-3-mobile.png")
-          &:nth-child(2)
             background-image url("/images/cms/homepage/slider/slider-1-mobile.jpg")
-          &:nth-child(3)
+          &:nth-child(2)
             background-image url("/images/cms/homepage/slider/slider-2-mobile.jpg")
+          &:nth-child(3)
+            background-image url("/images/cms/homepage/slider/slider-3-mobile.png")
 
         .flickity
 
@@ -448,7 +449,7 @@ nav
   align-items flex-start
 
   &__entry
-    width calc(33.333% - 1.333rem)
+    width calc(33.333% - 1.4rem)
     margin-bottom 2rem
     position relative
     margin-right 2rem

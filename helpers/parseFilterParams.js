@@ -1,7 +1,7 @@
 // Parses req.body into filters for Mongo queries
 exports.parseFilterParams = req => {
   // Extract query params for easy use
-  let search = req.query.search || req.body.search
+  let search = req.query.search || req.query.globalSearch || req.body.search
   let subcategory = req.query.subcategory || req.body.subcategory
   let filter = {}
   if (search)

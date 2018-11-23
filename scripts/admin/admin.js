@@ -1,3 +1,7 @@
+function toggleAdminNav(e) {
+  e.target.classList.toggle('active')
+}
+
 class AdminErrors {
   constructor() {
     this.messages = []
@@ -15,11 +19,9 @@ class AdminErrors {
     if (!this.container) {
       return console.error("No error container found. Please create a <div> with class '.admin__errors'.")
     }
-    if (this.messages.length > 0) {
-      this.container.classList.add('active')
-    } else {
+    this.messages.length > 0 ?
+      this.container.classList.add('active') :
       this.container.classList.remove('active')
-    }
     this.container.innerHTML = this.messages
       .map(message => `
         <div class="admin__errors--message">

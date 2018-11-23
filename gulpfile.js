@@ -29,7 +29,7 @@ gulp.task("scripts", () => {
   return gulp
     .src("scripts/**/*.js")
     .pipe(plumber())
-    .pipe(jsImport({hideConsole: true}))
+    .pipe(jsImport({ hideConsole: true }))
     .pipe(babel({
       presets: ["env"]
     }))

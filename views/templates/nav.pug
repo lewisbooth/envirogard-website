@@ -1,6 +1,9 @@
 mixin nav
-  - const clientDepot = cookies && cookies.locationDepot ? cookies.locationDepot : "south-east"
-  - const depotInfo = depotData[clientDepot]
+  -
+    const clientDepot = cookies && cookies.locationDepot ? cookies.locationDepot : "south-east"
+    let depotInfo = depotData[clientDepot]
+    if (!depotInfo) depotInfo = depotData['south-east']
+
   nav
     if user
       +adminBar
@@ -9,7 +12,12 @@ mixin nav
         a(href="/")
           img.nav__logo(src="/images/logos/main-logo.svg" alt="Main Logo")
         form.nav__search
-          input(type="text" name="globalSearch" placeholder="Search Envirogard Products...")
+          input(
+            type="text" 
+            name="globalSearch" 
+            value=(query.globalSearch || '')
+            placeholder="Search Envirogard Products..."
+          )
           button(type="submit") 
             img(src="/images/icons/search.svg" alt="Search")
         .nav__menu

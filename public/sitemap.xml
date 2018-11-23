@@ -13,63 +13,139 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-units</loc>
+    <loc>https://envirogard.co.uk/categories/air-ventilation</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-units/subcategory</loc>
+    <loc>https://envirogard.co.uk/categories/air-ventilation/fans-and-fume-extractors</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/industry/industry</loc>
+    <loc>https://envirogard.co.uk/categories/air-ventilation/air-ventilators</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/showers-and-decontamination</loc>
+    <loc>https://envirogard.co.uk/categories/air-ventilation/flexible-ducting</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/industry/pollution-control</loc>
+    <loc>https://envirogard.co.uk/categories/decontamination-showers</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/safety-showers</loc>
+    <loc>https://envirogard.co.uk/categories/decontamination-showers/modular-decontamination-showers</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/water-misting-cannons</loc>
+    <loc>https://envirogard.co.uk/categories/decontamination-showers/emergency-drench-showers</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/dust-control-and-extraction</loc>
+    <loc>https://envirogard.co.uk/categories/decontamination-showers/trailer-decontamination-showers</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/vacuum-cleaners</loc>
+    <loc>https://envirogard.co.uk/categories/decontamination-showers/showers-and-toilets</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/industry/waste-mangement</loc>
+    <loc>https://envirogard.co.uk/categories/dust-control</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/industry/contaminated-land</loc>
+    <loc>https://envirogard.co.uk/categories/dust-control/water-misting-cannons</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/industry/pollution-control-and-prevention</loc>
+    <loc>https://envirogard.co.uk/categories/dust-control/dust-filtration-units</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/industry/tank-purging-and-cleansing</loc>
+    <loc>https://envirogard.co.uk/categories/dust-control/ventsafe-dust-extractors</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/industry/demolition-and-recycling</loc>
+    <loc>https://envirogard.co.uk/categories/dust-control/fibre-suppressant-equipment</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/industry/asbestos-removal</loc>
+    <loc>https://envirogard.co.uk/categories/dust-control/negative-pressure-units</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/site-services</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/site-services/water-bowsers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/site-services/portable-generators</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/site-services/pumps-and-pressure-washers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/site-services/site-electrics</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/site-services/bootwash-stations</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/test-and-monitoring-equipment</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/test-and-monitoring-equipment/differential-pressure-monitors</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/test-and-monitoring-equipment/smoke-generators</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/vacuum-cleaners</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/vacuum-cleaners/clean-room-vacuums</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/vacuum-cleaners/hml-hepa-vacuums</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/vacuum-cleaners/type-h-vacuums</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/categories/vacuum-cleaners/wet-pick-up-vacuums</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industries/asbestos-removal</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industries/contaminated-land</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industries/demolition</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industries/pollution-control</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/industries/tank-purging</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -85,103 +161,219 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-units/emergency-drench-showers</loc>
+    <loc>https://envirogard.co.uk/products/flexible-ducting-for-dust-filtration</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-units/modular-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/ventsafe-1000-centrifugal-fan</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-units/showers-and-toilets</loc>
+    <loc>https://envirogard.co.uk/products/ventsafe-3000-centrifugal-fan</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-units/trailer-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/ventsafe-clustajet-ventilator</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/product/envirogard-micro-decontamination-unit</loc>
+    <loc>https://envirogard.co.uk/products/spitzna-axial-fan</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/showers-and-decontamination/emergency-drench-showers</loc>
+    <loc>https://envirogard.co.uk/products/all-electric-decontamination-unit</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/showers-and-decontamination/modular-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/astrocab-1200-modular-decontamination-shower</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/showers-and-decontamination/showers-and-toilets</loc>
+    <loc>https://envirogard.co.uk/products/envirogard-micro-decontamination-unit</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/showers-and-decontamination/trailer-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/mh-p-1200-transportable-safety-shower-and-eyewash-station</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/safety-showers/emergency-drench-showers</loc>
+    <loc>https://envirogard.co.uk/products/maxi-quad-decontamination-shower</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/safety-showers/modular-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/prestige-shower-trailer</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/safety-showers/showers-and-toilets</loc>
+    <loc>https://envirogard.co.uk/products/std-40-k-portable-safety-shower-and-eyewash-station</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/safety-showers/trailer-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/solus-and-nomad-self-contained-decontamination-units</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/water-misting-cannons/emergency-drench-showers</loc>
+    <loc>https://envirogard.co.uk/products/standard-twin-shower-trailer-with-wash-basins</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/water-misting-cannons/modular-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/aircube-2000-mobile-dust-filtration-unit</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/water-misting-cannons/showers-and-toilets</loc>
+    <loc>https://envirogard.co.uk/products/bs-8520-1-pas-60-1-compliant-wet-injection-system</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/water-misting-cannons/trailer-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/commando-dustguard-bowser-and-jetwash</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/dust-control-and-extraction/emergency-drench-showers</loc>
+    <loc>https://envirogard.co.uk/products/dfu-1800-dust-filtration-unit</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/dust-control-and-extraction/modular-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/dfu-2300-dust-filtration-unit</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/dust-control-and-extraction/showers-and-toilets</loc>
+    <loc>https://envirogard.co.uk/products/dfu-5000-dust-filtration-unit</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/dust-control-and-extraction/trailer-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/dfu-600-dust-filtration-unit</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/vacuum-cleaners/emergency-drench-showers</loc>
+    <loc>https://envirogard.co.uk/products/dust-fighter-mini-misting-unit</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/vacuum-cleaners/modular-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/dust-fighter-smart-misting-cannon</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/vacuum-cleaners/showers-and-toilets</loc>
+    <loc>https://envirogard.co.uk/products/e-vac-hepa-1800-negative-pressure-air-filtration-unit-%28npu%29</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/vacuum-cleaners/trailer-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/products/e-vac-hepa-2300-negative-pressure-air-filtration-unit-%28npu%29</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/e-vac-hepa-5400-negative-pressure-air-filtration-unit-%28npu%29</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/e-vac-hepa-600-negative-pressure-air-filtration-unit-%28npu%29</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/multiple-stage-filtration-dust-extraction</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/sc15-self-contained-bowser-mist-cannon</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/si-2300-hepa-negative-pressure-air-filtration-unit-%28npu%29</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/si-5000-hepa-negative-pressure-air-filtration-unit-%28npu%29</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/si-800-hepa-negative-pressure-air-filtration-unit-%28npu%29</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/scrub-aire-2000-dust-filtration-unit</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/super-mosquito-mist-cannon</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/ventsafe-1000-coarse-dust-extractor</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/ventsafe-3000-coarse-dust-extractor</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/vortex-440-water-misting-cannon-and-odour-suppressant</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/4000xl-portable-generator</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/bootwash-station</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/commando-4000-pressure-washer</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/water-bowser</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/portable-transformers</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/tornado-mini-bowser</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/waste-water-filtration-system</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/water-supply-booster-pump</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/concept-portable-smoke-generator</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/differential-pressure-monitor-readout-and-alarm-system</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/numatic-crq370-clean-room-vacuum</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/numatic-hml-hepa-vacuum</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/numatic-hzq-250-type-h-vacuum</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/numatic-hzq-350-type-h-vacuum</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/numatic-hzq-450-type-h-vacuum</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/numatic-hzq-750-type-h-vacuum</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/products/numatic-wv-wet-pick-up-vacuum</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
@@ -197,27 +389,119 @@
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/cms/products/5beb1cec9b779e00c04bb857/docs/manual.pdf</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-showers/trailer-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/cms/products/5beb1bbe9b779e00c04bb856/docs/manual.pdf</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/product/dust-control-dc-2000-aircube-air-scrubbing-unit</loc>
+    <loc>https://envirogard.co.uk/cms/products/5beb20069b779e00c04bb859/docs/manual.pdf</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-showers/emergency-drench-showers</loc>
+    <loc>https://envirogard.co.uk/cms/products/5beb1e589b779e00c04bb858/docs/manual.pdf</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-showers/modular-decontamination-showers</loc>
+    <loc>https://envirogard.co.uk/cms/products/5be57928c5f9e40191382f87/docs/manual.pdf</loc>
     <changefreq>weekly</changefreq>
   </url>
   <url>
-    <loc>https://envirogard.co.uk/category/decontamination-showers/showers-and-toilets</loc>
+    <loc>https://envirogard.co.uk/cms/products/5be56f9956cbdc00fb9454f0/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be46ca4ca0d1a6821993742/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be59a75cf49e405d4a835c8/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5bf2a7673a64d600d4541c38/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be5b75c41517e1354d1befb/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be59d08cf49e405d4a835ca/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be59e9dcf49e405d4a835cb/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be5a009cf49e405d4a835cc/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be59bd9cf49e405d4a835c9/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be5b2c341517e1354d1bef9/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be5af8641517e1354d1bef8/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be5b9dd41517e1354d1befc/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be59962cf49e405d4a835c7/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be5bbab41517e1354d1befd/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be5a7db41517e1354d1bef5/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be5a73641517e1354d1bef4/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5be5b4af41517e1354d1befa/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5beb194a9b779e00c04bb855/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5beb15c79b779e00c04bb854/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5bf2a32b3a64d600d4541c35/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5bf297523a64d600d4541c30/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5bf297ed3a64d600d4541c31/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5bf298f63a64d600d4541c32/docs/manual.pdf</loc>
+    <changefreq>weekly</changefreq>
+  </url>
+  <url>
+    <loc>https://envirogard.co.uk/cms/products/5bf29b903a64d600d4541c33/docs/manual.pdf</loc>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>

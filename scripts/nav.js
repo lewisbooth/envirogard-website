@@ -15,15 +15,15 @@ document.addEventListener('scroll', e =>
         body.classList.add("nav-scroll") :
         body.classList.remove("nav-scroll")
 )
-
-mobileDropdownButtons.forEach(button =>
+for (let i = 0; i < mobileDropdownButtons.length; i++) {
+    const button = mobileDropdownButtons[i]
     button.addEventListener('click', () => {
         const buttonWasActive = button.classList.contains('active')
-        mobileDropdownButtons.forEach(button =>
-            button.classList.remove('active')
-        )
+        for (let j = 0; j < mobileDropdownButtons.length; j++) {
+            mobileDropdownButtons[j].classList.remove('active')
+        }
         if (!buttonWasActive) {
             button.classList.add('active')
         }
     })
-)
+}

@@ -3,6 +3,7 @@ const mongoBackup = require("mongodb-backup")
 const mongoRestore = require("mongodb-restore")
 const tar = require("tar")
 const fs = require("fs")
+const copydir = require("copy-dir")
 const mkdirp = require("mkdirp")
 const rmdir = require("rmdir")
 const S3 = require("./S3")
@@ -29,6 +30,12 @@ exports.restore = async () => {
     if (!fs.existsSync("mongodb/temp/mongodb"))
       return console.log("No database backup found in tarball")
     const dbName = process.env.DATABASE.split("/").pop()
+    // Copy public data into /public if it exists in the tarball
+    if (fs.existsSync("mongodb/temp/public/cms")) {
+      copydir.sync("mongodb/temp/public/cms", "public/cms")
+    } else {
+      console.log("No public folder backup found in tarball")
+    }
     // Restore database if a backup was in the tarball
     mongoRestore({
       drop: true,

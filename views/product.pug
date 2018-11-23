@@ -1,9 +1,9 @@
 extends layout
 
 block body
-  .container
-    //- Breadcrumbs
-    ul.breadcrumbs
+  //- Breadcrumbs
+  .breadcrumbs
+    ul.container
       li
         a(href="/") Home
       if (product.subcategory)
@@ -13,6 +13,7 @@ block body
         li
           a(href=product.subcategory.pageURL)= product.subcategory.title
       li= product.title
+  .container
   .container.product
     .product__left-column
       if product.images
@@ -53,7 +54,7 @@ block body
           ul
             for feature in product.features
               li= feature
-      .product__block
+      .product__block.product__block--mobile-toggle
         h3.product__block--title Hire Product
         .product__block--content
           .product__block--content--branch-finder
@@ -210,8 +211,9 @@ block body
                   div
                     h6 Chat to Envirogard Ashford
                     .button.button__yellow.live-chat__start-button Start Live Chat
+                    
       if product.specifications && product.specifications.length > 0
-        .product__block
+        .product__block.product__block--mobile-toggle
           h3.product__block--title Product Specifications
           .product__block--content
             ul.product__block--content--specifications
@@ -222,6 +224,7 @@ block body
 
     //- Related Products
     if product.subcategory && product.subcategory.products
+      //- Filter the current product out of related listings
       -
         const relatedProducts = product.subcategory.products
           .filter(relatedProduct => 
@@ -235,7 +238,6 @@ block body
 
 block extraFooterScripts
   script
-    include ../public/js/flickity-init-product.js
-  script
+    include ../public/js/product.js
     include ../public/js/flickity-as-nav-for.js
   script(src=hashes["flickity.js"] async defer onload="flickityInit()")

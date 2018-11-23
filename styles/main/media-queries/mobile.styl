@@ -27,6 +27,25 @@
       &--environment-background
         background none 
 
+    &__promoted--right-column--industries--live-chat--text
+      padding 5rem 0 3rem 0
+
+  .page-header
+    padding 1rem 0
+
+    h1
+      font-size 2.6rem
+
+  .page-columns
+    padding 4rem 0 0 0
+
+    &__column
+      width 100%
+      margin-bottom 4rem
+
+      h3
+        font-size 2.4rem
+
   .branch-finder
 
     .container
@@ -36,6 +55,7 @@
       width 100%
       overflow hidden
       flex-direction column
+      margin-top 0
 
       &--block
         flex-direction column-reverse
@@ -48,6 +68,174 @@
 
   #branch-finder-svg
     height auto
+
+  .home__split-strip--popular-categories
+    width 100%
+
+  .popular-products
+    max-width 100%
+
+  .category
+    flex-direction column
+
+    &__header .container 
+
+      h1
+        padding 3rem 0
+      
+      div
+        display none
+
+    &__description
+      padding 3rem 0 2rem 0
+
+      p
+        font-size 1.4rem
+
+    &__filter
+      width 100%
+      padding-right 0
+
+      &--popular-categories
+        display none
+
+    &__results
+      width 100%
+
+      &--listing
+
+        &--image
+          width 10rem
+          height 10rem
+
+        &--text
+          padding-left 2rem
+          padding-right 0
+
+          h2
+            font-size 1.6rem
+
+          ul li
+            font-size 1.4rem
+
+  .breadcrumbs
+    font-size 1.4rem
+    margin-bottom 3rem
+
+  .product
+    flex-direction column
+
+    &__description
+      margin-bottom 3rem
+
+      h1
+        font-size 2.6rem
+
+    &__carousel
+
+    &__right-column
+      order 0
+      width 100%
+      margin-bottom 3rem
+
+    &__left-column
+      order 1
+      width 100%
+      margin-bottom 0
+
+    .product-listings
+      order 2
+      width 100%
+
+      &__cards--entry
+        width calc(50% - 1rem)
+        margin-bottom 1.5rem
+        
+        &:nth-child(2n + 1)
+          margin-right 0
+
+    &__block
+      margin-bottom .25rem
+
+      &--title
+        width 100%
+
+      &--mobile-toggle
+
+        .product__block
+
+          &--content
+            display none
+
+          &--title
+            border-bottom 5px solid mainBlue
+            user-select none
+            display flex
+            align-items center
+            justify-content space-between
+
+            &::after
+              content '▼'
+
+            &:hover
+              cursor pointer              
+
+            &.active
+              border-bottom none
+
+              &::after
+                content '▲'
+              
+              + .product__block--content
+                display block            
+
+      &--content
+        padding 1.5rem
+
+        &--entry--hire-options
+
+          & ul li 
+
+            > span 
+              padding 1.5rem
+            
+            > div 
+              padding 1.5rem 1.25rem
+            
+              a 
+                font-size 1.6rem
+
+  .about
+    padding-top 3rem
+
+    &__column
+      width 100% !important
+      max-width 100% !important
+
+      h3
+        font-size 2.4rem
+
+      img 
+        width 75%
+        margin 0 auto
+
+      .button
+        display flex
+        flex-wrap wrap
+
+  .contact-forms
+    padding-top 4rem
+    padding-bottom 2rem
+
+    h3
+      font-size 2.4rem
+
+    .button
+      margin-bottom 3rem
+
+    .container > div
+      width 100%
+      max-width 100%
 
   .newsletter
     padding 2rem 0 4rem 0

@@ -20,8 +20,9 @@ const device = require("device")
 const { checkDB } = require("./helpers/checkDB")
 const { logging } = require("./helpers/logging")
 const { truncate } = require("./helpers/truncate")
-const { cacheBuster } = require("./helpers/cacheBuster")
 const { depotData } = require("./helpers/depotData")
+const { cacheBuster } = require("./helpers/cacheBuster")
+const { globalSearch } = require("./helpers/globalSearch")
 const errorHandlers = require("./helpers/errorHandlers")
 const passport = require("passport")
 require("./helpers/passport")
@@ -80,6 +81,8 @@ app.use((req, res, next) => {
 // Parse cookies into req.cookies
 app.use(cookieParser())
 
+// Redirect global search requests to /search
+app.use(globalSearch)
 
 // Dynamic flash messages are passed from controllers to view templates 
 // (e.g. "Successfully logged in" or "Incorrect login details")
