@@ -64,12 +64,12 @@ exports.category = async (req, res) => {
     return res.redirect("/")
   }
 
-  // If a subcategory is selected, use its title instead of the category title
-  let subcategoryTitle = ''
-
   // Build the Product query
   const filter = parseFilterParams(req)
   const sort = parseSortParams(req, 'az')
+
+  // If a subcategory is selected, use its title instead of the category title
+  let subcategoryTitle = ''
 
   // Returns an array of requested subcategory IDs
   const selectedSubcategories = category.subcategories.map(doc => {

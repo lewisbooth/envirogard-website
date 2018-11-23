@@ -24,21 +24,21 @@ for (let i = 0; i < areaButtons.length; i++) {
 // For the map to be interactive, it must be a proper <svg> DOM node.
 // Linking to an external SVG doesn't allow adding event listeners etc.
 // To do this, we load the file into an <object> element and extract the XML.
-if (mapSvgContainer)
-  mapSvgData.addEventListener("load", () => {
-    // Extract parsed DOM node from <object>
-    const data = mapSvgData.contentDocument.documentElement
-    // Replace <object> with parsed element
-    mapSvgContainer.innerHTML = ''
-    mapSvgContainer.appendChild(data)
-    areaButtons = document.querySelectorAll('[data-area]')
-    // Re-attach the event listeners because SVG was not present on page load
-    for (let i = 0; i < areaButtons.length; i++) {
-      updateLocationOnClick(areaButtons[i])
-    }
-    // Re-render map to select active location
-    initLocation()
-  })
+// This function is fired by the <object> 'onload' attribute in the template.
+function mapLoaded() {
+  // Extract parsed DOM node from <object>
+  const data = mapSvgData.contentDocument.documentElement
+  // Replace <object> with parsed element
+  mapSvgContainer.innerHTML = ''
+  mapSvgContainer.appendChild(data)
+  areaButtons = document.querySelectorAll('[data-area]')
+  // Re-attach the event listeners because SVG was not present on page load
+  for (let i = 0; i < areaButtons.length; i++) {
+    updateLocationOnClick(areaButtons[i])
+  }
+  // Re-render map to select active location
+  initLocation()
+}
 
 // Change preference via drop-down in the nav
 if (areaSelectDropdown) {
