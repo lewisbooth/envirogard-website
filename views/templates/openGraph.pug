@@ -1,0 +1,17 @@
+mixin openGraph
+  block openGraph
+    -
+      let imageURL = publicURL + "/images/default/opengraph-default.jpg"
+      // Test for absolute or local URLs
+      if (openGraphImage) {
+        if (openGraphImage.startsWith("http"))
+          imageURL = openGraphImage
+        else
+          imageURL = publicURL + openGraphImage
+      }
+    meta(property="og:site_name" content="Envirogard")
+    meta(property="og:locale" content="en_UK")
+    meta(property="og:image" content=imageURL)
+
+    meta(name="twitter:card" content="summary_large_image")
+    meta(name="twitter:image" content=imageURL)

@@ -3,6 +3,7 @@ const Product = mongoose.model("Product")
 const Industry = mongoose.model("Industry")
 const Category = mongoose.model("Category")
 const { contactForm } = require("../helpers/contactForm")
+const { newsletterForm } = require("../helpers/newsletterForm")
 const { parseSortParams } = require("../helpers/parseSortParams")
 const { parseFilterParams } = require("../helpers/parseFilterParams")
 const validator = require('validator')
@@ -10,9 +11,10 @@ const validator = require('validator')
 // Titles and descriptions are written in the controllers
 // Titles are appended with "| Envirogard" in views/templates/head.pug
 
+// Categories & Subcategories are already queried on every request
+// and passed to res.locals.globalCategories
+
 exports.homepage = async (req, res) => {
-  // Categories & Subcategories are already queried on every request
-  // and passed to res.locals.globalCategories
   res.render("index")
 }
 
@@ -35,6 +37,7 @@ exports.product = async (req, res) => {
   res.render("product", {
     title: product.title,
     description: product.meta.description,
+    openGraphImage: product.mainImageURL,
     product
   })
 }
@@ -95,6 +98,7 @@ exports.category = async (req, res) => {
   res.render("category", {
     title: subcategoryTitle || category.title,
     description: category.meta.description,
+    openGraphImage: category.mainImageURL,
     category,
     products
   })
@@ -115,6 +119,7 @@ exports.industry = async (req, res) => {
   res.render("industry", {
     title: industry.title,
     description: industry.meta.description,
+    openGraphImage: industry.mainImageURL,
     industry
   })
 }
@@ -159,14 +164,66 @@ exports.privacyPolicy = (req, res) => {
   res.render("privacyPolicy")
 }
 
+exports.newsletter = (req, res) => {
+  res.render("newsletter", {
+    title: "Newsletter"
+  })
+}
+
+exports.newsletterSuccess = (req, res) => {
+  res.render("newsletterSuccess", {
+    title: "Success"
+  })
+}
+
+exports.newsletterForm = async (req, res) => {
+  // If a bot is detected, send a fake 200 OK response
+  if (req.body.phone) {
+    console.log('Stopped bot attempt')
+    return res.redirect('/newsletter/success')
+  }
+
+  let errors = []
+  if (!req.body.firstName)
+    errors.push('Please supply your first name')
+  if (!req.body.lastName)
+    errors.push('Please supply your last name')
+  if (!req.body.email)
+    errors.push('Please supply your email address')
+  if (req.body.email && !validator.isEmail(req.body.email))
+    errors.push('Email address is invalid')
+  if (!req.body.businessName)
+    errors.push('Please supply your business name')
+  if (!req.body.businessNature)
+    errors.push('Please supply the nature of your business')
+
+  // Flash errors
+  if (errors.length) {
+    errors.forEach(err => {
+      req.flash('error', err)
+    })
+    return res.redirect('back')
+  }
+
+  // Send email if input is OK
+  await newsletterForm({
+    messageData: req.body
+  }).then(() => {
+    res.redirect('/newsletter/success')
+  }).catch(err => {
+    req.flash('error', 'Error sending message, please contact us directly')
+    res.redirect('back')
+  })
+}
+
 exports.contactForm = async (req, res) => {
   // If a bot is detected, send a fake 200 OK response
-  if (!validator.isEmpty(req.body.bot))
+  if (req.body.bot)
     return res.status(200).send()
   // Validate the fields
   let errors = []
   if (!req.body.name)
-    errors.push("Please supply your name")
+    req.flash("error", "Please supply your name")
   if (!req.body.company)
     errors.push("Please supply your company name")
   if (!req.body.email)

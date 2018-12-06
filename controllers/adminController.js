@@ -5,6 +5,7 @@ const mkdirp = require('mkdirp')
 const rimraf = require('rimraf')
 const mongoose = require("mongoose")
 const Product = mongoose.model("Product")
+const Settings = mongoose.model("Settings")
 const Industry = mongoose.model("Industry")
 const Category = mongoose.model("Category")
 const Subcategory = mongoose.model("Subcategory")
@@ -632,4 +633,23 @@ exports.uploadIndustryImage = async (req, res, next) => {
     { $set: { hasImage: true } }
   )
   next()
+}
+
+exports.settings = async (req, res) => {
+  const settings = await Settings.getSettings()
+  res.render('admin/settings', {
+    title: "Settings",
+    settings
+  })
+}
+
+exports.settingsSave = async (req, res) => {
+  if (!req.body || !req.body.popularProducts)
+    return res.status(400).send()
+  // Parse popular products from req.body
+  const popularProducts = JSON.parse(req.body.popularProducts).slice(0, 5)
+  // Save to DB
+  await Settings.findOneAndUpdate({}, { $set: { popularProducts } })
+  req.flash('success', 'Settings updated')
+  res.status(200).send()
 }

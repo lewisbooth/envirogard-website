@@ -9,7 +9,7 @@ const options = {
     virtuals: true
   },
   toJSON: {
-    virtuals: true 
+    virtuals: true
   }
 }
 
@@ -21,7 +21,8 @@ const productSchema = new Schema(
       required: "Please supply a product title"
     },
     subcategory: {
-      type: ObjectId, ref: 'Subcategory',
+      type: ObjectId,
+      ref: 'Subcategory',
       default: null
     },
     slug: {
@@ -124,7 +125,7 @@ productSchema
 // Generate slug from product name
 // Call manually with .save() when updating an existing record
 // because pre "save" functions do not run on "update" methods
-productSchema.pre("save", async function(next) {
+productSchema.pre("save", async function (next) {
   this.slug = slugify(`${this.title}`, { lower: true })
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i')
   const productWithSlug = await this.constructor.find({ slug: slugRegEx })

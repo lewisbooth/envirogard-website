@@ -1,0 +1,23 @@
+extends layout
+
+block body
+  .container
+    .newsletter__content
+      h3 Subscribe to our newsletter
+      p If you would like to receive e-mail news bulletins and updates on products and services, then simply fill in and submit the enquiry form.
+      form(name='newsletter' action='/newsletter' method='POST')
+        label First Name
+        input(name='firstName' type='text' required)
+        label Last Name
+        input(name='lastName' type='text' required)
+        label Email
+        input(name='email' type='email' required)
+        label.hide Phone
+        input.hide(name='phone' type='phone')
+        label Business Name
+        input(name='businessName' type='text' required)
+        label Nature of Your Business
+        input(name='businessNature' type='text' required)
+        button(type='submit') Submit
+
+block newsletter

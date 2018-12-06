@@ -22,6 +22,12 @@ require("./models/Product")
 require("./models/Category")
 require("./models/Subcategory")
 require("./models/Industry")
+require("./models/Settings")
+
+// Creates default Settings database entry if required
+const { checkSettings } = require("./helpers/checkSettings")
+
+checkSettings()
 
 // Load server scripts
 const app = require("./app")
@@ -36,7 +42,7 @@ const server = app.listen(app.get("port"), () => {
   else
     console.log("🐌  Development Mode 🐌 ")
   console.log("Local address: " + ip.address())
-}) 
+})
 
 // Load cron jobs for sitemap, backup etc
 if (process.env.NODE_ENV === "production") {

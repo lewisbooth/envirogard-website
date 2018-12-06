@@ -6,6 +6,7 @@ const app = express()
 const mongoose = require("mongoose")
 const Category = mongoose.model("Category")
 const Industry = mongoose.model("Industry")
+const Settings = mongoose.model("Settings")
 const session = require("express-session")
 const MongoStore = require("connect-mongo")(session)
 const { promisify } = require("es6-promisify")
@@ -101,6 +102,7 @@ app.use(async (req, res, next) => {
   res.locals.globalIndustries = await Industry
     .find({})
     .sort({ title: 1 })
+  res.locals.settings = await Settings.getSettings()
   // Parses the User Agent into desktop, phone, tablet, phone, bot or car
   res.locals.device = device(req.headers["user-agent"]).type
   // Pass success/error messages into the template
@@ -110,6 +112,7 @@ app.use(async (req, res, next) => {
   // Safely format descriptions
   res.locals.truncate = truncate
   // Expose other useful information
+  res.locals.publicURL = process.env.PUBLIC_URL
   res.locals.currentPath = req.path
   res.locals.cookies = req.cookies
   res.locals.depotData = depotData

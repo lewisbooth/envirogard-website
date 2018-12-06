@@ -20,9 +20,6 @@ mixin adminNav
         li 
           a(class=(currentPath.includes('/industries') ? 'active' : '')
           href="/dashboard/industries") Industries
-        //- li 
-        //-   a(class=(currentPath.includes('/customers') ? 'active' : '')
-        //-   href="/dashboard/customers") Customers
-        //- li 
-        //-   a(class=(currentPath.includes('/settings') ? 'active' : '')
-        //-   href="/dashboard/settings") Settings
+        li 
+          a(class=(currentPath.includes('/settings') ? 'active' : '')
+          href="/dashboard/settings") Settings

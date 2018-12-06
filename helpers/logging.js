@@ -4,13 +4,12 @@ exports.logging = (req, res, next) => {
   // Ignore sitemap generator
   if (req.headers['user-agent'].includes('Node/SitemapGenerator'))
     return next()
-  // Don't leak login attempts!
-  if (req.path === '/login')
-    return next()
   const timestamp = new Date().toString()
   var ip = req.headers["x-forwarded-for"] || req.connection.remoteAddress
+  // Log the formatted request data
   console.log(`${timestamp} ${req.method} ${req.path} ${ip} ${req.user ? req.user.email : ""}`)
-  if (req.method === "POST" && req.body)
+  // Don't leak login attempts to the server log!
+  if (req.method === "POST" && req.body && req.path !== '/login')
     console.log(req.body)
   next()
 }

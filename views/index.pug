@@ -50,21 +50,10 @@ block body
         .home__split-strip--popular-categories--title
           h4 Popular Products
         ul.popular-products
-          li 
-            a(href="/category/decontamination-units")
-              span Decontamination Units
-          li
-            a(href="/category/safety-showers") 
-              span Safety Showers
-          li
-            a(href="/category/water-misting-cannons")
-              span Water Misting Cannons
-          li
-            a(href="/category/dust-control-and-extraction")
-              span Dust Control &amp; Extraction
-          li
-            a(href="/category/vacuum-cleaners")
-              span Vacuum Cleaners
+          for subcategory in settings.popularProducts
+            li 
+              a(href=subcategory.pageURL)
+                span= truncate(subcategory.title, 28)
       .home__split-strip--environment
         p For over 25 years we’ve helped contractors across the UK to protect the environment
         a.button.button__arrow(href="/about") More about Envirogard

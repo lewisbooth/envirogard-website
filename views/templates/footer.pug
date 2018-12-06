@@ -1,11 +1,10 @@
 mixin footer
-  .newsletter
-    .container
-      h4 Get updates on our products &amp; services
-      form(name="newsletter" method="POST" action="/")
-        input(name="email" type="email" placeholder="Enter your email...")
-        button(type="submit")
-          img(src="/images/icons/search.svg" alt="Search")
+  block newsletter
+    .newsletter-strip
+      .container
+        h4 Get updates on our products &amp; services
+        a.button.no-margin(href='/newsletter') 
+          span Sign up now →
       
   footer.footer
     .container      

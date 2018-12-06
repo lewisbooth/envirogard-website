@@ -26,6 +26,9 @@ router.get('/about', pageController.about)
 router.get('/contact', pageController.contact)
 router.post('/contact', catchErrors(pageController.contactForm))
 router.get('/contact/success', pageController.contactSuccess)
+router.get('/newsletter', pageController.newsletter)
+router.get('/newsletter/success', pageController.newsletterSuccess)
+router.post('/newsletter', catchErrors(pageController.newsletterForm))
 router.get('/trade-account', pageController.tradeAccount)
 router.get('/trade-account/terms-and-conditions', pageController.tradeAccountTerms)
 router.get('/frequently-asked-questions', pageController.faq)
@@ -99,6 +102,9 @@ router.post('/dashboard/industries/:slug',
   catchErrors(adminController.editIndustrySave),
   catchErrors(adminController.uploadIndustryImage),
   (req, res) => res.status(200).send())
+
+router.get('/dashboard/settings', catchErrors(adminController.settings))
+router.post('/dashboard/settings', catchErrors(adminController.settingsSave))
 
 // Create a user with no authentication
 // Disabled in production, obviously!

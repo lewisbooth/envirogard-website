@@ -7,7 +7,7 @@ const fs = require('fs')
 const TIMEOUT = 3600000
 const SITEMAP_FILE = `${process.env.PUBLIC_FOLDER}/sitemap.xml`
 const LOCAL_URL = `http://localhost:${process.env.PORT || 8888}`
-const PUBLIC_URL = process.env.DOMAIN_NAME || LOCAL_URL
+const PUBLIC_URL = process.env.PUBLIC_URL || LOCAL_URL
 
 exports.generate = () => {
   // Configure sitemap generator using the local URL

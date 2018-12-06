@@ -37,23 +37,12 @@ block body
               img(src="/images/icons/search.svg" alt="Search")
         
         .category__filter--popular-categories
-          h3 Popular Categories
+          h3 Popular Products
           ul.popular-products
-            li 
-              a(href="/category/decontamination-units")
-                span Decontamination Units
-            li
-              a(href="/category/safety-showers") 
-                span Safety Showers
-            li
-              a(href="/category/water-misting-cannons")
-                span Water Misting Cannons
-            li
-              a(href="/category/dust-control-and-extraction")
-                span Dust Control &amp; Extraction
-            li
-              a(href="/category/vacuum-cleaners")
-                span Vacuum Cleaners
+            for subcategory in settings.popularProducts
+              li 
+                a(href=subcategory.pageURL)
+                  span= truncate(subcategory.title, 24)
 
       .category__results
         .category__results--filters

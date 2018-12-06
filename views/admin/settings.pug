@@ -1,0 +1,35 @@
+extends layoutAdmin
+
+block body
+
+  form.admin__form.edit-product(name='subcategory' onsubmit='submitForm(event)')
+    h1 Settings
+    .edit-linked__listings
+      .label-and-input
+        label Popular Products (Max: 5)
+        a Reset to default
+      input(name='subcategoryDropdown' 
+            type='text' 
+            autocomplete="off"
+            placeholder="Start typing a subcategory name...")
+      .edit-linked__listings--autocomplete
+        div
+          span Select subcategory
+          ul 
+      .edit-linked__listings--container
+        if settings && settings.popularProducts
+          for subcategory in settings.popularProducts
+            div(data-id=subcategory.id)
+              span= subcategory.title
+              div
+                a(href=subcategory.editURL class="button" target="_blank") Edit Subcategory
+                span(onclick="removeSubcategory(event)") Remove
+
+    .admin__errors
+    .admin__save-buttons
+      button.button__green(type='submit') Save Changes
+      
+block extraFooterScripts
+  script
+    include ../../public/js/admin/edit-settings.js
+  script(src='https://unpkg.com/axios/dist/axios.min.js' async defer)
