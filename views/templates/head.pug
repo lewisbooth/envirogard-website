@@ -38,11 +38,15 @@ mixin head
       link(rel='stylesheet' href=hashes["critical.css"] type="text/css")
 
     //- External non-critical styles
-    link(rel='stylesheet' href=hashes["main.css"] type="text/css")
+    noscript(name='async-css')
+      link(rel='stylesheet' href=hashes["main.css"] type="text/css")
 
     //- Admin styles
     if user
       link(rel='stylesheet' href=hashes["admin.css"] type="text/css")
+
+    script
+      include ../../public/js/async-css.js
 
     //- Provision additional blocks for pages to load scripts
     block extraHeaderCSS
