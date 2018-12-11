@@ -1,3 +1,5 @@
+// Loads all CSS links in the <noscript> tag on page load
+
 const asyncScripts = document.querySelector('noscript[name="async-css"]').childNodes
 const head = document.querySelector('head')
 
