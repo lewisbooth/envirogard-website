@@ -1,1 +1,1 @@
-"use strict";var asyncScripts=document.querySelector('noscript[name="async-css"]').childNodes,head=document.querySelector("head");window.addEventListener("load",function(){for(var e=0;e<asyncScripts.length;e++)head.innerHTML+=asyncScripts[e].textContent.trim()});
+"use strict";for(var asyncScripts=document.querySelector('noscript[name="async-css"]').childNodes,head=document.querySelector("head"),i=0;i<asyncScripts.length;i++)head.innerHTML+=asyncScripts[i].textContent.trim();

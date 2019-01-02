@@ -239,5 +239,5 @@ block body
 block extraFooterScripts
   script
     include ../public/js/product.js
-    include ../public/js/flickity-as-nav-for.js
-  script(src=hashes["flickity.js"] async defer onload="flickityInit()")
+  script(src=hashes["flickity-as-nav-for.js"])
+  script(src=hashes["flickity.js"] onload="flickityInit()")

@@ -38,13 +38,8 @@ mixin head
       link(rel='stylesheet' href=hashes["critical.css"] type="text/css")
 
     //- External non-critical styles loaded by JS
-    noscript(name='async-css')
-      link(rel='stylesheet' href=hashes["main.css"] type="text/css")
+    link(rel='stylesheet' href=hashes["main.css"] type="text/css")
       
-    //- Loads the above CSS asynchronously
-    script
-      include ../../public/js/async-css.js
-
     //- Admin styles
     if user
       link(rel='stylesheet' href=hashes["admin.css"] type="text/css")
