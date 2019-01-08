@@ -16,7 +16,7 @@ block body
     div
       a(href='/dashboard/categories') << Back to Categories
     if category
-      div
+      div 
         a(href=category.pageURL target='_blank') View public page >>
 
   form.admin__form.edit-category(name='category' onsubmit='submitForm(event)')
@@ -54,6 +54,11 @@ block body
             span.label__subtitle Cropped to 5:3 ratio on category page to avoid large headings
           .image-preview__cropped
             img(src=(category && category.hasImage ? category.mainImageURL : ''))
+
+        if category && category.hasImage
+          .checkbox
+            input(name='deleteImage' type='checkbox')
+            label(for='deleteImage') Delete Image
 
     .admin__upload-progress
       h5 Uploading files...

@@ -8,7 +8,7 @@ const options = {
     virtuals: true
   },
   toJSON: {
-    virtuals: true 
+    virtuals: true
   }
 }
 
@@ -23,10 +23,14 @@ const categorySchema = new Schema(
       type: String,
       trim: true
     },
-    hasImage: Boolean,    
+    hasImage: {
+      type: Boolean,
+      default: false
+    },
     description: {
       short: {
         type: String,
+        required: "Please supply a short description",
         trim: true
       },
       long: {
@@ -83,23 +87,23 @@ categorySchema
 categorySchema
   .virtual('mainImageURL')
   .get(function () {
-    return this.hasImage ? 
+    return this.hasImage ?
       `/cms/categories/${this._id}/images/cover.jpg` :
-      '/images/default/no-image.png'    
+      '/images/default/no-image.png'
   })
 
 categorySchema
   .virtual('mainImageThumbnailURL')
   .get(function () {
-    return this.hasImage ? 
+    return this.hasImage ?
       `/cms/categories/${this._id}/images/cover-thumb.jpg` :
-      '/images/default/no-image.png'    
+      '/images/default/no-image.png'
   })
 
 // Generate slug from product name
 // Call manually with .save() when updating an existing record
 // because pre "save" functions do not run on "update" methods
-categorySchema.pre("save", async function(next) {
+categorySchema.pre("save", async function (next) {
   this.slug = slugify(`${this.title}`, { lower: true })
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i')
   const productWithSlug = await this.constructor.find({ slug: slugRegEx })

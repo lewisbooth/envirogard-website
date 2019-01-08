@@ -9,7 +9,7 @@ const options = {
     virtuals: true
   },
   toJSON: {
-    virtuals: true 
+    virtuals: true
   }
 }
 
@@ -23,6 +23,32 @@ const subcategorySchema = new Schema(
     slug: {
       type: String,
       trim: true
+    },
+    hasImage: {
+      type: Boolean,
+      default: false
+    },
+    description: {
+      short: {
+        type: String,
+        trim: true
+      },
+      long: {
+        type: String,
+        trim: true
+      },
+    },
+    meta: {
+      title: {
+        type: String,
+        trim: true,
+        required: "Please supply a meta title"
+      },
+      description: {
+        type: String,
+        trim: true,
+        required: "Please supply a meta description"
+      },
     },
     category: {
       type: ObjectId, ref: 'Category'
@@ -47,9 +73,15 @@ subcategorySchema
   })
 
 subcategorySchema
+  .virtual('publicFolder')
+  .get(function () {
+    return `${process.env.PUBLIC_FOLDER}/cms/subcategories/${this._id}`
+  })
+
+subcategorySchema
   .virtual('pageURL')
   .get(function () {
-    return this.category ? 
+    return this.category ?
       `/categories/${this.category.slug}/${this.slug}`
       : null
   })
@@ -60,12 +92,28 @@ subcategorySchema
     return `/dashboard/subcategories/${this.slug}`
   })
 
+subcategorySchema
+  .virtual('mainImageURL')
+  .get(function () {
+    return this.hasImage ?
+      `/cms/subcategories/${this._id}/images/cover.jpg` :
+      '/images/default/no-image.png'
+  })
+
+subcategorySchema
+  .virtual('mainImageThumbnailURL')
+  .get(function () {
+    return this.hasImage ?
+      `/cms/subcategories/${this._id}/images/cover-thumb.jpg` :
+      '/images/default/no-image.png'
+  })
+
 // Always populate the category in order to generate the full page URL
-const autoPopulate = function(next) {
+const autoPopulate = function (next) {
   this.populate('category')
   next()
 }
-  
+
 subcategorySchema.
   pre('findOne', autoPopulate).
   pre('find', autoPopulate)
@@ -73,7 +121,7 @@ subcategorySchema.
 // Generate slug from product name
 // Call manually with .save() when updating an existing record
 // because pre "save" functions do not run on "update" methods
-subcategorySchema.pre("save", async function(next) {
+subcategorySchema.pre("save", async function (next) {
   this.slug = slugify(`${this.title}`, { lower: true })
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i')
   const productWithSlug = await this.constructor.find({ slug: slugRegEx })

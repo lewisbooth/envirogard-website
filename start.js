@@ -37,10 +37,10 @@ app.set("port", process.env.PORT || 8888)
 // Initiate the server
 const server = app.listen(app.get("port"), () => {
   console.log(`Express running → PORT ${server.address().port}`)
-  if (process.env.NODE_ENV === "production")
-    console.log("⚡  Production Mode ⚡")
-  else
-    console.log("🐌  Development Mode 🐌 ")
+  console.log(process.env.NODE_ENV === "production" ?
+    "⚡  Production Mode ⚡" :
+    "🐌  Development Mode 🐌"
+  )
   console.log("Local address: " + ip.address())
 })
 

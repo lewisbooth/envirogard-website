@@ -32,6 +32,21 @@ block body
         .label-and-input
           label(for='title') Title
           input(name='title' type='text' value=(subcategory ? subcategory.title : '') required)
+        .label-and-input
+          label(for='shortDescription') Short Description
+          textarea(name='shortDescription' rows='3')= subcategory ? subcategory.description.short : ''
+        .label-and-input
+          label(for='longDescription') Expanded Description
+            span.label__subtitle Revealed when 'Read More' is clicked on subcategory page
+          textarea(name='longDescription' rows='10')= subcategory ? subcategory.description.long : ''
+        .label-and-input
+          label(for='metaTitle') Meta Title
+          span.link#copy-from-title Copy from Title
+          input(name='metaTitle' type='text' value=(subcategory ? subcategory.meta.title : '') required)
+        .label-and-input
+          label(for='metaDescription') Meta Description
+          span.link#copy-from-description Copy from Description
+          textarea(name='metaDescription' required rows='3')= subcategory ? subcategory.meta.description : ''
       div
         .label-and-input
           label Category
@@ -43,6 +58,25 @@ block body
                 value=category._id
                 selected=(subcategory && subcategory.category ? subcategory.category.id === category.id : false)          
                 )= category.title
+
+        .label-and-input
+          label Main image
+          if subcategory && subcategory.hasImage
+            span.file-uploaded
+              img(src='/images/icons/check-green-circle.svg')
+              span Image uploaded              
+          input(name='coverImage' type='file' accept='image/*')        
+
+        .image-preview(hidden=!(subcategory && subcategory.hasImage))
+          label Image preview
+            span.label__subtitle Cropped to 5:3 ratio on subcategory page to avoid large headings
+          .image-preview__cropped
+            img(src=(subcategory && subcategory.hasImage ? subcategory.mainImageURL : ''))
+
+        if subcategory && subcategory.hasImage
+          .checkbox
+            input(name='deleteImage' type='checkbox')
+            label(for='deleteImage') Delete Image
 
     .edit-linked__listings
       label Manage Products
@@ -63,6 +97,9 @@ block body
                 a(href=product.editURL class="button" target="_blank") Edit Product
                 span(onclick="removeProduct(event)") Remove
 
+    .admin__upload-progress
+      h5 Uploading files...
+      progress(value='0' max='1')
     .admin__errors
     .admin__save-buttons
       if subcategory

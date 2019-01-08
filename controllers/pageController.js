@@ -2,6 +2,7 @@ const mongoose = require("mongoose")
 const Product = mongoose.model("Product")
 const Industry = mongoose.model("Industry")
 const Category = mongoose.model("Category")
+const Subcategory = mongoose.model("Subcategory")
 const { contactForm } = require("../helpers/contactForm")
 const { newsletterForm } = require("../helpers/newsletterForm")
 const { parseSortParams } = require("../helpers/parseSortParams")
@@ -44,9 +45,26 @@ exports.product = async (req, res) => {
 
 exports.search = async (req, res) => {
   const filter = parseFilterParams(req)
-  const products = await Product.find(filter)
+  // Query products where search string is in title, description or key features
+  const products = await Product
+    .find(filter)
+  // Query subcategories where title matches search query
+  const subcategories = await Subcategory
+    .find(filter)
+    .populate('products')
+  // Push all matching subcategory products into product array
+  subcategories.forEach(subcategory => {
+    subcategory.products.forEach(product => {
+      // Check if product already exists in first Product query
+      let exists = products.filter(existingProduct =>
+        product._id.toString() === existingProduct._id.toString()
+      )
+      if (exists.length === 0)
+        products.push(product)
+    })
+  })
   res.render("search", {
-    title: 'Search Products',
+    title: `Search '${req.query.globalSearch}' - ${products.length} Results`,
     products
   })
 }
@@ -67,18 +85,19 @@ exports.category = async (req, res) => {
     return res.redirect("/")
   }
 
-  // Build the Product query
+  // Start building the Product query
   const filter = parseFilterParams(req)
   const sort = parseSortParams(req, 'az')
 
-  // If a subcategory is selected, use its title instead of the category title
-  let subcategoryTitle = ''
+  // Save selected subcategory to use in template if applicable
+  let subcategory = null
 
-  // Returns an array of requested subcategory IDs
+  // Filter products by subcategory IDs
+  // Returns an array of selected subcategories
   const selectedSubcategories = category.subcategories.map(doc => {
     if (req.params.subcategory) {
       if (req.params.subcategory === doc.slug) {
-        subcategoryTitle = doc.title
+        subcategory = doc
         return doc._id
       }
     } else {
@@ -95,11 +114,20 @@ exports.category = async (req, res) => {
     .find(filter)
     .sort(sort)
 
+  const title = subcategory ?
+    subcategory.title :
+    category.title
+
+  const description = subcategory ?
+    subcategory.meta.description :
+    category.meta.description
+
   res.render("category", {
-    title: subcategoryTitle || category.title,
-    description: category.meta.description,
+    title,
+    description,
     openGraphImage: category.mainImageURL,
     category,
+    subcategory,
     products
   })
 }

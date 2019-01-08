@@ -214,7 +214,7 @@ exports.deleteProduct = async (req, res) => {
       }
       // Emulates 'rm -rf'
       rimraf(doc.publicFolder, () =>
-        console.log("Product deleted: " + doc.title)
+        console.log(`Product deleted: ${doc.title}`)
       )
       req.flash("success", "Product deleted")
       res.redirect("/dashboard/products")
@@ -309,7 +309,7 @@ exports.deleteCategory = async (req, res) => {
       }
       // Emulates 'rm -rf'
       rimraf(doc.publicFolder, () =>
-        console.log("Category deleted: " + doc.title)
+        console.log(`Category deleted: ${doc.title}`)
       )
       req.flash("success", "Category deleted")
       res.redirect("/dashboard/categories")
@@ -402,6 +402,8 @@ exports.newSubcategorySave = async (req, res, next) => {
           { $set: { subcategory: doc._id } }
         )
       })
+      // Attach document to 'req' to be used by the file upload handlers
+      req.category = doc
       req.flash("success", "New subcategory added")
       res.status(200).send()
     }
@@ -449,8 +451,10 @@ exports.editSubcategorySave = async (req, res, next) => {
       }
       // Manually call save() to trigger slug update
       doc.save()
+      // Attach document to 'req' to be used by the file upload handlers
+      req.subcategory = doc
       req.flash("success", "Subcategory has been updated")
-      res.redirect("/dashboard/subcategories")
+      next()
     }
   )
 }
@@ -469,10 +473,55 @@ exports.deleteSubcategory = async (req, res) => {
         { subcategory: doc._id },
         { $set: { subcategory: null } }
       )
+      // Emulates 'rm -rf'
+      rimraf(doc.publicFolder, () =>
+        console.log(`Subcategory deleted: ${doc.title}`)
+      )
       req.flash("success", "Subcategory deleted")
       res.redirect("/dashboard/subcategories")
     }
   )
+}
+
+// Handles uploading new images and rearranging/deleting existing images.
+// Subcategories only have one image, which is saved as 'cover.jpg'
+exports.uploadSubcategoryImage = async (req, res, next) => {
+  const newImage = req.file
+  const folder = `${req.subcategory.publicFolder}/images`
+  // Initialise category image folder
+  mkdirp.sync(folder)
+  // Delete existing image if required
+  if ((newImage || req.body.deleteImage) && fs.existsSync(`${folder}/cover.jpg`)) {
+    fs.unlinkSync(`${folder}/cover.jpg`)
+    fs.unlinkSync(`${folder}/cover-thumb.jpg`)
+    await Subcategory.findOneAndUpdate(
+      { _id: req.subcategory._id },
+      { $set: { hasImage: false } }
+    )
+  }
+  if (!newImage) return next()
+  // Generate optimised image (1000px on longest side)
+  sharp(newImage.buffer)
+    .rotate()
+    .resize(1000, 1000)
+    .max()
+    .toFormat('jpg')
+    .toFile(`${folder}/cover.jpg`)
+    .then(() => console.log('New subcategory image uploaded'))
+    .catch(err => console.error)
+  // Generate thumbnail image (400px on longest side)
+  sharp(newImage.buffer)
+    .rotate()
+    .resize(400, 400)
+    .max()
+    .toFormat('jpg')
+    .toFile(`${folder}/cover-thumb.jpg`)
+  // Set flag in database
+  await Subcategory.findOneAndUpdate(
+    { _id: req.subcategory._id },
+    { $set: { hasImage: true } }
+  )
+  next()
 }
 
 exports.industries = async (req, res) => {
@@ -538,7 +587,7 @@ exports.deleteIndustry = async (req, res) => {
       }
       // Emulates 'rm -rf'
       rimraf(doc.publicFolder, () =>
-        console.log("Industry deleted: " + doc.title)
+        console.log(`Industry deleted: ${doc.title}`)
       )
       req.flash("success", "Industry deleted")
       res.redirect("/dashboard/industries")

@@ -3,14 +3,23 @@ extends layout
 block body
   .category__header
     .container
-      h1= category.title
-      if category.hasImage
+      h1= title
+      if subcategory && subcategory.hasImage
+        .category__header--image(
+          style=`background-image: url('${subcategory.mainImageURL}');`
+        )
+      else if category.hasImage
         .category__header--image(
           style=`background-image: url('${category.mainImageURL}');`
         )
   .container
     .category__description
-      if category.description
+      if subcategory && subcategory.description && subcategory.description.short
+        p= subcategory.description.short
+        if subcategory.description.long
+          p= subcategory.description.long
+          .category__description--read-more
+      else if category.description
         p= category.description.short
         if category.description.long
           p= category.description.long

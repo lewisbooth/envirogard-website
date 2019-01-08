@@ -55,6 +55,11 @@ block body
           .image-preview__cropped
             img(src=(industry && industry.hasImage ? industry.mainImageURL : ''))
 
+        if industry && industry.hasImage
+          .checkbox
+            input(name='deleteImage' type='checkbox')
+            label(for='deleteImage') Delete Image
+
     .edit-linked__listings
       label Manage Subcategories
       input(name='subcategoryDropdown' 

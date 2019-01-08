@@ -22,6 +22,6 @@ block body
           if query.globalSearch
             span for '#{query.globalSearch}'
         for product in products
-          +categoryListing(product)
+          +categoryListing(product, true)
       else if query.search
         h5 No products found

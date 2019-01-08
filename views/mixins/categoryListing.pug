@@ -1,8 +1,9 @@
-mixin categoryListing(product)
+mixin categoryListing(product, showSubcategory)
   a.category__results--listing(href=product.pageURL)
     .category__results--listing--image(style=`background-image: url('${product.mainImageThumbnailURL}');`)
     .category__results--listing--text
       h2= truncate(product.title, 75)
+      h2= truncate(product.subcategory.title, 75)
       ul
         for feature, i in product.features
           if i < 4

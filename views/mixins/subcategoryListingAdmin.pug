@@ -1,5 +1,7 @@
 mixin subcategoryListingAdmin(subcategory)
   a.admin__listings--entry(href=subcategory.editURL)
+    .admin__listings--entry--image
+      img(src=subcategory.mainImageThumbnailURL)
     .admin__listings--entry--text
       .admin__listings--entry--text--title= subcategory.title
       if subcategory.category
@@ -11,4 +13,4 @@ mixin subcategoryListingAdmin(subcategory)
       else
         .admin__listings--entry--text--subcategory.warning No Category
     .admin__listings--entry--buttons
-      .button Edit 
+      .button Edit

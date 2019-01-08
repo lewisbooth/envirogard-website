@@ -5,7 +5,11 @@ exports.parseFilterParams = req => {
   let subcategory = req.query.subcategory || req.body.subcategory
   let filter = {}
   if (search)
-    filter.title = { $regex: search, $options: "i" }
+    filter.$or = [
+      { title: { $regex: search, $options: "i" } },
+      { 'description.short': { $regex: search, $options: "i" } },
+      { 'features': { $regex: search, $options: "i" } }
+    ]
   if (subcategory && subcategory !== "all")
     filter.subcategory = subcategory
   if (req.params.slug)
