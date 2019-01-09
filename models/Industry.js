@@ -9,7 +9,7 @@ const options = {
     virtuals: true
   },
   toJSON: {
-    virtuals: true 
+    virtuals: true
   }
 }
 
@@ -24,7 +24,7 @@ const industrySchema = new Schema(
       type: String,
       trim: true
     },
-    hasImage: Boolean,    
+    hasImage: Boolean,
     description: {
       type: String,
       trim: true,
@@ -45,6 +45,12 @@ const industrySchema = new Schema(
   },
   options
 )
+
+industrySchema.index({
+  title: 'text',
+  description: 'text',
+  slug: 'text'
+})
 
 industrySchema.index({ title: 1 })
 industrySchema.index({ slug: 1 })
@@ -87,23 +93,23 @@ industrySchema
 industrySchema
   .virtual('mainImageURL')
   .get(function () {
-    return this.hasImage ? 
+    return this.hasImage ?
       `/cms/industries/${this._id}/images/cover.jpg` :
-      '/images/default/no-image.png'    
+      '/images/default/no-image.png'
   })
 
 industrySchema
   .virtual('mainImageThumbnailURL')
   .get(function () {
-    return this.hasImage ? 
+    return this.hasImage ?
       `/cms/industries/${this._id}/images/cover-thumb.jpg` :
-      '/images/default/no-image.png'    
+      '/images/default/no-image.png'
   })
 
 // Generate slug from product name
 // Call manually with .save() when updating an existing record
 // because pre "save" functions do not run on "update" methods
-industrySchema.pre("save", async function(next) {
+industrySchema.pre("save", async function (next) {
   this.slug = slugify(`${this.title}`, { lower: true })
   const slugRegEx = new RegExp(`^(${this.slug})((-[0-9]*$)?)`, 'i')
   const productWithSlug = await this.constructor.find({ slug: slugRegEx })

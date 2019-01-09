@@ -74,8 +74,13 @@ const productSchema = new Schema(
 )
 
 productSchema.index({
-  slug: 1,
-  title: 1
+  title: 'text',
+  'description.short': 'text',
+})
+
+productSchema.index({
+  title: 1,
+  slug: 1
 })
 
 productSchema

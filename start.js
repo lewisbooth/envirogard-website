@@ -1,3 +1,6 @@
+// Load environment variables
+require("dotenv").config({ path: "variables.env" })
+
 const path = require("path")
 const ip = require("ip")
 const { connectToMongo } = require("./helpers/connectToMongo")
@@ -8,10 +11,8 @@ const { checkConfig } = require("./helpers/checkConfig")
 process.env.ROOT = __dirname
 process.env.PUBLIC_FOLDER = path.join(__dirname, "public")
 
+// Make sure config files are present
 checkConfig()
-
-// Load environment variables
-require("dotenv").config({ path: "variables.env" })
 
 // Initiate database connection
 connectToMongo()

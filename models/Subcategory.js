@@ -60,8 +60,15 @@ const subcategorySchema = new Schema(
   options
 )
 
-subcategorySchema.index({ title: 1 })
-subcategorySchema.index({ slug: 1 })
+subcategorySchema.index({
+  title: 'text',
+  'description.short': 'text',
+})
+
+subcategorySchema.index({
+  title: 1,
+  slug: 1
+})
 
 // One-to-many relationship with Products
 // Products have a { subcategory: ObjectId } field

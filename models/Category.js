@@ -54,8 +54,15 @@ const categorySchema = new Schema(
   options
 )
 
-categorySchema.index({ title: 1 })
-categorySchema.index({ slug: 1 })
+categorySchema.index({
+  title: 'text',
+  'description.short': 'text',
+})
+
+categorySchema.index({
+  title: 1,
+  slug: 1
+})
 
 // One-to-many relationship with Subcategory
 // Subcategories have a { category: ObjectId } field

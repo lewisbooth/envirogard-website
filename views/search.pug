@@ -20,7 +20,7 @@ block body
           h5 No products found for '#{query.globalSearch}'
           
       if products.length > 0 && query.globalSearch
-        h5 Found #{products.length} products 
+        h5 Found #{products.length} product#{products.length > 1 ? 's' : ''} 
           if query.globalSearch
             span for '#{query.globalSearch}'
         for product in products

@@ -44,6 +44,13 @@ exports.product = async (req, res) => {
   })
 }
 
+// Redirect global search requests to /search
+exports.globalSearch = (req, res, next) => {
+  if (req.query.globalSearch && req.path !== '/search')
+    return res.redirect(`/search?globalSearch=${req.query.globalSearch}`)
+  next()
+}
+
 exports.search = async (req, res) => {
   if (!req.query.globalSearch || req.query.globalSearch === '') {
     req.flash('error', 'Please enter a search term')
@@ -55,6 +62,10 @@ exports.search = async (req, res) => {
     .find(filter)
   // Query subcategories where title matches search query
   const subcategories = await Subcategory
+    .find(filter)
+    .populate('products')
+  // Query industries where title matches search query
+  const industries = await Industry
     .find(filter)
     .populate('products')
   // Push all matching subcategory products into product array
