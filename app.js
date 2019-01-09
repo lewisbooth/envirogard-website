@@ -49,9 +49,6 @@ app.use(cacheBuster)
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
-// Log dynamic requests to console
-app.use(logging)
-
 // Throw error safely if DB is not connected
 app.use(checkDB)
 
@@ -72,6 +69,9 @@ app.use(
 // Load PassportJS authentication
 app.use(passport.initialize())
 app.use(passport.session())
+
+// Log dynamic requests to console
+app.use(logging)
 
 // Promisify the PassportJS login API
 app.use((req, res, next) => {
