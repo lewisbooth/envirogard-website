@@ -1,3 +1,4 @@
+const url = require("url")
 const mongoose = require("mongoose")
 const Product = mongoose.model("Product")
 const Industry = mongoose.model("Industry")
@@ -44,6 +45,10 @@ exports.product = async (req, res) => {
 }
 
 exports.search = async (req, res) => {
+  if (!req.query.globalSearch || req.query.globalSearch === '') {
+    req.flash('error', 'Please enter a search term')
+    return res.redirect('back')
+  }
   const filter = parseFilterParams(req)
   // Query products where search string is in title, description or key features
   const products = await Product
@@ -54,19 +59,39 @@ exports.search = async (req, res) => {
     .populate('products')
   // Push all matching subcategory products into product array
   subcategories.forEach(subcategory => {
-    subcategory.products.forEach(product => {
-      // Check if product already exists in first Product query
-      let exists = products.filter(existingProduct =>
-        product._id.toString() === existingProduct._id.toString()
-      )
-      if (exists.length === 0)
-        products.push(product)
+    if (subcategory.products) {
+      subcategory.products.forEach(product => {
+        // Check if product already exists in first Product query
+        let exists = false
+        products.forEach(existingProduct => {
+          if (product._id.toString() === existingProduct._id.toString())
+            exists = true
+        })
+        // If not, add it to the products array
+        if (!exists)
+          products.push(product)
+      })
+    }
+  })
+  // The analytics software needs the number of results in the query string.
+  // Unfortunately this means redirecting to a new URL and hitting the route
+  // (and database) twice unless some fancy caching is implemented.
+  // The queries are super fast (<2ms) so this isn't a problem.
+  if (req.query.results == products.length) {
+    res.render("search", {
+      title: `Search '${req.query.globalSearch}' - ${products.length} Results`,
+      products
     })
-  })
-  res.render("search", {
-    title: `Search '${req.query.globalSearch}' - ${products.length} Results`,
-    products
-  })
+  } else {
+    const processedURL = url.format({
+      pathname: req.path,
+      query: {
+        "globalSearch": req.query.globalSearch,
+        "results": products.length,
+      }
+    })
+    res.redirect(processedURL)
+  }
 }
 
 exports.category = async (req, res) => {

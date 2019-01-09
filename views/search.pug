@@ -16,6 +16,8 @@ block body
         )
         button(type="submit") 
           img(src="/images/icons/search.svg" alt="Search")
+        if products.length === 0 && query.globalSearch
+          h5 No products found for '#{query.globalSearch}'
           
       if products.length > 0 && query.globalSearch
         h5 Found #{products.length} products 
@@ -23,5 +25,3 @@ block body
             span for '#{query.globalSearch}'
         for product in products
           +categoryListing(product, true)
-      else if query.search
-        h5 No products found
