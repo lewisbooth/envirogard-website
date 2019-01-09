@@ -47,13 +47,13 @@ exports.product = async (req, res) => {
 
 // Redirect global search requests to /search
 exports.globalSearch = (req, res, next) => {
-  if (req.query.globalSearch && req.path !== '/search')
-    return res.redirect(`/search?globalSearch=${req.query.globalSearch}`)
+  if (req.query.searchPhrase && req.path !== '/search')
+    return res.redirect(`/search?searchPhrase=${req.query.searchPhrase}`)
   next()
 }
 
 exports.search = async (req, res) => {
-  if (!req.query.globalSearch || req.query.globalSearch === '') {
+  if (!req.query.searchPhrase || req.query.searchPhrase === '') {
     req.flash('error', 'Please enter a search term')
     return res.redirect('back')
   }
@@ -83,17 +83,17 @@ exports.search = async (req, res) => {
   // Unfortunately this means redirecting to a new URL and hitting the route
   // (and database) twice unless some fancy caching is implemented.
   // The queries are super fast (<2ms) so this isn't a problem.
-  if (req.query.results == products.length) {
+  if (req.query.searchResults == products.length) {
     res.render("search", {
-      title: `Search '${req.query.globalSearch}' - ${products.length} Results`,
+      title: `Search '${req.query.searchPhrase}' - ${products.length} Results`,
       products
     })
   } else {
     const processedURL = url.format({
       pathname: req.path,
       query: {
-        "globalSearch": req.query.globalSearch,
-        "results": products.length,
+        "searchPhrase": req.query.searchPhrase,
+        "searchResults": products.length,
       }
     })
     res.redirect(processedURL)

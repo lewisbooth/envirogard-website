@@ -14,8 +14,8 @@ mixin nav
         form.nav__search
           input(
             type="text" 
-            name="globalSearch" 
-            value=(query.globalSearch || '')
+            name="searchPhrase" 
+            value=(query.searchPhrase || '')
             placeholder="Search Envirogard Products..."
           )
           button(type="submit") 

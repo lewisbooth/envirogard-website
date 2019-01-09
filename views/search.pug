@@ -10,18 +10,18 @@ block body
         label Search Envirogard Products...
         input(
           type="text" 
-          name="globalSearch" 
-          value=(query.globalSearch || '')
+          name="searchPhrase" 
+          value=(query.searchPhrase || '')
           placeholder="Search Envirogard Products..."
         )
         button(type="submit") 
           img(src="/images/icons/search.svg" alt="Search")
-        if products.length === 0 && query.globalSearch
-          h5 No products found for '#{query.globalSearch}'
+        if products.length === 0 && query.searchPhrase
+          h5 No products found for '#{query.searchPhrase}'
           
-      if products.length > 0 && query.globalSearch
+      if products.length > 0 && query.searchPhrase
         h5 Found #{products.length} product#{products.length > 1 ? 's' : ''} 
-          if query.globalSearch
-            span for '#{query.globalSearch}'
+          if query.searchPhrase
+            span for '#{query.searchPhrase}'
         for product in products
           +categoryListing(product, true)
