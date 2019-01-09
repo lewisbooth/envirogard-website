@@ -52,8 +52,10 @@ industrySchema.index({
   slug: 'text'
 })
 
-industrySchema.index({ title: 1 })
-industrySchema.index({ slug: 1 })
+industrySchema.index({
+  title: 1,
+  slug: 1
+})
 
 // One-to-many relationship with Subcategory & Cateory
 // Subcategories/Categories have a { industry: [ObjectId] } field

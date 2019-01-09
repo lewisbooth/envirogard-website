@@ -36,7 +36,7 @@ copyFromDescriptionLink.addEventListener('click', copyFromDescription)
 
 function copyFromTitle() {
   if (inputs.title.value)
-    inputs.metaTitle.value = inputs.title.value
+    inputs.metaTitle.value = inputs.title.value + ' for Hire'
 }
 
 function copyFromDescription() {

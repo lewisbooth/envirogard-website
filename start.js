@@ -25,12 +25,11 @@ require("./models/Subcategory")
 require("./models/Industry")
 require("./models/Settings")
 
-// Creates default Settings database entry if required
+// Create default Settings database entry if required
 const { checkSettings } = require("./helpers/checkSettings")
-
 checkSettings()
 
-// Load server scripts
+// Load routes & middleware
 const app = require("./app")
 
 app.set("port", process.env.PORT || 8888)

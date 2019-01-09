@@ -29,9 +29,9 @@ copyFromDescriptionLink.addEventListener('click', copyFromDescription)
 
 function previewImage(e) {
   const input = e.target
-  if (input.files && input.files[0]) {    
-    var reader = new FileReader()    
-    reader.onload = e => {     
+  if (input.files && input.files[0]) {
+    var reader = new FileReader()
+    reader.onload = e => {
       imagePreview.setAttribute('src', e.target.result)
       imagePreviewContainer.removeAttribute('hidden')
     }
@@ -47,12 +47,12 @@ function previewImage(e) {
 
 function copyFromTitle() {
   if (inputs.title.value)
-    inputs.metaTitle.value = inputs.title.value
+    inputs.metaTitle.value = inputs.title.value + ' for Hire'
 }
 
 function copyFromDescription() {
   if (inputs.shortDescription.value)
-    inputs.metaDescription.value = inputs.shortDescription.value  
+    inputs.metaDescription.value = inputs.shortDescription.value
 }
 
 
@@ -63,9 +63,9 @@ function submitForm(e) {
   errors.clear()
   const data = new FormData()
   // Append all basic text inputs
-  for (let input in inputs) 
+  for (let input in inputs)
     if (inputs[input])
-      data.append(input, inputs[input].value)  
+      data.append(input, inputs[input].value)
   // Append image
   if (imageInput.files && imageInput.files[0]) {
     data.append("coverImage", imageInput.files[0])
@@ -73,10 +73,10 @@ function submitForm(e) {
   }
   // Increment upload progress bar
   const onUploadProgress = p =>
-    uploadProgressBar.value = p.loaded / p.total  
+    uploadProgressBar.value = p.loaded / p.total
   // Send form data
   axios.post(
-    window.location.pathname, 
+    window.location.pathname,
     data,
     { onUploadProgress }
   ).then(() =>

@@ -8,6 +8,7 @@ const { contactForm } = require("../helpers/contactForm")
 const { newsletterForm } = require("../helpers/newsletterForm")
 const { parseSortParams } = require("../helpers/parseSortParams")
 const { parseFilterParams } = require("../helpers/parseFilterParams")
+const { pushUniqueProducts } = require("../helpers/pushUniqueProducts")
 const validator = require('validator')
 
 // Titles and descriptions are written in the controllers
@@ -67,22 +68,16 @@ exports.search = async (req, res) => {
   // Query industries where title matches search query
   const industries = await Industry
     .find(filter)
-    .populate('products')
+    .populate({
+      path: 'subcategories',
+      options: {
+        populate: 'products'
+      }
+    })
   // Push all matching subcategory products into product array
-  subcategories.forEach(subcategory => {
-    if (subcategory.products) {
-      subcategory.products.forEach(product => {
-        // Check if product already exists in first Product query
-        let exists = false
-        products.forEach(existingProduct => {
-          if (product._id.toString() === existingProduct._id.toString())
-            exists = true
-        })
-        // If not, add it to the products array
-        if (!exists)
-          products.push(product)
-      })
-    }
+  pushUniqueProducts(subcategories, products)
+  industries.forEach(industry => {
+    pushUniqueProducts(industry.subcategories, products)
   })
   // The analytics software needs the number of results in the query string.
   // Unfortunately this means redirecting to a new URL and hitting the route
