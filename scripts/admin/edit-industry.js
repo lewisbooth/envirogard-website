@@ -17,10 +17,10 @@ const autocompleteResults = form.querySelector('.edit-linked__listings--autocomp
 const inputs = {
   title: form.querySelector('input[name="title"]'),
   metaTitle: form.querySelector('input[name="metaTitle"]'),
-  metaDescription: form.querySelector('textarea[name="metaDescription"]'),
-  deleteImage: form.querySelector('input[name="deleteImage"]')
+  metaDescription: form.querySelector('textarea[name="metaDescription"]')
 }
 
+const deleteImage = form.querySelector('input[name="deleteImage"]')
 
 // -------- Triggers --------- //
 
@@ -187,6 +187,8 @@ function submitForm(e) {
   for (let input in inputs)
     if (inputs[input])
       data.append(input, inputs[input].value)
+  if (deleteImage)
+    data.append('deleteImage', deleteImage.checked)
   // Append Pell editor
   data.append("description", editor.content.innerHTML)
   data.append("subcategories", JSON.stringify(subcategories.map(subcategory => subcategory.id)))

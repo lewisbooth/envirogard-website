@@ -18,10 +18,10 @@ const inputs = {
   shortDescription: form.querySelector('textarea[name="shortDescription"]'),
   longDescription: form.querySelector('textarea[name="longDescription"]'),
   metaTitle: form.querySelector('input[name="metaTitle"]'),
-  metaDescription: form.querySelector('textarea[name="metaDescription"]'),
-  deleteImage: form.querySelector('input[name="deleteImage"]')
+  metaDescription: form.querySelector('textarea[name="metaDescription"]')
 }
 
+const deleteImage = form.querySelector('input[name="deleteImage"]')
 
 // -------- Triggers --------- // 
 
@@ -171,6 +171,8 @@ function submitForm(e) {
   for (let input in inputs)
     if (inputs[input])
       data.append(input, inputs[input].value)
+  if (deleteImage)
+    data.append('deleteImage', deleteImage.checked)
   // Append image
   if (imageInput.files && imageInput.files[0]) {
     data.append("coverImage", imageInput.files[0])

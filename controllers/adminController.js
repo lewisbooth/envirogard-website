@@ -325,7 +325,7 @@ exports.uploadCategoryImage = async (req, res, next) => {
   // Initialise category image folder
   mkdirp.sync(folder)
   // Delete existing image if required
-  if ((newImage || req.body.deleteImage) && fs.existsSync(`${folder}/cover.jpg`)) {
+  if ((newImage || req.body.deleteImage === 'true') && fs.existsSync(`${folder}/cover.jpg`)) {
     fs.unlinkSync(`${folder}/cover.jpg`)
     fs.unlinkSync(`${folder}/cover-thumb.jpg`)
     await Category.findOneAndUpdate(
@@ -491,7 +491,7 @@ exports.uploadSubcategoryImage = async (req, res, next) => {
   // Initialise category image folder
   mkdirp.sync(folder)
   // Delete existing image if required
-  if ((newImage || req.body.deleteImage) && fs.existsSync(`${folder}/cover.jpg`)) {
+  if ((newImage || req.body.deleteImage === 'true') && fs.existsSync(`${folder}/cover.jpg`)) {
     fs.unlinkSync(`${folder}/cover.jpg`)
     fs.unlinkSync(`${folder}/cover-thumb.jpg`)
     await Subcategory.findOneAndUpdate(
@@ -651,7 +651,7 @@ exports.uploadIndustryImage = async (req, res, next) => {
   // Initialise industry image folder
   mkdirp.sync(folder)
   // Delete existing image if required
-  if ((newImage || req.body.deleteImage) && fs.existsSync(`${folder}/cover.jpg`)) {
+  if ((newImage || req.body.deleteImage === 'true') && fs.existsSync(`${folder}/cover.jpg`)) {
     fs.unlinkSync(`${folder}/cover.jpg`)
     fs.unlinkSync(`${folder}/cover-thumb.jpg`)
     await Industry.findOneAndUpdate(

@@ -138,11 +138,10 @@ app.use(errorHandlers.notFound)
 // Flash Mongoose errors
 app.use(errorHandlers.flashValidationErrors)
 
-// Error page with stacktrace during development
-if (process.env.NODE_ENV === "development")
-  app.use(errorHandlers.developmentErrors)
-
-// Error page with no stacktrace in production
-app.use(errorHandlers.productionErrors)
+process.env.NODE_ENV === "development" ?
+  // Error page with stacktrace during development
+  app.use(errorHandlers.developmentErrors) :
+  // Error page with no stacktrace in production
+  app.use(errorHandlers.productionErrors)
 
 module.exports = app

@@ -32,10 +32,8 @@ checkSettings()
 // Load routes & middleware
 const app = require("./app")
 
-app.set("port", process.env.PORT || 8888)
-
-// Initiate the server
-const server = app.listen(app.get("port"), () => {
+// Initiate the server and log useful data
+const server = app.listen(process.env.PORT || 8888, () => {
   console.log(`Express running → PORT ${server.address().port}`)
   console.log(process.env.NODE_ENV === "production" ?
     "⚡  Production Mode ⚡" :
@@ -45,6 +43,5 @@ const server = app.listen(app.get("port"), () => {
 })
 
 // Load cron jobs for sitemap, backup etc
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === "production")
   require("./cron")
-}
