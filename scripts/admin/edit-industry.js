@@ -191,7 +191,9 @@ function submitForm(e) {
     data.append('deleteImage', deleteImage.checked)
   // Append Pell editor
   data.append("description", editor.content.innerHTML)
-  data.append("subcategories", JSON.stringify(subcategories.map(subcategory => subcategory.id)))
+  data.append("subcategories", JSON.stringify(
+    subcategories.map(subcategory => subcategory.id)
+  ))
   // Append image
   if (imageInput.files && imageInput.files[0]) {
     data.append("coverImage", imageInput.files[0])

@@ -82,7 +82,7 @@ exports.editProductSave = async (req, res, next) => {
   await Product.findOneAndUpdate(
     { slug: req.params.slug },
     { $set: product },
-    { returnNewDocument: true },
+    { new: true },
     (err, doc) => {
       if (err || !doc)
         return res.status(400).send()
@@ -284,7 +284,7 @@ exports.editCategorySave = async (req, res, next) => {
   await Category.findOneAndUpdate(
     { slug: req.params.slug },
     { $set: category },
-    { returnNewDocument: true },
+    { new: true },
     (err, doc) => {
       if (err)
         return res.status(400).send()
@@ -431,7 +431,7 @@ exports.editSubcategorySave = async (req, res, next) => {
   await Subcategory.findOneAndUpdate(
     { slug: req.params.slug },
     { $set: subcategory },
-    { returnNewDocument: true },
+    { new: true },
     async (err, doc) => {
       if (err)
         return res.status(400).send()
@@ -615,7 +615,7 @@ exports.editIndustrySave = async (req, res, next) => {
   await Industry.findOneAndUpdate(
     { slug: req.params.slug },
     { $set: industry },
-    { returnNewDocument: true },
+    { new: true },
     async (err, doc) => {
       if (err)
         return res.status(400).send()
