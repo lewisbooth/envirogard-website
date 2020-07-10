@@ -50,7 +50,7 @@
     "moment": "^2.22.2",
     "mongodb-backup": "1.4.8",
     "mongodb-restore": "^1.6.2",
-    "mongoose": "^5.3.13",
+    "mongoose": "^5.7.5",
     "mongoose-mongodb-errors": "0.0.2",
     "multer": "^1.4.1",
     "natives": "^1.1.6",
