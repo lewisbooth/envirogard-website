@@ -10,6 +10,7 @@ exports.connectToMongo = (retry = false) => {
   }).then(() => {
     process.env.CONNECTED = "true"
     console.log("Connected to MongoDB")
+    
   }, err => {
     process.env.CONNECTED = "false"
     if (!retry)

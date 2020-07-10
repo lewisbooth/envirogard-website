@@ -4,13 +4,13 @@ block body
   .category__header
     .container
       h1= title
-      if subcategory && subcategory.hasImage
-        .category__header--image(
-          style=`background-image: url('${subcategory.mainImageURL}');`
-        )
-      else if category.hasImage
-        .category__header--image(
-          style=`background-image: url('${category.mainImageURL}');`
+      //- if subcategory && subcategory.hasImage
+      //-   .category__header--image(
+      //-     style=`background-image: url('${subcategory.mainImageURL}');`
+      //-   )
+      //- else if category.hasImage
+      //-   .category__header--image(
+      //-     style=`background-image: url('${category.mainImageURL}');`
         )
   .container
     .category__description

@@ -9,21 +9,6 @@ var minify = require("gulp-minify")
 var jsImport = require("gulp-js-import")
 var browserSync = require("browser-sync").create()
 
-gulp.task("default", ["serve"])
-
-// Start the BrowserSync server
-gulp.task("serve", ["stylus", "scripts"], () => {
-  browserSync.init({ proxy: "localhost:8888" })
-  // Watch for file changes and run the appropriate tasks
-  gulp.watch("styles/**/*.styl", ["stylus"])
-  gulp.watch("scripts/**/*.js", ["watch-scripts"])
-  gulp.watch("views/**/*.pug").on("change", browserSync.reload)
-})
-
-gulp.task("watch-scripts", ["scripts"], () => {
-  browserSync.reload()
-})
-
 // Transpile & minify JavaScript from ES6+ to ES5
 gulp.task("scripts", () => {
   return gulp
@@ -55,3 +40,17 @@ gulp.task("stylus", () => {
     .pipe(browserSync.stream())
 })
 
+// Start the BrowserSync server
+gulp.task("serve", gulp.series("stylus", "scripts", () => {
+  browserSync.init({ proxy: "localhost:8888" })
+  // Watch for file changes and run the appropriate tasks
+  gulp.watch("styles/**/*.styl", gulp.series("stylus"))
+  gulp.watch("scripts/**/*.js", gulp.series("watch-scripts"))
+  gulp.watch("views/**/*.pug").on("change", browserSync.reload)
+}))
+
+gulp.task("watch-scripts", gulp.series("scripts"), () => {
+  browserSync.reload()
+})
+
+gulp.task("default", gulp.series("serve"))

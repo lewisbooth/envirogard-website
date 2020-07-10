@@ -126,8 +126,7 @@ function userSelect(files) {
     // Create the readline object
     const input = readline.createInterface(
       process.stdin,
-      process.stdout,
-      null
+      process.stdout
     )
     // Prints the question to stdout and waits for user input
     input.question("Select a backup entry: ", answer => {
