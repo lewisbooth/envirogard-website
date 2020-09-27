@@ -47,5 +47,6 @@ mixin footer
       .container
         div
           img(src="/images/logos/envirogard-wordmark-white.svg" alt="Envirogard Logo")
-          span &copy; Specialist Hires Ltd 2018
+          - const year = new Date().getFullYear()
+          span &copy; Specialist Hires Ltd #[span=year]
         span Website by #[a(href="https://amp.studio" target="_blank") AMP Studio] on #[a(href="https://amp.studio/cms" target="_blank") AMP CMS]

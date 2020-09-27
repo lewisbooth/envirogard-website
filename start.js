@@ -1,47 +1,48 @@
 // Load environment variables
-require("dotenv").config({ path: "variables.env" })
+require("dotenv").config({ path: "variables.env" });
 
-const path = require("path")
-const ip = require("ip")
-const { connectToMongo } = require("./helpers/connectToMongo")
-const { checkConfig } = require("./helpers/checkConfig")
+const path = require("path");
+const ip = require("ip");
+const { connectToMongo } = require("./helpers/connectToMongo");
+const { checkConfig } = require("./helpers/checkConfig");
 
-// Expose an absolute path to root & public directories 
+// Expose an absolute path to root & public directories
 // Useful for scripts that are nested in folders
-process.env.ROOT = __dirname
-process.env.PUBLIC_FOLDER = path.join(__dirname, "public")
+process.env.ROOT = __dirname;
+process.env.PUBLIC_FOLDER = path.join(__dirname, "public");
 
 // Make sure config files are present
-checkConfig()
+checkConfig();
 
 // Initiate database connection
-connectToMongo()
+connectToMongo();
 
 // Load MongoDB models
-require("./models/User")
-require("./models/Product")
-require("./models/Category")
-require("./models/Subcategory")
-require("./models/Industry")
-require("./models/Settings")
+require("./models/User");
+require("./models/Product");
+require("./models/Category");
+require("./models/Subcategory");
+require("./models/Industry");
+require("./models/Settings");
+require("./models/Pages");
 
 // Create default Settings database entry if required
-const { checkSettings } = require("./helpers/checkSettings")
-checkSettings()
+const { checkSettings } = require("./helpers/checkSettings");
+checkSettings();
 
 // Load routes & middleware
-const app = require("./app")
+const app = require("./app");
 
 // Initiate the server and log useful data
 const server = app.listen(process.env.PORT || 8888, () => {
-  console.log(`Express running → PORT ${server.address().port}`)
-  console.log(process.env.NODE_ENV === "production" ?
-    "⚡  Production Mode ⚡" :
-    "🐌  Development Mode 🐌"
-  )
-  console.log("Local address: " + ip.address())
-})
+  console.log(`Express running → PORT ${server.address().port}`);
+  console.log(
+    process.env.NODE_ENV === "production"
+      ? "⚡  Production Mode ⚡"
+      : "🐌  Development Mode 🐌"
+  );
+  console.log("Local address: " + ip.address());
+});
 
 // Load cron jobs for sitemap, backup etc
-if (process.env.NODE_ENV === "production")
-  require("./cron")
+if (process.env.NODE_ENV === "production") require("./cron");

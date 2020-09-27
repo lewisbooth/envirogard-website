@@ -1,0 +1,15 @@
+extends layoutAdmin
+
+block body
+
+  form.admin__form.edit-product(name='about' onsubmit='submitForm(event)')
+    h1 About
+
+    .admin__errors
+    .admin__save-buttons
+      button.button__green(type='submit') Save Changes
+      
+block extraFooterScripts
+  script
+    include ../../public/js/admin/edit-about.js
+  script(src='https://unpkg.com/axios/dist/axios.min.js' async defer)
