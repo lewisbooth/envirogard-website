@@ -207,11 +207,16 @@ nav
       
       > div
         display flex
+        justify-content space-between
+        width 100%
         line-height 1.1
         font-size 1.4rem
 
-        .nav__secondary--products li a
-          box-shadow 1px 0px 0px 0px rgba(255,255,255,0.25)
+        .nav__secondary--products 
+          flex-grow 1
+          
+          li a
+            box-shadow 1px 0px 0px 0px rgba(255,255,255,0.25)
 
         > ul
           display flex
@@ -219,8 +224,8 @@ nav
           > li
             display flex
             align-items center
-            padding 1rem 0 .95rem 0
             position relative
+            flex-grow 1
 
             > ul          
               display none
@@ -243,11 +248,13 @@ nav
                   color white
 
             > a, > span
-              height 1.2em
-              padding 0 1.25rem
+              padding 1rem 1.25rem .95rem 1.25rem
+              width 100%
               color white
               text-decoration none
               white-space nowrap
+              text-align center
+              letter-spacing .01em
 
             &.live-chat__start-button a
               display flex
@@ -260,6 +267,7 @@ nav
 
             &:hover
               background-color mainBlueHover
+              cursor pointer
 
               span, a
                 box-shadow none

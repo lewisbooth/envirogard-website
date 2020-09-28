@@ -8,6 +8,7 @@ var babel = require("gulp-babel");
 var minify = require("gulp-minify");
 var jsImport = require("gulp-js-import");
 var browserSync = require("browser-sync").create();
+require("dotenv").config({ path: "variables.env" });
 
 // Transpile & minify JavaScript from ES6+ to ES5
 gulp.task("scripts", () => {
@@ -48,7 +49,7 @@ gulp.task("stylus", () => {
 gulp.task(
   "serve",
   gulp.series("stylus", "scripts", () => {
-    browserSync.init({ proxy: "localhost:9999" });
+    browserSync.init({ proxy: `localhost:${process.env.PORT}` });
     // Watch for file changes and run the appropriate tasks
     gulp.watch("styles/**/*.styl", gulp.series("stylus"));
     gulp.watch("scripts/**/*.js", gulp.series("watch-scripts"));

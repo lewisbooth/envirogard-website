@@ -67,14 +67,14 @@ mixin nav
           span.nav__secondary--dropdown.hide__desktop Browse by Industry
           ul.nav__secondary--industries
             li
-              span Browse by Industry
+              span Industries
               ul
                 for industry in globalIndustries
                   li
                     a(href=industry.pageURL)= industry.title
-        div.hide__tablet
-          ul
-            li.live-chat__start-button
-              a(href="/contact")
-                img(src="/images/icons/chat.svg" alt="Live Chat Icon")
-                span Live Chat
+        //- div.hide__tablet
+        //-   ul
+        //-     li.live-chat__start-button
+        //-       a(href="/contact")
+        //-         img(src="/images/icons/chat.svg" alt="Live Chat Icon")
+        //-         span Live Chat
