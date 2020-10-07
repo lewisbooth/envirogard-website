@@ -169,7 +169,10 @@ router.get("/dashboard/settings", catchErrors(adminController.settings));
 router.post("/dashboard/settings", catchErrors(adminController.settingsSave));
 
 router.get("/dashboard/about", catchErrors(adminController.about));
-// router.post("/dashboard/about", catchErrors(adminController.aboutSave));
+router.post("/dashboard/about", catchErrors(adminController.aboutSave));
+
+router.get("/dashboard/faq", catchErrors(adminController.faq));
+router.post("/dashboard/faq", catchErrors(adminController.faqSave));
 
 // Create a user with no authentication
 // Disabled in production!

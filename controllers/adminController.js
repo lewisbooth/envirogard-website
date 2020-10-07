@@ -671,7 +671,9 @@ exports.settings = async (req, res) => {
 };
 
 exports.settingsSave = async (req, res) => {
-  if (!req.body || !req.body.popularProducts) return res.status(400).send();
+  console.log(req.body)
+  if (!req.body || !req.body.popularProducts)
+    return res.status(400).send();
   // Parse popular products from req.body
   const popularProducts = JSON.parse(req.body.popularProducts).slice(0, 5);
   // Save to DB
@@ -681,9 +683,43 @@ exports.settingsSave = async (req, res) => {
 };
 
 exports.about = async (req, res) => {
-  const about = await Pages.findOne({ title: "about" });
+  const about = await Pages.findOne({ title: "About" })
   res.render("admin/about", {
     title: "About",
     about,
-  });
+  })
+}
+
+exports.aboutSave = async (req, res) => {
+  if (!req.body || !req.body.pageContent)
+    return res.status(400).send()
+  // Save to DB
+  const page = await Pages.findOneAndUpdate(
+    { title: 'About' },
+    { $set: { 'pageContent': req.body.pageContent } },
+    { upsert: true, new: true }
+  )
+  req.flash("success", "Settings updated")
+  res.status(200).send()
+};
+
+exports.faq = async (req, res) => {
+  const faq = await Pages.findOne({ title: "FAQ" })
+  res.render("admin/faq", {
+    title: "FAQ",
+    faq,
+  })
+}
+
+exports.faqSave = async (req, res) => {
+  if (!req.body || !req.body.pageContent)
+    return res.status(400).send()
+  // Save to DB
+  const page = await Pages.findOneAndUpdate(
+    { title: 'FAQ' },
+    { $set: { 'pageContent': req.body.pageContent } },
+    { upsert: true, new: true }
+  )
+  req.flash("success", "Settings updated")
+  res.status(200).send()
 };

@@ -1,4 +1,4 @@
-const form = document.forms['about']
+const form = document.forms['faq']
 const editorElement = document.getElementById('pell')
 const editorContent = document.getElementById('pell-data').value
 
@@ -42,7 +42,7 @@ function submitForm(e) {
     window.location.pathname,
     { 'pageContent': editor.content.innerHTML }
   ).then(() =>
-    window.location = "/dashboard/about"
+    window.location = "/dashboard/faq"
   ).catch(err => {
     console.log('test')
     const message = err.response.data || {

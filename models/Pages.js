@@ -11,12 +11,16 @@ const options = {
   },
 };
 
-const pagesSchema = new Schema(
+const pageSchema = new Schema(
   {
     title: String,
-    html: String,
+    pageContent: {
+      type: String,
+      required: "Please supply some page content"
+    },
+    customContent: [String]
   },
   options
 );
 
-module.exports = mongoose.model("Pages", pagesSchema);
+module.exports = mongoose.model("Pages", pageSchema);

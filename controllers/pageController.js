@@ -1,5 +1,6 @@
 const url = require("url")
 const mongoose = require("mongoose")
+const Pages = mongoose.model("Pages")
 const Product = mongoose.model("Product")
 const Industry = mongoose.model("Industry")
 const Category = mongoose.model("Category")
@@ -8,6 +9,7 @@ const { contactForm } = require("../helpers/contactForm")
 const { newsletterForm } = require("../helpers/newsletterForm")
 const { parseSortParams } = require("../helpers/parseSortParams")
 const { parseFilterParams } = require("../helpers/parseFilterParams")
+const { renderPellButtons } = require("../helpers/renderPellButtons")
 const { pushUniqueProducts } = require("../helpers/pushUniqueProducts")
 const validator = require('validator')
 
@@ -183,11 +185,14 @@ exports.industry = async (req, res) => {
   })
 }
 
-exports.about = (req, res) => {
+exports.about = async (req, res) => {
+  const about = await Pages.findOne({ title: "About" })
+  if (about)
+    about.pageContent = renderPellButtons(about.pageContent)
   res.render("about", {
     title: "About Us",
-    description:
-      "Established in 1989, Envirogard hires specialist equipment to contractors across mainland U.K. Equipment is supplied from our hire depots at Manchester, Barnsley, Tamworth, Bristol and Ashford (Kent)."
+    description: "Established in 1989, Envirogard hires specialist equipment to contractors across mainland U.K. Equipment is supplied from our hire depots at Manchester, Barnsley, Tamworth, Bristol and Ashford (Kent).",
+    about,
   })
 }
 
@@ -205,10 +210,19 @@ exports.tradeAccountTerms = (req, res) => {
   })
 }
 
-exports.faq = (req, res) => {
+exports.faq = async (req, res) => {
+  const faq = await Pages.findOne({ title: "FAQ" })
+  let content = faq ? faq.pageContent : ''
+  content = renderPellButtons(content)
+  // Split into two columns
+  const columns = content.split(/\<div\>\[column\].+?<\/div>/)
+  const leftColumn = columns[0]
+  const rightColumn = columns[1]
   res.render("faq", {
     title: "Frequently Asked Questions",
-    description: "Our FAQ page answers common questions about our service coverage & conditions, collection prodecures, care & use of hire goods, returns procedure and invoicing."
+    description: "Our FAQ page answers common questions about our service coverage & conditions, collection prodecures, care & use of hire goods, returns procedure and invoicing.",
+    leftColumn,
+    rightColumn,
   })
 }
 

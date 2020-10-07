@@ -2,13 +2,13 @@ extends layoutAdmin
 
 block body
 
-  form.admin__form.edit-about(name='about' onsubmit='submitForm(event)')
-    h1 About
+  form.admin__form.edit-about(name='faq' onsubmit='submitForm(event)')
+    h1 FAQ
     label(for='pageContent') Page Content
     //- Editor content is placed in a hidden textarea then extracted by JS
     //- because reading textarea.value decodes HTML entities
     //- i.e '&lt;div&gt;' becomes '<div>'
-    textarea#pell-data(hidden)= about ? about.pageContent : ''
+    textarea#pell-data(hidden)= faq ? faq.pageContent : ''
     //- Decoded HTML is placed in the '#pell' editor element
     #pell
     .admin__errors
@@ -22,4 +22,4 @@ block extraFooterScripts
   script(src='https://unpkg.com/axios/dist/axios.min.js' async defer)
   script(src='https://unpkg.com/pell')
   script
-    include ../../public/js/admin/edit-about.js
+    include ../../public/js/admin/edit-faq.js
