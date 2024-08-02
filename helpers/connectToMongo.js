@@ -1,20 +1,15 @@
-const mongoose = require("mongoose")
+const mongoose = require('mongoose')
 
-exports.connectToMongo = (retry = false) => {
-  mongoose.connect(process.env.DATABASE, {
-    autoReconnect: true,
-    useCreateIndex: true,
-    reconnectTries: 100,
-    reconnectInterval: 500,
-    useNewUrlParser: true
-  }).then(() => {
-    process.env.CONNECTED = "true"
-    console.log("Connected to MongoDB")
-    
-  }, err => {
-    process.env.CONNECTED = "false"
-    if (!retry)
-      console.error("🚫  Error connecting to MongoDB \n" + err.message)
-    setTimeout(() => exports.connectToMongo(true), 5000)
-  })
+if (!process.env.DATABASE) {
+  console.error('ERROR: No database specified'.bgRed)
+  process.exit()
 }
+
+mongoose.connect(process.env.DATABASE, {}).then(() => {
+  process.env.CONNECTED = 'true'
+  console.log('✔ Connected to MongoDB'.green)
+}, err => {
+  process.env.CONNECTED = 'false'
+  console.error(err.message)
+  console.error('Error connecting to database'.bgRed)
+})

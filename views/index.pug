@@ -49,11 +49,12 @@ block body
       .home__split-strip--popular-categories
         .home__split-strip--popular-categories--title
           h4 Popular Products
-        ul.popular-products
-          for subcategory in settings.popularProducts
-            li 
-              a(href=subcategory.pageURL)
-                span= truncate(subcategory.title, 28)
+        if settings.popularProducts
+          ul.popular-products
+            for subcategory in settings.popularProducts
+              li 
+                a(href=subcategory.pageURL)
+                  span= truncate(subcategory.title, 28)
       .home__split-strip--environment
         p For over 25 years we’ve helped contractors across the UK to protect the environment
         a.button.button__arrow(href="/about") More about Envirogard

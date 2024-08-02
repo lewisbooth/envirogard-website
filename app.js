@@ -8,7 +8,7 @@ const Category = mongoose.model("Category")
 const Industry = mongoose.model("Industry")
 const Settings = mongoose.model("Settings")
 const session = require("express-session")
-const MongoStore = require("connect-mongo")(session)
+const MongoStore = require("connect-mongo")
 const { promisify } = require("es6-promisify")
 const expressValidator = require("express-validator")
 const cookieParser = require('cookie-parser')
@@ -60,9 +60,7 @@ app.use(
     key: process.env.KEY,
     secret: process.env.SECRET,
     saveUninitialized: false,
-    store: new MongoStore({
-      mongooseConnection: mongoose.connection
-    })
+    store: MongoStore.create({ mongoUrl: process.env.DATABASE })
   })
 )
 
@@ -88,9 +86,6 @@ app.use(pageController.globalSearch)
 // Dynamic flash messages are passed from controllers to view templates 
 // (e.g. "Successfully logged in" or "Incorrect login details")
 app.use(flash())
-
-// Data validation library for user uploads
-app.use(expressValidator())
 
 // Expose variables and functions to view templates
 app.use(async (req, res, next) => {

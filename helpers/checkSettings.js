@@ -3,21 +3,20 @@ const mongoose = require("mongoose")
 const Settings = mongoose.model("Settings")
 const Subcategory = mongoose.model("Subcategory")
 
-exports.checkSettings = async () => {
-    // Check if settings already exist
-    const hasSettings = await Settings.countDocuments({})
-    if (hasSettings) return
+// Check if settings already exist
+const hasSettings = Settings.countDocuments({})
 
-    // Generate default popular products
-    const subcategories = await Subcategory
-        .find({})
-        .sort({ updatedAt: -1 })
-        .limit(5)
+if (!hasSettings) {
+  // Generate default popular products
+  const subcategories = Subcategory
+      .find({})
+      .sort({ updatedAt: -1 })
+      .limit(5)
 
-    // Extract Subcategory ids
-    const popularProducts = subcategories.map(subcategory => subcategory.id)
+  // Extract Subcategory ids
+  const popularProducts = subcategories.map(subcategory => subcategory.id) || []
 
-    await new Settings({ popularProducts }).save()
+  Settings({ popularProducts }).save()
 
-    console.log('Created default Settings')
+  console.log('Created default Settings')
 }

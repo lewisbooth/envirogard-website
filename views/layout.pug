@@ -19,12 +19,8 @@ html
         h1 New page
     +footer
     block footerScripts
-      if !bot
-        script(async defer src=hashes["tawkTo.js"])
       script
         include ../public/js/nav.js
         include ../public/js/cookies.js
         include ../public/js/branch-finder.js
-        if !bot
-          include ../public/js/tawkToInit.js
     block extraFooterScripts

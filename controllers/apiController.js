@@ -1,4 +1,4 @@
-const fetch = require('node-fetch')
+const fetch = import('node-fetch')
 const mongoose = require("mongoose")
 const Product = mongoose.model("Product")
 const Subcategory = mongoose.model("Subcategory")
